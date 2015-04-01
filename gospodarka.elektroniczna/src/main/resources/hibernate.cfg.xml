@@ -7,9 +7,9 @@
 	<session-factory>
 		<!-- Database connection settings -->
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/security?useUnicode=yes&amp;characterEncoding=UTF-8</property>
-		<property name="connection.username">root</property>
-		<property name="connection.password">root</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/GE?useUnicode=yes&amp;characterEncoding=UTF-8</property>
+		<property name="connection.username">gospodarka</property>
+		<property name="connection.password">gospodarka</property>
 		
 		<property name="connection.pool_size">5</property>
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>

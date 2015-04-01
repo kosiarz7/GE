@@ -8,13 +8,18 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import pl.wkr.fluentrule.api.FluentExpectedException;
+
 
 public class SignatureServiceTest {
+    @Rule
+    public FluentExpectedException exception = FluentExpectedException.none();
     @Mock
     private ISignatureDao dao;
     @InjectMocks
@@ -29,6 +34,7 @@ public class SignatureServiceTest {
     public void shouldReturnCurentDateWithOneIfDaoReturNull() throws Exception {
         // given
         when(dao.getLastSignature()).thenReturn(null);
+        when(dao.getSignaturesNumber()).thenReturn(0);
         String expectedSignature = getFirstPartOfSignature() + "1";
         
         // when
@@ -42,6 +48,7 @@ public class SignatureServiceTest {
     public void shouldReturnCurentDateWithOneIfDaoReturnDateWithObsoleteMonth() throws Exception {
         // given
         GregorianCalendar calendar = new GregorianCalendar();
+        when(dao.getSignaturesNumber()).thenReturn(1);
         when(dao.getLastSignature()).thenReturn(calendar.get(Calendar.YEAR) + "/" + calendar.get(Calendar.MONTH) + "/23");
         String expectedSignature = getFirstPartOfSignature() + "1";
         
@@ -56,6 +63,7 @@ public class SignatureServiceTest {
     public void shouldReturnCurentDateWithOneIfDaoReturnDateWithObsoleteYear() throws Exception {
         // given
         GregorianCalendar calendar = new GregorianCalendar();
+        when(dao.getSignaturesNumber()).thenReturn(1);
         when(dao.getLastSignature()).thenReturn((calendar.get(Calendar.YEAR) - 2) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/23");
         String expectedSignature = getFirstPartOfSignature() + "1";
         
@@ -70,6 +78,7 @@ public class SignatureServiceTest {
     public void shouldReturnIncrementLastPartIfDaoReturnCurrentDate() throws Exception {
         // given
         GregorianCalendar calendar = new GregorianCalendar();
+        when(dao.getSignaturesNumber()).thenReturn(1);
         when(dao.getLastSignature()).thenReturn((calendar.get(Calendar.YEAR)) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/56");
         String expectedSignature = getFirstPartOfSignature() + "57";
         
@@ -83,6 +92,18 @@ public class SignatureServiceTest {
     private String getFirstPartOfSignature() {
         GregorianCalendar calendar = new GregorianCalendar();
         return calendar.get(GregorianCalendar.YEAR) + "/" + (calendar.get(GregorianCalendar.MONTH) + 1) + "/";
+    }
+
+    @Test
+    public void shouldTrowWrongNumberOfLastSignatureExceptionIfInTableAreMoreThenOneSignature() throws Exception {
+        // given
+        exception.expect(WrongNumberOfLastSignatureException.class);
+        when(dao.getSignaturesNumber()).thenReturn(2);
+        
+        // when
+        sut.createNewSingature();
+        
+        // then
     }
 
 }

@@ -20,4 +20,10 @@ public interface ISignatureDao {
      * @param signature ostanio nadana sygnatura.
      */
     void updateLastSignature(final String signature);
+    /**
+     * Zwraca liczbę sygnatur przechowywanych w tabeli z ostatnią sygnaturą.
+     * 
+     * @return liczba sygnatur.
+     */
+    int getSignaturesNumber();
 }

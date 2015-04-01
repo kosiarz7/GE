@@ -22,7 +22,7 @@ public class SignatureService implements ISignatureService {
      * {@inheritDoc}
      */
     @Override
-    public String getNewSignature() {
+    public String getNewSignature() throws WrongNumberOfLastSignatureException {
         String signature = createNewSingature();
         signatureDao.updateLastSignature(signature);
         return signature;
@@ -32,8 +32,15 @@ public class SignatureService implements ISignatureService {
      * Tworzy nową sygnature.
      * 
      * @return nowa sygnatura.
+     * @throws WrongNumberOfLastSignatureException gdy w tabeli z ostanią sygnaturą jest więcej niż jeden rekord.
      */
-    protected String createNewSingature() {
+    protected String createNewSingature() throws WrongNumberOfLastSignatureException {
+        int signaturesNumber = signatureDao.getSignaturesNumber(); 
+        if (signaturesNumber > 1) {
+            throw new WrongNumberOfLastSignatureException("W tabeli z ostatnio nadaną sygnaturą znajdują się "
+                    + signaturesNumber + " wpisy.");
+        }
+        
         String signature = signatureDao.getLastSignature();
         GregorianCalendar calendar = new GregorianCalendar();
         

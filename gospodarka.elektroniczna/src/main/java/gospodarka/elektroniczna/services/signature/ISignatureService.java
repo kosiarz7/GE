@@ -12,6 +12,7 @@ public interface ISignatureService {
      * Zwraca nową sygnaturę dokumentu.
      * 
      * @return sygnatura dokumentu.
+     * @throws WrongNumberOfLastSignatureException gdy w tabeli z ostanią sygnaturą jest więcej niż jeden rekord.
      */
-    String getNewSignature();
+    String getNewSignature() throws WrongNumberOfLastSignatureException;
 }
