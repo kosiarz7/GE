@@ -7,6 +7,8 @@ import gospodarka.elektroniczna.services.user.IUserService;
 import gospodarka.elektroniczna.services.user.UserData;
 import gospodarka.elektroniczna.util.CollectionsUtil;
 
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -43,8 +45,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
         UserData user = userService.loadUserByLogin(authentication.getName());
         checkPassword((String) authentication.getCredentials(), user);
-        LOGGER.info("authenticate|Do systemu zalogował się użytkownik: {} o uprawnieniach: {}", user.getUsername(),
-                CollectionsUtil.toString(user.getAuthorities()));
+        LOGGER.info(
+                "authenticate|Do systemu zalogował się użytkownik: {} o uprawnieniach: {}",
+                user.getUsername(),
+                CollectionsUtil.toString(user.getAuthorities().stream().map(a -> a.getAuthority())
+                        .collect(Collectors.toList())));
         return new UsernamePasswordAuthenticationToken(user, authentication.getCredentials(), user.getAuthorities());
     }
     
