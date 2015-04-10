@@ -28,6 +28,14 @@ class Authority implements GrantedAuthority {
     public Authority(final String authority) {
         this.authority = authority;
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "[authority=" + authority + "]";
+    }
 
     /**
      * {@inheritDoc}
