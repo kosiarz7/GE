@@ -5,7 +5,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
@@ -20,7 +19,22 @@ public class LoggerPostProcessor implements BeanPostProcessor {
     /**
      * Logger.
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoggerPostProcessor.class);
+    private final Logger logger;;
+    /**
+     * Producent loggerów.
+     */
+    private ILoggerFactory loggerFactory;
+
+    
+    /**
+     * Konstruktor.
+     * 
+     * @param loggerFactory producent loggerów.
+     */
+    public LoggerPostProcessor(final ILoggerFactory loggerFactory) {
+        this.loggerFactory = loggerFactory;
+        logger = this.loggerFactory.getLogger(LoggerPostProcessor.class);
+    }
 
     /**
      * {@inheritDoc}
@@ -68,11 +82,11 @@ public class LoggerPostProcessor implements BeanPostProcessor {
             Field modifiersField = Field.class.getDeclaredField("modifiers");
             modifiersField.setAccessible(true);
             modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
-            field.set(null, LoggerFactory.getLogger(bean.getClass()));
-            LOGGER.info("injectLogger| Wstrzyknięcie loggera do klasy: {}", bean.getClass());
+            field.set(null, loggerFactory.getLogger(bean.getClass()));
+            logger.info("injectLogger| Wstrzyknięcie loggera do klasy: {}", bean.getClass());
         }
         catch (SecurityException | IllegalArgumentException | NoSuchFieldException | IllegalAccessException e) {
-            LOGGER.error("injectLogger| Błąd podczas próby wstrzyknięcia loggera do klasy: {}", bean.getClass(), e);
+            logger.error("injectLogger| Błąd podczas próby wstrzyknięcia loggera do klasy: {}", bean.getClass(), e);
         }
     }
 

@@ -4,10 +4,33 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security.xsd">
+    
+    <!-- Konfiguracja Spring Security -->
+	<security:http auto-config="true" use-expressions="true">
+		<security:form-login login-page="/app/login" login-processing-url="/app/j_spring_security_check" 
+			default-target-url="/app/test" authentication-failure-url="/app/login?login_error=1" />
+		<security:logout logout-url="/logout" logout-success-url="/test"/>
+		<!-- <security:intercept-url pattern="/app/addUser" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/app/createList" access="hasRole('ADMIN')" /> -->
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider ref="authenticationProvider" />
+	</security:authentication-manager>
+	
+	<bean id="authenticationProvider" class="gospodarka.elektroniczna.security.CustomAuthenticationProvider">
+		<property name="encryptor">
+			<bean class="gospodarka.elektroniczna.services.SHA512Encryptor"/>
+		</property>
+		<property name="userService" ref="userService"/>
+	</bean>
 
-	<import resource="security-config.xml" />
+	<!-- Pozostałe beany -->
 	
 	<!-- Fabryka sesji Hibernate -->
 	<bean id="hibernateSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
@@ -17,11 +40,21 @@
 	<bean id="signatureService" class="gospodarka.elektroniczna.services.signature.SignatureService" 
 		p:signatureDao-ref="signatureDAO"/>
 		
+	<bean id="userService" class="gospodarka.elektroniczna.services.user.UserService" p:userDao-ref="userDao"/>
+		
 	<!-- DAO -->
 	<bean id="signatureDAO" class="gospodarka.elektroniczna.dao.sgnature.SignatureDao" 
 		p:sessionFactory-ref="hibernateSessionFactory"/>
 		
+	<bean id="userDao" class="gospodarka.elektroniczna.dao.user.UserDao"
+		p:sessionFactory-ref="hibernateSessionFactory"/>
+		
 	<!-- Wstrykiwanie loggerów -->
-	<bean class="gospodarka.elektroniczna.annotations.LoggerPostProcessor"/>
+	<bean class="gospodarka.elektroniczna.annotations.LoggerPostProcessor">
+		<constructor-arg name="loggerFactory">
+			<bean class="gospodarka.elektroniczna.annotations.LoggerFactory" />
+		</constructor-arg>
+	</bean>
 	
+	<bean id="usernameExtractor" class="gospodarka.elektroniczna.common.beans.UsernameExtractor" lazy-init="false"/>
 </beans>

@@ -1,5 +1,7 @@
 package gospodarka.elektroniczna.dao;
 
+import java.io.Serializable;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -10,7 +12,11 @@ import org.hibernate.SessionFactory;
  *
  * Copyright © 2015 Adam Kopaczewski
  */
-public class CommonDao {
+public class CommonDao implements Serializable {
+    /**
+     * UID.
+     */
+    private static final long serialVersionUID = -7088860771369912098L;
     /**
      * Fabryka sesji Hibernate.
      */

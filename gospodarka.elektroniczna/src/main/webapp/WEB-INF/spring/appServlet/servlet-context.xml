@@ -12,9 +12,12 @@
 	<!-- Kontekst kontekstu głównego servletu -->
 
 	<import resource="webflow.xml" />
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven />
 
 	<!-- Skanowanie po projekcie za benami oznaczonymi adnotacjami -->
-	<context:component-scan base-package="kopaczewski.adam.security"/>
+	<context:component-scan base-package="gospodarka.elektroniczna.controllers"/>
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />

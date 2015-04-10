@@ -3,6 +3,7 @@ package gospodarka.elektroniczna.dao.sgnature;
 import gospodarka.elektroniczna.annotations.InjectLogger;
 import gospodarka.elektroniczna.dao.CommonDao;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
 import org.hibernate.Session;
@@ -16,7 +17,11 @@ import org.slf4j.Logger;
  *
  * Copyright © 2015 Adam Kopaczewski
  */
-public class SignatureDao extends CommonDao implements ISignatureDao {
+public class SignatureDao extends CommonDao implements ISignatureDao, Serializable {
+    /**
+     * UID.
+     */
+    private static final long serialVersionUID = 2935920387890581523L;
     /**
      * Logger.
      */
