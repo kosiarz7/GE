@@ -13,7 +13,7 @@ import org.springframework.security.core.AuthenticationException;
  *
  * Copyright © 2015 Adam Kopaczewski
  */
-public class UsernameExtractor implements Serializable {
+public class UsernameExtractorBean implements Serializable {
 
     /**
      * UID.

@@ -46,5 +46,4 @@
 		/webflow-primefaces-showcase/app/javax.faces.resource/jsf.js?ln=javax.faces
 	-->
 	<faces:resources />
-
 </beans>
