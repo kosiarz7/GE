@@ -9,17 +9,17 @@
 <f:view contentType="text/html">
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" href="${request.contextPath}/app/resources/styles/style.css" type="text/css"/>
+		<link href="#{request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" />
 		<title>Logowanie</title>
 	</h:head>
 	
-	<h:body>
+	<h:body styleClass="bkgColor" style="color: white;">
 		<div style="display: table; margin: 0 auto; border: 1px solid white; padding: 25px; margin-top: 100px; border-radius: 25px;">
 			<h1>Logowanie</h1>
 	        <c:if test="#{not empty param.login_error}">
 	            <div class="error">
-	                Logowanie zakończone porażką.<br/> Powód:
-	                <span style="font-weight: bold; color: red;">#{sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</span>
+	                Logowanie zakończone porażką.<br/>
+	                <span style="font-weight: bold; color: #BC0A1C;">#{sessionScope.SPRING_SECURITY_LAST_EXCEPTION.message}</span>
 	            </div>
 	        </c:if>
 	        <form name="f" action="${request.contextPath}/app/j_spring_security_check" method="post">

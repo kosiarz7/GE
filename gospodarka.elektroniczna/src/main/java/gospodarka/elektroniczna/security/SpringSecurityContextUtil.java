@@ -19,11 +19,16 @@ public interface SpringSecurityContextUtil {
      * @return lista uprawnień zalogowanego użytkownika.
      */
     public List<String> getLoggedOnUserRolesAsStringList();
-    
     /**
      * Zwraca kolekcję uprawnień zalogowanego użytkownika.
      * 
      * @return kolekcja uprawnień zalogowanego użytkownika.
      */
     public Collection<? extends GrantedAuthority> getLoggedOnUserRoles();
+    /**
+     * Zwraca imię i nazwisko zalogowanego użytkownika.
+     *  
+     * @return imię i naziwsko.
+     */
+    String getLoggedOnUserNameAndSurname();
 }

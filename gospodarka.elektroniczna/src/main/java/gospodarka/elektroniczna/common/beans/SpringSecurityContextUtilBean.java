@@ -1,6 +1,7 @@
 package gospodarka.elektroniczna.common.beans;
 
 import gospodarka.elektroniczna.security.SpringSecurityContextUtil;
+import gospodarka.elektroniczna.services.user.UserData;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -38,5 +39,21 @@ public class SpringSecurityContextUtilBean implements Serializable, SpringSecuri
     @Override
     public Collection<? extends GrantedAuthority> getLoggedOnUserRoles() {
         return SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLoggedOnUserNameAndSurname() {
+        String nameAndSurename = "";
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        
+        if (principal instanceof UserData) {
+            nameAndSurename = ((UserData) principal).getNameAndSurname();
+            
+        }
+        
+        return nameAndSurename;
     }
 }
