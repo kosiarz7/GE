@@ -1,10 +1,13 @@
 package gospodarka.elektroniczna.common.beans;
 
+import gospodarka.elektroniczna.annotations.InjectLogger;
 import gospodarka.elektroniczna.security.SpringSecurityContextUtil;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
+import org.slf4j.Logger;
 
 /**
  * Bean przekierowujący zalogowanego użytkownika na opdowiednią stronę.
@@ -19,6 +22,11 @@ public class RedirectBean implements Serializable {
      * UID.
      */
     private static final long serialVersionUID = -5659482197872768296L;
+    /**
+     * Logger.
+     */
+    @InjectLogger
+    private static final Logger LOGGER = null;
     /**
      * Mapowanie przekierowań.
      */
@@ -57,6 +65,7 @@ public class RedirectBean implements Serializable {
             }
         }
 
+        LOGGER.debug("getRedirectUrl|URL: {}", prefix + url);
         return prefix + url;
     }
 

@@ -23,6 +23,10 @@ public class UserData implements UserDetails {
      */
     private static final long serialVersionUID = -4507510932062523271L;
     /**
+     * Prefiks roli użytkownika.
+     */
+    private static final String ROLE_PREFIX = "ROLE_";
+    /**
      * Dane użytkownika.
      */
     private UserDto userDto;
@@ -41,7 +45,7 @@ public class UserData implements UserDetails {
         this.userDto = userDto;
         authorities = new ArrayList<>();
         for (RoleDto r : userDto.getRoles()) {
-            authorities.add(new Authority(r.getName()));
+            authorities.add(new Authority(ROLE_PREFIX + r.getName()));
         }
     }
     

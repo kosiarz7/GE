@@ -14,7 +14,7 @@
 
 		<spring-version>4.1.6.RELEASE</spring-version>
 		<springwebflow-version>2.4.1.RELEASE</springwebflow-version>
-		<springsecurity-version>4.0.0.RELEASE</springsecurity-version>
+		<springsecurity-version>3.2.6.RELEASE</springsecurity-version>
 		<primefaces-version>5.1</primefaces-version>
 		<mysql-connector-version>5.1.35</mysql-connector-version>
 	</properties>
