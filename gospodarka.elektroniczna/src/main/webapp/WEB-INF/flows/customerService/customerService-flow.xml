@@ -5,7 +5,7 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
-	<secured attributes="ROLE_OBSLUGA"/>
+	<secured attributes="ROLE_CUSTOMER_SERVICE"/>
 	
 	<view-state id="start" />
 
