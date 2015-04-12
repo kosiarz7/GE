@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * Encja reprezentująca typ dokumentu.
  * 
@@ -43,6 +45,14 @@ public class DocumentTypeDto extends AbstractDto implements Serializable {
      */
     public DocumentTypeDto() {
         id = UNLOADED_ID;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
     
     // GETTERY I SETTERY
