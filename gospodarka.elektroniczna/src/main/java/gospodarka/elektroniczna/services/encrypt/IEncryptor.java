@@ -1,4 +1,4 @@
-package gospodarka.elektroniczna.services;
+package gospodarka.elektroniczna.services.encrypt;
 
 /**
  * Interfejs obiektu kodującego tekst.

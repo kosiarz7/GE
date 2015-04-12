@@ -17,5 +17,10 @@
 		
 		<mapping class="gospodarka.elektroniczna.dto.UserDto" />
 		<mapping class="gospodarka.elektroniczna.dto.RoleDto" />
+		<mapping class="gospodarka.elektroniczna.dto.DepartmentDto" />
+		<mapping class="gospodarka.elektroniczna.dto.DocumentHeaderDto" />
+		<mapping class="gospodarka.elektroniczna.dto.DocumentTypeDto" />
+		<mapping class="gospodarka.elektroniczna.dto.ArchivalDocumentDto" />
+		<mapping class="gospodarka.elektroniczna.dto.CurrentDocumentDto" />
 	</session-factory>
 </hibernate-configuration>

@@ -10,40 +10,42 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Encja uprawnienia użytkownika.
+ * Encja reprezentująca typ dokumentu.
  * 
  * @author Adam Kopaczewski
  *
  * Copyright © 2015 Adam Kopaczewski
  */
 @Entity
-@Table(name = "ROLES")
-public class RoleDto extends AbstractDto implements Serializable {
+@Table(name = "DOCUMENT_TYPES")
+public class DocumentTypeDto extends AbstractDto implements Serializable {
+
     /**
      * UID.
      */
-    private static final long serialVersionUID = -2828027452403509314L;
+    private static final long serialVersionUID = -4174190135043302353L;
     /**
-     * Id uprawnienia.
+     * Id typu dokumentu.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", nullable = false)
     private int id;
     /**
-     * Nazwa uprawnienia.
+     * Nazwa typu dokumentu.
      */
-    @Column(name = "NAME", nullable = false, length = 50)
+    @Column(name = "TYPE_NAME", nullable = false, length = 255, unique = true)
     private String name;
     
+    
     /**
-     * Konstrutkor.
+     * Konstruktor.
      */
-    public RoleDto() {
+    public DocumentTypeDto() {
         id = UNLOADED_ID;
     }
-
-    // SETTRY I GETTERY
+    
+    // GETTERY I SETTERY
     @Override
     public int getId() {
         return id;

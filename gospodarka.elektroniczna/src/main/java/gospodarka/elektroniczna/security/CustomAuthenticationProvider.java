@@ -1,8 +1,8 @@
 package gospodarka.elektroniczna.security;
 
 import gospodarka.elektroniczna.annotations.InjectLogger;
-import gospodarka.elektroniczna.services.EncryptException;
-import gospodarka.elektroniczna.services.IEncryptor;
+import gospodarka.elektroniczna.services.encrypt.EncryptException;
+import gospodarka.elektroniczna.services.encrypt.IEncryptor;
 import gospodarka.elektroniczna.services.user.IUserService;
 import gospodarka.elektroniczna.services.user.UserData;
 import gospodarka.elektroniczna.util.CollectionsUtil;

@@ -1,4 +1,4 @@
-package gospodarka.elektroniczna.services;
+package gospodarka.elektroniczna.services.encrypt;
 
 /**
  * Wyjątek oznaczający wystąpienie błędu podczas kodowania tekstu.

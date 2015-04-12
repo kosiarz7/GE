@@ -24,7 +24,7 @@
 	
 	<bean id="authenticationProvider" class="gospodarka.elektroniczna.security.CustomAuthenticationProvider">
 		<property name="encryptor">
-			<bean class="gospodarka.elektroniczna.services.SHA512Encryptor"/>
+			<bean class="gospodarka.elektroniczna.services.encrypt.SHA512Encryptor"/>
 		</property>
 		<property name="userService" ref="userService"/>
 	</bean>

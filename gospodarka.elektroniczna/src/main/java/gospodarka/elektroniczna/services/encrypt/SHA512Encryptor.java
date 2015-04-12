@@ -1,4 +1,4 @@
-package gospodarka.elektroniczna.services;
+package gospodarka.elektroniczna.services.encrypt;
 
 import gospodarka.elektroniczna.annotations.InjectLogger;
 import gospodarka.elektroniczna.util.StringUtil;

@@ -1,4 +1,4 @@
-package gospodarka.elektroniczna.services;
+package gospodarka.elektroniczna.services.encrypt;
 
 import static junitparams.JUnitParamsRunner.$;
 import static org.junit.Assert.assertEquals;
@@ -8,6 +8,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import gospodarka.elektroniczna.annotations.ILoggerFactory;
 import gospodarka.elektroniczna.annotations.LoggerPostProcessor;
+import gospodarka.elektroniczna.services.encrypt.SHA512Encryptor;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 

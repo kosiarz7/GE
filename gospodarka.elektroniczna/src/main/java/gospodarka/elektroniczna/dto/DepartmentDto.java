@@ -10,40 +10,41 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Encja uprawnienia użytkownika.
+ * Encja reprezentująca oddział.
  * 
  * @author Adam Kopaczewski
  *
  * Copyright © 2015 Adam Kopaczewski
  */
 @Entity
-@Table(name = "ROLES")
-public class RoleDto extends AbstractDto implements Serializable {
+@Table(name = "DEPARTMENTS")
+public class DepartmentDto extends AbstractDto implements Serializable {
     /**
      * UID.
      */
-    private static final long serialVersionUID = -2828027452403509314L;
+    private static final long serialVersionUID = -4652417286804055194L;
     /**
-     * Id uprawnienia.
+     * Id oddziału.
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", nullable = false)
     private int id;
     /**
-     * Nazwa uprawnienia.
+     * Nazwa oddziału.
      */
-    @Column(name = "NAME", nullable = false, length = 50)
+    @Column(name = "NAME", nullable = false, length = 255, unique = true)
     private String name;
     
+    
     /**
-     * Konstrutkor.
+     * Konstruktor
      */
-    public RoleDto() {
+    public DepartmentDto() {
         id = UNLOADED_ID;
     }
-
-    // SETTRY I GETTERY
+    
+    // GETTERY I SETTERY
     @Override
     public int getId() {
         return id;
