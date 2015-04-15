@@ -8,5 +8,7 @@
 	<secured attributes="ROLE_ROOT"/>
 
 	<view-state id="start"/>
+	
+	<bean-import resource="flow-beans.xml"/>
 
 </flow>

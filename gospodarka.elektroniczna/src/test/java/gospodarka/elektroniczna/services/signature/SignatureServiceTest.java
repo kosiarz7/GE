@@ -31,9 +31,23 @@ public class SignatureServiceTest {
     }
 
     @Test
-    public void shouldReturnCurentDateWithOneIfDaoReturNull() throws Exception {
+    public void shouldReturnCurentDateWithOneIfDaoReturnNull() throws Exception {
         // given
         when(dao.getLastSignature()).thenReturn(null);
+        when(dao.getSignaturesNumber()).thenReturn(0);
+        String expectedSignature = getFirstPartOfSignature() + "1";
+        
+        // when
+        String signature = sut.createNewSingature();
+        
+        // then
+        assertEquals(expectedSignature, signature);
+    }
+    
+    @Test
+    public void shouldReturnCurentDateWithOneIfDaoReturnEmptyString() throws Exception {
+        // given
+        when(dao.getLastSignature()).thenReturn("");
         when(dao.getSignaturesNumber()).thenReturn(0);
         String expectedSignature = getFirstPartOfSignature() + "1";
         

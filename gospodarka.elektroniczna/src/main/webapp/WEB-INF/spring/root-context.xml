@@ -40,6 +40,14 @@
 	<bean id="signatureService" class="gospodarka.elektroniczna.services.signature.SignatureService" 
 		p:signatureDao-ref="signatureDAO"/>
 		
+	<bean id="documentService" class="gospodarka.elektroniczna.services.document.DocumentService"
+		p:documentHeaderService-ref="documentHeaderService"/>
+		
+	<bean id="documentHeaderService" class="gospodarka.elektroniczna.services.document.DocumentHeaderService"
+		p:documentHeaderDao-ref="documentHeaderDao"
+		p:documentTypeDao-ref="documentTypeDao"
+		p:signatureService-ref="signatureService"/>
+		
 	<bean id="userService" class="gospodarka.elektroniczna.services.user.UserService" p:userDao-ref="userDao"/>
 		
 	<!-- DAO -->
@@ -47,6 +55,12 @@
 		p:sessionFactory-ref="hibernateSessionFactory"/>
 		
 	<bean id="userDao" class="gospodarka.elektroniczna.dao.user.UserDao"
+		p:sessionFactory-ref="hibernateSessionFactory"/>
+		
+	<bean id="documentHeaderDao" class="gospodarka.elektroniczna.dao.documenttype.DocumentHeaderDao"
+		p:sessionFactory-ref="hibernateSessionFactory"/>
+		
+	<bean id="documentTypeDao" class="gospodarka.elektroniczna.dao.documenttype.DocumentTypeDao"
 		p:sessionFactory-ref="hibernateSessionFactory"/>
 		
 	<!-- Wstrzykiwanie loggerów -->

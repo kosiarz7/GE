@@ -12,6 +12,9 @@
 	<ui:param name="department" value="Root"/>
     <ui:define name="pageContent">
         Zawartość strony.
+        <h:form>
+	        <p:commandButton value="Nowy nagłówek" actionListener="#{testBean.createNewTestDocument()}" />
+	    </h:form>
     </ui:define>
 </ui:composition>
 </html>

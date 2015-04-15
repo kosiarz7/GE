@@ -2,6 +2,7 @@ package gospodarka.elektroniczna.services.document;
 
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
+import gospodarka.elektroniczna.services.signature.WrongNumberOfLastSignatureException;
 
 /**
  * Interfejs do pracy z dokumentami.
@@ -17,8 +18,10 @@ public interface IDocumentService {
      * @param type typ dokumentu.
      * @param title tytuł dokumentu.
      * @return nowy dokument.
+     * @throws WrongNumberOfLastSignatureException rzucany gdy wystąpił błąd podczas generowani nowej sygnatury.
      */
-    <T> Document<T> createDocument(final DocumentTypes type, final String title);
+    <T> Document<T> createDocument(final DocumentTypes type, final String title)
+            throws WrongNumberOfLastSignatureException;
     /**
      * Przesyład dokument ze źródłowego działu do docelowego.
      * 

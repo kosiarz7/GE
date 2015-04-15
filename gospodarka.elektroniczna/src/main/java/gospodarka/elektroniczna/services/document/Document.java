@@ -1,39 +1,47 @@
 package gospodarka.elektroniczna.services.document;
 
-import java.util.Date;
+import java.io.Serializable;
 
-import gospodarka.elektroniczna.dao.department.Departments;
-import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Document<T> {
+/**
+ * Dokument.
+ * 
+ * @author Adam Kopaczewski
+ *
+ * Copyright © 2015 Adam Kopaczewski
+ */
+public class Document<T> implements Serializable {
     /**
-     * Id nagłówka dokumentu.
+     * UID.
      */
-    private int headerId;
+    private static final long serialVersionUID = -5561620646849987040L;
     /**
-     * Sygnatura dokumentu.
+     * Nagłówek dokumentu.
      */
-    private String signature;
-    /**
-     * Tytuł dokumentu.
-     */
-    private String title;
-    /**
-     * Typ dokumentu.
-     */
-    private DocumentTypes type;
-    /**
-     * Z jakiego działu przyszedł dokument.
-     */
-    private Departments from;
-    /**
-     * Data odbioru dokumentu.
-     */
-    private Date receiptDate;
+    private DocumentHeader header;
     /**
      * Zawartość dokumentu.
      */
     private T content;
+    
+    
+    /**
+     * Konstruktor.
+     */
+    public Document() {
+    }
+    
+    /**
+     * Konstruktor.
+     * 
+     * @param header nagłówek dokumentu.
+     * @param content zawartość dokumentu.
+     */
+    public Document(final DocumentHeader header, final T content) {
+        this.header = header;
+        this.content = content;
+    }
 
     /**
      * Zwraca zawartość dokumentu.
@@ -42,6 +50,15 @@ public class Document<T> {
      */
     public T getContent() {
         return content;
+    }
+    
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 
     /**
@@ -54,110 +71,20 @@ public class Document<T> {
     }
 
     /**
-     * Zwraca id nagłówka dokumentu.
+     * Zwraca nagłówek dokumentu.
      * 
-     * @return id nagłówka dokumentu.
+     * @return nagłówek dokumentu.
      */
-    int getHeaderId() {
-        return headerId;
+    public DocumentHeader getHeader() {
+        return header;
     }
 
     /**
-     * Zwraca sygnaturę dokumentu.
+     * Ustawia nagłówek dokumentu.
      * 
-     * @return sygnatura dokumentu.
+     * @param header nagłówek dokumentu.
      */
-    public String getSignature() {
-        return signature;
-    }
-
-    /**
-     * Zwraca tytuł dokumentu.
-     * 
-     * @return tytuł dokumentu.
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Zwraca typ dokumentu.
-     * 
-     * @return typ dokumentu.
-     */
-    public DocumentTypes getType() {
-        return type;
-    }
-
-    /**
-     * Zwraca dział, który przesłał dany dokument.
-     * 
-     * @return dział, który przesłał dany dokument.
-     */
-    public Departments getFrom() {
-        return from;
-    }
-
-    /**
-     * Zwraca datę odbioru dokumentu.
-     * 
-     * @return data odbioru dokumentu.
-     */
-    public Date getReceiptDate() {
-        return receiptDate;
-    }
-
-    /**
-     * Ustawia id nagłówka dokumentu.
-     * 
-     * @param headerId id nagłówka dokumentu.
-     */
-    void setHeaderId(int headerId) {
-        this.headerId = headerId;
-    }
-
-    /**
-     * Ustawia sygnaturę dokumentu.
-     * 
-     * @param signature sygnatura dokumentu.
-     */
-    void setSignature(final String signature) {
-        this.signature = signature;
-    }
-
-    /**
-     * Ustawia tytuł dokumentu.
-     * 
-     * @param title tytuł dokumentu.
-     */
-    void setTitle(final String title) {
-        this.title = title;
-    }
-
-    /**
-     * Ustawia typ dokumentu.
-     * 
-     * @param type typ dokumentu.
-     */
-    void setType(final DocumentTypes type) {
-        this.type = type;
-    }
-
-    /**
-     * Ustawia oddział, który przysłał dany dokument.
-     * 
-     * @param from oddział, który przysłał dokument.
-     */
-    void setFrom(final Departments from) {
-        this.from = from;
-    }
-    
-    /**
-     * Ustawia datę odbioru dokumentu.
-     * 
-     * @param receiptDate data odbioru dokumentu.
-     */
-    void setReceiptDate(final Date receiptDate) {
-        this.receiptDate = receiptDate;
+    void setHeader(final DocumentHeader header) {
+        this.header = header;
     }
 }

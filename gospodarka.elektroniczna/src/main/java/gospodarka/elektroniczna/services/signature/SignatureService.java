@@ -1,6 +1,7 @@
 package gospodarka.elektroniczna.services.signature;
 
 import gospodarka.elektroniczna.dao.sgnature.ISignatureDao;
+import gospodarka.elektroniczna.util.StringUtil;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -44,7 +45,7 @@ public class SignatureService implements ISignatureService {
         String signature = signatureDao.getLastSignature();
         GregorianCalendar calendar = new GregorianCalendar();
         
-        if (null != signature && isCurrentDateInSignature(signature, calendar)) {
+        if (!StringUtil.isEmpty(signature) && isCurrentDateInSignature(signature, calendar)) {
             int lastSlashIndex = signature.lastIndexOf("/") + 1;
             signature = signature.substring(0, lastSlashIndex) + 
                     + (Integer.valueOf(signature.substring(lastSlashIndex, signature.length())) + 1);

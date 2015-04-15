@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 /**
  * Klasa bazowa dla DAO.
@@ -21,6 +22,32 @@ public class CommonDao implements Serializable {
      * Fabryka sesji Hibernate.
      */
     protected SessionFactory sessionFactory;
+    
+
+    /**
+     * Zapisuję encję.
+     * 
+     * @param entity encja.
+     */
+    protected void save(final Object entity) {
+        Session session = openSession();
+        Transaction tx = null;
+        
+        try {
+            tx = session.beginTransaction();
+            session.save(entity);
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            if (null != tx) {
+                tx.rollback();
+            }
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+    }
     
     /**
      * Ustawia fabrykę sesji.

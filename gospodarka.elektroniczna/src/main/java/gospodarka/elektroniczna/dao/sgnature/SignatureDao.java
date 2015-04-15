@@ -5,6 +5,7 @@ import gospodarka.elektroniczna.dao.CommonDao;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -36,28 +37,34 @@ public class SignatureDao extends CommonDao implements ISignatureDao, Serializab
      */
     private static final String GET_LAST_SIGNATURE_QUERY = "SELECT SIGNATURE FROM LAST_SIGNATURE";
     /**
-     * Zwraca id ostatniej sygnatury.
+     * Pobiera id ostatniej sygnatury.
      */
-    private static final String GET_LAST_SIGNATURE_ID_QUERY = "SELECT ID FROM LAST_SIGNATURE";
+    private static final String GET_LAST_SIGNATURE_ID = "SELECT ID FROM LAST_SIGNATURE";
     /**
      * Uaktualnia wartość ostatniej sygnatury.
      */
     private static final String UPDATE_LAST_SIGNATURE = 
-            "UPDATE LAST_SIGNATURE SET SIGNATURE = :singature WHERE ID = :id";
+            "UPDATE LAST_SIGNATURE SET SIGNATURE = :signature WHERE ID = :id";
+    /**
+     * Zapytanie wstawiające nową sygnaturę.
+     */
+    private static final String INSERT_SIGNATURE = "INSERT INTO LAST_SIGNATURE(SIGNATURE) VALUE(:signature)";
 
     /**
      * {@inheritDoc}
      */
     @Override
+    @SuppressWarnings("unchecked")
     public String getLastSignature() {
-        String signature = null;
+        String signature = "";
         
         Session session = openSession();
         Transaction tx = null;
+        List<String> signatures = null;
         
         try {
             tx = session.beginTransaction();
-            signature = (String) session.createSQLQuery(GET_LAST_SIGNATURE_QUERY).list().get(0);
+            signatures = session.createSQLQuery(GET_LAST_SIGNATURE_QUERY).list();
             tx.commit();
         }
         catch (RuntimeException e) {
@@ -68,6 +75,10 @@ public class SignatureDao extends CommonDao implements ISignatureDao, Serializab
         }
         finally {
             session.close();
+        }
+        
+        if (!signatures.isEmpty()) {
+            signature = signatures.get(0);
         }
                 
         LOGGER.info("getLastSignature|Pobranie ostatniej sygnatury: {}", signature);
@@ -80,14 +91,20 @@ public class SignatureDao extends CommonDao implements ISignatureDao, Serializab
     @Override
     public void updateLastSignature(final String signature) {
         LOGGER.info("updateLastSignature|Uaktualnienie sygnatury na: {}", signature);
+        int signaturesNumber = getSignaturesNumber();
         Session session = openSession();
         Transaction tx = null;
         
         try {
             tx = session.beginTransaction();
-            int id = (int) session.createSQLQuery(GET_LAST_SIGNATURE_ID_QUERY).list().get(0);
-            session.createSQLQuery(UPDATE_LAST_SIGNATURE).setString("singature", signature).setInteger("id", id)
-                    .executeUpdate();
+            if (0 == signaturesNumber) {
+                session.createSQLQuery(INSERT_SIGNATURE).setString("signature", signature).executeUpdate();
+            }
+            else {
+                int signatureId = (int) session.createSQLQuery(GET_LAST_SIGNATURE_ID).list().get(0);
+                session.createSQLQuery(UPDATE_LAST_SIGNATURE).setString("signature", signature)
+                    .setInteger("id", signatureId).executeUpdate();
+            }
             tx.commit();
         }
         catch (RuntimeException e) {
