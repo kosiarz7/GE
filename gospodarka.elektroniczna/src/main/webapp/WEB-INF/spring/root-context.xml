@@ -19,8 +19,23 @@
 		<security:logout logout-url="/app/logout" logout-success-url="/app/login"/>
 	</security:http>
 	
-	<security:authentication-manager>
+	<!-- Wersja docelowa -->
+	<!-- <security:authentication-manager>
 		<security:authentication-provider ref="authenticationProvider" />
+	</security:authentication-manager> -->
+	
+	<!-- MOCK -->
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="kadry" password="kadry" authorities="ROLE_HR" />
+				<security:user name="produkcja" password="produkcja" authorities="ROLE_MANUFACTURE" />
+				<security:user name="finanse" password="finanse" authorities="ROLE_FINANCE" />
+				<security:user name="serwis" password="serwis" authorities="ROLE_SERVIS" />
+				<security:user name="magazyn" password="magazyn" authorities="ROLE_STOREHOUSE" />
+				<security:user name="obsluga" password="obsluga" authorities="ROLE_CUSTOMER_SERVICE" />
+			</security:user-service>
+		</security:authentication-provider>
 	</security:authentication-manager>
 	
 	<bean id="authenticationProvider" class="gospodarka.elektroniczna.security.CustomAuthenticationProvider">
@@ -51,7 +66,7 @@
 	<bean id="userService" class="gospodarka.elektroniczna.services.user.UserService" p:userDao-ref="userDao"/>
 		
 	<!-- DAO -->
-	<bean id="signatureDAO" class="gospodarka.elektroniczna.dao.sgnature.SignatureDao" 
+	<bean id="signatureDAO" class="gospodarka.elektroniczna.dao.signature.SignatureDao" 
 		p:sessionFactory-ref="hibernateSessionFactory"/>
 		
 	<bean id="userDao" class="gospodarka.elektroniczna.dao.user.UserDao"

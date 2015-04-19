@@ -1,4 +1,4 @@
-package gospodarka.elektroniczna.dao.sgnature;
+package gospodarka.elektroniczna.dao.signature;
 
 import gospodarka.elektroniczna.annotations.InjectLogger;
 import gospodarka.elektroniczna.dao.CommonDao;

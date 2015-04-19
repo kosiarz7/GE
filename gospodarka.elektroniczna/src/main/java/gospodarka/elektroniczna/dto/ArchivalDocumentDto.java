@@ -18,12 +18,17 @@ public class ArchivalDocumentDto extends CurrentDocumentDto {
      */
     @Column(name = "DATE_OF_DISPATCH", nullable = false)
     private Date dateOfDispatch;
+    
 
     /**
      * Konstruktor.
      */
     public ArchivalDocumentDto() {
         super();
+    }
+    
+    public ArchivalDocumentDto(CurrentDocumentDto currentDocumentDto) {
+        
     }
 
     // SETTERY I GETTERY

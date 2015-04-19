@@ -2,7 +2,7 @@ package gospodarka.elektroniczna.services.signature;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
-import gospodarka.elektroniczna.dao.sgnature.ISignatureDao;
+import gospodarka.elektroniczna.dao.signature.ISignatureDao;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

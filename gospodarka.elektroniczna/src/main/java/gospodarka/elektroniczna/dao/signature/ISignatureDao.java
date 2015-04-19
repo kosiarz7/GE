@@ -1,4 +1,4 @@
-package gospodarka.elektroniczna.dao.sgnature;
+package gospodarka.elektroniczna.dao.signature;
 
 /**
  * Interfejs DAO dla sygnatury dokumentu.

@@ -1,6 +1,6 @@
 package gospodarka.elektroniczna.services.signature;
 
-import gospodarka.elektroniczna.dao.sgnature.ISignatureDao;
+import gospodarka.elektroniczna.dao.signature.ISignatureDao;
 import gospodarka.elektroniczna.util.StringUtil;
 
 import java.util.Calendar;
