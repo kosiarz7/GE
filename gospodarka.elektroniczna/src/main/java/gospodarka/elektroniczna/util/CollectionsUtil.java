@@ -5,7 +5,7 @@ import java.util.Collection;
 import com.google.common.base.Joiner;
 
 /**
- * Wspólne metody dla kolekcji.
+ * Wspólne metody dla kolekcji
  * 
  * @author Adam Kopaczewski
  *
