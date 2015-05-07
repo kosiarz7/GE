@@ -31,4 +31,7 @@ public interface SpringSecurityContextUtil {
      * @return imię i naziwsko.
      */
     String getLoggedOnUserNameAndSurname();
+    
+    
+    boolean isUserLoggedIn();
 }

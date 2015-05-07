@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:define name="pageContent">
+	<h1>Rozliczenie podróży służbowej</h1>
+		<h:form>
+			<p>
+				<p:message for="name" />
+			</p>
+			<p>
+				<p:message for="startDate" />
+			</p>
+			<p>
+				<p:message for="endDate" />
+			</p>
+			<p>
+				<p:message for="country" />
+			</p>
+			<p>
+				<p:message for="city" />
+			</p>
+			<p>
+				<p:message for="amount" />
+			</p>
+			<p>
+				Nazwa wyjazdu (nazwa klienta/nazwa wydarzenia):
+				<p:inputText id="name" value="#{clearingBusinessTravelVar.name}"
+					label="'Nazwa wyjazdu (nazwa klienta/nazwa wydarzenia)'" />
+			</p>
+			<p>
+				Data wyjazdu
+				<p:calendar id="startDate" value="#{clearingBusinessTravelVar.startDate}"
+					showOn="button" pattern="dd-MM-yyyy" label="'Data powrotu'"
+					placeholder="dd-mm-yyyy" />
+			</p>
+			<p>
+				Data powrotu:
+				<p:calendar id="endDate" value="#{clearingBusinessTravelVar.endDate}"
+					showOn="button" pattern="dd-MM-yyyy" label="'Data powrotu'"
+					placeholder="dd-mm-yyyy" />
+			</p>
+			<p>
+				Kraj:
+				<p:inputText id="country"
+					value="#{clearingBusinessTravelVar.country}" label="'Kraj'" />
+			</p>
+			<p>
+				Miasto:
+				<p:inputText id="city" value="#{clearingBusinessTravelVar.city}"
+					label="'Miasto'" />
+			</p>
+
+			<p>
+				Koszt wyjazdu:
+				<p:inputText id="amount" value="#{clearingBusinessTravelVar.amount}"
+					label="'Kwota'" />
+			</p>
+
+			<p:commandButton action="clearingBusinessTravel" value="Wyślij rozliczenie" ajax="false" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+

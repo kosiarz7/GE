@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:define name="pageContent">
+		<h1>Ogloszenie o wakacie</h1>
+		<h:form>
+			<p>
+				<p:message for="jobName" />
+			</p>
+			<p>
+				<p:message for="requiredExperience" />
+			</p>
+			<p>
+				<p:message for="goodToKnownExperience" />
+			</p>
+			<p>
+				Nazwa stanowiska:
+				<p:inputText id="jobName" value="#{condidateRequestVar.jobName}"
+					label="'Nazwa stanowiska'" />
+			</p>
+			<p>
+				Wymagane umiejętności:
+				<p:inputText id="requiredExperience"
+					value="#{condidateRequestVar.requiredExperience}"
+					label="'Wymagane umiejętności:'" />
+			</p>
+			<p>
+				Opcjonalne umiejętności:
+				<p:inputText id="goodToKnownExperience"
+					value="#{condidateRequestVar.goodToKnownExperience}"
+					label="'Opcjonalne umiejętności'" />
+			</p>
+
+			<p:commandButton action="condidateRequest"
+				value="Wyslij ogłoszenie do kadr" ajax="false" />
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
+

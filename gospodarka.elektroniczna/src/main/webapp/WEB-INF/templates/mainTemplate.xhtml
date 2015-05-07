@@ -1,36 +1,64 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Produkcja samochodów</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href="#{request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" />
-    </h:head>
-    <h:body>
-    	<div id="header">
-            <div id="header-content" class="content">
-				<div id="title" class="font48p wideSpacing">#{department}</div>
-				<div id="userData">
-					<form id="logoutForm" action="${request.contextPath}/app/logout" method="post">
-						#{springSecurityContextUtilBean.getLoggedOnUserNameAndSurname()}
-						<a href="#" title="Wyloguj się" onclick="document.getElementById('logoutForm').submit();">
-							<img id="logout-icon" src="#{request.contextPath}/resources/img/exit.png"/>
-						</a>
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					</form>
-				</div>
-            </div>
-        </div>
-        
-        <div id="pageSeparator" />
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Produkcja samochodów</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="#{request.contextPath}/resources/css/style.css"
+		rel="stylesheet" type="text/css" />
+</h:head>
+<h:body>
+	<div id="header">
+		<div id="header-content" class="content">
+			<div id="title" class="font48p wideSpacing">#{department}</div>
+			<div id="userData">
+				<form id="logoutForm" action="${request.contextPath}/app/logout"
+					method="post">
+					#{springSecurityContextUtilBean.getLoggedOnUserNameAndSurname()} <a
+						href="#" title="Wyloguj się"
+						onclick="document.getElementById('logoutForm').submit();"> <img
+						id="logout-icon"
+						src="#{request.contextPath}/resources/img/exit.png" />
+					</a> <input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</form>
+			</div>
+		</div>
+	</div>
 
-        <div id="page">
-            <div class="content">
-                <div id="pageContent">
-                    <ui:insert name="pageContent"/>
-                </div>
-            </div>
-        </div>
-    </h:body>
+	<div id="pageSeparator" />
+
+	<div id="page">
+		<div class="content">
+			<c:if test="#{springSecurityContextUtilBean.isUserLoggedIn()}">
+				<ol class="mainMenu">
+					<li><a href="#">Stronga główna</a></li>
+					<li><a href="#">Kadry/Finanse</a>
+						<ul>
+							<li><a href="${request.contextPath}/app/hr/holidayRequest">Wniosek
+									o urlop</a></li>
+							<li><a
+								href="${request.contextPath}/app/hr/clearingBusinessTravel">Rozliczenie
+									podróży służbowej</a></li>
+							<li><a href="${request.contextPath}/app/hr/clearingTraining">Rozlicz
+									szkolenie</a></li>
+							<li><a href="${request.contextPath}/app/hr/clearingInvoice">Rozlicz
+									Fakturę</a></li>
+							<li><a href="${request.contextPath}/app/hr/candidateRequest">Wyślij
+									informacje o wakacie</a></li>
+							<li><a href="${request.contextPath}/app/hr/sickLeave">Zwolnienie
+									lekarskie</a></li>
+
+						</ul></li>
+					<li><a href="#">Menu 2</a></li>
+				</ol>
+			</c:if>
+			<div id="pageContent">
+				<ui:insert name="pageContent" />
+			</div>
+		</div>
+	</div>
+</h:body>
 </html>

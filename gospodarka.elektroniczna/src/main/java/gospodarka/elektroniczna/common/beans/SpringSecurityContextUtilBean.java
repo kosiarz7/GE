@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -55,5 +57,11 @@ public class SpringSecurityContextUtilBean implements Serializable, SpringSecuri
         }
         
         return nameAndSurename;
+    }
+    
+    @Override
+    public boolean isUserLoggedIn() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        return !(null == auth || auth instanceof AnonymousAuthenticationToken);
     }
 }
