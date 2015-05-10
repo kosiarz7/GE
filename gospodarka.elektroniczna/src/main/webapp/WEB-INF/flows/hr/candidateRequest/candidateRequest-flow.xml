@@ -8,18 +8,18 @@
 		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT"
 		match="any" />
 		
-	<var name="condidateRequestVar" class="gospodarka.elektroniczna.dto.hr.CandidateRequest" />
+	<var name="candidateRequestVar" class="gospodarka.elektroniczna.dto.hr.CandidateRequest" />
 	<var name="controllerVar" class="gospodarka.elektroniczna.controllers.hr.CandidateRequestFlow" />
-					
+	
 	<view-state id="candidateRequestView">
-		<transition on="condidateRequest" to="condidateRequest" />
+		<transition on="candidateRequest" to="candidateRequest" />
 	</view-state>
 
-	<action-state id="condidateRequest">
-		<evaluate expression="controllerVar.submit(condidateRequestVar)"
+	<action-state id="candidateRequest">
+		<evaluate expression="controllerVar.submitCandidateRequest(candidateRequestVar, springSecurityContextUtilBean.getUserDepartment())"
 			result="flowScope.status" />
-		<transition to="condidateRequestEnd" />
+		<transition to="candidateRequestEnd" />
 	</action-state>
 
-	<end-state id="condidateRequestEnd" view="candidateRequestEnd.xhtml" />
+	<end-state id="candidateRequestEnd" view="candidateRequestEnd.xhtml" />
 </flow>

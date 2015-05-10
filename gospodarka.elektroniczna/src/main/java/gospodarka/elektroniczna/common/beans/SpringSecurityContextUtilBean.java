@@ -1,5 +1,6 @@
 package gospodarka.elektroniczna.common.beans;
 
+import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.security.SpringSecurityContextUtil;
 import gospodarka.elektroniczna.services.user.UserData;
 
@@ -18,7 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * 
  * @author Adam Kopaczewski
  *
- * Copyright © 2015 Adam Kopaczewski
+ *         Copyright © 2015 Adam Kopaczewski
  */
 public class SpringSecurityContextUtilBean implements Serializable, SpringSecurityContextUtil {
 
@@ -26,7 +27,7 @@ public class SpringSecurityContextUtilBean implements Serializable, SpringSecuri
      * UID.
      */
     private static final long serialVersionUID = -1707242397470945906L;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -34,7 +35,7 @@ public class SpringSecurityContextUtilBean implements Serializable, SpringSecuri
     public List<String> getLoggedOnUserRolesAsStringList() {
         return getLoggedOnUserRoles().stream().map(a -> a.getAuthority()).collect(Collectors.toList());
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -50,18 +51,80 @@ public class SpringSecurityContextUtilBean implements Serializable, SpringSecuri
     public String getLoggedOnUserNameAndSurname() {
         String nameAndSurename = "";
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        
+
         if (principal instanceof UserData) {
             nameAndSurename = ((UserData) principal).getNameAndSurname();
-            
+
         }
-        
+
         return nameAndSurename;
     }
-    
+
     @Override
     public boolean isUserLoggedIn() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return !(null == auth || auth instanceof AnonymousAuthenticationToken);
+    }
+
+    @Override
+    public boolean hasRole(String roleToCompare) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserData) {
+            UserData userData = (UserData) principal;
+            Collection<? extends GrantedAuthority> authorities = userData.getAuthorities();
+            for (GrantedAuthority authority : authorities) {
+                if (authority.getAuthority().equalsIgnoreCase(roleToCompare)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Przyjmuje ze rola to tez departament - pozniej sie poprawi
+     * 
+     * @return
+     */
+    public Departments getUserDepartment() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserData) {
+            UserData userData = (UserData) principal;
+            Collection<? extends GrantedAuthority> authorities = userData.getAuthorities();
+            String roleName = authorities.iterator().next().getAuthority().toUpperCase();
+            // (1, "HR"), (2, "MANUFACTURE"), (3, "FINANCE"), (4, "SERVIS"), (5,
+            // "STOREHOUSE"), (6, "CUSTOMER_SERVICE"), (7, "ROOT");
+            switch (roleName) {
+            case "HR":
+                return Departments.HUMAN_RESOURCES;
+            case "MANUFACTURE":
+                return Departments.MANUFACTURE;
+            case "FINANCE":
+                return Departments.FINANCE;
+            case "SERVIS":
+                return Departments.SERVIS;
+            case "STOREHOUSE":
+                return Departments.STOREHOUSE;
+            case "CUSTOMER_SERVICE":
+                return Departments.CUSTOMER_SERVICE;
+            case "ROOT":
+                return Departments.BEGIN;
+            default:
+                break;
+            }
+        }
+        return null;
+    }
+
+    public UserData getUser() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserData) {
+            return (UserData) principal;
+        }
+        return null;
+
     }
 }

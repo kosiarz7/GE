@@ -29,39 +29,39 @@
 			</p>
 			<p>
 				Nazwa wyjazdu (nazwa klienta/nazwa wydarzenia):
-				<p:inputText id="name" value="#{clearingBusinessTravelVar.name}"
+				<p:inputText id="name" value="#{businessTravelClearingVar.name}"
 					label="'Nazwa wyjazdu (nazwa klienta/nazwa wydarzenia)'" />
 			</p>
 			<p>
 				Data wyjazdu
-				<p:calendar id="startDate" value="#{clearingBusinessTravelVar.startDate}"
+				<p:calendar id="startDate" value="#{businessTravelClearingVar.startDate}"
 					showOn="button" pattern="dd-MM-yyyy" label="'Data powrotu'"
 					placeholder="dd-mm-yyyy" />
 			</p>
 			<p>
 				Data powrotu:
-				<p:calendar id="endDate" value="#{clearingBusinessTravelVar.endDate}"
+				<p:calendar id="endDate" value="#{businessTravelClearingVar.endDate}"
 					showOn="button" pattern="dd-MM-yyyy" label="'Data powrotu'"
 					placeholder="dd-mm-yyyy" />
 			</p>
 			<p>
 				Kraj:
 				<p:inputText id="country"
-					value="#{clearingBusinessTravelVar.country}" label="'Kraj'" />
+					value="#{businessTravelClearingVar.country}" label="'Kraj'" />
 			</p>
 			<p>
 				Miasto:
-				<p:inputText id="city" value="#{clearingBusinessTravelVar.city}"
+				<p:inputText id="city" value="#{businessTravelClearingVar.city}"
 					label="'Miasto'" />
 			</p>
 
 			<p>
 				Koszt wyjazdu:
-				<p:inputText id="amount" value="#{clearingBusinessTravelVar.amount}"
+				<p:inputText id="amount" value="#{businessTravelClearingVar.amount}"
 					label="'Kwota'" />
 			</p>
 
-			<p:commandButton action="clearingBusinessTravel" value="Wyślij rozliczenie" ajax="false" />
+			<p:commandButton action="businessTravelClearing" value="Wyślij rozliczenie" ajax="false" />
 		</h:form>
 	</ui:define>
 </ui:composition>

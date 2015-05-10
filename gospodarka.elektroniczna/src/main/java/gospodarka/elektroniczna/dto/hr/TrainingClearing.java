@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.validation.constraints.Past;
 
-public class ClearingTraining implements Serializable {
+public class TrainingClearing implements Serializable {
 
 	/**
 	 * 

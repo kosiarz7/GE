@@ -12,14 +12,12 @@
 	<var name="controllerVar"
 		class="gospodarka.elektroniczna.controllers.hr.HolidaysRequestFlow" />
 
-	<!-- <view-state id="transfer" />
- -->
 	<view-state id="holidayRequestView">
 		<transition on="holidayRequest" to="holidayRequest" />
 	</view-state>
 
 	<action-state id="holidayRequest">
-		<evaluate expression="controllerVar.submit(holidayRequestVar)"
+		<evaluate expression="controllerVar.submitHolidayRequest(holidayRequestVar)"
 			result="flowScope.status" />
 		<transition to="holidayRequestEnd" />
 	</action-state>

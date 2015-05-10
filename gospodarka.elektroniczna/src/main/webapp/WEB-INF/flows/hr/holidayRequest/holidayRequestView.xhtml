@@ -14,19 +14,20 @@
 			<p>
 				<p:message for="toDate" />
 			</p>
-			<h1>
-				Wniosek o urlop
-			</h1>
+			<h1>Wniosek o urlop</h1>
 			<p>
-			Zwracam się z prośbą o udzielenie mi urlopu od dnia
-				<p:calendar id="fromDate" value="#{holidayRequestVar.fromDate}" showOn="button"
-					pattern="dd-MM-yyyy" label="'Data od'" placeholder="dd-mm-yyyy" />
-			do dnia
-				<p:calendar id="toDate" value="#{holidayRequestVar.toDate}" showOn="button"
-					pattern="dd-MM-yyyy" label="'Data do'" placeholder="dd-mm-yyyy" />
-			za rok 2015.
+				Zwracam się z prośbą o udzielenie mi urlopu od dnia
+				<p:calendar id="fromDate" value="#{holidayRequestVar.fromDate}"
+					showOn="button" pattern="dd-MM-yyyy" label="'Data od'"
+					placeholder="dd-mm-yyyy" />
+				do dnia
+				<p:calendar id="toDate" value="#{holidayRequestVar.toDate}"
+					showOn="button" pattern="dd-MM-yyyy" label="'Data do'"
+					placeholder="dd-mm-yyyy" />
+				za rok 2015.
 			</p>
-			<p:commandButton action="holidayRequest" value="Wyślij wniosek" ajax="false" />
+			<p:commandButton action="holidayRequest" value="Wyślij wniosek"
+				ajax="false" />
 		</h:form>
 	</ui:define>
 </ui:composition>

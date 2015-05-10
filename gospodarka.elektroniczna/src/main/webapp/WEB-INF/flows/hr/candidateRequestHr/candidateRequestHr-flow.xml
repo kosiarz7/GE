@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="candidateRequestHrView"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<!-- Zabezpieczenie flow przez Spring Security -->
+	<secured attributes="ROLE_HR" />
+
+
+	<var name="controllerVar"
+		class="gospodarka.elektroniczna.controllers.hr.CandidateRequestFlow" />
+	<var name="condidateRequestToDeleteVar" class="gospodarka.elektroniczna.dto.hr.CandidateRequest" />
+	
+	<on-start>
+		<evaluate expression="controllerVar.getCandidateRequest()"
+			result="flowScope.candidates" />
+	</on-start>
+
+	<view-state id="candidateRequestHrView">
+
+		<transition on="removedCandidateRequest" to="removedCandidateRequest" />
+	</view-state>
+
+	<action-state id="removedCandidateRequest">
+		<evaluate expression="controllerVar.removeRequest(condidateRequestToDeleteVar)"
+			result="flowScope.status" />
+		<transition to="condidateRequestHrEnd" />
+	</action-state>
+
+	<end-state id="condidateRequestHrEnd" view="candidateRequestHrEnd.xhtml" />
+	
+</flow>

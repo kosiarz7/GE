@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="invoiceClearingView"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<!-- Zabezpieczenie flow przez Spring Security -->
+	<secured
+		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT"
+		match="any" />
+	
+	<var name="invoiceClearingVar" class="gospodarka.elektroniczna.dto.hr.InvoiceClearing"/>
+	<var name="controllerVar" class="gospodarka.elektroniczna.controllers.hr.InvoiceClearingFlow"/>
+
+
+	<view-state id="invoiceClearingView">
+		<transition on="invoiceClearing" to="invoiceClearing"/>
+	</view-state>
+
+	<action-state id="invoiceClearing">
+		<evaluate expression="controllerVar.submitInvoiceClearing(invoiceClearingVar)" result="flowScope.status" />
+		<transition to="invoiceClearingEnd" />
+	</action-state>
+
+	<end-state id="invoiceClearingEnd" view="invoiceClearingEnd.xhtml"/>
+</flow>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:define name="pageContent">
+		<h1>Zarejestruj nowego kandydata</h1>
+		<h:form>
+			<p>
+				<p:message for="name" />
+			</p>
+			<p>
+				<p:message for="surname" />
+			</p>
+			<p>
+				<p:message for="experience" />
+			</p>
+			<p>
+				<p:message for="department" />
+			</p>
+			<p>
+				Imie:
+				<p:inputText id="name" value="#{newCandidateVar.name}"
+					label="'Imie'" />
+			</p>
+			<p>
+				Nazwisko:
+				<p:inputText id="surname" value="#{newCandidateVar.surname}"
+					label="'Nazwisko'" />
+			</p>
+			<p>
+				Doświadczenie:
+				<p:inputText id="experience" value="#{newCandidateVar.experience}"
+					label="'Doświadczenie'" />
+			</p>
+			<p>
+				Dział:
+				<p:selectOneMenu id="department"
+					value="#{newCandidateVar.department}">
+					<f:selectItems
+						value="#{gospodarka.elektroniczna.dao.department.Departments}"
+						var="status" itemValue="#{status}" itemLabel="#{status.label}" />
+					<!-- 
+					<f:selectItem itemLabel="Select One" itemValue="" />
+					<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+					<f:selectItem itemLabel="PS4" itemValue="PS4" />
+					<f:selectItem itemLabel="Wii U" itemValue="Wii U" /> -->
+				</p:selectOneMenu>
+			</p>
+
+			<p:commandButton action="newCandidateHr" value="Dodaj" ajax="false" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+

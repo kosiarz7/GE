@@ -123,6 +123,7 @@ ol.mainMenu {
 	height: 2em;
 	line-height: 2em;
 	text-align: center;
+	z-index: 1;
 }
 
 /* wygląd wszystkich elementów - a - znajdujących się w elemencie - ol */
@@ -131,6 +132,7 @@ ol.mainMenu a {
 	text-decoration: none;
 	color: #000;
 	padding: 0 5px;
+	z-index: 1;
 }
 
 /* wygląd elementów - li - wszystkich dzieci elementu - ol */
@@ -140,26 +142,31 @@ ol.mainMenu>li {
 	margin-left: 1px;
 	background-color: #FFFFFF;
 	height: 2em;
+	z-index: 1;
 }
 
 /* wygląd elementu - li - pierwszego dziecka elementu - ol */
 ol.mainMenu>li:first-child {
 	margin-left: 0;
+	z-index: 1;
 }
 
 /* wygląd elementów - li - wszystkich dzieci elementu - ol - po najechaniu kursorem myszki na element - li */
 ol.mainMenu>li:hover {
 	background-color: #EEE;
+	z-index: 1;
 }
 
 /* wygląd elementu - a - dziecka elementu - li - będącego dzieckiem elementu - ol - po najechaniu kursorem myszki na element - li */
 ol.mainMenu>li:hover>a {
 	color: #09C;
+	z-index: 1;
 }
 
 /* wygląd elementu - ul - dziecka elementu - li - będącego dzieckiem elementu - ol - po najechaniu kursorem myszki na element - li */
 ol.mainMenu>li:hover>ul {
 	display: block;
+	z-index: 1;
 }
 
 /* ------------------------CZĘŚĆ-ROZWIJANA-MENU------------------------ */
@@ -170,25 +177,30 @@ ol.mainMenu>li>ul {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
+	z-index: 1;
 }
 
 /* wygląd elementu - li - w części rozwijanej */
 ol.mainMenu>li>ul>li {
 	position: relative;
 	background-color: #EEE;
+	z-index: 1;
 }
 
 /* wygląd elementu - a - w części rozwijanej */
 ol.mainMenu>li>ul>li>a {
 	border-top: 1px solid #FFF;
+	z-index: 1;
 }
 
 /* wygląd elementu - li - w części rozwijanej, po najechaniu kursorem myszki na dany element - li */
 ol.mainMenu>li>ul>li:hover {
 	background-color: #DDD;
+	z-index: 1;
 }
 
 /* wygląd elementu - a - w części rozwijanej, po najechaniu kursorem myszki na element - li */
 ol.mainMenu>li>ul>li:hover>a {
 	color: #09C;
+	z-index: 1;
 }

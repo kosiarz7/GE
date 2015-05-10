@@ -13,6 +13,14 @@ public class CandidateRequest implements Serializable {
 	public CandidateRequest() {
 	}
 
+	public CandidateRequest(String jobName, String requiredExperience,
+			String goodToKnownExperience) {
+		super();
+		this.jobName = jobName;
+		this.requiredExperience = requiredExperience;
+		this.goodToKnownExperience = goodToKnownExperience;
+	}
+
 	public String getJobName() {
 		return jobName;
 	}

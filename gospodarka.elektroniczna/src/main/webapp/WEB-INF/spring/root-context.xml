@@ -19,12 +19,12 @@
 		<security:logout logout-url="/app/logout" logout-success-url="/app/login"/>
 	</security:http>
 	
-	<!-- Wersja docelowa -->
-	<!-- <security:authentication-manager>
+	<!-- Wersja docelowa CustomAuthenticationProvider -->
+	 <security:authentication-manager>
 		<security:authentication-provider ref="authenticationProvider" />
-	</security:authentication-manager> -->
+	</security:authentication-manager> 
 	
-	<!-- MOCK -->
+	<!-- MOCK
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:user-service>
@@ -37,7 +37,7 @@
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
-	
+	 -->
 	<bean id="authenticationProvider" class="gospodarka.elektroniczna.security.CustomAuthenticationProvider">
 		<property name="encryptor">
 			<bean class="gospodarka.elektroniczna.services.encrypt.SHA512Encryptor"/>

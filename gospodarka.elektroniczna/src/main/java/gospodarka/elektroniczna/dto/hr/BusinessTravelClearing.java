@@ -3,7 +3,7 @@ package gospodarka.elektroniczna.dto.hr;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ClearingBusinessTravel implements Serializable {
+public class BusinessTravelClearing implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -70,5 +70,11 @@ public class ClearingBusinessTravel implements Serializable {
 	public void setApproved(boolean approved) {
 		this.approved = approved;
 	}
+
+    @Override
+    public String toString() {
+        return "BusinessTravelClearing [name=" + name + ", startDate=" + startDate + ", endDate=" + endDate
+                + ", country=" + country + ", city=" + city + ", amount=" + amount + "]";
+    }
 
 }
