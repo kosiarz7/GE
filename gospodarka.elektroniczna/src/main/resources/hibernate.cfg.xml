@@ -22,5 +22,6 @@
 		<mapping class="gospodarka.elektroniczna.dto.DocumentTypeDto" />
 		<mapping class="gospodarka.elektroniczna.dto.ArchivalDocumentDto" />
 		<mapping class="gospodarka.elektroniczna.dto.CurrentDocumentDto" />
+		<mapping class="gospodarka.elektroniczna.dto.LightCurrentDocumentDto" />
 	</session-factory>
 </hibernate-configuration>

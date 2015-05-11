@@ -18,7 +18,7 @@ import org.slf4j.Logger;
  *
  * Copyright © 2015 Adam Kopaczewski
  */
-public class DocumentTypeDao extends CommonDao implements IDocumentTypeDao, Serializable {
+public class DocumentTypeDao extends CommonDao<DocumentTypeDto> implements IDocumentTypeDao, Serializable {
     /**
      * UID.
      */

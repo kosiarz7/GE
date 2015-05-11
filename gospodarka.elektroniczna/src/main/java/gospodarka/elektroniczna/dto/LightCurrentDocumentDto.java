@@ -22,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "CURRENT_DOCUMENTS")
-public class CurrentDocumentDto extends AbstractDto implements Serializable {
+public class LightCurrentDocumentDto extends AbstractDto implements Serializable {
     /**
      * UID.
      */
@@ -57,17 +57,12 @@ public class CurrentDocumentDto extends AbstractDto implements Serializable {
      */
     @Column(name = "DATE_OF_RECIPT", nullable = false)
     private Date dateOfRecipt;
-    /**
-     * Zawartość dokumentu.
-     */
-    @Column(name = "CONTENT", nullable = false)
-    private byte[] content;
 
     
     /**
      * Konstruktor.
      */
-    public CurrentDocumentDto() {
+    public LightCurrentDocumentDto() {
     }
 
     // GETTERY I SETTERY
@@ -109,13 +104,5 @@ public class CurrentDocumentDto extends AbstractDto implements Serializable {
 
     public void setDateOfRecipt(Date dateOfRecipt) {
         this.dateOfRecipt = dateOfRecipt;
-    }
-
-    public byte[] getContent() {
-        return content;
-    }
-
-    public void setContent(byte[] content) {
-        this.content = content;
     }
 }

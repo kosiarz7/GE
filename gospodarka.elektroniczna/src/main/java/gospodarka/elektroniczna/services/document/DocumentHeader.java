@@ -70,6 +70,7 @@ public class DocumentHeader implements Serializable {
         headerId = headerDto.getId();
         title = headerDto.getTitle();
         signature = headerDto.getSignature();
+        type = DocumentTypes.valueOf(headerDto.getDocumentType().getName());
     }
     
     /**

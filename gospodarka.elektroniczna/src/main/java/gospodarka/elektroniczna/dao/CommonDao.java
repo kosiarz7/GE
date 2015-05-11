@@ -13,11 +13,12 @@ import org.hibernate.Transaction;
  *
  * Copyright © 2015 Adam Kopaczewski
  */
-public class CommonDao implements Serializable {
+public class CommonDao<T> implements Serializable, ICommonDao<T> {
     /**
      * UID.
      */
     private static final long serialVersionUID = -7088860771369912098L;
+    
     /**
      * Fabryka sesji Hibernate.
      */
@@ -29,7 +30,7 @@ public class CommonDao implements Serializable {
      * 
      * @param entity encja.
      */
-    protected void save(final Object entity) {
+    public void save(final T entity) {
         Session session = openSession();
         Transaction tx = null;
         
