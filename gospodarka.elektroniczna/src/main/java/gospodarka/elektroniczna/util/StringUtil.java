@@ -1,5 +1,6 @@
 package gospodarka.elektroniczna.util;
 
+
 /**
  * Wspólne metody dla łańcuchów.
  * 
@@ -16,5 +17,23 @@ public class StringUtil {
      */
     public static boolean isEmpty(final String string) {
         return null == string || "".equals(string.trim());
+    }
+    
+    /**
+     * Usuwa białe znaki z napisu.
+     * 
+     * @param string napis.
+     * @return napis bez białych znaków.
+     */
+    public static String removeWhitespaces(String string) {
+        String removedWhitespaces = "";
+        
+        if (!StringUtil.isEmpty(string)) {
+            removedWhitespaces = string.trim();
+            removedWhitespaces = removedWhitespaces.replaceAll(" ", "");
+            removedWhitespaces = removedWhitespaces.replaceAll("\t", "");
+        }
+        
+        return removedWhitespaces;
     }
 }

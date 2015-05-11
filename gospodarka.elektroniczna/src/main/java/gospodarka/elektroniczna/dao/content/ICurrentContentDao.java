@@ -1,10 +1,9 @@
 package gospodarka.elektroniczna.dao.content;
 
 import gospodarka.elektroniczna.dao.ICommonDao;
-import gospodarka.elektroniczna.dao.department.Departments;
-import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.dto.CurrentDocumentDto;
 import gospodarka.elektroniczna.dto.LightCurrentDocumentDto;
+import gospodarka.elektroniczna.services.document.SearchCriteria;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,19 +17,10 @@ import java.util.Optional;
  */
 public interface ICurrentContentDao extends ICommonDao<CurrentDocumentDto> {
     /**
-     * Wczytuje bieżące dokumentu znajdujące się w danym oddziale.
+     * Wczytuje bieżące dokumenty spełniające przesłane kryteria.
      * 
-     * @param department oddział.
-     * @return lista dokumentów.
+     * @param searchCriteria kryteria wyszukiwania.
+     * @return dokumenty spełniające kryteria.
      */
-    Optional<List<LightCurrentDocumentDto>> loadDocumentsInDeparment(final Departments department);
-    /**
-     * Wczytuje bieżące dokumentu żądanego znajdujące się w danym oddziale.
-     * 
-     * @param department oddział.
-     * @param type typ dokumentu.
-     * @return lista dokumentów.
-     */
-    Optional<List<LightCurrentDocumentDto>> loadDocumentsInDeparment(final Departments department,
-            final DocumentTypes type);
+    Optional<List<LightCurrentDocumentDto>> loadDocuments(final SearchCriteria searchCriteria);
 }

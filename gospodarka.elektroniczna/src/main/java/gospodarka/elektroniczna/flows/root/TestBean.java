@@ -6,6 +6,7 @@ import gospodarka.elektroniczna.documents.TestDocument;
 import gospodarka.elektroniczna.services.document.Document;
 import gospodarka.elektroniczna.services.document.DocumentStub;
 import gospodarka.elektroniczna.services.document.IDocumentService;
+import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.signature.WrongNumberOfLastSignatureException;
 
 import java.io.Serializable;
@@ -46,15 +47,11 @@ public class TestBean implements Serializable {
     }
     
     public void loadDocuemnts(TestDataBean bean) {
-        bean.setDocuments(documentService.loadCurrentDocumentsInDepartment(Departments.FINANCE));
+        bean.setDocuments(documentService.loadCurrentDocuments(bean.getSearchCriteria()));
     }
     
-    public void loadDocuemntsByType(TestDataBean bean) {
-        bean.setDocuments(documentService.loadCurrentDocumentsInDepartment(Departments.FINANCE, DocumentTypes.TEST));
-    }
-    
-    public void loadDocuemntsByType2(TestDataBean bean) {
-        bean.setDocuments(documentService.loadCurrentDocumentsInDepartment(Departments.SERVIS, DocumentTypes.TEST));
+    public void clear(TestDataBean bean) {
+        bean.setSearchCriteria(new SearchCriteria());
     }
     
     public void loadDocument(DocumentStub stub, TestDataBean bean) {

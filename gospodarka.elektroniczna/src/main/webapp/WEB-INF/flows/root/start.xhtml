@@ -14,9 +14,32 @@
         Zawartość strony.
         <h:form>
 	        <p:commandButton value="Nowy dokument" actionListener="#{testBean.create()}"/>
-	        <p:commandButton value="Lista dokumentów" actionListener="#{testBean.loadDocuemnts(data)}" update="@form"/>
-	        <p:commandButton value="Lista dokumentów (finanse)" actionListener="#{testBean.loadDocuemntsByType(data)}" update="@form"/>
-	        <p:commandButton value="Lista dokumentów (serwis)" actionListener="#{testBean.loadDocuemntsByType2(data)}" update="@form"/>
+	        
+	        <h:panelGrid columns="2" cellpadding="5" style="display: table; margin: 0 auto;">
+				<p:outputLabel value="Tytuł: " />
+				<p:inputText value="#{data.searchCriteria.title}"/>
+				
+				<p:outputLabel value="Sygnatura: " />
+				<p:inputText value="#{data.searchCriteria.signature}"/>
+				
+				<p:outputLabel value="Oddział: " />
+				<p:selectOneMenu value="#{data.searchCriteria.department}">
+					<f:selectItems value="#{data.departments}" var="item" itemValue="#{item}" itemLabel="#{item}"/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Typ: " />
+				<p:selectOneMenu value="#{data.searchCriteria.type}">
+					<f:selectItems value="#{data.documentTypes}" var="item" itemValue="#{item}" itemLabel="#{item}"/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Od: "/>
+				<p:calendar value="#{data.searchCriteria.from}" pattern="MM/dd/yyyy" />
+				
+				<p:outputLabel value="Do: "/>
+				<p:calendar value="#{data.searchCriteria.to}" pattern="MM/dd/yyyy" />
+		    </h:panelGrid>
+		    <p:commandButton value="Szukaj" actionListener="#{testBean.loadDocuemnts(data)}" update="@form"/>
+		    <p:commandButton value="Wyczyść" actionListener="#{testBean.clear(data)}" update="@form"/>
 	        
 	        <p:dataTable var="item" value="#{data.documents}" rows="10"
                          paginator="true"

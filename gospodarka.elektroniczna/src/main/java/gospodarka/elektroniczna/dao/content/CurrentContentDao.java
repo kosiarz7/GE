@@ -2,15 +2,16 @@ package gospodarka.elektroniczna.dao.content;
 
 import gospodarka.elektroniczna.annotations.InjectLogger;
 import gospodarka.elektroniczna.dao.CommonDao;
-import gospodarka.elektroniczna.dao.department.Departments;
-import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.dto.CurrentDocumentDto;
 import gospodarka.elektroniczna.dto.LightCurrentDocumentDto;
+import gospodarka.elektroniczna.services.document.SearchCriteria;
+import gospodarka.elektroniczna.util.StringUtil;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.slf4j.Logger;
@@ -39,17 +40,15 @@ public class CurrentContentDao extends CommonDao<CurrentDocumentDto> implements 
      */
     @Override
     @SuppressWarnings("unchecked")
-    public Optional<List<LightCurrentDocumentDto>> loadDocumentsInDeparment(Departments department) {
-        LOGGER.debug("loadDocumentsInDeparment|Pobranie dokumentów z oddziału: {}", department.toString());
+    public Optional<List<LightCurrentDocumentDto>> loadDocuments(final SearchCriteria searchCriteria) {
+        LOGGER.debug("loadDocuments|Kryteria wyszukiwania: {}", searchCriteria);
         Session session = openSession();
         Transaction tx = null;
         List<LightCurrentDocumentDto> documents = null;
         
         try {
             tx = session.beginTransaction();
-            documents = session
-                    .createQuery("from LightCurrentDocumentDto where targetDepartment.name = :targetDepartmentName")
-                    .setString("targetDepartmentName", department.toString()).list();
+            documents = createQuery(searchCriteria, session).list();
             tx.commit();
         }
         catch (RuntimeException e) {
@@ -64,58 +63,92 @@ public class CurrentContentDao extends CommonDao<CurrentDocumentDto> implements 
         
         Optional<List<LightCurrentDocumentDto>> result = Optional.empty();
         if (documents.isEmpty()) {
-            LOGGER.debug("loadDocumentsInDeparment|Brak bieżących dokumentów w oddziale: {}", department.toString());
+            LOGGER.debug("loadDocuments|Brak dokumentów spełniających kryteria: {}", searchCriteria);
         }
         else {
             result = Optional.of(documents);
-            LOGGER.debug("loadDocumentsInDeparment|Załadowano {} bieżących dokumentów dla oddziału: {}",
-                    documents.size(), department.toString());
+            LOGGER.debug("loadDocuments|Załadowano {} dokumentów spełniających kryteria.", searchCriteria);
         }
         return result;
     }
     
     /**
-     * {@inheritDoc}
+     * Buduje zapytanie.
+     * 
+     * @param searchCriteria kryteria wyszukiwania.
+     * @return zapytanie.
      */
-    @Override
-    @SuppressWarnings("unchecked")
-    public Optional<List<LightCurrentDocumentDto>> loadDocumentsInDeparment(Departments department, DocumentTypes type) {
-        LOGGER.debug("loadDocumentsInDeparment|Pobranie dokumentów typu: {} z oddziału: {}", type.toString(),
-                department.toString());
-        Session session = openSession();
-        Transaction tx = null;
-        List<LightCurrentDocumentDto> documents = null;
+    private Query createQuery(final SearchCriteria searchCriteria, final Session session) {
+        String query = createStringQuery(searchCriteria);
+        return fillParamters(session.createQuery(query), searchCriteria);
+    }
+    
+    /**
+     * Tworzy zapytanie.
+     * 
+     * @param searchCriteria kryteria wyszukiwania.
+     * @return zapytanie.
+     */
+    private String createStringQuery(final SearchCriteria searchCriteria) {
+        StringBuilder builder = new StringBuilder();
+        String and = " AND ";
         
-        try {
-            tx = session.beginTransaction();
-            documents = session
-                    .createQuery("from LightCurrentDocumentDto where targetDepartment.name = :targetDepartmentName and"
-                            + " header.documentType.name = :documentTypeName")
-                            .setString("targetDepartmentName", department.toString())
-                            .setString("documentTypeName", type.toString())
-                            .list();
-            tx.commit();
+        builder.append("from LightCurrentDocumentDto where ");
+        if (searchCriteria.getFrom() != null) {
+            builder.append("dateOfRecipt >= :from").append(and);
         }
-        catch (RuntimeException e) {
-            if (null != tx) {
-                tx.rollback();
-            }
-            throw e;
+        if (searchCriteria.getTo() != null) {
+            builder.append("dateOfRecipt <= :to").append(and);
         }
-        finally {
-            session.close();
+        if (searchCriteria.getDepartment() != null) {
+            builder.append("targetDepartment.name = :departmentName").append(and);
+        }
+        if (searchCriteria.getType() != null) {
+            builder.append("header.documentType.name = :docTypeName").append(and);
+        }
+        if (!StringUtil.isEmpty(searchCriteria.getSignature())) {
+            builder.append("header.signature = :signature").append(and);
+        }
+        if (!StringUtil.isEmpty(searchCriteria.getTitle())) {
+            builder.append("header.title = :title");
         }
         
-        Optional<List<LightCurrentDocumentDto>> result = Optional.empty();
-        if (documents.isEmpty()) {
-            LOGGER.debug("loadDocumentsInDeparment|Brak bieżących dokumentów typu: {} w oddziale: {}", 
-                    department.toString());
+        String stringQuery = builder.toString();
+        if (stringQuery.endsWith(and)) {
+            stringQuery = stringQuery.substring(0, stringQuery.length() - 5);
         }
-        else {
-            result = Optional.of(documents);
-            LOGGER.debug("loadDocumentsInDeparment|Załadowano {} bieżących dokumentów typu: {} dla oddziału: {}",
-                    documents.size(), type.toString(), department.toString());
+        
+        LOGGER.debug("createStringQuery|Query: {}", stringQuery);
+        return stringQuery;
+    }
+    
+    /**
+     * Wypełnia zapytanie parametrami.
+     * 
+     * @param query zapytanie.
+     * @param searchCriteria parametry.
+     * @return zapytanie z wypełnionymi parametrami.
+     */
+    private Query fillParamters(Query query, SearchCriteria searchCriteria) {
+        if (searchCriteria.getFrom() != null) {
+            query.setDate("from", searchCriteria.getFrom());
         }
-        return result;
+        if (searchCriteria.getTo() != null) {
+            query.setDate("to", searchCriteria.getTo());
+        }
+        if (searchCriteria.getDepartment() != null) {
+            query.setString("departmentName", searchCriteria.getDepartment().toString());
+        }
+        if (searchCriteria.getType() != null) {
+            query.setString("docTypeName", searchCriteria.getType().toString());
+        }
+        if (!StringUtil.isEmpty(searchCriteria.getSignature())) {
+            query.setString("signature", searchCriteria.getSignature());
+        }
+        if (!StringUtil.isEmpty(searchCriteria.getTitle())) {
+            query.setString("title", searchCriteria.getTitle());
+        }
+        
+        return query;
     }
 }

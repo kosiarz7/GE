@@ -41,25 +41,17 @@ public interface IDocumentService {
      */
     <T> void archiveDocument(final Document<T> document, final Departments department);
     /**
-     * Zwraca wszystkie nieprzetworzone dokumenty dla danego oddziału.
-     * 
-     * @param department oddział.
-     * @return lista nieprzetworzonych dokumentów.
-     */
-    List<DocumentStub> loadCurrentDocumentsInDepartment(final Departments department);
-    /**
-     * Zwraca wszystkie nieprzetworzone dokumenty określonego typu dla danego oddziału.
-     * 
-     * @param department oddział.
-     * @param type typ dokumentu.
-     * @return lista nieprzetworzonych dokumentów.
-     */
-    List<DocumentStub> loadCurrentDocumentsInDepartment(final Departments department, final DocumentTypes type);
-    /**
      * Ładuje zawartość dokumentu na podstawie jego "obciętej" wersji.
      * 
      * @param stub "obcięta" wersja dokumentu.
      * @return dokument.
      */
     <T> Document<T> loadCurrentDocument(final DocumentStub stub);
+    /**
+     * Wyszukuje dokumenty spełniające kryteria.
+     * 
+     * @param searchCriteria kryteria wyszukiwania.
+     * @return dokumenty spełniające kryteria wyszukiwania.
+     */
+    List<DocumentStub> loadCurrentDocuments(final SearchCriteria searchCriteria);
 }

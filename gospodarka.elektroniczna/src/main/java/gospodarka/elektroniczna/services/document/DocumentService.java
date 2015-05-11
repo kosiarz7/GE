@@ -16,6 +16,7 @@ import gospodarka.elektroniczna.dto.LightCurrentDocumentDto;
 import gospodarka.elektroniczna.services.document.content.DocumentContentFactory;
 import gospodarka.elektroniczna.services.document.content.IDocumentContentSerialization;
 import gospodarka.elektroniczna.services.signature.WrongNumberOfLastSignatureException;
+import gospodarka.elektroniczna.util.StringUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -171,46 +172,6 @@ public class DocumentService implements IDocumentService, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public List<DocumentStub> loadCurrentDocumentsInDepartment(final Departments department, final DocumentTypes type) {
-        Optional<List<LightCurrentDocumentDto>> documents = currentDocumentDao.loadDocumentsInDeparment(department,
-                type);
-        return documents.isPresent() ? documents.get().stream().map(current -> convert(current))
-                .collect(Collectors.toList()) : new ArrayList<>();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<DocumentStub> loadCurrentDocumentsInDepartment(final Departments department) {
-        Optional<List<LightCurrentDocumentDto>> documents = currentDocumentDao.loadDocumentsInDeparment(department);
-        return documents.isPresent() ? documents.get().stream().map(current -> convert(current))
-                .collect(Collectors.toList()) : new ArrayList<>();
-    }
-    
-    /**
-     * Konwertuje obieket DTO na DocumentStub.
-     * 
-     * @param documentDto DTO.
-     * @return DocumentStub.
-     */
-    private DocumentStub convert(LightCurrentDocumentDto documentDto) {
-        DocumentStub stub = new DocumentStub();
-        stub.setContentId(documentDto.getId());
-        stub.setDateOfRecipte(documentDto.getDateOfRecipt());
-        stub.setFrom(Departments.valueOf(documentDto.getSourceDepartment().getName()));
-        stub.setHeaderId(documentDto.getHeader().getId());
-        stub.setSignature(documentDto.getHeader().getSignature());
-        stub.setTitle(documentDto.getHeader().getTitle());
-        stub.setTo(Departments.valueOf(documentDto.getTargetDepartment().getName()));
-        stub.setType(DocumentTypes.valueOf(documentDto.getHeader().getDocumentType().getName()));
-        return stub;
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public <T> Document<T> loadCurrentDocument(DocumentStub stub) {
         Optional<CurrentDocumentDto> currentDocument = currentDocumentDao.loadById(stub.getContentId(),
                 CurrentDocumentDto.class);
@@ -262,6 +223,65 @@ public class DocumentService implements IDocumentService, Serializable {
         archivalDto.setTargetDepartment(targetDto);
         archivalDocumentDao.save(archivalDto);
         currentDocumentDao.delete(currentDto);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<DocumentStub> loadCurrentDocuments(final SearchCriteria searchCriteria) {
+        if (!validSearchCriteria(searchCriteria)) {
+            LOGGER.error("loadCurrentDocuments|Żadene kryterium nie zostało wybrane.");
+            throw new IllegalArgumentException("Przynajmniej jedno kryterium musi być wybrane.");
+        }
+        
+        Optional<List<LightCurrentDocumentDto>> documents = currentDocumentDao.loadDocuments(searchCriteria);
+        return documents.isPresent() ? documents.get().stream().map(current -> convert(current))
+                .collect(Collectors.toList()) : new ArrayList<>();
+    }
+    
+    /**
+     * Konwertuje obieket DTO na DocumentStub.
+     * 
+     * @param documentDto DTO.
+     * @return DocumentStub.
+     */
+    private DocumentStub convert(LightCurrentDocumentDto documentDto) {
+        DocumentStub stub = new DocumentStub();
+        stub.setContentId(documentDto.getId());
+        stub.setDateOfRecipte(documentDto.getDateOfRecipt());
+        stub.setFrom(Departments.valueOf(documentDto.getSourceDepartment().getName()));
+        stub.setHeaderId(documentDto.getHeader().getId());
+        stub.setSignature(documentDto.getHeader().getSignature());
+        stub.setTitle(documentDto.getHeader().getTitle());
+        stub.setTo(Departments.valueOf(documentDto.getTargetDepartment().getName()));
+        stub.setType(DocumentTypes.valueOf(documentDto.getHeader().getDocumentType().getName()));
+        return stub;
+    }
+    
+    /**
+     * Sprawdza czy kryteria wyszukiwania są poprawne.
+     * 
+     * @param searchCriteria kryteria wyszukiwania.
+     * @return true - kryteria są poprawne; false - kryteria są niepoprawne.
+     */
+    private boolean validSearchCriteria(final SearchCriteria searchCriteria) {
+        boolean valid = false;
+        
+        valid |= searchCriteria.getDepartment() != null;
+        valid |= searchCriteria.getFrom() != null;
+        valid |= searchCriteria.getTo() != null;
+        valid |= searchCriteria.getType() != null;
+        if (!StringUtil.isEmpty(searchCriteria.getSignature())) {
+            searchCriteria.setSignature(searchCriteria.getSignature().trim());
+            valid |= true;
+        }
+        if (!StringUtil.isEmpty(searchCriteria.getTitle())) {
+            searchCriteria.setTitle(searchCriteria.getTitle().trim());
+            valid |= true;
+        }
+        
+        return valid;
     }
 
     /**
