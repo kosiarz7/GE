@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+ <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Produkcja"/>
+            <ui:define name="pageContent">
+
+                        <h3>Miesęczne podsumowanie linii produkcyjnej</h3>
+ 
+                        <h:form id="monthlySummaryForm" >
+
+                            <div class="form-group">
+                                <label for="date">Data</label>
+                                <!--<input type="date" class="form-control" path="date" placeholder="data"/>-->
+                                <h:inputText id="date" class="form-control" value="#{monthlySummary.date}" required="true">
+                                    <f:convertDateTime pattern="yyyy-MM-dd"/> 
+                                </h:inputText>
+                                <h:message id="m1" for="date" style="color:red"/> <p></p>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productionLineNumber">Numer linii montażowej</label>
+                                <h:inputText id="productionLineNumber" class="form-control" value="#{monthlySummary.productionLineNumber}" required="true" />
+                                <h:message id="m2" for="productionLineNumber" style="color:red"/> <p></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="modelName">Nazwa produkowanego modelu</label>
+                                <h:inputText id="modelName" class="form-control" value="#{monthlySummary.modelName}" required="true" />
+                                <h:message id="m3" for="modelName" style="color:red"/> <p></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="amountOfProductedElements">Ilość wyprodukowanych sztuk</label>
+                                <h:inputText id="amountOfProductedElements" class="form-control" value="#{monthlySummary.amountOfProductedElements}" required="true"/>
+                                <h:message id="m4" for="amountOfProductedElements" style="color:red"/> <p></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="reportedProblems">Zgłoszone nieprawidłowości</label>
+                                <h:inputText id="reportedProblems" class="form-control" value="#{monthlySummary.reportedProblems}"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="numberOfDefectiveElements">Ilość wadliwych elementów</label>
+                                <h:inputText id="numberOfDefectiveElements" class="form-control" value="#{monthlySummary.numberOfDefectiveElements}"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productionLineManager">Osoba zarządzająca linią</label>
+                                <h:inputText id="productionLineManager" class="form-control" value="#{monthlySummary.productionLineManager}" required="true" />
+                                <h:message id="m5" for="productionLineManager" style="color:red"/> <p></p>
+                            </div>
+
+                            <p:commandButton action="saveMonthlySummary" class="btn btn-primary"  value="Dodaj" update="@form" />
+                            <p:commandButton action="cancel" class="btn btn-primary"  value="Anuluj" immediate="true"/>
+                           
+                        </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
