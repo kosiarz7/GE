@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 	<title>Produkcja samochodów</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="#{request.contextPath}/resources/css/style.css"
-		rel="stylesheet" type="text/css" />
-        <!-- Bootstrap -->
-        <link rel='stylesheet' href='webjars/bootstrap/3.3.4/css/bootstrap.min.css'/>
+	<link href="#{request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap -->
+    <link rel='stylesheet' href='webjars/bootstrap/3.3.4/css/bootstrap.min.css'/>
 </h:head>
 <h:body>
 	<div id="header">
@@ -35,54 +35,32 @@
 	<div id="page">
 		<div class="content">
 			<c:if test="#{springSecurityContextUtilBean.isUserLoggedIn()}">
-				<ol class="mainMenu">
-					<li><a href="#">Stronga główna</a></li>
-					<li><a href="#">Wnioski</a>
-						<ul>
-							<li><a href="${request.contextPath}/app/hr/holidayRequest">Wniosek
-									o urlop</a></li>
-							<li><a
-								href="${request.contextPath}/app/hr/businessTravelClearing">Rozliczenie
-									podróży służbowej</a></li>
-
-							<li><a href="${request.contextPath}/app/hr/trainingClearing">Rozliczenie
-									szkolenie</a></li>
-
-							<li><a href="${request.contextPath}/app/hr/invoiceClearing">Rozliczenie
-									Faktury</a></li>
-							<li><a href="${request.contextPath}/app/hr/candidateRequest">Informacje
-									o wakacie</a></li>
-							<li><a href="${request.contextPath}/app/hr/sickLeave">Zwolnienie
-									lekarskie</a></li>
-
-						</ul></li>
-					<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_HR')}">
-					<li><a href="#">Kadry/Finanse</a>
-						<ul>
-							<li><a href="${request.contextPath}/app/hr/holidayRequestHr">Wnioski
-									o urlop</a></li>
-							<li><a
-								href="${request.contextPath}/app/hr/businessTravelClearingHr">Rozlicz
-									podróże służbowe</a></li>
-
-							<li><a href="${request.contextPath}/app/hr/trainingClearingHr">Rozlicz
-									szkolenia</a></li>
-
-							<li><a href="${request.contextPath}/app/hr/invoiceClearingHr">Rozlicz
-									Fakturę</a></li>
-							<li><a href="${request.contextPath}/app/hr/candidateRequestHr">Sprawdz
-									wakaty</a></li>
-
-							<li><a href="${request.contextPath}/app/hr/sickLeaveHr">Zwolnienia
-									lekarskie</a></li>
-							<li><a href="${request.contextPath}/app/hr/newCandidateHr">Nowy kandydat</a></li>
-						</ul>
-					</li>
-					</c:if>
-					<li><a href="#">Menu 2</a></li>
-				</ol>
+				<h:form>
+					<p:menubar>
+				        <p:submenu label="Wnioski">
+			                <p:menuitem value="Wniosek o urlop" url="${request.contextPath}/app/hr/holidayRequest" />
+			                <p:menuitem value="Rozliczenie podróży służbowej" url="${request.contextPath}/app/hr/businessTravelClearing" />
+			                <p:menuitem value="Rozliczenie szkolenia" url="${request.contextPath}/app/hr/trainingClearing" />
+			                <p:menuitem value="Rozliczenie faktury" url="${request.contextPath}/app/hr/invoiceClearing" />
+			                <p:menuitem value="Informacje o wakacie" url="${request.contextPath}/app/hr/candidateRequest" />
+			                <p:menuitem value="Zwolnienie lekarskie" url="${request.contextPath}/app/hr/sickLeave" />
+				        </p:submenu>
+				        
+				        <c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_HR')}">
+				        	<p:submenu label="Kadry/Finanse">
+				                <p:menuitem value="Wnioski o urlop" url="${request.contextPath}/app/hr/holidayRequest" />
+				                <p:menuitem value="Rozlicz podróże służbowe" url="${request.contextPath}/app/hr/businessTravelClearing" />
+				                <p:menuitem value="Rozlicz szkolenia" url="${request.contextPath}/app/hr/trainingClearing" />
+				                <p:menuitem value="Rozlicz fakturę" url="${request.contextPath}/app/hr/invoiceClearing" />
+				                <p:menuitem value="Sprawdź wakaty" url="${request.contextPath}/app/hr/candidateRequest" />
+				                <p:menuitem value="Zwolnienia lekarskie" url="${request.contextPath}/app/hr/sickLeave" />
+				                <p:menuitem value="Nowy kandydat" url="${request.contextPath}/app/hr/newCandidateHr" />
+					        </p:submenu>
+				        </c:if>
+				    </p:menubar>
+			    </h:form>
 			</c:if>
-			<div id="pageContent">
+			<div id="pageContent" style="margin-top: 20px;">
 				<ui:insert name="pageContent" />
 			</div>
 		</div>
