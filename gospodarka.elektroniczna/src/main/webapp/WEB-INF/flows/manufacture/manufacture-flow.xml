@@ -2,11 +2,102 @@
 <flow xmlns="http://www.springframework.org/schema/webflow"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
-        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+        http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
 	<secured attributes="ROLE_MANUFACTURE"/>
-	
-	<view-state id="start" />
+        
+	<var name="monthlySummary" class="gospodarka.elektroniczna.dto.manufacture.MonthlySummaryOfProductionLine" />
+        <var name="accidentForm" class="gospodarka.elektroniczna.dto.manufacture.IndustrialAccidentForm" />
+        <var name="defectiveElement" class="gospodarka.elektroniczna.dto.manufacture.DefectiveElementForm" />
+        <var name="order" class="gospodarka.elektroniczna.dto.manufacture.OrderForm" />
+        <var name="timeSheet" class="gospodarka.elektroniczna.dto.manufacture.TimeSheetForm" />
+        <var name="vehicle" class="gospodarka.elektroniczna.dto.manufacture.VehicleForm" />
+<!--            <set name="flowScope.factoryId" value="0" type="java.lang.Integer"/>
+            <evaluate expression="manufactureBean.createMonthlySummaryForm()" 
+                      result="flowScope.monthlySummary"/>
+        </on-start>-->
+        
+	<view-state id="start">
+            <on-entry>
+                <evaluate expression="manufactureBean.getListOfMonthlySummary()"
+                    result="flowScope.monthlySummaryList">
+                </evaluate>         
+            </on-entry> 
+            <transition on="gotoMonthlySummary" to="monthlySummaryForm"/>
+            <transition on="gotoAccidentForm" to="industrialAccidentForm"/>
+            <transition on="gotoDefectiveElementForm" to="defectiveElementForm"/>
+            <transition on="gotoOrderForm" to="orderForm"/>
+            <transition on="gotoTimeSheetForm" to="timeSheetForm"/>
+            <transition on="gotoVehicleForm" to="vehicleForm"/>
+        </view-state>
+        
+        <view-state id="monthlySummaryForm">
+            <transition on="saveMonthlySummary" to="success">
+                <evaluate expression="manufactureBean.saveMonthlySummary(monthlySummary)"/>
+            </transition>
+            <transition on="cancel" to="start" bind="false"/>
+        </view-state>
+        
+        <action-state id="decisionSummaryForm">
+            <evaluate expression="manufactureBean.saveMonthlySummary(monthlySummary)"/>
+            <transition on="yes" to="success" />
+        </action-state>
+        
+        <view-state id="industrialAccidentForm">
+            <transition on="saveAccidentForm" to="decisionAccidentForm"/>
+            <transition on="cancel" to="start"/>
+        </view-state> 
+        
+        <action-state id="decisionAccidentForm">
+            <evaluate expression="manufactureBean.saveAccidentForm(accidentForm)"/>
+            <transition on="yes" to="success" />
+        </action-state>
+        
+        <view-state id="defectiveElementForm">
+            <transition on="saveDefectiveElementForm" to="decisionDefectiveElementForm"/>
+            <transition on="cancel" to="start"/>
+        </view-state>
+        
+        <action-state id="decisionDefectiveElementForm">
+            <evaluate expression="manufactureBean.saveDefectiveElementForm(defectiveElement)"/>
+            <transition on="yes" to="success" />
+        </action-state>
+        
+        <view-state id="orderForm">
+            <transition on="saveOrderForm" to="decisionOrderForm"/>
+            <transition on="cancel" to="start"/>
+        </view-state>
+        
+        <action-state id="decisionOrderForm">
+            <evaluate expression="manufactureBean.saveOrderForm(order)"/>
+            <transition on="yes" to="success" />
+        </action-state>
+        
+        <view-state id="timeSheetForm">
+            <transition on="saveTimeSheetForm" to="decisionTimeSheetForm"/>
+            <transition on="cancel" to="start"/>
+        </view-state>
+        
+        <action-state id="decisionTimeSheetForm">
+            <evaluate expression="manufactureBean.saveTimeSheetForm(timeSheet)"/>
+            <transition on="yes" to="success" />
+        </action-state>
+        
+        <view-state id="vehicleForm">
+            <transition on="saveVehicleForm" to="decisionVehicleForm"/>
+            <transition on="cancel" to="start"/>
+        </view-state>
+        
+        <action-state id="decisionVehicleForm">
+            <evaluate expression="manufactureBean.saveVehicleForm(vehicle)"/>
+            <transition on="yes" to="success" />
+        </action-state>
+        
+        <view-state id="success">
+            <transition on="cancel" to="start"/>
+        </view-state>
+               
+        <bean-import resource="flow-beans.xml"/>      
 
 </flow>
