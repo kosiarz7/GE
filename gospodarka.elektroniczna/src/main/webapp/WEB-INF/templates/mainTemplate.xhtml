@@ -38,23 +38,23 @@
 				<h:form>
 					<p:menubar>
 				        <p:submenu label="Wnioski">
-			                <p:menuitem value="Wniosek o urlop" url="${request.contextPath}/app/hr/holidayRequest" />
-			                <p:menuitem value="Rozliczenie podróży służbowej" url="${request.contextPath}/app/hr/businessTravelClearing" />
-			                <p:menuitem value="Rozliczenie szkolenia" url="${request.contextPath}/app/hr/trainingClearing" />
-			                <p:menuitem value="Rozliczenie faktury" url="${request.contextPath}/app/hr/invoiceClearing" />
-			                <p:menuitem value="Informacje o wakacie" url="${request.contextPath}/app/hr/candidateRequest" />
-			                <p:menuitem value="Zwolnienie lekarskie" url="${request.contextPath}/app/hr/sickLeave" />
+			                <p:menuitem value="Wniosek o urlop" url="/app/hr/holidayRequest" />
+			                <p:menuitem value="Rozliczenie podróży służbowej" url="/app/hr/businessTravelClearing" />
+			                <p:menuitem value="Rozliczenie szkolenia" url="/app/hr/trainingClearing" />
+			                <p:menuitem value="Rozliczenie faktury" url="/app/hr/invoiceClearing" />
+			                <p:menuitem value="Informacje o wakacie" url="/app/hr/candidateRequest" />
+			                <p:menuitem value="Zwolnienie lekarskie" url="/app/hr/sickLeave" />
 				        </p:submenu>
 				        
 				        <c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_HR')}">
 				        	<p:submenu label="Kadry/Finanse">
-				                <p:menuitem value="Wnioski o urlop" url="${request.contextPath}/app/hr/holidayRequest" />
-				                <p:menuitem value="Rozlicz podróże służbowe" url="${request.contextPath}/app/hr/businessTravelClearing" />
-				                <p:menuitem value="Rozlicz szkolenia" url="${request.contextPath}/app/hr/trainingClearing" />
-				                <p:menuitem value="Rozlicz fakturę" url="${request.contextPath}/app/hr/invoiceClearing" />
-				                <p:menuitem value="Sprawdź wakaty" url="${request.contextPath}/app/hr/candidateRequest" />
-				                <p:menuitem value="Zwolnienia lekarskie" url="${request.contextPath}/app/hr/sickLeave" />
-				                <p:menuitem value="Nowy kandydat" url="${request.contextPath}/app/hr/newCandidateHr" />
+				                <p:menuitem value="Wnioski o urlop" url="/app/hr/holidayRequest" />
+				                <p:menuitem value="Rozlicz podróże służbowe" url="/app/hr/businessTravelClearing" />
+				                <p:menuitem value="Rozlicz szkolenia" url="/app/hr/trainingClearing" />
+				                <p:menuitem value="Rozlicz fakturę" url="/app/hr/invoiceClearing" />
+				                <p:menuitem value="Sprawdź wakaty" url="/app/hr/candidateRequest" />
+				                <p:menuitem value="Zwolnienia lekarskie" url="/app/hr/sickLeave" />
+				                <p:menuitem value="Nowy kandydat" url="/app/hr/newCandidateHr" />
 					        </p:submenu>
 				        </c:if>
 				    </p:menubar>
