@@ -24,6 +24,9 @@
 
 	<!-- Lokalizacja zasobów (arkuszów stylów, skryptów js itd). -->
 	<mvc:resources location="/" mapping="/resources/**" />
+        
+        <!-- Kieruje żądania z /webjars do /META-INF/resources/webjars dla wszystkich jarów w classpath-->
+        <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
 
 	<!-- Mapuje nazwy na id przepływów: np.	/hotels/booking looks => przepływ o id "hotels/booking"	-->
 	<bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
