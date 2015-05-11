@@ -68,7 +68,7 @@ public class TestBean implements Serializable {
     }
     
     public void loadDocument(DocumentStub stub, TestDataBean bean) {
-        bean.setTestDocument(documentService.loadCurrentDocument(stub, TestDocument.class).getContent());
+        bean.setTestDocument((TestDocument) documentService.loadCurrentDocument(stub).getContent());
     }
     
     public void setDocumentService(final IDocumentService documentService) {

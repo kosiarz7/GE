@@ -121,7 +121,7 @@ public class DocumentService implements IDocumentService, Serializable {
             currentDto
                     .setContent(documentContentSerialization.convertToStream(header.getType(), document.getContent()));
             currentDto.setDateOfRecipt(currDate);
-            currentDto.setHeader(documentHeaderDao.loadById(header.getHeaderId()));
+            currentDto.setHeader(documentHeaderDao.loadById(header.getHeaderId(), DocumentHeaderDto.class).get());
             currentDto.setSourceDepartment(sourceDto);
             currentDto.setTargetDepartment(targetDto);
             ArchivalDocumentDto archivalDto = new ArchivalDocumentDto(currentDto);
@@ -130,7 +130,7 @@ public class DocumentService implements IDocumentService, Serializable {
             currentDocumentDao.save(currentDto);
         }
         else {
-
+            
         }
         throw new IllegalArgumentException("Not implemented yet.");
     }
@@ -179,14 +179,16 @@ public class DocumentService implements IDocumentService, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public <T> Document<T> loadCurrentDocument(DocumentStub stub, Class<T> clazz) {
-        Optional<CurrentDocumentDto> currentDocument = currentDocumentDao.loadDocumentById(stub.getContentId());
+    public <T> Document<T> loadCurrentDocument(DocumentStub stub) {
+        Optional<CurrentDocumentDto> currentDocument = currentDocumentDao.loadById(stub.getContentId(),
+                CurrentDocumentDto.class);
         if (currentDocument.isPresent()) {
             DocumentHeaderDto headerDto = currentDocument.get().getHeader();
             DocumentTypes documentType = DocumentTypes.valueOf(headerDto.getDocumentType().getName());
             T content = documentContentSerialization.convertToDocumentContent(documentType, currentDocument.get()
                     .getContent());
-            return new Document<T>(createDocumentHeader(headerDto, currentDocument.get()), content);
+            return new Document<T>(createDocumentHeader(headerDto, currentDocument.get()), content, currentDocument
+                    .get().getId());
         }
         else {
             LOGGER.warn("loadCurrentDocument|Brak bieżącego dokumentu dla: {}", stub);

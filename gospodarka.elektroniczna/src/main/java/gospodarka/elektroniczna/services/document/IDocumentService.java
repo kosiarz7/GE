@@ -60,5 +60,5 @@ public interface IDocumentService {
      * @param stub "obcięta" wersja dokumentu.
      * @return dokument.
      */
-    <T> Document<T> loadCurrentDocument(final DocumentStub stub, final Class<T> clazz);
+    <T> Document<T> loadCurrentDocument(final DocumentStub stub);
 }

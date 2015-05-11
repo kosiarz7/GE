@@ -11,11 +11,4 @@ import gospodarka.elektroniczna.dto.DocumentHeaderDto;
  * Copyright © 2015 Adam Kopaczewski
  */
 public interface IDocumentHeaderDao extends ICommonDao<DocumentHeaderDto> {
-    /**
-     * Wczytuje nagłówek dokumentu po id.
-     * 
-     * @param id id nagłówka dokumentu.
-     * @return DTO żądanego nagłówka.
-     */
-    DocumentHeaderDto loadById(int id);
 }

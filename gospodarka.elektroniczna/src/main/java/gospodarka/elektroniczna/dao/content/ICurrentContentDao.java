@@ -33,11 +33,4 @@ public interface ICurrentContentDao extends ICommonDao<CurrentDocumentDto> {
      */
     Optional<List<LightCurrentDocumentDto>> loadDocumentsInDeparment(final Departments department,
             final DocumentTypes type);
-    /**
-     * Wczytuje bieżący dokument po jego id.
-     * 
-     * @param id id dokumentu.
-     * @return bieżący dokuement.
-     */
-    Optional<CurrentDocumentDto> loadDocumentById(int id);
 }

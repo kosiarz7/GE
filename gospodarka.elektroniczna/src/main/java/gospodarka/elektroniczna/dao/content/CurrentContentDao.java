@@ -118,41 +118,4 @@ public class CurrentContentDao extends CommonDao<CurrentDocumentDto> implements 
         }
         return result;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public Optional<CurrentDocumentDto> loadDocumentById(int id) {
-        LOGGER.debug("loadDocumentById|Próba załadowania bieżącego dokumentu o id: {}", id);
-        Session session = openSession();
-        Transaction tx = null;
-        List<CurrentDocumentDto> documents = null;
-        
-        try {
-            tx = session.beginTransaction();
-            documents = session.createQuery("from CurrentDocumentDto where id = :id").setInteger("id", id).list();
-            tx.commit();
-        }
-        catch (RuntimeException e) {
-            if (null != tx) {
-                tx.rollback();
-            }
-            throw e;
-        }
-        finally {
-            session.close();
-        }
-        
-        Optional<CurrentDocumentDto> result = Optional.empty();
-        if (documents.isEmpty()) {
-            LOGGER.debug("loadDocumentById|Brak bieżącego dokumentu o id: {}", id);
-        }
-        else {
-            result = Optional.of(documents.get(0));
-            LOGGER.debug("loadDocumentById|Załadowano bieżący dokument o id: {}", id);
-        }
-        return result;
-    }
 }
