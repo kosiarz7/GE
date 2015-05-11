@@ -6,6 +6,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="testBean" class="gospodarka.elektroniczna.dao.flows.root.TestBean"
+	<bean id="data" class="gospodarka.elektroniczna.flows.root.TestDataBean" scope="flow"/>
+	
+	<bean id="testBean" class="gospodarka.elektroniczna.flows.root.TestBean"
 		p:documentService-ref="documentService"/>
 </beans>

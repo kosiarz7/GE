@@ -4,6 +4,8 @@ import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.services.signature.WrongNumberOfLastSignatureException;
 
+import java.util.List;
+
 /**
  * Interfejs do pracy z dokumentami.
  * 
@@ -37,4 +39,26 @@ public interface IDocumentService {
      * @param department dział, który dokonuje archiwizacji dokumentu.
      */
     <T> void archiveDocument(final Document<T> document, final Departments department);
+    /**
+     * Zwraca wszystkie nieprzetworzone dokumenty dla danego oddziału.
+     * 
+     * @param department oddział.
+     * @return lista nieprzetworzonych dokumentów.
+     */
+    List<DocumentStub> loadCurrentDocumentsInDepartment(final Departments department);
+    /**
+     * Zwraca wszystkie nieprzetworzone dokumenty określonego typu dla danego oddziału.
+     * 
+     * @param department oddział.
+     * @param type typ dokumentu.
+     * @return lista nieprzetworzonych dokumentów.
+     */
+    List<DocumentStub> loadCurrentDocumentsInDepartment(final Departments department, final DocumentTypes type);
+    /**
+     * Ładuje zawartość dokumentu na podstawie jego "obciętej" wersji.
+     * 
+     * @param stub "obcięta" wersja dokumentu.
+     * @return dokument.
+     */
+    <T> Document<T> loadCurrentDocument(final DocumentStub stub);
 }

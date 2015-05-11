@@ -1,5 +1,6 @@
 package gospodarka.elektroniczna.dao.documenttype;
 
+import gospodarka.elektroniczna.dao.ICommonDao;
 import gospodarka.elektroniczna.dto.DocumentHeaderDto;
 
 /**
@@ -9,11 +10,5 @@ import gospodarka.elektroniczna.dto.DocumentHeaderDto;
  *
  * Copyright © 2015 Adam Kopaczewski
  */
-public interface IDocumentHeaderDao {
-    /**
-     * Zapisuje nagłówek dokumentu.
-     * 
-     * @param header nagłówek dokumentu.
-     */
-    void save(final DocumentHeaderDto header);
+public interface IDocumentHeaderDao extends ICommonDao<DocumentHeaderDto> {
 }

@@ -14,6 +14,47 @@
         Zawartość strony.
         <h:form>
 	        <p:commandButton value="Nowy nagłówek" actionListener="#{testBean.createNewTestDocument()}" />
+	        <p:commandButton value="Nowy dokument i zapis" actionListener="#{testBean.createAndSave()}"/>
+	        <p:commandButton value="Lista dokumentów" actionListener="#{testBean.loadDocuemnts(data)}" update="@form"/>
+	        <p:commandButton value="Lista dokumentów (kryterium typu)" actionListener="#{testBean.loadDocuemntsByType(data)}" update="@form"/>
+	        
+	        <p:dataTable var="item" value="#{data.documents}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+		        <p:column headerText="Sygnatura">
+		            <h:outputText value="#{item.signature}" />
+		        </p:column>
+		 
+		        <p:column headerText="Tytuł">
+		            <h:outputText value="#{item.title}" />
+		        </p:column>
+		        
+		        <p:column headerText="Type">
+		            <h:outputText value="#{item.type}" />
+		        </p:column>
+		        
+		        <p:column headerText="Z">
+		            <h:outputText value="#{item.from}" />
+		        </p:column>
+		        
+		        <p:column headerText="Do">
+		            <h:outputText value="#{item.to}" />
+		        </p:column>
+		        
+		        <p:column headerText="Data">
+		            <h:outputText value="#{item.dateOfRecipte}" />
+		        </p:column>
+		        
+		        <p:column style="width:32px;text-align: center">
+		             <p:commandButton update="@form" value="Wybierz" actionListener="#{testBean.loadDocument(item, data)}"/>
+		        </p:column>
+		    </p:dataTable>
+		    
+		    <h:panelGrid columns="1" cellpadding="5" style="display: table; margin: 0 auto;">
+				<p:outputLabel value="number: #{data.testDocument.number}" />
+			    <p:outputLabel value="data: #{data.testDocument.date}" />		    
+		    </h:panelGrid>
 	    </h:form>
     </ui:define>
 </ui:composition>

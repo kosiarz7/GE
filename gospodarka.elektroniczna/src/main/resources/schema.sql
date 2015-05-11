@@ -82,8 +82,8 @@ CREATE TABLE IF NOT EXISTS ARCHIVAL_DOCUMENTS (
 	HEADER_ID INT NOT NULL,
 	SOURCE_DEPARTMENT_ID INT NOT NULL,
 	TARGET_DEPARTMENT_ID INT NOT NULL,
-	DATE_OF_RECIPT TIMESTAMP NOT NULL, -- data otrzymania dokumentu przez docelowy oddział
-	DATE_OF_DISPATCH TIMESTAMP NOT NULL, -- data przetworzenia dokumentu przez docelowy oddział (przesłanie go dalej, przeniesienie do archiwum itd.)
+	DATE_OF_RECIPT TIMESTAMP NOT NULL, -- data otrzymania dokumentu przez źródłowy oddział
+	DATE_OF_DISPATCH TIMESTAMP NOT NULL, -- data przetworzenia dokumentu przez źródłowy oddział (przesłanie go dalej, przeniesienie do archiwum itd.)
 	CONTENT LONGBLOB NOT NULL,
 	PRIMARY KEY (ID),
 	FOREIGN KEY ARCHIVAL_DOCUMENTS_00_HEADER_ID_FK(HEADER_ID) REFERENCES DOCUMENT_HEADERS(ID),

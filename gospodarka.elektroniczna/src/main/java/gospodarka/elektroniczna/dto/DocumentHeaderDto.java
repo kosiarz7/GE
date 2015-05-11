@@ -46,7 +46,7 @@ public class DocumentHeaderDto extends AbstractDto implements Serializable {
     /**
      * Typ dokumentu.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "TYPE_ID", nullable = false)
     private DocumentTypeDto documentType;
 

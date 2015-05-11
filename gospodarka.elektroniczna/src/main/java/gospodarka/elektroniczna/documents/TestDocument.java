@@ -2,6 +2,7 @@ package gospodarka.elektroniczna.documents;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Random;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -12,7 +13,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  *         Copyright © 2015 Adam Kopaczewski
  */
-public class TestDocument implements Serializable {
+public class TestDocument extends AbstractDocument implements Serializable {
 
     /**
      * UID.
@@ -32,6 +33,8 @@ public class TestDocument implements Serializable {
      * Konstruktor.
      */
     public TestDocument() {
+        number = new Random().nextInt(100_000) + 200;
+        date = new Date();
     }
     
     

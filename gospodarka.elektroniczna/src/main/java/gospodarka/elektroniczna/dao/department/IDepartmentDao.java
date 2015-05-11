@@ -1,5 +1,6 @@
 package gospodarka.elektroniczna.dao.department;
 
+import gospodarka.elektroniczna.dao.ICommonDao;
 import gospodarka.elektroniczna.dto.DepartmentDto;
 
 /**
@@ -9,7 +10,7 @@ import gospodarka.elektroniczna.dto.DepartmentDto;
  *
  * Copyright © 2015 Adam Kopaczewski
  */
-public interface IDepartmentDao {
+public interface IDepartmentDao extends ICommonDao<DepartmentDto> {
     /**
      * Zwraca DTO dla oddziału.
      * 

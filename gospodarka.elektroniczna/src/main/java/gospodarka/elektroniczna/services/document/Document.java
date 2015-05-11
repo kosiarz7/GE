@@ -17,6 +17,10 @@ public class Document<T> implements Serializable {
      */
     private static final long serialVersionUID = -5561620646849987040L;
     /**
+     * Wartość, którą przyjmuje id zawartości dokumentu, gdy ta została niewczytana.
+     */
+    public static final int UNLOADED_CONTENT_ID = -1;
+    /**
      * Nagłówek dokumentu.
      */
     private DocumentHeader header;
@@ -24,6 +28,10 @@ public class Document<T> implements Serializable {
      * Zawartość dokumentu.
      */
     private T content;
+    /**
+     * ID bieżącego dokumentu.
+     */
+    private int currentContentId = UNLOADED_CONTENT_ID;
     
     
     /**
@@ -41,6 +49,19 @@ public class Document<T> implements Serializable {
     public Document(final DocumentHeader header, final T content) {
         this.header = header;
         this.content = content;
+    }
+    
+    /**
+     * Konstruktor.
+     * 
+     * @param header nagłówek dokumentu.
+     * @param content zawartość dokumentu.
+     * @param currentContentId ID bieżącego dokumentu.
+     */
+    public Document(final DocumentHeader header, final T content, int currentContentId) {
+        this.header = header;
+        this.content = content;
+        this.currentContentId = currentContentId;
     }
 
     /**
@@ -86,5 +107,23 @@ public class Document<T> implements Serializable {
      */
     void setHeader(final DocumentHeader header) {
         this.header = header;
+    }
+
+    /**
+     * Zwraca id bieżącej zawartości dokumentu.
+     * 
+     * @return id bieżącej zawartości dokumentu.
+     */
+    public int getCurrentContentId() {
+        return currentContentId;
+    }
+
+    /**
+     * Ustawia id bieżącej zawartości dokumentu.
+     * 
+     * @param currentContentId id bieżącej zawartości dokumeut.
+     */
+    public void setCurrentContentId(int currentContentId) {
+        this.currentContentId = currentContentId;
     }
 }
