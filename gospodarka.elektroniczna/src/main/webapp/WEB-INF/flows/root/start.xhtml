@@ -13,10 +13,10 @@
     <ui:define name="pageContent">
         Zawartość strony.
         <h:form>
-	        <p:commandButton value="Nowy nagłówek" actionListener="#{testBean.createNewTestDocument()}" />
-	        <p:commandButton value="Nowy dokument i zapis" actionListener="#{testBean.createAndSave()}"/>
+	        <p:commandButton value="Nowy dokument" actionListener="#{testBean.create()}"/>
 	        <p:commandButton value="Lista dokumentów" actionListener="#{testBean.loadDocuemnts(data)}" update="@form"/>
-	        <p:commandButton value="Lista dokumentów (kryterium typu)" actionListener="#{testBean.loadDocuemntsByType(data)}" update="@form"/>
+	        <p:commandButton value="Lista dokumentów (finanse)" actionListener="#{testBean.loadDocuemntsByType(data)}" update="@form"/>
+	        <p:commandButton value="Lista dokumentów (serwis)" actionListener="#{testBean.loadDocuemntsByType2(data)}" update="@form"/>
 	        
 	        <p:dataTable var="item" value="#{data.documents}" rows="10"
                          paginator="true"
@@ -46,8 +46,16 @@
 		            <h:outputText value="#{item.dateOfRecipte}" />
 		        </p:column>
 		        
-		        <p:column style="width:32px;text-align: center">
-		             <p:commandButton update="@form" value="Wybierz" actionListener="#{testBean.loadDocument(item, data)}"/>
+		        <p:column headerText="Załaduj">
+		             <p:commandButton update="@form" value="Ładuj" actionListener="#{testBean.loadDocument(item, data)}" />
+		        </p:column>
+		        
+		        <p:column headerText="Prześlij">
+		             <p:commandButton value="Prześlij" actionListener="#{testBean.send(item)}" />
+		        </p:column>
+		        
+		        <p:column headerText="Zakończ">
+		             <p:commandButton value="Zakończ" actionListener="#{testBean.end(item)}" />
 		        </p:column>
 		    </p:dataTable>
 		    

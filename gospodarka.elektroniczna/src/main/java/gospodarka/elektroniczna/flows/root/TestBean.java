@@ -3,6 +3,7 @@ package gospodarka.elektroniczna.flows.root;
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.documents.TestDocument;
+import gospodarka.elektroniczna.services.document.Document;
 import gospodarka.elektroniczna.services.document.DocumentStub;
 import gospodarka.elektroniczna.services.document.IDocumentService;
 import gospodarka.elektroniczna.services.signature.WrongNumberOfLastSignatureException;
@@ -28,31 +29,16 @@ public class TestBean implements Serializable {
      * Serwis dla dokumentów.
      */
     private IDocumentService documentService;
-    
-    /**
-     * Tworzy nowy testowy dokument.
-     * 
-     * @return 
-     */
-    public void createNewTestDocument() {
-        try {
-            documentService.createDocument(DocumentTypes.TEST, "Nowy tytuł. ąśćóęłżźŻŹĆĄŚŁĘÓ");
-        }
-        catch (WrongNumberOfLastSignatureException e) {
-            LoggerFactory.getLogger(TestBean.class).error("błąd", e);
-        }
-    }
+
     
     /**
      * Testowy zapis dokumentu.
      * 
      * @param document zapisuje dokument.
      */
-    public void createAndSave() {
+    public void create() {
         try {
-            documentService.sendDocument(
-                    documentService.createDocument(DocumentTypes.TEST, "Nowy tytuł. ąśćóęłżźŻŹĆĄŚŁĘÓ"), Departments.BEGIN,
-                    Departments.FINANCE);
+            documentService.createDocument(DocumentTypes.TEST, "Title", Departments.FINANCE);
         }
         catch (WrongNumberOfLastSignatureException e) {
             LoggerFactory.getLogger(TestBean.class).error("błąd", e);
@@ -67,8 +53,22 @@ public class TestBean implements Serializable {
         bean.setDocuments(documentService.loadCurrentDocumentsInDepartment(Departments.FINANCE, DocumentTypes.TEST));
     }
     
+    public void loadDocuemntsByType2(TestDataBean bean) {
+        bean.setDocuments(documentService.loadCurrentDocumentsInDepartment(Departments.SERVIS, DocumentTypes.TEST));
+    }
+    
     public void loadDocument(DocumentStub stub, TestDataBean bean) {
         bean.setTestDocument((TestDocument) documentService.loadCurrentDocument(stub).getContent());
+    }
+    
+    public void send(DocumentStub stub) {
+        Document<TestDocument> doc = documentService.loadCurrentDocument(stub);
+        documentService.sendDocument(doc, Departments.FINANCE, Departments.SERVIS);
+    }
+    
+    public void end(DocumentStub stub) {
+        Document<TestDocument> doc = documentService.loadCurrentDocument(stub);
+        documentService.archiveDocument(doc, Departments.SERVIS);
     }
     
     public void setDocumentService(final IDocumentService documentService) {

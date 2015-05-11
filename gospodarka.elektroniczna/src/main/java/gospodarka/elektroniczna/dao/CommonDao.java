@@ -38,6 +38,7 @@ public class CommonDao<T> implements Serializable, ICommonDao<T> {
      */
     @Override
     public void save(final T entity) {
+        LOGGER.debug("save|Próba zapisu encji: {}");
         Session session = openSession();
         Transaction tx = null;
         
@@ -50,11 +51,70 @@ public class CommonDao<T> implements Serializable, ICommonDao<T> {
             if (null != tx) {
                 tx.rollback();
             }
+            LOGGER.error("save|Wystąpił błąd podczas zapisu encji: {}", entity, e);
             throw e;
         }
         finally {
             session.close();
         }
+        
+        LOGGER.debug("save|Zapis encji {} zakończył się sukcesem.", entity);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update(T entity) {
+        LOGGER.debug("update|Próba aktualizacji encji: {}");
+        Session session = openSession();
+        Transaction tx = null;
+        
+        try {
+            tx = session.beginTransaction();
+            session.update(entity);
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            if (null != tx) {
+                tx.rollback();
+            }
+            LOGGER.error("update|Wystąpił błąd podczas aktualizacji encji: {}", entity, e);
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+        
+        LOGGER.debug("update|Aktualizacja encji {} zakończyła się sukcesem.", entity);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void delete(T entity) {
+        LOGGER.debug("delete|Próba usunięcia encji: {}");
+        Session session = openSession();
+        Transaction tx = null;
+        
+        try {
+            tx = session.beginTransaction();
+            session.delete(entity);
+            tx.commit();
+        }
+        catch (RuntimeException e) {
+            if (null != tx) {
+                tx.rollback();
+            }
+            LOGGER.error("delete|Wystąpił błąd podczas usuwania encji: {}", entity, e);
+            throw e;
+        }
+        finally {
+            session.close();
+        }
+        
+        LOGGER.debug("delete|Encja została usunięta.");
     }
 
     /**

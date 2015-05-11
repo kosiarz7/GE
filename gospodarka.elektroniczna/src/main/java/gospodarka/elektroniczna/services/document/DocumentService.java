@@ -84,55 +84,87 @@ public class DocumentService implements IDocumentService, Serializable {
      */
     private IArchivalContentDao archivalDocumentDao;
 
-    
     /**
      * {@inheritDoc}
-     * 
-     * @throws WrongNumberOfLastSignatureException
      */
     @Override
-    public <T> Document<T> createDocument(final DocumentTypes type, final String title)
+    public <T> Document<T> createDocument(final DocumentTypes type, final String title, final Departments department)
             throws WrongNumberOfLastSignatureException {
         LOGGER.debug("createDocument|Invoke. Type: {}, title: {}", type, title);
         @SuppressWarnings("unchecked")
         Class<T> clazz = (Class<T>) map.get(type);
         try {
-            return new Document<T>(documentHeaderService.createNewHeader(type, title),
+            Document<T> document = new Document<T>(documentHeaderService.createNewHeader(type, title),
                     DocumentContentFactory.newDocumentContent(clazz));
+            saveNewDocument(document, department);
+            return document;
         }
         catch (InstantiationException | IllegalAccessException e) {
             LOGGER.error("createDocument|Wystąpił błąd podczas inicjalizacji zawartości dokumentu.", e);
             throw new RuntimeException(e);
         }
     }
-
+    
+    /**
+     * Zapisuje nowy dokument.
+     * 
+     * @param document nowy dokument.
+     * @param department oddział, który towrzy nowy dokument.
+     */
+    private <T> void saveNewDocument(final Document<T> document, final Departments department) {
+        LOGGER.debug("saveNewDocument|Zapis nowego dokumentu. Dokument: {}, oddział tworzący dokument: {}", document,
+                department);
+        DocumentHeader header = document.getHeader();
+        Date currDate = new Date();
+        CurrentDocumentDto currentDto = new CurrentDocumentDto();
+        currentDto.setContent(documentContentSerialization.convertToStream(header.getType(), document.getContent()));
+        currentDto.setDateOfRecipt(currDate);
+        currentDto.setHeader(documentHeaderDao.loadById(header.getHeaderId(), DocumentHeaderDto.class).get());
+        currentDto.setSourceDepartment(departmentDao.getDepartment(Departments.BEGIN));
+        currentDto.setTargetDepartment(departmentDao.getDepartment(department));
+        ArchivalDocumentDto archivalDto = new ArchivalDocumentDto(currentDto);
+        archivalDto.setDateOfDispatch(currDate);
+        archivalDocumentDao.save(archivalDto);
+        currentDocumentDao.save(currentDto);
+        document.setCurrentContentId(currentDto.getId());
+    }
+    
     /**
      * {@inheritDoc}
      */
     @Override
     public <T> void sendDocument(final Document<T> document, final Departments source, final Departments target) {
         LOGGER.debug("sendDocument|Przeslanie dokumentu: {} z: {} do: {}", document, source, target);
-        DocumentHeader header = document.getHeader();
-        DepartmentDto sourceDto = departmentDao.getDepartment(source);
-        DepartmentDto targetDto = departmentDao.getDepartment(target);
-        if (Departments.BEGIN.equals(source)) {
-            Date currDate = new Date();
-            CurrentDocumentDto currentDto = new CurrentDocumentDto();
-            currentDto
-                    .setContent(documentContentSerialization.convertToStream(header.getType(), document.getContent()));
-            currentDto.setDateOfRecipt(currDate);
-            currentDto.setHeader(documentHeaderDao.loadById(header.getHeaderId(), DocumentHeaderDto.class).get());
-            currentDto.setSourceDepartment(sourceDto);
-            currentDto.setTargetDepartment(targetDto);
-            ArchivalDocumentDto archivalDto = new ArchivalDocumentDto(currentDto);
-            archivalDto.setDateOfDispatch(currDate);
-            archivalDocumentDao.save(archivalDto);
-            currentDocumentDao.save(currentDto);
+        if (Departments.BEGIN.equals(source) || Departments.BEGIN.equals(target)) {
+            LOGGER.warn(
+                    "sendDocument|Niepoprawne użycie metody. Zaden z działów nie powinien być fikcyjnym działem BEGIN. Parametry: dokuemt: {}, z: {}, do: {}",
+                    document, source, target);
+            throw new IllegalArgumentException("Zaden z działów nie powinien być fikcyjnym działem BEGIN. Source: "
+                    + source + " target: " + target);
+        }
+        else if (Departments.END.equals(target)) {
+            LOGGER.warn("sendDocument|Niepoprawne użycie metody. Docelowy dział nie może być typu END. "
+                    + "Parametry: dokuemt: {}, z: {} do: {}", document, source, target);
+            archiveDocument(document, source);
         }
         else {
-            
+            Date currDate = new Date();
+            CurrentDocumentDto currentDto = currentDocumentDao.loadById(document.getCurrentContentId(),
+                    CurrentDocumentDto.class).get();
+            Date archivalDateOfRecipt = currentDto.getDateOfRecipt();
+            currentDto.setContent(documentContentSerialization.convertToStream(document.getHeader().getType(),
+                    document.getContent()));
+            currentDto.setSourceDepartment(departmentDao.getDepartment(source));
+            currentDto.setTargetDepartment(departmentDao.getDepartment(target));
+            currentDto.setDateOfRecipt(currDate);
+            ArchivalDocumentDto archivalDto = new ArchivalDocumentDto(currentDto);
+            archivalDto.setDateOfDispatch(currDate);
+            archivalDto.setDateOfRecipt(archivalDateOfRecipt);
+            archivalDocumentDao.save(archivalDto);
+            currentDocumentDao.update(currentDto);
         }
-        throw new IllegalArgumentException("Not implemented yet.");
+        LOGGER.debug("sendDocument|Przeslanie dokumentu: {} z: {} do: {} zakończyło się sukcesem.", document, source,
+                target);
     }
     
     /**
@@ -216,7 +248,20 @@ public class DocumentService implements IDocumentService, Serializable {
      */
     @Override
     public <T> void archiveDocument(final Document<T> document, final Departments department) {
-        throw new IllegalArgumentException("Not implemented yet.");
+        CurrentDocumentDto currentDto = currentDocumentDao.loadById(document.getCurrentContentId(),
+                CurrentDocumentDto.class).get();
+        DepartmentDto sourceDto = departmentDao.getDepartment(department);
+        DepartmentDto targetDto = departmentDao.getDepartment(Departments.END);
+        ArchivalDocumentDto archivalDto = new ArchivalDocumentDto();
+        archivalDto.setContent(documentContentSerialization.convertToStream(document.getHeader().getType(),
+                document.getContent()));
+        archivalDto.setDateOfDispatch(new Date());
+        archivalDto.setDateOfRecipt(currentDto.getDateOfRecipt());
+        archivalDto.setHeader(currentDto.getHeader());
+        archivalDto.setSourceDepartment(sourceDto);
+        archivalDto.setTargetDepartment(targetDto);
+        archivalDocumentDao.save(archivalDto);
+        currentDocumentDao.delete(currentDto);
     }
 
     /**
@@ -229,7 +274,7 @@ public class DocumentService implements IDocumentService, Serializable {
     }
 
     /**
-     * Serwis serializujący zawartość dokumentów.
+     * Ustawia serwis serializujący zawartość dokumentów.
      * 
      * @param documentContentSerialization serwis serializujący zawartość dokumentów.
      */
@@ -237,18 +282,38 @@ public class DocumentService implements IDocumentService, Serializable {
         this.documentContentSerialization = documentContentSerialization;
     }
 
+    /**
+     * Ustawia DAO dla oddziałów.
+     * 
+     * @param departmentDao DAO dla oddziałów.
+     */
     public void setDepartmentDao(IDepartmentDao departmentDao) {
         this.departmentDao = departmentDao;
     }
 
+    /**
+     * Ustawia DAO dla nagłówków dokumentów.
+     * 
+     * @param documentHeaderDao dao dla nagłówków dokumentów.
+     */
     public void setDocumentHeaderDao(IDocumentHeaderDao documentHeaderDao) {
         this.documentHeaderDao = documentHeaderDao;
     }
 
+    /**
+     * Ustawia DAO dla bieżącej zawartości dokumentów.
+     * 
+     * @param currentDocumentDao DAO dla bieżącej zawartości dokumentów.
+     */
     public void setCurrentDocumentDao(ICurrentContentDao currentDocumentDao) {
         this.currentDocumentDao = currentDocumentDao;
     }
 
+    /**
+     * Ustawia DAO dla archivalnej zawartości dokumentów.
+     * 
+     * @param archivalDocumentDao DAO dla archiwalnej zawartości dokumentów.
+     */
     public void setArchivalDocumentDao(IArchivalContentDao archivalDocumentDao) {
         this.archivalDocumentDao = archivalDocumentDao;
     }

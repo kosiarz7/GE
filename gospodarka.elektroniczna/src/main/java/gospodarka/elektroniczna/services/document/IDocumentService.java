@@ -19,10 +19,11 @@ public interface IDocumentService {
      * 
      * @param type typ dokumentu.
      * @param title tytuł dokumentu.
+     * @param department oddział, z którego jest tworzonyc dokument.
      * @return nowy dokument.
      * @throws WrongNumberOfLastSignatureException rzucany gdy wystąpił błąd podczas generowani nowej sygnatury.
      */
-    <T> Document<T> createDocument(final DocumentTypes type, final String title)
+    <T> Document<T> createDocument(final DocumentTypes type, final String title, final Departments department)
             throws WrongNumberOfLastSignatureException;
     /**
      * Przesyład dokument ze źródłowego działu do docelowego.

@@ -17,6 +17,18 @@ public interface ICommonDao<T> {
      */
     void save(final T entity);
     /**
+     * Uaktualnia encję.
+     * 
+     * @param entity encja.
+     */
+    void update(final T entity);
+    /**
+     * Kasuję encję z bazy.
+     * 
+     * @param entity encja.
+     */
+    void delete(final T entity);
+    /**
      * Wczytuję encję po ID.
      * 
      * @param id id encji.
