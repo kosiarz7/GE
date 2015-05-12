@@ -140,13 +140,19 @@ public class DocumentService implements IDocumentService, Serializable {
             LOGGER.warn(
                     "sendDocument|Niepoprawne użycie metody. Zaden z działów nie powinien być fikcyjnym działem BEGIN. Parametry: dokuemt: {}, z: {}, do: {}",
                     document, source, target);
-            throw new IllegalArgumentException("Zaden z działów nie powinien być fikcyjnym działem BEGIN. Source: "
-                    + source + " target: " + target);
+            throw new IllegalArgumentException("Żaden z działów nie może być fikcyjnym działem BEGIN. Source department: "
+                    + source + " target department: " + target);
         }
         else if (Departments.END.equals(target)) {
             LOGGER.warn("sendDocument|Niepoprawne użycie metody. Docelowy dział nie może być typu END. "
                     + "Parametry: dokuemt: {}, z: {} do: {}", document, source, target);
             archiveDocument(document, source);
+        }
+        else if (Departments.END.equals(source)) {
+            LOGGER.warn("sendDocument|Niepoprawne użycie metody. Źródłowy dział nie może być typu END. "
+                    + "Parametry: dokuemt: {}, z: {} do: {}", document, source, target);
+            throw new IllegalArgumentException("Dział źródłowy nie może być fikcyjnym działem END. Source department: "
+                    + source + " target department: " + target);
         }
         else {
             Date currDate = new Date();
