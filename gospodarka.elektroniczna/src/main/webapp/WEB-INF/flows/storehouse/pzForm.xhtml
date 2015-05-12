@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+        <ui:param name="department" value="Magazyn"/>
+        <ui:define name="pageContent">
+            <h3>Przyjęcie zewnetrzne</h3>
+            <h:form id="pzForm" >
+
+            <div class="form-group">
+           
+                
+               <label>Data przyjecia towaru</label>
+				<p:calendar id="receivedDate" value="#{pzDoc.receivedDate}"
+					showOn="button" pattern="dd-MM-yyyy" label="'Data przyjecia'"
+					placeholder="dd-mm-yyyy" />
+					<h:message id="m1" for="receivedDate" style="color:red"/> <p></p>
+				 </div>	
+
+                <div class="form-group">
+                    <label>nazwa </label>
+                    <h:inputText id="itemName" class="form-control" value="#{pzDoc.itemName}" required="true"/>
+                   <p></p>
+                </div>
+
+                <div class="form-group">
+                    <label>kod</label>
+                  <h:inputText id="itemCode" class="form-control" value="#{pzDoc.itemCode}" required="true"/>
+                   <p></p>
+                </div>
+
+                <div class="form-group">
+                    <label>cena</label>
+                   <h:inputText id="pricePerItem" class="form-control" value="#{pzDoc.pricePerItem}" required="true"/>
+                    <h:message id="m4" for="pricePerItem" style="color:red"/> <p></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Ilość</label>
+                  <h:inputText id="amount" class="form-control" value="#{pzDoc.amount}" required="true"/>
+                    <h:message id="m5" for="amount" style="color:red"/> <p></p>
+                </div>
+                
+				 <div class="form-group">
+                    <label>Dostawca </label>
+                  <h:inputText id="deliver" class="form-control" value="#{pzDoc.deliver}" />
+                    <p></p>
+                </div>
+                <p:commandButton  id="save" action="savePZForm"  class="btn btn-primary"  value="Dodaj" update="@form" />
+                <p:commandButton id="cancel" action="cancel" class="btn btn-primary"  value="Anuluj" ajax="false" immediate="true"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

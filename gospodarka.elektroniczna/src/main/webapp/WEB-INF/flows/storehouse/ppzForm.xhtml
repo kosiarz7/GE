@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+        <ui:param name="department" value="Magazyn"/>
+        <ui:define name="pageContent">
+            <h3>Potwierdzenie przyjęcia zamówienia</h3>
+            <h:form id="ppzForm" >
+
+            <div class="form-group">
+           
+                 <div class="form-group">
+                    <label>Numer zamówienia</label>
+                  <h:inputText id="orderNumber" class="form-control" value="#{ppzDoc.orderNumber}" required="true"/>
+                    <h:message id="m3" for="orderNumber" style="color:red"/> <p></p>
+                </div>
+                
+               <label>Przewidujemy datę realizacji na: </label>
+				<p:calendar id="dateEnd" value="#{ppzDoc.dateEnd}"
+					showOn="button" pattern="dd-MM-yyyy" label="'Data realizacji'"
+					placeholder="dd-mm-yyyy" />
+					<h:message id="m1" for="dateEnd" style="color:red"/> <p></p>
+				 </div>	
+
+                <div class="form-group">
+                    <label>Status zamówienia: </label>
+                    <h:inputText id="state" class="form-control" value="#{ppzDoc.state}" required="true"/>
+                    <p></p>
+                </div>
+               
+                <div class="form-group">
+                    <label>Uzasadnienie</label>
+                   <h:inputText id="reason" class="form-control" value="#{ppzDoc.reason}" />
+                    <p></p>
+                </div>
+
+              
+
+                <p:commandButton  id="save" action="savePPZForm"  class="btn btn-primary"  value="Dodaj" update="@form" />
+                <p:commandButton id="cancel" action="cancel" class="btn btn-primary"  value="Anuluj" ajax="false" immediate="true"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
