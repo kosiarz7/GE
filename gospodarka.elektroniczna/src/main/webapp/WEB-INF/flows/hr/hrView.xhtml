@@ -17,9 +17,10 @@
 			<p:button href="/app/hr/invoiceClearing" value="Wyślij rozliczenie faktury" />
 			<p:button href="/app/hr/candidateRequest" value="Wyślij informacje o wakacie" />
 			<p:button href="/app/hr/sickLeave" value="Wyślij zwolnienie lekarskie" />
-			<hr/>
-			<h1>Kadry - zarządzanie</h1>
 			<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_HR')}">
+				<hr/>
+				<h1>Kadry - zarządzanie</h1>
+
 				<p:button href="/app/hr/holidaysRequestHr" value="Wnioski o urlop" />
 				<p:button href="/app/hr/businessTravelClearingHr" value="Rozlicz podróże służbowe" />
 				<p:button href="/app/hr/trainingClearingHr" value="Rozlicz szkolenia" />
