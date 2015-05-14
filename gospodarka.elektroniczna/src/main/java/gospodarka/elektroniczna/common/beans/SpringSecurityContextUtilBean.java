@@ -68,18 +68,7 @@ public class SpringSecurityContextUtilBean implements Serializable, SpringSecuri
 
     @Override
     public boolean hasRole(String roleToCompare) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (principal instanceof UserData) {
-            UserData userData = (UserData) principal;
-            Collection<? extends GrantedAuthority> authorities = userData.getAuthorities();
-            for (GrantedAuthority authority : authorities) {
-                if (authority.getAuthority().equalsIgnoreCase(roleToCompare)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return getLoggedOnUserRoles().stream().filter(a -> a.getAuthority().equalsIgnoreCase(roleToCompare)).count() > 0;
     }
 
     /**
