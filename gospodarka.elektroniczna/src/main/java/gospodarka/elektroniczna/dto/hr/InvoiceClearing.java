@@ -3,7 +3,7 @@ package gospodarka.elektroniczna.dto.hr;
 import java.io.Serializable;
 import java.util.Date;
 
-public class InvoiceClearing implements Serializable {
+public class InvoiceClearing extends AbstractHrUser implements Serializable {
 
     /**
 	 * 
@@ -46,6 +46,13 @@ public class InvoiceClearing implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "InvoiceClearing [products=" + products + ", amount=" + amount + ", date=" + date + ", getUserName()="
+                + getUserName() + ", getUserSurname()=" + getUserSurname() + ", getDepartment()=" + getDepartment()
+                + "]";
     }
 
 }

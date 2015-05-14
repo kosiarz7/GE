@@ -5,60 +5,58 @@ import java.util.Date;
 
 import javax.validation.constraints.Past;
 
-public class TrainingClearing implements Serializable {
+public class TrainingClearing extends AbstractHrUser implements Serializable {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String trainingName;
+    private String trainingName;
 
-	@Past
-	private Date startDate;
-	@Past
-	private Date endDate;
-	private double amount;
-	private boolean approved = false;
+    @Past
+    private Date startDate;
+    @Past
+    private Date endDate;
+    private double amount;
 
-	public boolean isApproved() {
-		return approved;
-	}
+    public String getTrainingName() {
+        return trainingName;
+    }
 
-	public void setApproved(boolean approved) {
-		this.approved = approved;
-	}
+    public void setTrainingName(String trainingName) {
+        this.trainingName = trainingName;
+    }
 
-	public String getTrainingName() {
-		return trainingName;
-	}
+    public Date getStartDate() {
+        return startDate;
+    }
 
-	public void setTrainingName(String trainingName) {
-		this.trainingName = trainingName;
-	}
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 
-	public Date getStartDate() {
-		return startDate;
-	}
+    public Date getEndDate() {
+        return endDate;
+    }
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
-	public Date getEndDate() {
-		return endDate;
-	}
+    public double getAmount() {
+        return amount;
+    }
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 
-	public double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
+    @Override
+    public String toString() {
+        return "TrainingClearing [trainingName=" + trainingName + ", startDate=" + startDate + ", endDate=" + endDate
+                + ", amount=" + amount + ", getUserName()=" + getUserName() + ", getUserSurname()=" + getUserSurname()
+                + ", getDepartment()=" + getDepartment() + "]";
+    }
 
 }

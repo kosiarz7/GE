@@ -1,11 +1,15 @@
 package gospodarka.elektroniczna.controllers.hr;
 
+import gospodarka.elektroniczna.dao.department.Departments;
+import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.dto.hr.BusinessTravelClearing;
+import gospodarka.elektroniczna.services.document.SearchCriteria;
+import gospodarka.elektroniczna.services.user.UserData;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * Rozliczenie podrózy służbowej
@@ -13,20 +17,34 @@ import java.util.logging.Logger;
  * @author iblis
  *
  */
-public class BusinessTravelClearingFlow implements Serializable {
+public class BusinessTravelClearingFlow extends AbstractHrFlow<BusinessTravelClearing> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Logger LOGGER = Logger.getLogger(BusinessTravelClearingFlow.class.getCanonicalName());
+    public BusinessTravelClearingFlow() {
+        super("Rozliczenie podróży służbowej", DocumentTypes.BUSINESS_TRAVEL_CLEARING, Departments.FINANCE);
+    }
 
-    public boolean submitBusinessTravelClearing(BusinessTravelClearing clearingBusinessTravel) {
-        LOGGER.info("submitBusinessTravelClearing: " + clearingBusinessTravel);
-        return true;
+    public boolean submitBusinessTravelClearing(UserData userData,
+            BusinessTravelClearing clearingBusinessTravel) {
+
+        LoggerFactory.getLogger(BusinessTravelClearingFlow.class).debug("submitBusinessTravelClearing",
+                clearingBusinessTravel);
+
+        return submit(userData, clearingBusinessTravel);
     }
 
     public List<BusinessTravelClearing> getBusinessTravelClearings() {
-        ArrayList<BusinessTravelClearing> clearingBusinessTravels = new ArrayList<BusinessTravelClearing>();
-        LOGGER.info("getBusinessTravelClearings: " + clearingBusinessTravels.size());
+
+        SearchCriteria criteria = new SearchCriteria();
+        criteria.department(Departments.FINANCE);
+        criteria.setType(DocumentTypes.BUSINESS_TRAVEL_CLEARING);
+
+        List<BusinessTravelClearing> clearingBusinessTravels = search(criteria);
+        LoggerFactory.getLogger(BusinessTravelClearingFlow.class).debug("getBusinessTravelClearings",
+                clearingBusinessTravels.size());
+
         return clearingBusinessTravels;
     }
+
 }

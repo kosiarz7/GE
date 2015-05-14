@@ -8,9 +8,6 @@
 		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT"
 		match="any" />
 
-	<var name="controllerVar"
-		class="gospodarka.elektroniczna.controllers.hr.TrainingClearingFlow" />
-
 	<on-start>
 		<evaluate expression="controllerVar.getTrainingClearings()"
 			result="flowScope.trainingClearings" />
@@ -19,4 +16,6 @@
 	<view-state id="trainingClearingHrView">
 		<transition on="trainingClearingHr" to="trainingClearingHr" />
 	</view-state>
+
+	<bean-import resource="flow-beans.xml" />
 </flow>

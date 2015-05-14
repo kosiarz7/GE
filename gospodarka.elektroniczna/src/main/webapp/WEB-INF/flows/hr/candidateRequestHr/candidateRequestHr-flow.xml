@@ -6,11 +6,8 @@
 	<!-- Zabezpieczenie flow przez Spring Security -->
 	<secured attributes="ROLE_HR" />
 
-
-	<var name="controllerVar"
-		class="gospodarka.elektroniczna.controllers.hr.CandidateRequestFlow" />
 	<var name="condidateRequestToDeleteVar" class="gospodarka.elektroniczna.dto.hr.CandidateRequest" />
-	
+
 	<on-start>
 		<evaluate expression="controllerVar.getCandidateRequest()"
 			result="flowScope.candidates" />
@@ -28,5 +25,5 @@
 	</action-state>
 
 	<end-state id="condidateRequestHrEnd" view="candidateRequestHrEnd.xhtml" />
-	
+	<bean-import resource="flow-beans.xml" />
 </flow>

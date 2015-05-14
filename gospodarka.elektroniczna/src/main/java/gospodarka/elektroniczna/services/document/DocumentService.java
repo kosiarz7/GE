@@ -8,6 +8,15 @@ import gospodarka.elektroniczna.dao.department.IDepartmentDao;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.dao.documenttype.IDocumentHeaderDao;
 import gospodarka.elektroniczna.documents.TestDocument;
+import gospodarka.elektroniczna.documents.hr.BusinessTravelClearingDocument;
+import gospodarka.elektroniczna.documents.hr.CandidateRequestDocument;
+import gospodarka.elektroniczna.documents.hr.HolidaysRequestDocument;
+import gospodarka.elektroniczna.documents.hr.InvoiceClearingDocument;
+import gospodarka.elektroniczna.documents.hr.NewCandidateDocument;
+import gospodarka.elektroniczna.documents.hr.ResignationEmployeeDocument;
+import gospodarka.elektroniczna.documents.hr.ResignationEmployerDocument;
+import gospodarka.elektroniczna.documents.hr.SickLeaveDocument;
+import gospodarka.elektroniczna.documents.hr.TrainingClearingDocument;
 import gospodarka.elektroniczna.dto.ArchivalDocumentDto;
 import gospodarka.elektroniczna.dto.CurrentDocumentDto;
 import gospodarka.elektroniczna.dto.DepartmentDto;
@@ -57,6 +66,15 @@ public class DocumentService implements IDocumentService, Serializable {
     static {
         map = new HashMap<>();
         map.put(DocumentTypes.TEST, TestDocument.class);
+        map.put(DocumentTypes.BUSINESS_TRAVEL_CLEARING, BusinessTravelClearingDocument.class);
+        map.put(DocumentTypes.CANDIDATE_REQUEST, CandidateRequestDocument.class);
+        map.put(DocumentTypes.HOLIDAYS_REQUEST, HolidaysRequestDocument.class);
+        map.put(DocumentTypes.INVOICE_CLEARING, InvoiceClearingDocument.class);
+        map.put(DocumentTypes.NEW_CANDIDATE, NewCandidateDocument.class);
+        map.put(DocumentTypes.RESIGNATION_EMPLOYEE, ResignationEmployeeDocument.class);
+        map.put(DocumentTypes.RESIGNATION_EMPLOYER, ResignationEmployerDocument.class);
+        map.put(DocumentTypes.SICK_LEAVE, SickLeaveDocument.class);
+        map.put(DocumentTypes.TRAINING_CLEARING, TrainingClearingDocument.class);
         // TODO przy kolejnych dokumentach trzeba dołożyć.
     }
     

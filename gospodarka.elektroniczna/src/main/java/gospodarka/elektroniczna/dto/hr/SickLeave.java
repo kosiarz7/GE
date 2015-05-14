@@ -3,23 +3,15 @@ package gospodarka.elektroniczna.dto.hr;
 import java.io.Serializable;
 import java.util.Date;
 
-public class SickLeave implements Serializable {
+public class SickLeave extends AbstractHrUser implements Serializable {
 
     /**
 	 * 
 	 */
     private static final long serialVersionUID = 1L;
 
-    //private UserData user;
     private Date fromDate;
     private Date toDate;
-
-    public SickLeave(/*UserData user, */Date fromDate, Date toDate) {
-        super();
-       // this.user = user;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
-    }
 
     public SickLeave() {
     }
@@ -39,13 +31,11 @@ public class SickLeave implements Serializable {
     public void setToDate(Date toDate) {
         this.toDate = toDate;
     }
-/*
-    public UserData getUser() {
-        return user;
+
+    @Override
+    public String toString() {
+        return "SickLeave [fromDate=" + fromDate + ", toDate=" + toDate + ", getUserName()=" + getUserName()
+                + ", getUserSurname()=" + getUserSurname() + ", getDepartment()=" + getDepartment() + "]";
     }
 
-    public void setUser(UserData user) {
-        this.user = user;
-    }
-*/
 }

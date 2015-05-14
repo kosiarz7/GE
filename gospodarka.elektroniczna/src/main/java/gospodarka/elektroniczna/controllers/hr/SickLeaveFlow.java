@@ -1,16 +1,15 @@
 package gospodarka.elektroniczna.controllers.hr;
 
-import gospodarka.elektroniczna.annotations.InjectLogger;
-import gospodarka.elektroniczna.dto.RoleDto;
-import gospodarka.elektroniczna.dto.UserDto;
+import gospodarka.elektroniczna.dao.department.Departments;
+import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.dto.hr.SickLeave;
+import gospodarka.elektroniczna.services.document.SearchCriteria;
+import gospodarka.elektroniczna.services.user.UserData;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * Zwolnienie chorobowe
@@ -18,37 +17,30 @@ import java.util.logging.Logger;
  * @author iblis
  *
  */
-public class SickLeaveFlow implements Serializable {
+public class SickLeaveFlow extends AbstractHrFlow<SickLeave>  implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @InjectLogger
-    private static final Logger LOGGER = Logger.getLogger(SickLeaveFlow.class.getCanonicalName());
 
-    public boolean submitSickLeave(SickLeave sickLeave, UserDto user) {
-        LOGGER.info("submitSickLeave: "+ sickLeave);
-        return true;
+    public SickLeaveFlow() {
+        super("Zwolnienie lekarskie", DocumentTypes.SICK_LEAVE,
+                Departments.HUMAN_RESOURCES);
+    }
+    
+    public boolean submitSickLeave(UserData user, SickLeave sickLeave) {
+        LoggerFactory.getLogger(SickLeaveFlow.class).debug("submitSickLeave", sickLeave);
+
+        return submit(user, sickLeave);
     }
 
     public List<SickLeave> getSickLeaves() {
-        ArrayList<SickLeave> sickLeaves = new ArrayList<SickLeave>();
 
-        UserDto us1 = new UserDto();
-        List<RoleDto> roles = new ArrayList<RoleDto>();
-        RoleDto role = new RoleDto();
-        role.setName("TESTOWA_ROLA");
-        roles.add(role);
-        us1.setName("Jan");
-        us1.setSurname("Kowalski");
-        us1.setRoles(roles);
+        SearchCriteria criteria = new SearchCriteria();
+        criteria.department(Departments.HUMAN_RESOURCES);
+        criteria.setType(DocumentTypes.SICK_LEAVE);
 
-        GregorianCalendar gregorianCalendar = new GregorianCalendar();
-        gregorianCalendar.set(GregorianCalendar.DAY_OF_YEAR, -1);
+        List<SickLeave> records = search(criteria);
+        LoggerFactory.getLogger(HolidaysRequestFlow.class).debug("getSickLeaves", records.size());
 
-        Date from1 = gregorianCalendar.getTime();
-        gregorianCalendar.set(GregorianCalendar.DAY_OF_YEAR, 14);
-        Date to1 = gregorianCalendar.getTime();
-        // sickLeaves.add(new SickLeave(new UserData(us1), from1, to1));
-        LOGGER.info("getSickLeaves: "+ sickLeaves.size());
-        return sickLeaves;
+        return records;
     }
 }

@@ -6,9 +6,6 @@
 	<!-- Zabezpieczenie flow przez Spring Security -->
 	<secured attributes="ROLE_HR" />
 
-	<var name="controllerVar"
-		class="gospodarka.elektroniczna.controllers.hr.BusinessTravelClearingFlow" />
-
 	<on-start>
 		<evaluate expression="controllerVar.getBusinessTravelClearings()"
 			result="flowScope.candidates" />
@@ -24,4 +21,5 @@
 	</action-state>
 
 	<end-state id="businessTravelClearingHrEnd" view="businessTravelClearingHrEnd.xhtml" />
+		<bean-import resource="flow-beans.xml"/>
 </flow>

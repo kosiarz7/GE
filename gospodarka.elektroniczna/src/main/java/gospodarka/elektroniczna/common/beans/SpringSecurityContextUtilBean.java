@@ -97,19 +97,19 @@ public class SpringSecurityContextUtilBean implements Serializable, SpringSecuri
             // (1, "HR"), (2, "MANUFACTURE"), (3, "FINANCE"), (4, "SERVIS"), (5,
             // "STOREHOUSE"), (6, "CUSTOMER_SERVICE"), (7, "ROOT");
             switch (roleName) {
-            case "HR":
+            case "ROLE_HR":
                 return Departments.HUMAN_RESOURCES;
-            case "MANUFACTURE":
+            case "ROLE_MANUFACTURE":
                 return Departments.MANUFACTURE;
-            case "FINANCE":
+            case "ROLE_FINANCE":
                 return Departments.FINANCE;
-            case "SERVIS":
+            case "ROLE_SERVIS":
                 return Departments.SERVIS;
-            case "STOREHOUSE":
+            case "ROLE_STOREHOUSE":
                 return Departments.STOREHOUSE;
-            case "CUSTOMER_SERVICE":
+            case "ROLE_CUSTOMER_SERVICE":
                 return Departments.CUSTOMER_SERVICE;
-            case "ROOT":
+            case "ROLE_ROOT":
                 return Departments.BEGIN;
             default:
                 break;

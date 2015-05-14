@@ -5,18 +5,19 @@
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
 	<secured attributes="ROLE_HR" />
-	
-	<var name="newCandidateVar" class="gospodarka.elektroniczna.dto.hr.NewCandidate"/>
-	<var name="controllerVar" class="gospodarka.elektroniczna.controllers.hr.NewCandidateFlow"/>
 
+	<var name="newCandidateVar" class="gospodarka.elektroniczna.dto.hr.NewCandidate" />
+	
 	<view-state id="newCandidateHrView">
-		<transition on="newCandidateHr" to="newCandidateHr"/>
+		<transition on="newCandidateHr" to="newCandidateHr" />
 	</view-state>
 
 	<action-state id="newCandidateHr">
-		<evaluate expression="controllerVar.submitNewCandidate(newCandidateVar)" result="flowScope.status" />
+		<evaluate expression="controllerVar.submitNewCandidate(springSecurityContextUtilBean.getUser(), newCandidateVar)"
+			result="flowScope.status" />
 		<transition to="newCandidateHrEnd" />
 	</action-state>
 
-	<end-state id="newCandidateHrEnd" view="newCandidateHrEnd.xhtml"/>
+	<end-state id="newCandidateHrEnd" view="newCandidateHrEnd.xhtml" />
+	<bean-import resource="flow-beans.xml" />
 </flow>
