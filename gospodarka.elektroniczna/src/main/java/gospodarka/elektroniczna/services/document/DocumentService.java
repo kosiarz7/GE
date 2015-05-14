@@ -107,7 +107,7 @@ public class DocumentService implements IDocumentService, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public <T> Document<T> createDocument(final DocumentTypes type, final String title, final Departments department)
+    public <T extends Serializable> Document<T> createDocument(final DocumentTypes type, final String title, final Departments department)
             throws WrongNumberOfLastSignatureException {
         LOGGER.debug("createDocument|Invoke. Type: {}, title: {}", type, title);
         @SuppressWarnings("unchecked")
@@ -130,13 +130,13 @@ public class DocumentService implements IDocumentService, Serializable {
      * @param document nowy dokument.
      * @param department oddział, który towrzy nowy dokument.
      */
-    private <T> void saveNewDocument(final Document<T> document, final Departments department) {
+    private <T extends Serializable> void saveNewDocument(final Document<T> document, final Departments department) {
         LOGGER.debug("saveNewDocument|Zapis nowego dokumentu. Dokument: {}, oddział tworzący dokument: {}", document,
                 department);
         DocumentHeader header = document.getHeader();
         Date currDate = new Date();
         CurrentDocumentDto currentDto = new CurrentDocumentDto();
-        currentDto.setContent(documentContentSerialization.convertToStream(header.getType(), document.getContent()));
+        currentDto.setContent(documentContentSerialization.convertToStream(document.getContent()));
         currentDto.setDateOfRecipt(currDate);
         currentDto.setHeader(documentHeaderDao.loadById(header.getHeaderId(), DocumentHeaderDto.class).get());
         currentDto.setSourceDepartment(departmentDao.getDepartment(Departments.BEGIN));
@@ -152,7 +152,7 @@ public class DocumentService implements IDocumentService, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public <T> void sendDocument(final Document<T> document, final Departments source, final Departments target) {
+    public <T extends Serializable> void sendDocument(final Document<T> document, final Departments source, final Departments target) {
         LOGGER.debug("sendDocument|Przeslanie dokumentu: {} z: {} do: {}", document, source, target);
         if (Departments.BEGIN.equals(source) || Departments.BEGIN.equals(target)) {
             LOGGER.warn(
@@ -177,8 +177,7 @@ public class DocumentService implements IDocumentService, Serializable {
             CurrentDocumentDto currentDto = currentDocumentDao.loadById(document.getCurrentContentId(),
                     CurrentDocumentDto.class).get();
             Date archivalDateOfRecipt = currentDto.getDateOfRecipt();
-            currentDto.setContent(documentContentSerialization.convertToStream(document.getHeader().getType(),
-                    document.getContent()));
+            currentDto.setContent(documentContentSerialization.convertToStream(document.getContent()));
             currentDto.setSourceDepartment(departmentDao.getDepartment(source));
             currentDto.setTargetDepartment(departmentDao.getDepartment(target));
             currentDto.setDateOfRecipt(currDate);
@@ -196,14 +195,12 @@ public class DocumentService implements IDocumentService, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public <T> Document<T> loadCurrentDocument(DocumentStub stub) {
+    public <T extends Serializable> Document<T> loadCurrentDocument(DocumentStub stub) {
         Optional<CurrentDocumentDto> currentDocument = currentDocumentDao.loadById(stub.getContentId(),
                 CurrentDocumentDto.class);
         if (currentDocument.isPresent()) {
             DocumentHeaderDto headerDto = currentDocument.get().getHeader();
-            DocumentTypes documentType = DocumentTypes.valueOf(headerDto.getDocumentType().getName());
-            T content = documentContentSerialization.convertToDocumentContent(documentType, currentDocument.get()
-                    .getContent());
+            T content = documentContentSerialization.convertToDocumentContent(currentDocument.get().getContent());
             return new Document<T>(createDocumentHeader(headerDto, currentDocument.get()), content, currentDocument
                     .get().getId());
         }
@@ -232,14 +229,13 @@ public class DocumentService implements IDocumentService, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public <T> void archiveDocument(final Document<T> document, final Departments department) {
+    public <T extends Serializable> void archiveDocument(final Document<T> document, final Departments department) {
         CurrentDocumentDto currentDto = currentDocumentDao.loadById(document.getCurrentContentId(),
                 CurrentDocumentDto.class).get();
         DepartmentDto sourceDto = departmentDao.getDepartment(department);
         DepartmentDto targetDto = departmentDao.getDepartment(Departments.END);
         ArchivalDocumentDto archivalDto = new ArchivalDocumentDto();
-        archivalDto.setContent(documentContentSerialization.convertToStream(document.getHeader().getType(),
-                document.getContent()));
+        archivalDto.setContent(documentContentSerialization.convertToStream(document.getContent()));
         archivalDto.setDateOfDispatch(new Date());
         archivalDto.setDateOfRecipt(currentDto.getDateOfRecipt());
         archivalDto.setHeader(currentDto.getHeader());

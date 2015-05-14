@@ -71,35 +71,7 @@
 		p:signatureService-ref="signatureService"/>
 		
 	<bean id="documentContentSerialization" 
-		class="gospodarka.elektroniczna.services.document.content.DocumentContentSerialization">
-		<property name="converters">
-			<map>
-				<entry key="TEST" value-ref="testDocService"/>
-				<entry key="BUSINESS_TRAVEL_CLEARING" value-ref="businessTravelClearingDocBean"/>
-				<entry key="CANDIDATE_REQUEST" value-ref="candidateRequestDocBean"/>
-				<entry key="HOLIDAYS_REQUEST" value-ref="holidaysRequestDocBean"/>
-				<entry key="INVOICE_CLEARING" value-ref="invoiceClearingDocBean"/>
-				<entry key="NEW_CANDIDATE" value-ref="newCandidateDocBean"/>
-				<entry key="RESIGNATION_EMPLOYEE" value-ref="resignationEmployeeDocBean"/>
-				<entry key="RESIGNATION_EMPLOYER" value-ref="resignationEployerDocBean"/>
-				<entry key="SICK_LEAVE" value-ref="sickLeaveDocBean"/>
-				<entry key="TRAINING_CLEARING" value-ref="trainingClearingDocBean"/>
-				
-			</map>
-		</property>
-	</bean>
-	
-	<!-- Serwisy - poszczególne dokumenty -->
-	<bean id="testDocService" class="gospodarka.elektroniczna.services.document.content.TestDocumentContentService"/>
-	<bean id="businessTravelClearingDocBean" class="gospodarka.elektroniczna.services.document.content.hr.BusinessTravelClearingDocumentService"/>
-	<bean id="candidateRequestDocBean" class="gospodarka.elektroniczna.services.document.content.hr.CandidateRequestDocumentService"/>
-	<bean id="holidaysRequestDocBean" class="gospodarka.elektroniczna.services.document.content.hr.HolidaysRequestDocumentService"/>
-	<bean id="invoiceClearingDocBean" class="gospodarka.elektroniczna.services.document.content.hr.InvoiceClearingDocumentService"/>
-	<bean id="newCandidateDocBean" class="gospodarka.elektroniczna.services.document.content.hr.NewCandidateDocumentService"/>
-	<bean id="resignationEmployeeDocBean" class="gospodarka.elektroniczna.services.document.content.hr.ResignationEmployeeDocumentService"/>
-	<bean id="resignationEployerDocBean" class="gospodarka.elektroniczna.services.document.content.hr.ResignationEmployerDocumentService"/>
-	<bean id="sickLeaveDocBean" class="gospodarka.elektroniczna.services.document.content.hr.SickLeaveDocumentService"/>
-	<bean id="trainingClearingDocBean" class="gospodarka.elektroniczna.services.document.content.hr.TrainingClearingDocumentService"/>
+		class="gospodarka.elektroniczna.services.document.content.DocumentContentSerialization" />
 					
 	<!-- DAO -->
 	<bean id="signatureDAO" class="gospodarka.elektroniczna.dao.signature.SignatureDao" 
