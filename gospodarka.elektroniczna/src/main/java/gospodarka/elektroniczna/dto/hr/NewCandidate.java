@@ -4,44 +4,18 @@ import gospodarka.elektroniczna.dao.department.Departments;
 
 import java.io.Serializable;
 
-public class NewCandidate implements Serializable {
+public class NewCandidate extends AbstractHrUser implements Serializable {
 
     /**
 	 * 
 	 */
     private static final long serialVersionUID = 1L;
 
-    private String name;
-    private String surname;
     private String experience;
     private Departments department;
 
     public NewCandidate() {
 
-    }
-
-    public NewCandidate(String name, String surname, String experience, Departments department) {
-        super();
-        this.name = name;
-        this.surname = surname;
-        this.experience = experience;
-        this.department = department;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getExperience() {
@@ -60,4 +34,11 @@ public class NewCandidate implements Serializable {
         this.department = department;
     }
 
+    @Override
+    public String toString() {
+        return "NewCandidate [experience=" + experience + ", department=" + department + ", getUserName()="
+                + getUserName() + ", getUserSurname()=" + getUserSurname() + "]";
+    }
+
+    
 }

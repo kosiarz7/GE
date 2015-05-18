@@ -6,20 +6,14 @@
 	<!-- Zabezpieczenie flow przez Spring Security -->
 	<secured attributes="ROLE_HR" />
 
-	<var name="controllerVar"
-		class="gospodarka.elektroniczna.controllers.hr.SickLeaveFlow" />
-		
-		
 	<on-start>
-		<evaluate expression="controllerVar.getSickLeaves()"
-			result="flowScope.sickLeaves" />
+		<evaluate expression="controllerVar.getSickLeaves()" result="flowScope.sickLeaves" />
 	</on-start>
-	
-	
-	<view-state id="sickLeaveHrView">
 
+
+	<view-state id="sickLeaveHrView">
 		<transition on="sickLeaveHrTest" to="sickLeaveHrTest" />
 	</view-state>
 
-	
+	<bean-import resource="flow-beans.xml" />
 </flow>

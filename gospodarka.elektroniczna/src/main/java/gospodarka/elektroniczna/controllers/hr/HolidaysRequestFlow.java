@@ -1,12 +1,15 @@
 package gospodarka.elektroniczna.controllers.hr;
 
-import gospodarka.elektroniczna.annotations.InjectLogger;
-import gospodarka.elektroniczna.dto.hr.HolidayRequest;
+import gospodarka.elektroniczna.dao.department.Departments;
+import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
+import gospodarka.elektroniczna.dto.hr.HolidaysRequest;
+import gospodarka.elektroniczna.services.document.SearchCriteria;
+import gospodarka.elektroniczna.services.user.UserData;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * Wniosek o urlop
@@ -14,21 +17,29 @@ import java.util.logging.Logger;
  * @author iblis
  *
  */
-public class HolidaysRequestFlow implements Serializable {
+public class HolidaysRequestFlow extends AbstractHrFlow<HolidaysRequest> implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @InjectLogger
-    private static final Logger LOGGER = Logger.getLogger(HolidaysRequestFlow.class.getCanonicalName());
 
-    public boolean submitHolidayRequest(final HolidayRequest holidayRequest) {
-        LOGGER.info("submitHolidayRequest: "+ holidayRequest);
-        return true;
+    public HolidaysRequestFlow() {
+        super("Wniose o urlop", DocumentTypes.HOLIDAYS_REQUEST, Departments.HUMAN_RESOURCES);
     }
-    
-    public List<HolidayRequest> getHolidayRequests()
-    {
-        ArrayList<HolidayRequest> holidayRequests = new ArrayList<HolidayRequest>();
-        LOGGER.info("getHolidayRequests: "+ holidayRequests.size());
-        return holidayRequests;
+
+    public boolean submitHolidaysRequest(UserData userData, HolidaysRequest holidayRequest) {
+        LoggerFactory.getLogger(CandidateRequestFlow.class).debug("submitCandidateRequest", holidayRequest);
+
+        return submit(userData, holidayRequest);
+    }
+
+    public List<HolidaysRequest> getHolidaysRequests() {
+
+        SearchCriteria criteria = new SearchCriteria();
+        criteria.department(Departments.HUMAN_RESOURCES);
+        criteria.setType(DocumentTypes.HOLIDAYS_REQUEST);
+
+        List<HolidaysRequest> records = search(criteria);
+        LoggerFactory.getLogger(HolidaysRequestFlow.class).debug("getHolidaysRequests", records.size());
+
+        return records;
     }
 }

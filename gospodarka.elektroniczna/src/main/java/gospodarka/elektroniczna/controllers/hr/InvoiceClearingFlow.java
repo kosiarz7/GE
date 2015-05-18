@@ -1,12 +1,15 @@
 package gospodarka.elektroniczna.controllers.hr;
 
-import gospodarka.elektroniczna.annotations.InjectLogger;
+import gospodarka.elektroniczna.dao.department.Departments;
+import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.dto.hr.InvoiceClearing;
+import gospodarka.elektroniczna.services.document.SearchCriteria;
+import gospodarka.elektroniczna.services.user.UserData;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
+import org.slf4j.LoggerFactory;
 
 /**
  * Rozliczenie faktury
@@ -14,21 +17,28 @@ import java.util.logging.Logger;
  * @author iblis
  *
  */
-public class InvoiceClearingFlow implements Serializable {
+public class InvoiceClearingFlow extends AbstractHrFlow<InvoiceClearing> implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @InjectLogger
-    private static final Logger LOGGER = Logger.getLogger(InvoiceClearingFlow.class.getCanonicalName());
 
-    public boolean submitInvoiceClearing(InvoiceClearing clearingInvoice) {
-        LOGGER.info("submitInvoiceClearing: "+ clearingInvoice);
-        return true;
+    public InvoiceClearingFlow() {
+        super("Rozliczenie faktury", DocumentTypes.INVOICE_CLEARING, Departments.FINANCE);
     }
-    
-    public List<InvoiceClearing> getInvoiceClearing()
-    {
-        ArrayList<InvoiceClearing> invoiceClearing = new ArrayList<InvoiceClearing>();
-        LOGGER.info("getInvoiceClearing: "+ invoiceClearing.size());
-        return invoiceClearing;
+
+    public boolean submitInvoiceClearing(UserData userData, InvoiceClearing clearingInvoice) {
+        LoggerFactory.getLogger(InvoiceClearingFlow.class).debug("submitInvoiceClearing", clearingInvoice);
+
+        return submit(userData, clearingInvoice);
+    }
+
+    public List<InvoiceClearing> getInvoiceClearing() {
+        SearchCriteria criteria = new SearchCriteria();
+        criteria.department(Departments.FINANCE);
+        criteria.setType(DocumentTypes.INVOICE_CLEARING);
+
+        List<InvoiceClearing> records = search(criteria);
+        LoggerFactory.getLogger(InvoiceClearingFlow.class).debug("getInvoiceClearing", records.size());
+
+        return records;
     }
 }

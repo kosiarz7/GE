@@ -6,6 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Kadry/Finanse"/>
 	<ui:define name="pageContent">
 		<h1>Ogloszenie o wakacie</h1>
 		<h:form>
@@ -21,23 +22,24 @@
 			<p>
 				Nazwa stanowiska:
 				<p:inputText id="jobName" value="#{candidateRequestVar.jobName}"
-					label="'Nazwa stanowiska'" />
+					label="'Nazwa stanowiska'"  required="true"/>
 			</p>
 			<p>
 				Wymagane umiejętności:
 				<p:inputText id="requiredExperience"
 					value="#{candidateRequestVar.requiredExperience}"
-					label="'Wymagane umiejętności:'" />
+					label="'Wymagane umiejętności:'"  required="true"/>
 			</p>
 			<p>
 				Opcjonalne umiejętności:
 				<p:inputText id="goodToKnownExperience"
 					value="#{candidateRequestVar.goodToKnownExperience}"
-					label="'Opcjonalne umiejętności'" />
+					label="'Opcjonalne umiejętności'"  required="true"/>
 			</p>
 
 			<p:commandButton action="candidateRequest"
 				value="Wyslij ogłoszenie do kadr" ajax="false" />
+			<p:button href="/app/hr" value="Powrót" />
 		</h:form>
 
 	</ui:define>

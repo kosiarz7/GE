@@ -6,6 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Kadry/Finanse"/>
 	<ui:define name="pageContent">
 		<h:form>
 			<p>
@@ -17,17 +18,18 @@
 			<h1>Wniosek o urlop</h1>
 			<p>
 				Zwracam się z prośbą o udzielenie mi urlopu od dnia
-				<p:calendar id="fromDate" value="#{holidayRequestVar.fromDate}"
+				<p:calendar id="fromDate" value="#{holidaysRequestVar.fromDate}"
 					showOn="button" pattern="dd-MM-yyyy" label="'Data od'"
-					placeholder="dd-mm-yyyy" />
+					placeholder="dd-mm-yyyy"  required="true"/>
 				do dnia
-				<p:calendar id="toDate" value="#{holidayRequestVar.toDate}"
+				<p:calendar id="toDate" value="#{holidaysRequestVar.toDate}"
 					showOn="button" pattern="dd-MM-yyyy" label="'Data do'"
-					placeholder="dd-mm-yyyy" />
+					placeholder="dd-mm-yyyy"  required="true"/>
 				za rok 2015.
 			</p>
-			<p:commandButton action="holidayRequest" value="Wyślij wniosek"
+			<p:commandButton action="holidaysRequest" value="Wyślij wniosek"
 				ajax="false" />
+			<p:button href="/app/hr" value="Powrót" />
 		</h:form>
 	</ui:define>
 </ui:composition>

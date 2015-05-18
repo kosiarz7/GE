@@ -71,17 +71,8 @@
 		p:signatureService-ref="signatureService"/>
 		
 	<bean id="documentContentSerialization" 
-		class="gospodarka.elektroniczna.services.document.content.DocumentContentSerialization">
-		<property name="converters">
-			<map>
-				<entry key="TEST" value-ref="testDocService"/>
-			</map>
-		</property>
-	</bean>
-	
-	<!-- Serwisy - poszczególne dokumenty -->
-	<bean id="testDocService" class="gospodarka.elektroniczna.services.document.content.TestDocumentContentService"/>
-	
+		class="gospodarka.elektroniczna.services.document.content.DocumentContentSerialization" />
+					
 	<!-- DAO -->
 	<bean id="signatureDAO" class="gospodarka.elektroniczna.dao.signature.SignatureDao" 
 		p:sessionFactory-ref="hibernateSessionFactory"/>

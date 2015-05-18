@@ -6,6 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Kadry/Finanse"/>
 	<ui:define name="pageContent">
 		<h1>Zarejestruj nowego kandydata</h1>
 		<h:form>
@@ -17,41 +18,35 @@
 			</p>
 			<p>
 				<p:message for="experience" />
-			</p>
+			</p><!-- 
 			<p>
 				<p:message for="department" />
-			</p>
+			</p> -->
 			<p>
 				Imie:
-				<p:inputText id="name" value="#{newCandidateVar.name}"
-					label="'Imie'" />
+				<p:inputText id="name" value="#{newCandidateVar.userName}"
+					label="'Imie'"  required="true"/>
 			</p>
 			<p>
 				Nazwisko:
-				<p:inputText id="surname" value="#{newCandidateVar.surname}"
-					label="'Nazwisko'" />
+				<p:inputText id="surname" value="#{newCandidateVar.userSurname}"
+					label="'Nazwisko'"  required="true"/>
 			</p>
 			<p>
 				Doświadczenie:
 				<p:inputText id="experience" value="#{newCandidateVar.experience}"
-					label="'Doświadczenie'" />
+					label="'Doświadczenie'"  required="true"/>
 			</p>
 			<p>
 				Dział:
-				<p:selectOneMenu id="department"
-					value="#{newCandidateVar.department}">
-					<f:selectItems
-						value="#{gospodarka.elektroniczna.dao.department.Departments}"
-						var="status" itemValue="#{status}" itemLabel="#{status.label}" />
-					<!-- 
-					<f:selectItem itemLabel="Select One" itemValue="" />
-					<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-					<f:selectItem itemLabel="PS4" itemValue="PS4" />
-					<f:selectItem itemLabel="Wii U" itemValue="Wii U" /> -->
+				<p:selectOneMenu value="#{newCandidateVar.department}">
+					<f:selectItems value="#{controllerVar.departments}" var="item" itemValue="#{item}" itemLabel="#{item}"/>
 				</p:selectOneMenu>
+				
 			</p>
 
 			<p:commandButton action="newCandidateHr" value="Dodaj" ajax="false" />
+			<p:button href="/app/hr" value="Powrót" />
 		</h:form>
 	</ui:define>
 </ui:composition>

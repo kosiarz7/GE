@@ -7,19 +7,19 @@
 	<secured
 		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT"
 		match="any" />
-		
+
 	<var name="sickLeaveVar" class="gospodarka.elektroniczna.dto.hr.SickLeave" />
-	<var name="controllerVar" class="gospodarka.elektroniczna.controllers.hr.SickLeaveFlow" />
-					
+
 	<view-state id="sickLeaveView">
-		<transition on="sickLeaveState" to="sickLeaveState" />
+		<transition on="sickLeave" to="sickLeave" />
 	</view-state>
 
-	<action-state id="sickLeaveState">
-		<evaluate expression="controllerVar.submitSickLeave(sickLeaveVar, springSecurityContextUtilBean.getUserDepartment())"
+	<action-state id="sickLeave">
+		<evaluate expression="controllerVar.submitSickLeave(springSecurityContextUtilBean.getUser(), sickLeaveVar)"
 			result="flowScope.status" />
 		<transition to="sickLeaveEnd" />
 	</action-state>
 
 	<end-state id="sickLeaveEnd" view="sickLeaveEnd.xhtml" />
+	<bean-import resource="flow-beans.xml" />
 </flow>

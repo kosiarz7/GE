@@ -6,6 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Kadry/Finanse"/>
 	<ui:define name="pageContent">
 		<h1>Zwolnienie lekarskie</h1>
 		<h:form>
@@ -18,19 +19,21 @@
 			<p>
 				Początek zwolnienia
 				<p:calendar id="fromDate"
-					value="#{clearingBusinessTravelVar.fromDate}" showOn="button"
+					value="#{sickLeaveVar.fromDate}" showOn="button"
 					pattern="dd-MM-yyyy" label="'Początek zwolnienia'"
-					placeholder="dd-mm-yyyy" />
+					placeholder="dd-mm-yyyy"  required="true"/>
 			</p>
 			<p>
 				Koniec zwolnienia
 				<p:calendar id="toDate"
-					value="#{clearingBusinessTravelVar.toDate}" showOn="button"
+					value="#{sickLeaveVar.toDate}" showOn="button"
 					pattern="dd-MM-yyyy" label="'Koniec zwolnienia'"
-					placeholder="dd-mm-yyyy" />
+					placeholder="dd-mm-yyyy"  required="true"/>
 			</p>
 
-			<p:commandButton action="sickLeaveState" value="Wyślij" ajax="false" />
+			<p:commandButton action="sickLeave" value="Wyślij" ajax="false" />
+			
+			<p:button href="/app/hr" value="Powrót" />
 		</h:form>
 	</ui:define>
 </ui:composition>

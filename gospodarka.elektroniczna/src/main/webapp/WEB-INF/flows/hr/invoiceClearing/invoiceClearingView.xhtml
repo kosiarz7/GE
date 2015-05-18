@@ -6,6 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Kadry/Finanse"/>
 	<ui:define name="pageContent">
 		<h1>Faktura do rozliczenia</h1>
 		<h:form>
@@ -18,15 +19,16 @@
 			<p>
 				Produkty:
 				<p:inputText id="products" value="#{invoiceClearingVar.products}"
-					label="'Produkty'" />
+					label="'Produkty'"  required="true"/>
 			</p>
 			<p>
 				Kwota:
 				<p:inputText id="amount" value="#{invoiceClearingVar.amount}"
-					label="'Kwota'" />
+					label="'Kwota'"  required="true"/>
 			</p>
 
 			<p:commandButton action="invoiceClearing" value="Dodaj" ajax="false" />
+			<p:button href="/app/hr" value="Powrót" />
 		</h:form>
 	</ui:define>
 </ui:composition>
