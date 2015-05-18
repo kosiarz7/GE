@@ -34,14 +34,6 @@
 
 	<div id="page">
 		<div class="content">
-			<c:if test="#{springSecurityContextUtilBean.isUserLoggedIn()}">
-				<h:form>
-					<p:menubar>
-					  <p:menuitem value="Kadry" url="/app/hr" />
-					  
-				    </p:menubar>
-			    </h:form>
-			</c:if>
 			<div id="pageContent" style="margin-top: 20px;">
 				<ui:insert name="pageContent" />
 			</div>
