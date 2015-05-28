@@ -1,93 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-
+	
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="Magazyn" />
+	<ui:param name="department" value="Magazyn"/>
 	<ui:define name="pageContent">
-  <h:head>
+		<h:form >
+		<h1 class="bg-info">Nowy dokument</h1>
+			<p:button class="btn btn-primary" href="/app/storehouse/pzGen" value="PRZYJECIE ZEWNĘTRZNE" />
+			<p:button class="btn btn-primary" href="/app/storehouse/wzGen" value="WYDANIE ZEWNĘTRZNE" />			
+			<p:button class="btn btn-primary" href="/app/storehouse/pwGen" value="PRZYJECIE WEWNĘTRZNE" />
+			<p:button class="btn btn-primary" href="/app/storehouse/wwGen" value="WYDANIE WEWNĘTRZNE" />			
+			<p:button class="btn btn-primary" href="/app/storehouse/ppzGen" value="POTWIERDZENIE PRZYJĘCIA ZAMÓWIENIA" />
+			
+			<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
+				<hr/>
+				<h1 class="bg-success">Podgląd dokumentów</h1>
 
-                <title>Magazyn </title>
-                
-            </h:head>
-            <body>
-		<div >
-			<ul id="tablist" class="tablist" role="tablist">
-				<li role="tab"><a href="#nowy" aria-controls="nowy" role="tab"
-					data-toggle="tab">Nowy dokument</a></li>
-				<li role="tab"><a href="#nasze" aria-controls="nasze"
-					role="tab" data-toggle="tab">Wydane dokumenty</a></li>
-				<li role="tab"><a href="#inne" aria-controls="inne" role="tab"
-					data-toggle="tab">Otrzymane dokumenty</a></li>
-
-			</ul>
-
-			<div id="tabContent" class="tab-content">
-				<div role="tabpanel" class="tab-pane active" id="nasze">
-				  <ui:include src="/WEB-INF/flows/storehouse/producedDocuments.xhtml"/>  
-				</div>
-				<div role="tabpanel" class="tab-pane" id="inne">
-					  <ui:include src="/WEB-INF/flows/storehouse/receivedDocuments.xhtml"/> 
-				</div>
-
-				<div role="tabpanel" class="tab-pane" id="nowy">
-					<br></br>
-					<h:form>
-						<p>
-							<p:commandButton action="gotoWW" class="btn btn-primary"
-								value="WW" />
-						</p>
-						<p>
-							<p:commandButton action="gotoPPZ" class="btn btn-primary"
-								value="PPZ" />
-						</p>
-						<p>
-							<p:commandButton action="gotoPZ" class="btn btn-primary"
-								value="PZ" />
-						</p>
-						<p>
-							<p:commandButton action="gotoPW" class="btn btn-primary"
-								value="PW" />
-						</p>
-
-					</h:form>
-
-
-				</div>
-			</div>
-		</div>
-  </body>
-
-
-		<!--  <div role="tabpanel" class="tab-pane" id="addDocument">
-                            <br></br>
-             <br></br>
-             	  <h:form>
-			<p>
-				<p:commandButton action="gotoWW" class="btn btn-primary" value="WW" />
-			</p>
-			<p>
-				<p:commandButton action="gotoPPZ" class="btn btn-primary"
-					value="PPZ" />
-			</p>
-			<p>
-				<p:commandButton action="gotoPZ" class="btn btn-primary" value="PZ" />
-			</p>
-			<p>
-				<p:commandButton action="gotoPW" class="btn btn-primary" value="PW" />
-			</p>
-
-		
+				<p:button class="btn btn-success"  href="/app/storehouse/pzShow" value="Pokaz PRZYJECIE ZEWNĘTRZNE" />				
+				<p:button class="btn btn-success" href="/app/storehouse/wzShow" value="Pokaz WYDANIE ZEWNĘTRZNE" />	
+				<p:button class="btn btn-success" href="/app/storehouse/pwShow" value="Pokaz PRZYJECIE WEWNĘTRZNE" />
+				<p:button class="btn btn-success" href="/app/storehouse/wwShow" value="Pokaz WYDANIE WEWNĘTRZNE" />	
+				<p:button class="btn btn-success" href="/app/storehouse/ppzShow" value="Pokaz POTWIERDZENIE PRZYJĘCIA ZAMÓWIENIA" />
+				
+			</c:if>
 		</h:form>
-</div>
--->
 	</ui:define>
 </ui:composition>
 </html>
+

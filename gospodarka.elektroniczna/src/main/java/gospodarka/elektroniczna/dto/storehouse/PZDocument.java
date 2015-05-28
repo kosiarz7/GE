@@ -6,44 +6,43 @@ import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
-public class PZDocument implements Serializable {
+public class PZDocument extends AbstractStoreHouseUser  implements Serializable {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -426477545115161813L;
+    private static final long serialVersionUID = 1L;
 
     /**
      * Data otrzymania towarow
      */
     private Date receivedDate;
+    
     /**
      * ilosc
      */
     private int amount;
     /**
      * kod towaru
-     */
+    */
     private String itemCode;
     /**
      * nazwa towaru
      */
-    private int itemName;
-    /**
-     * kod towaru
+    private String itemName;
+   /**
+     * cena towaru
      */
-    private String pricePerItem;
+    private float pricePerItem;
     
-    /**
+  /**
      * dostarczyl
      */
     private String deliver;
     
     
-    /**
-     * Konstruktor.
-     */
-    public PZDocument() {
+    public PZDocument(){
+    	
     }
     
     
@@ -55,16 +54,9 @@ public class PZDocument implements Serializable {
         return ToStringBuilder.reflectionToString(this);
     }
 
-  
-
 
 	public Date getReceivedDate() {
 		return receivedDate;
-	}
-
-
-	public void setReceivedDate(Date receivedDate) {
-		this.receivedDate = receivedDate;
 	}
 
 
@@ -73,38 +65,18 @@ public class PZDocument implements Serializable {
 	}
 
 
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-
-
 	public String getItemCode() {
 		return itemCode;
 	}
 
 
-	public void setItemCode(String itemCode) {
-		this.itemCode = itemCode;
-	}
-
-
-	public int getItemName() {
+	public String getItemName() {
 		return itemName;
 	}
 
 
-	public void setItemName(int itemName) {
-		this.itemName = itemName;
-	}
-
-
-	public String getPricePerItem() {
+	public float getPricePerItem() {
 		return pricePerItem;
-	}
-
-
-	public void setPricePerItem(String pricePerItem) {
-		this.pricePerItem = pricePerItem;
 	}
 
 
@@ -113,10 +85,36 @@ public class PZDocument implements Serializable {
 	}
 
 
+	public void setReceivedDate(Date receivedDate) {
+		this.receivedDate = receivedDate;
+	}
+
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
+	}
+
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+
+	public void setPricePerItem(float pricePerItem) {
+		this.pricePerItem = pricePerItem;
+	}
+
+
 	public void setDeliver(String deliver) {
 		this.deliver = deliver;
 	}
 
+ 
 
 
 }

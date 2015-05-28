@@ -9,6 +9,10 @@
 	<secured attributes="ROLE_STOREHOUSE"  />
 	
 	
+	<view-state id="start">
+		<transition on="storehouse" to="storehouse" />
+	</view-state>
+	<!-- 
 	  <var name="wwDoc" class="gospodarka.elektroniczna.dto.storehouse.WWDocument" />	
 		<var name="pzDoc" class="gospodarka.elektroniczna.dto.storehouse.PZDocument" />
         <var name="ppzDoc" class="gospodarka.elektroniczna.dto.storehouse.PPZDocument" />      
@@ -25,14 +29,16 @@
         
         
 		<view-state id="start">      
-		
-		    <transition on="gotoPPZ" to="ppzForm"/>
+	
+		     <transition on="gotoPPZ" to="ppzForm"/>
             <transition on="gotoPZ" to="pzForm"/>
             <transition on="gotoPW" to="pwForm"/>            
             <transition on="gotoWW" to="wwForm"/> 
-             
+      
         </view-state> 
      
+        
+       
         
        <view-state id="wwForm">
             <transition on="saveWWForm" to="decisionWWForm"/>
@@ -80,5 +86,5 @@
         </view-state>
         
         <end-state id="end"/>
-        
+         -->
 </flow>

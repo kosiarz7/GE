@@ -17,6 +17,11 @@ import gospodarka.elektroniczna.documents.hr.ResignationEmployeeDocument;
 import gospodarka.elektroniczna.documents.hr.ResignationEmployerDocument;
 import gospodarka.elektroniczna.documents.hr.SickLeaveDocument;
 import gospodarka.elektroniczna.documents.hr.TrainingClearingDocument;
+import gospodarka.elektroniczna.documents.storehouse.PPZDocument_A;
+import gospodarka.elektroniczna.documents.storehouse.PWDocument_A;
+import gospodarka.elektroniczna.documents.storehouse.PZDocument_A;
+import gospodarka.elektroniczna.documents.storehouse.WWDocument_A;
+import gospodarka.elektroniczna.documents.storehouse.WZDocument_A;
 import gospodarka.elektroniczna.dto.ArchivalDocumentDto;
 import gospodarka.elektroniczna.dto.CurrentDocumentDto;
 import gospodarka.elektroniczna.dto.DepartmentDto;
@@ -75,6 +80,15 @@ public class DocumentService implements IDocumentService, Serializable {
         map.put(DocumentTypes.RESIGNATION_EMPLOYER, ResignationEmployerDocument.class);
         map.put(DocumentTypes.SICK_LEAVE, SickLeaveDocument.class);
         map.put(DocumentTypes.TRAINING_CLEARING, TrainingClearingDocument.class);
+        map.put(DocumentTypes.INTERNAL_ISSUE, WWDocument_A.class);
+        map.put(DocumentTypes.EXTERNAL_ISSUE, WZDocument_A.class);
+        map.put(DocumentTypes.INTERNAL_ADOPTION, PWDocument_A.class);
+        map.put(DocumentTypes.EXTERNAL_ADOPTION, PZDocument_A.class);
+        map.put(DocumentTypes.ORDER_CONFIRMATION, PPZDocument_A.class);
+        
+       
+        
+        
         // TODO przy kolejnych dokumentach trzeba dołożyć.
     }
     
