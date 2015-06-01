@@ -5,6 +5,8 @@
  */
 package gospodarka.elektroniczna.dao.flows.service;
 
+import gospodarka.elektroniczna.dto.service.DamagedCarForm;
+
 /**
  *
  * @author Piotrek
@@ -15,4 +17,11 @@ public class ServiceBean {
           System.out.println("widac");   
          return "witaj";
      }
+         
+         public boolean saveDamagedCarForm(DamagedCarForm damagedCarForm)
+         {
+             System.out.println("DAMAGED CAR FORM");
+             System.out.println(damagedCarForm.getDate().toString());
+             return true;
+         }
 }

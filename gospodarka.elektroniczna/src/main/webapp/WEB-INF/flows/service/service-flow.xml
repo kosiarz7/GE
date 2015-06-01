@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
         
-	<!-- Zabezpieczenie flow przez Spring Security -->
-	<secured attributes="ROLE_SERVIS"/>
+    <!-- Zabezpieczenie flow przez Spring Security -->
+    <secured attributes="ROLE_SERVIS"/>
         
-        <var name="collectCarForm" class="gospodarka.elektroniczna.dto.service.CollectCarForm" />
-        <var name="damagedCarForm" class="gospodarka.elektroniczna.dto.service.DamagedCarForm" />
-        <var name="repairCostEstimationForm" class="gospodarka.elektroniczna.dto.service.RepairCostEstimationForm" />
-        <var name="replacementPartOrderForm" class="gospodarka.elektroniczna.dto.service.ReplacementPartOrderForm" />
-        <var name="warrantyRepairForm" class="gospodarka.elektroniczna.dto.service.WarrantyRepairForm" />
+    <var name="collectCarForm" class="gospodarka.elektroniczna.dto.service.CollectCarForm" />
+    <var name="damagedCarForm" class="gospodarka.elektroniczna.dto.service.DamagedCarForm" />
+    <var name="repairCostEstimationForm" class="gospodarka.elektroniczna.dto.service.RepairCostEstimationForm" />
+    <var name="replacementPartOrderForm" class="gospodarka.elektroniczna.dto.service.ReplacementPartOrderForm" />
+    <var name="warrantyRepairForm" class="gospodarka.elektroniczna.dto.service.WarrantyRepairForm" />
         
-        <view-state id="start">
-            <on-entry>
-                <evaluate expression="serviceBean.sendMessage()">
-                </evaluate>         
-            </on-entry> 
-        </view-state>
+    <view-state id="start">
+        <transition on="goDamagedCarForm" to="damagedCarForm"/>
+    </view-state>
         
-        <bean-import resource="flow-beans.xml"/>
+    <view-state id="damagedCarForm">
+        <transition on="saveDamagedCarForm" to="saveDamagedCarAction"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <action-state id="saveDamagedCarAction">
+        <evaluate expression="serviceBean.saveDamagedCarForm(damagedCarForm)"/>
+        <transition on="yes" to="start"/>
+    </action-state>
+        
+    <bean-import resource="flow-beans.xml"/>
 
 </flow>
