@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+        <ui:param name="department" value="Serwis"/>
+        <ui:define name="pageContent">
+            <h3>Protokół przyjęcia uszkodzonego samochodu</h3>
+            <p:separator/>
+
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="calendar" value="Data:" />
+                    <p:calendar id="calendar" value="#{damagedCarForm.date}"/>   
+
+                    <h:outputLabel for="brand" value="Marka:" />
+                    <p:inputText id="brand"/>
+
+                    <h:outputLabel for="model" value="Model:" />
+                    <p:inputText id="model"/>
+
+                    <h:outputLabel for="testRide" value="Jazda próbna:"/>
+                    <p:selectBooleanCheckbox id="testRide" />
+
+                    <h:outputLabel for="plates" value="Numer rejestracyjny:" />
+                    <p:inputText id="plates"/>
+
+                    <h:outputLabel for="client" value="Nazwisko klienta:" />
+                    <p:inputText id="client"/>
+
+                    <h:outputLabel for="worker" value="Nazwisko pracownika:" />
+                    <p:inputText id="worker"/>
+                </h:panelGrid>
+                <p:commandButton id="save" action="saveDamagedCarForm" value="Dodaj" update="@form" ajax="false" />
+                <p:commandButton id="cancel" action="cancel" value="Anuluj" ajax="false" immediate="true"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

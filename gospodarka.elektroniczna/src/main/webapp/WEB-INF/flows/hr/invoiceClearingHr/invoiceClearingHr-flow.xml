@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="invoiceClearingHrView"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<!-- Zabezpieczenie flow przez Spring Security -->
+	<secured attributes="ROLE_HR" />
+
+	<on-start>
+		<evaluate expression="controllerVar.getInvoiceClearing()"
+			result="flowScope.InvoiceClearings" />
+	</on-start>
+
+	<view-state id="invoiceClearingHrView">
+		<transition on="invoiceClearingHr" to="invoiceClearingHr" />
+	</view-state>
+
+	<bean-import resource="flow-beans.xml" />
+
+</flow>

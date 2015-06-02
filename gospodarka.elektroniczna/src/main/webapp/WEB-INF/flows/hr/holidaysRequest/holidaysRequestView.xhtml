@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Kadry/Finanse"/>
+	<ui:define name="pageContent">
+		<h:form>
+			<p>
+				<p:message for="fromDate" />
+			</p>
+			<p>
+				<p:message for="toDate" />
+			</p>
+			<h1>Wniosek o urlop</h1>
+			<p>
+				Zwracam się z prośbą o udzielenie mi urlopu od dnia
+				<p:calendar id="fromDate" value="#{holidaysRequestVar.fromDate}"
+					showOn="button" pattern="dd-MM-yyyy" label="'Data od'"
+					placeholder="dd-mm-yyyy"  required="true"/>
+				do dnia
+				<p:calendar id="toDate" value="#{holidaysRequestVar.toDate}"
+					showOn="button" pattern="dd-MM-yyyy" label="'Data do'"
+					placeholder="dd-mm-yyyy"  required="true"/>
+				za rok 2015.
+			</p>
+			<p:commandButton action="holidaysRequest" value="Wyślij wniosek"
+				ajax="false" />
+			<p:button href="/app/hr" value="Powrót" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+

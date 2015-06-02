@@ -18,7 +18,7 @@ import org.slf4j.Logger;
  *
  * Copyright © 2015 Adam Kopaczewski
  */
-public class DepartmentDao extends CommonDao implements IDepartmentDao, Serializable {
+public class DepartmentDao extends CommonDao<DepartmentDto> implements IDepartmentDao, Serializable {
 
     /**
      * UID.

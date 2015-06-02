@@ -54,10 +54,9 @@ public class DocumentHeaderService implements IDocumentHeaderService, Serializab
             throws WrongNumberOfLastSignatureException {
         DocumentHeaderDto headerDto = createAndSaveNewHeaderDto(type, title);
         DocumentHeader header = new DocumentHeader();
-        header.setFrom(Departments.BEGIN);
-        header.setType(type);
-        header.setReceiptDate(new Date());
         header.fill(headerDto);
+        header.setFrom(Departments.BEGIN);
+        header.setReceiptDate(new Date());
         LOGGER.debug("createNewHeader|Został stworzony nowy nagłówek dokumentu: {}", header);
         return header;
     }

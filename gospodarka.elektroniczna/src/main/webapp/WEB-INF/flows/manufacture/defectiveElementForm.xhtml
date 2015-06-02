@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+        <ui:param name="department" value="Produkcja"/>
+        <ui:define name="pageContent">
+            <h3>Zgłoszenie wypadku przy pracy</h3>
+            <h:form id="defectiveElementForm" >
+
+                <div class="form-group">
+                    <label>Data</label>
+                    <h:inputText id="date" class="form-control" value="#{defectiveElement.date}" required="true">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/> 
+                    </h:inputText>
+                    <h:message id="m1" for="date" style="color:red"/> <p></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Osoba zgłaszająca</label>
+                    <h:inputText id="complainant" class="form-control" value="#{defectiveElement.complainant}" required="true"/>
+                    <h:message id="m2" for="complainant" style="color:red"/> <p></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Numer lini produkcyjnej</label>
+                    <h:inputText id="productionLineNumber" class="form-control" value="#{defectiveElement.productionLineNumber}" required="true"/>
+                    <h:message id="m3" for="productionLineNumber" style="color:red"/> <p></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Numer stanowiska</label>
+                    <h:inputText id="workStationNumber" class="form-control" value="#{defectiveElement.workStationNumber}" required="true"/>
+                    <h:message id="m4" for="workStationNumber" style="color:red"/> <p></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Numer elementu</label>
+                    <h:inputText id="elementNumber" class="form-control" value="#{defectiveElement.elementNumber}" required="true"/>
+                    <h:message id="m5" for="elementNumber" style="color:red"/> <p></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Opis wady</label>
+                    <h:inputText  class="form-control" value="#{defectiveElement.description}" />
+                </div>
+                <p:commandButton  id="save" action="saveDefectiveElementForm"  class="btn btn-primary"  value="Dodaj" update="@form" />
+                <p:commandButton id="cancel" action="cancel" class="btn btn-primary"  value="Anuluj" ajax="false" immediate="true"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

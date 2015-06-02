@@ -18,7 +18,7 @@ import org.slf4j.Logger;
  *
  * Copyright © 2015 Adam Kopaczewski
  */
-public class SignatureDao extends CommonDao implements ISignatureDao, Serializable {
+public class SignatureDao extends CommonDao<Object> implements ISignatureDao, Serializable {
     /**
      * UID.
      */

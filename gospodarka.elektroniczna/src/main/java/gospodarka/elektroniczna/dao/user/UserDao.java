@@ -18,7 +18,7 @@ import org.slf4j.Logger;
  *
  * Copyright © 2015 Adam Kopaczewski
  */
-public class UserDao extends CommonDao implements IUserDao, Serializable {
+public class UserDao extends CommonDao<Object> implements IUserDao, Serializable {
     /**
      * UID.
      */

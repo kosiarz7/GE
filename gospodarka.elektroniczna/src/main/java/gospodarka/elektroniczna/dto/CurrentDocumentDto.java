@@ -33,42 +33,41 @@ public class CurrentDocumentDto extends AbstractDto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", nullable = false)
-    protected int id;
+    private int id;
     /**
      * Nagłówek dokumentu.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "HEADER_ID", nullable = false)
-    protected DocumentHeaderDto header;
+    private DocumentHeaderDto header;
     /**
      * Oddział, który wysłał dany dokument.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "SOURCE_DEPARTMENT_ID", nullable = false)
-    protected DepartmentDto sourceDepartment;
+    private DepartmentDto sourceDepartment;
     /**
      * Oddział, który otrzymał dany dokument.
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "TARGET_DEPARTMENT_ID", nullable = false)
-    protected DepartmentDto targetDepartment;
+    private DepartmentDto targetDepartment;
     /**
      * Data otrzymania dokumentu przez oddział docelowy.
      */
     @Column(name = "DATE_OF_RECIPT", nullable = false)
-    protected Date dateOfRecipt;
+    private Date dateOfRecipt;
     /**
      * Zawartość dokumentu.
      */
     @Column(name = "CONTENT", nullable = false)
-    protected byte[] content;
+    private byte[] content;
 
     
     /**
      * Konstruktor.
      */
     public CurrentDocumentDto() {
-        id = UNLOADED_ID;
     }
 
     // GETTERY I SETTERY

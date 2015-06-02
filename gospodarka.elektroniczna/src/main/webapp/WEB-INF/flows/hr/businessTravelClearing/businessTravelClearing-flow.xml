@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="businessTravelClearingView"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<!-- Zabezpieczenie flow przez Spring Security -->
+	<secured
+		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT"
+		match="any" />
+		
+	<var name="businessTravelClearingVar" class="gospodarka.elektroniczna.dto.hr.BusinessTravelClearing" />
+					
+	<view-state id="businessTravelClearingView">
+		<transition on="businessTravelClearing" to="businessTravelClearing" />
+	</view-state>
+
+	<action-state id="businessTravelClearing">
+		<evaluate expression="controllerVar.submitBusinessTravelClearing(springSecurityContextUtilBean.getUser(), businessTravelClearingVar)"
+			result="flowScope.status" />
+		<transition to="businessTravelClearingEnd" />
+	</action-state>
+
+	<end-state id="businessTravelClearingEnd" view="businessTravelClearingEnd.xhtml" />
+	<bean-import resource="flow-beans.xml"/>
+</flow>

@@ -19,12 +19,12 @@
 		<security:logout logout-url="/app/logout" logout-success-url="/app/login"/>
 	</security:http>
 	
-	<!-- Wersja docelowa -->
-	<!-- <security:authentication-manager>
+	<!-- Wersja docelowa CustomAuthenticationProvider -->
+	 <security:authentication-manager>
 		<security:authentication-provider ref="authenticationProvider" />
-	</security:authentication-manager> -->
+	</security:authentication-manager> 
 	
-	<!-- MOCK -->
+	<!-- MOCK
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:user-service>
@@ -37,7 +37,7 @@
 			</security:user-service>
 		</security:authentication-provider>
 	</security:authentication-manager>
-	
+	 -->
 	<bean id="authenticationProvider" class="gospodarka.elektroniczna.security.CustomAuthenticationProvider">
 		<property name="encryptor">
 			<bean class="gospodarka.elektroniczna.services.encrypt.SHA512Encryptor"/>
@@ -52,19 +52,27 @@
 		p:configLocation="classpath:hibernate.cfg.xml"/>
 		
 	<!-- Serwisy -->
+	<bean id="userService" class="gospodarka.elektroniczna.services.user.UserService" p:userDao-ref="userDao"/>
+	
 	<bean id="signatureService" class="gospodarka.elektroniczna.services.signature.SignatureService" 
 		p:signatureDao-ref="signatureDAO"/>
 		
 	<bean id="documentService" class="gospodarka.elektroniczna.services.document.DocumentService"
-		p:documentHeaderService-ref="documentHeaderService"/>
+		p:documentHeaderService-ref="documentHeaderService"
+		p:documentContentSerialization-ref="documentContentSerialization"
+		p:archivalDocumentDao-ref="archivalDocumentDao"
+		p:currentDocumentDao-ref="currentDocumentDao"
+		p:departmentDao-ref="departmentDao"
+		p:documentHeaderDao-ref="documentHeaderDao"/>
 		
 	<bean id="documentHeaderService" class="gospodarka.elektroniczna.services.document.DocumentHeaderService"
 		p:documentHeaderDao-ref="documentHeaderDao"
 		p:documentTypeDao-ref="documentTypeDao"
 		p:signatureService-ref="signatureService"/>
 		
-	<bean id="userService" class="gospodarka.elektroniczna.services.user.UserService" p:userDao-ref="userDao"/>
-		
+	<bean id="documentContentSerialization" 
+		class="gospodarka.elektroniczna.services.document.content.DocumentContentSerialization" />
+					
 	<!-- DAO -->
 	<bean id="signatureDAO" class="gospodarka.elektroniczna.dao.signature.SignatureDao" 
 		p:sessionFactory-ref="hibernateSessionFactory"/>
@@ -77,6 +85,15 @@
 		
 	<bean id="documentTypeDao" class="gospodarka.elektroniczna.dao.documenttype.DocumentTypeDao"
 		p:sessionFactory-ref="hibernateSessionFactory"/>
+		
+	<bean id="archivalDocumentDao" class="gospodarka.elektroniczna.dao.content.ArchivalContentDao"
+		p:sessionFactory-ref="hibernateSessionFactory" />
+	
+	<bean id="currentDocumentDao" class="gospodarka.elektroniczna.dao.content.CurrentContentDao"
+		p:sessionFactory-ref="hibernateSessionFactory" />	
+		
+	<bean id="departmentDao" class="gospodarka.elektroniczna.dao.department.DepartmentDao"
+		p:sessionFactory-ref="hibernateSessionFactory" />
 		
 	<!-- Wstrzykiwanie loggerów -->
 	<bean class="gospodarka.elektroniczna.annotations.LoggerPostProcessor">

@@ -39,4 +39,30 @@ public class StringUtilTest {
                     $("         d ", false)
                  );
     }
+
+    @Test
+    @Parameters
+    public void testRemoveWhitespaces(String number, String expected) throws Exception {
+        String result = StringUtil.removeWhitespaces(number);
+        
+        assertEquals(expected, result);
+    }
+    
+    public Object[] parametersForTestRemoveWhitespaces() {
+        return $(
+                    $("12 3456", "123456"),
+                    $("123 4567", "1234567"),
+                    $("1234 5678", "12345678"),
+                    $("123", "123"),
+                    $("1 2345", "12345"),
+                    $("05 7712 5419 9761 6253 1932 2422", "05771254199761625319322422"),
+                    $(" 0123 ", "0123"),
+                    $(" 0\t12\t\t0123 ", "0120123"),
+                    $("\t\t0123\t\t", "0123"),
+                    $(null, ""),
+                    $("", ""),
+                    $("\t", ""),
+                    $(" \t\t ", "")
+                );
+    }
 }

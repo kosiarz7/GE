@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Kadry/Finanse"/>
+	<ui:define name="pageContent">
+	<h1>Rozliczenie podróży służbowej</h1>
+		<h:form>
+			<p>
+				<p:message for="name" />
+			</p>
+			<p>
+				<p:message for="startDate" />
+			</p>
+			<p>
+				<p:message for="endDate" />
+			</p>
+			<p>
+				<p:message for="country" />
+			</p>
+			<p>
+				<p:message for="city" />
+			</p>
+			<p>
+				<p:message for="amount" />
+			</p>
+			<p>
+				Nazwa wyjazdu (nazwa klienta/nazwa wydarzenia):
+				<p:inputText id="name" value="#{businessTravelClearingVar.name}"
+					label="'Nazwa wyjazdu (nazwa klienta/nazwa wydarzenia)'" required="true"/>
+			</p>
+			<p>
+				Data wyjazdu
+				<p:calendar id="startDate" value="#{businessTravelClearingVar.startDate}"
+					showOn="button" pattern="dd-MM-yyyy" label="'Data powrotu'"
+					placeholder="dd-mm-yyyy" required="true" />
+			</p>
+			<p>
+				Data powrotu:
+				<p:calendar id="endDate" value="#{businessTravelClearingVar.endDate}"
+					showOn="button" pattern="dd-MM-yyyy" label="'Data powrotu'"
+					placeholder="dd-mm-yyyy" required="true" />
+			</p>
+			<p>
+				Kraj:
+				<p:inputText id="country"
+					value="#{businessTravelClearingVar.country}" label="'Kraj'"  required="true"/>
+			</p>
+			<p>
+				Miasto:
+				<p:inputText id="city" value="#{businessTravelClearingVar.city}"
+					label="'Miasto'" required="true" />
+			</p>
+
+			<p>
+				Koszt wyjazdu:
+				<p:inputText id="amount" value="#{businessTravelClearingVar.amount}"
+					label="'Kwota'" />
+			</p>
+
+			<p:commandButton action="businessTravelClearing" value="Wyślij rozliczenie" ajax="false" />
+			<p:button href="/app/hr" value="Powrót" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+

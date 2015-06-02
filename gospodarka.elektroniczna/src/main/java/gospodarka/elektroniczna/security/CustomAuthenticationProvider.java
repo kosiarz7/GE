@@ -43,7 +43,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
      */
     @Override
     public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
-        UserData user = userService.loadUserByLogin(authentication.getName());
+    	UserData user = userService.loadUserByLogin(authentication.getName());
         checkPassword((String) authentication.getCredentials(), user);
         LOGGER.info(
                 "authenticate|Do systemu zalogował się użytkownik: {} o uprawnieniach: {}",

@@ -1,40 +1,60 @@
+-- ODDZIAĹ�Y
+INSERT INTO DEPARTMENTS (NAME) VALUES
+('BEGIN'), ('HUMAN_RESOURCES'), ('MANUFACTURE'), ('FINANCE'), ('SERVIS'), ('STOREHOUSE'), ('CUSTOMER_SERVICE'), ('END');
+
+
 -- UPRAWNIENIA
 INSERT INTO ROLES(ID, NAME) VALUES
-(1, "HR"), (2, "MANUFACTURE"), (3, "FINANCE"), (4, "SERVIS"), (5, "STOREHOUSE"), (6, "CUSTOMER_SERVICE"), (7, "ROOT");
+(1, 'HR'), (2, 'MANUFACTURE'), (3, 'FINANCE'), (4, 'SERVIS'), (5, 'STOREHOUSE'), (6, 'CUSTOMER_SERVICE'), (7, 'ROOT');
 
 COMMIT;
 
--- UŻYTKOWNICY
--- hasło jest takie same jak login
+-- UĹ»YTKOWNICY
+-- hasĹ‚o jest takie same jak login
 INSERT INTO USERS(ID, NAME, SURNAME, LOGIN, PASSWORD) VALUES
 (1, 'Jan', 'Kowalski', 'kadry', 
 UPPER('d29a78bffdc6f3b5ec8a042e40cf51daef546074944365dac2c5d3fb0f3e82351be8a19acf5278bf496c66e676677a53de5c1efa78fbd0530235fca629ad0073')),
 (2, 'Marian', 'Malinowski', 'produkcja', 
 UPPER('9875112cc0e4164ec4fce37286d99c50af2c6f83f81f9c0c5ce6863c0e7630df72fae2b08e1d75571f7b0abb278a25a8c8e26b02564abecaf94a395035117566')),
-(3, 'Magda', 'Pigułowska', 'finanse', 
+(3, 'Magda', 'PiguĹ‚owska', 'finanse', 
 UPPER('84af1982c3effbefad2db842c92200c57999a840f9acb3f5bbce1701ce042433f1e604368340eb0b0e07729ff6e3b9bdae5f10e880869c90701e169cf0e32218')),
-(4, 'Adrianna', 'Zielińska', 'serwis', 
+(4, 'Adrianna', 'ZieliĹ„ska', 'serwis', 
 UPPER('127580a0e32a932b7a815047e0a2cec8d893190c6e87a575ce9af0d2a8db39ec74bafb41c3f5fda35cb077794baba200c62eff51dc7988dfef661214e77c72fb')),
-(5, 'Mariusz', 'Wyszyński', 'magazyn', 
+(5, 'Mariusz', 'WyszyĹ„ski', 'magazyn', 
 UPPER('ca97c14fde091c45be5a21fe4abe7c235dcd84bfa662e6a20f5f681a2b307bd5d6f7b9da798dcfb01d07989d517a7a6487d93e7e80dc28a1739282cda10006c4')),
 (6, 'Sabina', 'Jutrzenka', 'obsluga', 
 UPPER('2fce4c555ecadcb54952e04ee09e65549e77d5d796f485d6a413dde2e4164821145dcc8ae43d2001c567ba612160105e2bedbeb51a96c5b8bd764b5560273268')),
-(7, 'Maćko', 'z Bogdańca', 'root', 
+(7, 'MaÄ‡ko', 'z BogdaĹ„ca', 'root', 
 UPPER('6f9d2dbd5f05435803378c244aebe0193843105fff77602b8000faa7fb929f0146119a53f3bb8755f9f099e57edd45e3949a985d71368994687814b72702aae3'));
 
 COMMIT;
 
--- UPRAWNIENIA UŻYTKOWNIKÓW
+-- UPRAWNIENIA UĹ»YTKOWNIKĂ“W
 INSERT INTO USER_ROLES(USER_ID, ROLE_ID) VALUES
 (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (7, 1), (7, 2), (7, 3), (7, 4), (7, 5), (7, 6);
 COMMIT;
 
--- ODDZIAŁY
-INSERT INTO DEPARTMENTS (NAME) VALUES
-('BEGIN'), ('HUMAN_RESOURCES'), ('MANUFACTURE'), ('FINANCE'), ('SERVIS'), ('STOREHOUSE'), ('CUSTOMER_SERVICE'), ('END');
 
--- TYPY DOKUMNETÓW
+-- TYPY DOKUMNETĂ“W
+-- Dokument testowy
 INSERT INTO DOCUMENT_TYPES (TYPE_NAME) VALUE ('TEST');
--- reszta typów jest do dopisania
+COMMIT;
+
+-- Reszta dokumentĂłw (do dopisywania)
+INSERT INTO DOCUMENT_TYPES (TYPE_NAME) VALUES
+('BUSINESS_TRAVEL_CLEARING'), 
+('CANDIDATE_REQUEST'), 
+('HOLIDAYS_REQUEST'), 
+('INVOICE_CLEARING'), 
+('NEW_CANDIDATE'),
+('RESIGNATION_EMPLOYEE'), 
+('RESIGNATION_EMPLOYER'), 
+('SICK_LEAVE'), 
+('TRAINING_CLEARING'),
+('INTERNAL_ISSUE'), 
+('INTERNAL_ADOPTION'), 
+('EXTERNAL_ISSUE'), 
+('EXTERNAL_ADOPTION'), 
+('ORDER_CONFIRMATION');
 
 COMMIT;

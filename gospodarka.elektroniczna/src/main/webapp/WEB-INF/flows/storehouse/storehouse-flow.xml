@@ -2,11 +2,89 @@
 <flow xmlns="http://www.springframework.org/schema/webflow"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
-        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+        http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
+
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
-	<secured attributes="ROLE_STOREHOUSE"/>
+	<secured attributes="ROLE_STOREHOUSE"  />
+	
+	
+	<view-state id="start">
+		<transition on="storehouse" to="storehouse" />
+	</view-state>
+	<!-- 
+	  <var name="wwDoc" class="gospodarka.elektroniczna.dto.storehouse.WWDocument" />	
+		<var name="pzDoc" class="gospodarka.elektroniczna.dto.storehouse.PZDocument" />
+        <var name="ppzDoc" class="gospodarka.elektroniczna.dto.storehouse.PPZDocument" />      
+        <var name="pwDoc" class="gospodarka.elektroniczna.dto.storehouse.PWDocument" />
+      
+        <var name="wwVar"
+		class="gospodarka.elektroniczna.controllers.storehouse.WWFlow" />
+		 <var name="pzVar"
+		class="gospodarka.elektroniczna.controllers.storehouse.PZFlow" />        
+         <var name="ppzVar"
+		class="gospodarka.elektroniczna.controllers.storehouse.PPZFlow" />        
+         <var name="pwVar"
+		class="gospodarka.elektroniczna.controllers.storehouse.PWFlow" />
+        
+        
+		<view-state id="start">      
+	
+		     <transition on="gotoPPZ" to="ppzForm"/>
+            <transition on="gotoPZ" to="pzForm"/>
+            <transition on="gotoPW" to="pwForm"/>            
+            <transition on="gotoWW" to="wwForm"/> 
+      
+        </view-state> 
+     
+        
+       
+        
+       <view-state id="wwForm">
+            <transition on="saveWWForm" to="decisionWWForm"/>
+            <transition on="cancel" to="start"/>
+        </view-state>
+        
+  		<view-state id="ppzForm">
+            <transition on="savePPZForm" to="decisionPPZForm"/>
+            <transition on="cancel" to="start"/>
+        </view-state>
+        
+          <view-state id="pzForm">
+            <transition on="savePZForm" to="decisionPZForm"/>
+            <transition on="cancel" to="start"/>
+        </view-state>
+        
+          <view-state id="pwForm">
+            <transition on="savePWForm" to="decisionPWForm"/>
+            <transition on="cancel" to="start"/>
+        </view-state>
 
-	<view-state id="start" />
-
+	
+        <action-state id="decisionWWForm">
+            <evaluate expression="wwVar.submit(wwDoc)"/>
+            <transition on="yes" to="success" />
+        </action-state>        
+        
+        <action-state id="decisionPPZForm">
+            <evaluate expression="ppzVar.submit(ppzDoc)"/>
+            <transition on="yes" to="success" />
+        </action-state>
+        
+        <action-state id="decisionPZForm">
+            <evaluate expression="pzVar.submit(pzDoc)"/>
+            <transition on="yes" to="success" />
+        </action-state>
+        
+        <action-state id="decisionPWForm">
+            <evaluate expression="pwVar.submit(pwDoc)"/>
+            <transition on="yes" to="success" />
+        </action-state>
+        
+         <view-state id="success">
+            <transition on="cancel" to="end"/>
+        </view-state>
+        
+        <end-state id="end"/>
+         -->
 </flow>

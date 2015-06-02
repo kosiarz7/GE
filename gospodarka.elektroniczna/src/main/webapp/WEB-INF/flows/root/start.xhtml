@@ -13,7 +13,79 @@
     <ui:define name="pageContent">
         Zawartość strony.
         <h:form>
-	        <p:commandButton value="Nowy nagłówek" actionListener="#{testBean.createNewTestDocument()}" />
+	        <p:commandButton value="Nowy dokument" actionListener="#{testBean.create()}"/>
+	        
+	        <h:panelGrid columns="2" cellpadding="5" style="display: table; margin: 0 auto;">
+				<p:outputLabel value="Tytuł: " />
+				<p:inputText value="#{data.searchCriteria.title}"/>
+				
+				<p:outputLabel value="Sygnatura: " />
+				<p:inputText value="#{data.searchCriteria.signature}"/>
+				
+				<p:outputLabel value="Oddział: " />
+				<p:selectOneMenu value="#{data.searchCriteria.department}">
+					<f:selectItems value="#{data.departments}" var="item" itemValue="#{item}" itemLabel="#{item}"/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Typ: " />
+				<p:selectOneMenu value="#{data.searchCriteria.type}">
+					<f:selectItems value="#{data.documentTypes}" var="item" itemValue="#{item}" itemLabel="#{item}"/>
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Od: "/>
+				<p:calendar value="#{data.searchCriteria.from}" pattern="MM/dd/yyyy" />
+				
+				<p:outputLabel value="Do: "/>
+				<p:calendar value="#{data.searchCriteria.to}" pattern="MM/dd/yyyy" />
+		    </h:panelGrid>
+		    <p:commandButton value="Szukaj" actionListener="#{testBean.loadDocuemnts(data)}" update="@form"/>
+		    <p:commandButton value="Wyczyść" actionListener="#{testBean.clear(data)}" update="@form"/>
+	        
+	        <p:dataTable var="item" value="#{data.documents}" rows="10"
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+		        <p:column headerText="Sygnatura">
+		            <h:outputText value="#{item.signature}" />
+		        </p:column>
+		 
+		        <p:column headerText="Tytuł">
+		            <h:outputText value="#{item.title}" />
+		        </p:column>
+		        
+		        <p:column headerText="Type">
+		            <h:outputText value="#{item.type}" />
+		        </p:column>
+		        
+		        <p:column headerText="Z">
+		            <h:outputText value="#{item.from}" />
+		        </p:column>
+		        
+		        <p:column headerText="Do">
+		            <h:outputText value="#{item.to}" />
+		        </p:column>
+		        
+		        <p:column headerText="Data">
+		            <h:outputText value="#{item.dateOfRecipte}" />
+		        </p:column>
+		        
+		        <p:column headerText="Załaduj">
+		             <p:commandButton update="@form" value="Ładuj" actionListener="#{testBean.loadDocument(item, data)}" />
+		        </p:column>
+		        
+		        <p:column headerText="Prześlij">
+		             <p:commandButton value="Prześlij" actionListener="#{testBean.send(item)}" />
+		        </p:column>
+		        
+		        <p:column headerText="Zakończ">
+		             <p:commandButton value="Zakończ" actionListener="#{testBean.end(item)}" />
+		        </p:column>
+		    </p:dataTable>
+		    
+		    <h:panelGrid columns="1" cellpadding="5" style="display: table; margin: 0 auto;">
+				<p:outputLabel value="number: #{data.testDocument.number}" />
+			    <p:outputLabel value="data: #{data.testDocument.date}" />		    
+		    </h:panelGrid>
 	    </h:form>
     </ui:define>
 </ui:composition>
