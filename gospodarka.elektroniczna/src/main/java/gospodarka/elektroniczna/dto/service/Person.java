@@ -15,6 +15,10 @@ public class Person implements Serializable{
     
     private static final long serialVersionUID = 1L;
 
+    public Person() {
+    }
+
+    
     
     private String name;
     private String address;

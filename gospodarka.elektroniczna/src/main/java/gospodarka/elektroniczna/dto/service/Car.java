@@ -21,6 +21,9 @@ public class Car implements Serializable{
     private String registrationNumber;
     private String VIN;
 
+    public Car() {
+    }
+    
     /**
      * @return the brand
      */

@@ -22,6 +22,13 @@ public class ServiceBean {
          {
              System.out.println("DAMAGED CAR FORM");
              System.out.println(damagedCarForm.getDate().toString());
+             System.out.println(damagedCarForm.getCar().getBrand());
+             System.out.println(damagedCarForm.getCar().getModel());
+             System.out.println(damagedCarForm.getCar().getRegistrationNumber());
+             //System.out.println(damagedCarForm.getCar().getVIN());
+             System.out.println(damagedCarForm.getClient().getName());
+             System.out.println(damagedCarForm.getWorker().getName());
+             
              return true;
          }
 }

@@ -14,10 +14,14 @@
     <var name="warrantyRepairForm" class="gospodarka.elektroniczna.dto.service.WarrantyRepairForm" />
         
     <view-state id="start">
-        <transition on="goDamagedCarForm" to="damagedCarForm"/>
+        <transition on="goDamagedCarForm" to="damagedCar"/>
+        <transition on="goWarrantyRepairForm" to="warrantyRepair"/>
+        <transition on="goReplacementPartOrderForm" to="replacementPartOrder"/>
+        <transition on="goRepairCostEstimationForm" to="repairCostEstimation"/>
+        <transition on="goCollectCarForm" to="collectCar"/>
     </view-state>
         
-    <view-state id="damagedCarForm">
+    <view-state id="damagedCar">
         <transition on="saveDamagedCarForm" to="saveDamagedCarAction"/>
         <transition on="cancel" to="start"/>
     </view-state>
@@ -26,7 +30,48 @@
         <evaluate expression="serviceBean.saveDamagedCarForm(damagedCarForm)"/>
         <transition on="yes" to="start"/>
     </action-state>
-        
+    
+    <view-state id="warrantyRepair">
+        <transition on="saveWarrantyRepair" to="saveWarrantyRepairAction"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <action-state id="saveWarrantyRepairAction">
+        <evaluate expression="serviceBean.saveDamagedCarForm(damagedCarForm)"/>
+        <transition on="yes" to="start"/>
+    </action-state>
+    
+    <view-state id="replacementPartOrder">
+        <transition on="saveReplacementPartOrder" to="saveReplacementPartOrderAction"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <action-state id="saveReplacementPartOrderAction">
+        <evaluate expression="serviceBean.saveDamagedCarForm(damagedCarForm)"/>
+        <transition on="yes" to="start"/>
+    </action-state>
+    
+    <view-state id="repairCostEstimation">
+        <transition on="saveRepairCostEstimation" to="saveRepairCostEstimationAction"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <action-state id="saveRepairCostEstimationAction">
+        <evaluate expression="serviceBean.saveDamagedCarForm(damagedCarForm)"/>
+        <transition on="yes" to="start"/>
+    </action-state>
+    
+    <view-state id="collectCar">
+        <transition on="saveCollectCar" to="saveCollectCarAction"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <action-state id="saveCollectCarAction">
+        <evaluate expression="serviceBean.saveDamagedCarForm(damagedCarForm)"/>
+        <transition on="yes" to="start"/>
+    </action-state>
+    
+    
     <bean-import resource="flow-beans.xml"/>
 
 </flow>

@@ -12,9 +12,13 @@
         <ui:param name="department" value="Serwis"/>
         <ui:define name="pageContent">
             <h:form>
-                <p:growl id="growl" life="2000" />
-
+                
                 <p:commandButton action="goDamagedCarForm" value="Protokół przyjęcia uszkodzonego samochodu" styleClass="ui-priority-primary" />
+                <p:commandButton action="goWarrantyRepairForm" value="Zlecenie naprawy w ramach gwarancji" styleClass="ui-priority-primary" />
+                <p:commandButton action="goReplacementPartOrderForm" value="Zamówienie części zamiennych" styleClass="ui-priority-primary" />
+                <p:commandButton action="goRepairCostEstimationForm" value="Kosztorys naprawy pogwarancyjnej" styleClass="ui-priority-primary" />
+                <p:commandButton action="goCollectCarForm" value="Protokół odbioru samochodu" styleClass="ui-priority-primary" />
+                
             </h:form>
         </ui:define>
     </ui:composition>

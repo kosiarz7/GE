@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+        <ui:param name="department" value="Serwis"/>
+        <ui:define name="pageContent">
+            <h3>Protokół przyjęcia uszkodzonego samochodu</h3>
+            <p:separator/>
+
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="calendar" value="Data:" />
+                    <p:calendar id="calendar" value="#{replacementPartOrderForm.date}"/>   
+
+                    <h:outputLabel for="deliveryDate" value="Data dostarczenia:" />
+                    <p:calendar id="deliveryDate" value="#{replacementPartOrderForm.deliveryDate}"/>
+
+                    <h:outputLabel for="element" value="Nazwa części:" />
+                    <p:inputText id="element" value="#{replacementPartOrderForm.elementName}"/>
+
+                    <h:outputLabel for="amount" value="Ilość:" />
+                    <p:inputText id="amount" value="#{replacementPartOrderForm.amount}"/>
+
+                    <h:outputLabel for="worker" value="Nazwisko pracownika:" />
+                    <p:inputText id="worker" value="#{replacementPartOrderForm.worker.name}"/>
+                </h:panelGrid>
+                <p:commandButton id="save" action="saveReplacementPartOrderAction" value="Dodaj" update="@form" ajax="false" />
+                <p:commandButton id="cancel" action="cancel" value="Anuluj" ajax="false" immediate="true"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

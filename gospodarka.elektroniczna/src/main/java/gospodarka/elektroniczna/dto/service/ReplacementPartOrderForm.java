@@ -7,6 +7,7 @@ package gospodarka.elektroniczna.dto.service;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.annotation.PostConstruct;
 
 /**
  *
@@ -24,7 +25,10 @@ public class ReplacementPartOrderForm implements Serializable {
 
     public ReplacementPartOrderForm() { }
 
-    
+    @PostConstruct
+    public void init() {
+        this.worker = new Person();
+    }
     
     /**
      * @return the date

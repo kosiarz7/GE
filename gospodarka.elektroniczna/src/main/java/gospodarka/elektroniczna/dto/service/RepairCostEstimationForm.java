@@ -7,6 +7,7 @@ package gospodarka.elektroniczna.dto.service;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.annotation.PostConstruct;
 
 /**
  *
@@ -24,6 +25,13 @@ public class RepairCostEstimationForm implements Serializable{
     private Person worker;
 
     public RepairCostEstimationForm() { }
+    
+    @PostConstruct
+    public void init() {
+        this.car = new Car();
+        this.client = new Person();
+        this.worker = new Person();
+    }
     
     /**
      * @return the date
