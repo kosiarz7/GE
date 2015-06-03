@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+
+	<ui:param name="department" value="Magazyn" />
+	<ui:define name="pageContent">
+		<h3>Potwierdzenie przyjecia zamówienia</h3>
+		<h:form>
+		
+			<div class="form-group">
+			
+				<p:outputLabel for="doDzialu" value="Do działu:" />
+				<p:selectOneListbox id="doDzialu">
+					<!--  value="#{ppzVar.dzialDocelowy}" -->
+					<f:selectItem itemLabel="Produkcja" itemValue="1" />
+					<f:selectItem itemLabel="Serwis" itemValue="2" />
+					<f:selectItem itemLabel="Obsługa klienta" itemValue="3" />
+				</p:selectOneListbox>
+				<p></p>
+			</div>
+			<div class="form-group">
+				<label>Numer zamówienia:	</label>
+				<p:inputText id="orderNumber"
+					value="#{ppzVar.orderNumber}" required="true" minValue="1" />
+				<h:message id="m1" for="orderNumber" style="color:red" /><p></p>
+			</div>
+			<div class="form-group">
+				<label>Przewidujemy datę realizacji na: </label>
+				<p:calendar id="dateEnd" value="#{ppzVar.dateEnd}" showOn="button"
+					pattern="dd-MM-yyyy" label="'Data realizacji'"
+					placeholder="dd-mm-yyyy" required="true" />
+				<h:message id="m2" for="dateEnd" style="color:red" /><p></p>
+			</div>
+
+			<div class="form-group">
+				<label>Status zamówienia: </label>
+				<p:inputText id="state" class="form-control" value="#{ppzVar.state}"
+					required="true" />
+				<h:message id="m3" for="state" style="color:red" /><p></p>
+			</div>
+
+			<div class="form-group">
+				<label>Uzasadnienie: 	</label>
+				<p:inputText id="reason" class="form-control"
+					value="#{ppzVar.reason}" />
+				<p></p>
+			</div>
+
+
+			<p:commandButton id="save" action="ppzGenA" value="Wyślij wniosek"
+				ajax="false" />
+			<p:button href="/app/storehouse" value="Powrót" />
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+
