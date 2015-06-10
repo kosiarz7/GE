@@ -7,13 +7,14 @@
     <!-- Zabezpieczenie flow przez Spring Security -->
     <secured attributes="ROLE_SERVIS"/>
         
-    <var name="collectCarForm" class="gospodarka.elektroniczna.dto.service.CollectCarForm" />
-    <var name="damagedCarForm" class="gospodarka.elektroniczna.dto.service.DamagedCarForm" />
-    <var name="repairCostEstimationForm" class="gospodarka.elektroniczna.dto.service.RepairCostEstimationForm" />
-    <var name="replacementPartOrderForm" class="gospodarka.elektroniczna.dto.service.ReplacementPartOrderForm" />
-    <var name="warrantyRepairForm" class="gospodarka.elektroniczna.dto.service.WarrantyRepairForm" />
+    <var name="collectCarForm" class="gospodarka.elektroniczna.documents.service.CollectCarForm" />
+    <var name="damagedCarForm" class="gospodarka.elektroniczna.documents.service.DamagedCarForm" />
+    <var name="repairCostEstimationForm" class="gospodarka.elektroniczna.documents.service.RepairCostEstimationForm" />
+    <var name="replacementPartOrderForm" class="gospodarka.elektroniczna.documents.service.ReplacementPartOrderForm" />
+    <var name="warrantyRepairForm" class="gospodarka.elektroniczna.documents.service.WarrantyRepairForm" />
         
     <view-state id="start">
+        <transition on="goReceiveDocuments" to="receiveDocuments"/>
         <transition on="goDamagedCarForm" to="damagedCar"/>
         <transition on="goWarrantyRepairForm" to="warrantyRepair"/>
         <transition on="goReplacementPartOrderForm" to="replacementPartOrder"/>
@@ -21,13 +22,38 @@
         <transition on="goCollectCarForm" to="collectCar"/>
     </view-state>
         
+    <view-state id="receiveDocuments">
+        <on-entry>
+            <evaluate expression="serviceFlow.getDocumentStubs()"
+                          result="flowScope.documentStubs">
+            </evaluate>         
+        </on-entry> 
+        <transition on="goReceiveDocuments" to="receiveDocuments"/>
+        <transition on="goLoadDamagedCarForm" to="loadDamagedCarForm"/>
+        <transition on="goLoadWarrantyRepairForm" to="loadWarrantyRepairForm"/>
+        <transition on="goLoadCollectCarForm" to="loadCollectCarForm"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <view-state id="loadCollectCarForm">
+        <transition on="cancel" to="receiveDocuments"/>
+    </view-state>
+    
+    <view-state id="loadDamagedCarForm">
+        <transition on="cancel" to="receiveDocuments"/>
+    </view-state>
+    
+    <view-state id="loadWarrantyRepairForm">
+        <transition on="cancel" to="receiveDocuments"/>
+    </view-state>
+    
     <view-state id="damagedCar">
-        <transition on="saveDamagedCarForm" to="saveDamagedCarAction"/>
+        <transition on="saveDamagedCar" to="saveDamagedCarAction"/>
         <transition on="cancel" to="start"/>
     </view-state>
     
     <action-state id="saveDamagedCarAction">
-        <evaluate expression="serviceBean.saveDamagedCarForm(damagedCarForm)"/>
+        <evaluate expression="damagedCarFlow.sendDocument(damagedCarForm)"/>
         <transition on="yes" to="start"/>
     </action-state>
     
@@ -37,7 +63,7 @@
     </view-state>
     
     <action-state id="saveWarrantyRepairAction">
-        <evaluate expression="serviceBean.saveDamagedCarForm(damagedCarForm)"/>
+        <evaluate expression="warrantyRepairFlow.sendDocument(warrantyRepairForm)"/>
         <transition on="yes" to="start"/>
     </action-state>
     
@@ -47,7 +73,7 @@
     </view-state>
     
     <action-state id="saveReplacementPartOrderAction">
-        <evaluate expression="serviceBean.saveDamagedCarForm(damagedCarForm)"/>
+        <evaluate expression="replacementPartOrderFlow.sendDocument(replacementPartOrderForm)"/>
         <transition on="yes" to="start"/>
     </action-state>
     
@@ -57,7 +83,7 @@
     </view-state>
     
     <action-state id="saveRepairCostEstimationAction">
-        <evaluate expression="serviceBean.saveDamagedCarForm(damagedCarForm)"/>
+        <evaluate expression="repairCostEstimationFlow.sendDocument(repairCostEstimationForm)"/>
         <transition on="yes" to="start"/>
     </action-state>
     
@@ -67,7 +93,7 @@
     </view-state>
     
     <action-state id="saveCollectCarAction">
-        <evaluate expression="serviceBean.saveDamagedCarForm(damagedCarForm)"/>
+        <evaluate expression="collectCarFlow.sendDocument(collectCarForm)"/>
         <transition on="yes" to="start"/>
     </action-state>
     

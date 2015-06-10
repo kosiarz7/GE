@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gospodarka.elektroniczna.dto.service;
+package gospodarka.elektroniczna.documents.service;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,23 +13,25 @@ import javax.annotation.PostConstruct;
  *
  * @author Piotrek
  */
-public class CollectCarForm implements Serializable{
+public class DamagedCarForm implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     private Date date;
     private Car car;
-    private String carCondition;
-    private Person worker;
     private Person client;
+    private Person worker;
+    private boolean testRide;
+    
+    public DamagedCarForm() { }
 
-    public CollectCarForm() { }
     
     @PostConstruct
     public void init() {
-        this.car = new Car();
         this.client = new Person();
         this.worker = new Person();
+        this.car = new Car();
+        
     }
     
     /**
@@ -61,17 +63,17 @@ public class CollectCarForm implements Serializable{
     }
 
     /**
-     * @return the carCondition
+     * @return the client
      */
-    public String getCarCondition() {
-        return carCondition;
+    public Person getClient() {
+        return client;
     }
 
     /**
-     * @param carCondition the carCondition to set
+     * @param client the client to set
      */
-    public void setCarCondition(String carCondition) {
-        this.carCondition = carCondition;
+    public void setClient(Person client) {
+        this.client = client;
     }
 
     /**
@@ -89,17 +91,16 @@ public class CollectCarForm implements Serializable{
     }
 
     /**
-     * @return the client
+     * @return the testRide
      */
-    public Person getClient() {
-        return client;
+    public boolean isTestRide() {
+        return testRide;
     }
 
     /**
-     * @param client the client to set
+     * @param testRide the testRide to set
      */
-    public void setClient(Person client) {
-        this.client = client;
+    public void setTestRide(boolean testRide) {
+        this.testRide = testRide;
     }
-    
 }

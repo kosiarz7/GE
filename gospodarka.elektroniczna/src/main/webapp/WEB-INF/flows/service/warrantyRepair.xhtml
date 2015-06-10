@@ -11,7 +11,7 @@
     <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
         <ui:param name="department" value="Serwis"/>
         <ui:define name="pageContent">
-            <h3>Protokół przyjęcia uszkodzonego samochodu</h3>
+            <h3>Zlecenie naprawy pogwarancyjnej</h3>
             <p:separator/>
 
             <h:form>
@@ -37,10 +37,13 @@
                     <h:outputLabel for="worker" value="Nazwisko pracownika:" />
                     <p:inputText id="worker" value="#{warrantyRepairForm.worker.name}"/>
                     
+                    <h:outputLabel for="realisationDate" value="Przybliżony czas realizacji:" />
+                    <p:calendar id="realisationDate" value="#{warrantyRepairForm.realisationDate}"/>   
+                    
                     <h:outputLabel for="damagedPart" value="Zepsute części:" />
                     <p:inputText id="damagedPart" value="#{warrantyRepairForm.damagedPart}"/>
                 </h:panelGrid>
-                <p:commandButton id="save" action="saveWarrantyRepairAction" value="Dodaj" update="@form" ajax="false" />
+                <p:commandButton id="save" action="saveWarrantyRepair" value="Dodaj" update="@form" ajax="false" />
                 <p:commandButton id="cancel" action="cancel" value="Anuluj" ajax="false" immediate="true"/>
             </h:form>
         </ui:define>

@@ -40,7 +40,7 @@
                     <h:outputLabel for="worker" value="Nazwisko pracownika:" />
                     <p:inputText id="worker" value="#{damagedCarForm.worker.name}"/>
                 </h:panelGrid>
-                <p:commandButton id="save" action="saveDamagedCarForm" value="Dodaj" update="@form" ajax="false" />
+                <p:commandButton id="save" action="saveDamagedCar" value="Dodaj" update="@form" ajax="false" />
                 <p:commandButton id="cancel" action="cancel" value="Anuluj" ajax="false" immediate="true"/>
             </h:form>
         </ui:define>

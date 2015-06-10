@@ -27,6 +27,10 @@ import gospodarka.elektroniczna.dto.CurrentDocumentDto;
 import gospodarka.elektroniczna.dto.DepartmentDto;
 import gospodarka.elektroniczna.dto.DocumentHeaderDto;
 import gospodarka.elektroniczna.dto.LightCurrentDocumentDto;
+import gospodarka.elektroniczna.documents.service.CollectCarForm;
+import gospodarka.elektroniczna.documents.service.DamagedCarForm;
+import gospodarka.elektroniczna.documents.service.RepairCostEstimationForm;
+import gospodarka.elektroniczna.documents.service.ReplacementPartOrderForm;
 import gospodarka.elektroniczna.services.document.content.DocumentContentFactory;
 import gospodarka.elektroniczna.services.document.content.IDocumentContentSerialization;
 import gospodarka.elektroniczna.services.signature.WrongNumberOfLastSignatureException;
@@ -85,9 +89,11 @@ public class DocumentService implements IDocumentService, Serializable {
         map.put(DocumentTypes.INTERNAL_ADOPTION, PWDocument_A.class);
         map.put(DocumentTypes.EXTERNAL_ADOPTION, PZDocument_A.class);
         map.put(DocumentTypes.ORDER_CONFIRMATION, PPZDocument_A.class);
-        
-       
-        
+        map.put(DocumentTypes.COLLECT_CAR, CollectCarForm.class);
+        map.put(DocumentTypes.DAMAGED_CAR, DamagedCarForm.class);
+        map.put(DocumentTypes.REPAIR_COST_ESTIMATION, RepairCostEstimationForm.class);
+        map.put(DocumentTypes.REPLACEMENT_PART_ORDER, ReplacementPartOrderForm.class);
+        map.put(DocumentTypes.WARRANTY_REPAIR, ReplacementPartOrderForm.class);
         
         // TODO przy kolejnych dokumentach trzeba dołożyć.
     }

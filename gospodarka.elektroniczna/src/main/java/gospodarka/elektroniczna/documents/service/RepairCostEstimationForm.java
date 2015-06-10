@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gospodarka.elektroniczna.dto.service;
+package gospodarka.elektroniczna.documents.service;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -78,14 +78,14 @@ public class RepairCostEstimationForm implements Serializable{
     /**
      * @return the price
      */
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
     /**
      * @param price the price to set
      */
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
