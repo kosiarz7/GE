@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="serviceBean" class="gospodarka.elektroniczna.flows.service.ServiceBean"/>
+        
+        <bean id="serviceFlow" class="gospodarka.elektroniczna.flows.service.ServiceFlow"
+            p:documentService-ref="documentService"/>
+        
+        <bean id="collectCarFlow" class="gospodarka.elektroniczna.flows.service.CollectCarFlow"
+            p:documentService-ref="documentService"/>
+        
+        <bean id="damagedCarFlow" class="gospodarka.elektroniczna.flows.service.DamagedCarFlow"
+            p:documentService-ref="documentService"/>
+        
+        <bean id="repairCostEstimationFlow" class="gospodarka.elektroniczna.flows.service.RepairCostEstimationFlow"
+            p:documentService-ref="documentService"/>
+        
+        <bean id="replacementPartOrderFlow" class="gospodarka.elektroniczna.flows.service.ReplacementPartOrderFlow"
+            p:documentService-ref="documentService"/>
+        
+        <bean id="warrantyRepairFlow" class="gospodarka.elektroniczna.flows.service.WarrantyRepairFlow"
+            p:documentService-ref="documentService"/>
+</beans>

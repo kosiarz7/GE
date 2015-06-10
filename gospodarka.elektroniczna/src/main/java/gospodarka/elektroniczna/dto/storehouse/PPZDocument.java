@@ -1,20 +1,19 @@
 package gospodarka.elektroniczna.dto.storehouse;
 
-
-
 import java.io.Serializable;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
-public class PPZDocument implements Serializable {
+public class PPZDocument extends AbstractStoreHouseUser  implements Serializable {
 	
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 9213708960529183737L;
+	private static final long serialVersionUID = 1L;
 
+	
     /**
      * Nr zamowienia
      */

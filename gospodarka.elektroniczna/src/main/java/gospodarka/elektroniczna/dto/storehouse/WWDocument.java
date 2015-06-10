@@ -3,16 +3,19 @@ package gospodarka.elektroniczna.dto.storehouse;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
 
-public class WWDocument implements Serializable {
+public class WWDocument  extends AbstractStoreHouseUser  implements Serializable {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 5931639035642495299L;
+	private static final long serialVersionUID = 1L;
 
 
     /**
@@ -22,6 +25,7 @@ public class WWDocument implements Serializable {
 	/**
      * ilosc
      */
+    @Min((long) 0.01)
     private int amount;
     /**
      * kod towaru
@@ -30,19 +34,12 @@ public class WWDocument implements Serializable {
     /**
      * nazwa towaru
      */
-    private int itemName;
+    private String itemName;
     /**
      * cena za sztuke
      */
-    private String pricePerItem;
+    private float pricePerItem;
     
- 
-    
-    /**
-     * Konstruktor.
-     */
-  public WWDocument() {
-    }
  
     
     /**
@@ -75,24 +72,29 @@ public class WWDocument implements Serializable {
 	}
 
 
-	public int getItemName() {
+
+	public String getItemName() {
 		return itemName;
 	}
 
 
-	public void setItemName(int itemName) {
-		this.itemName = itemName;
-	}
 
-
-	public String getPricePerItem() {
+	public float getPricePerItem() {
 		return pricePerItem;
 	}
 
 
-	public void setPricePerItem(String pricePerItem) {
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+
+
+	public void setPricePerItem(float pricePerItem) {
 		this.pricePerItem = pricePerItem;
 	}
+
 
 
 	public Date getReleaseDate() {

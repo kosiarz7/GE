@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="pwGenView"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<!-- Zabezpieczenie flow przez Spring Security -->
+<secured
+		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT"
+		match="any" />
+
+	<var name="pwVar" class="gospodarka.elektroniczna.dto.storehouse.PWDocument" />
+
+	<view-state id="pwGenView">
+		<transition on="pwGenA" to="pwGen" />
+	</view-state>
+
+	<action-state id="pwGen">
+		<evaluate expression="controllerVar.submitPW(springSecurityContextUtilBean.getUser(), pwVar)"
+			result="flowScope.status" />
+		<transition to="pwGenEnd" />
+	</action-state>
+
+	<end-state id="pwGenEnd" view="pwGenEnd.xhtml" />
+	<bean-import resource="flow-beans.xml" />
+</flow>

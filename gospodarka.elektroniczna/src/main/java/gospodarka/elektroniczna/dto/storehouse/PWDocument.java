@@ -6,12 +6,12 @@ import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
-public class PWDocument implements Serializable {
+public class PWDocument extends AbstractStoreHouseUser  implements Serializable {
 	
 	/**
-	 * 
+	 * Kasia
 	 */
-	private static final long serialVersionUID = -3196790204411637635L;
+	private static final long serialVersionUID = 1L;
 	
     /**
      * Data przyjecia towarow
@@ -28,11 +28,11 @@ public class PWDocument implements Serializable {
     /**
      * nazwa towaru
      */
-    private int itemName;
+    private String itemName;
     /**
      * cena za sztuke
      */
-    private String pricePerItem;
+    private float pricePerItem;
     
    
     
@@ -51,15 +51,9 @@ public class PWDocument implements Serializable {
         return ToStringBuilder.reflectionToString(this);
     }
 
-    // GETTERY I SETTERY
-  
+
 	public Date getReceivedDate() {
 		return receivedDate;
-	}
-
-
-	public void setReceivedDate(Date receivedDate) {
-		this.receivedDate = receivedDate;
 	}
 
 
@@ -68,13 +62,28 @@ public class PWDocument implements Serializable {
 	}
 
 
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public String getItemCode() {
+		return itemCode;
 	}
 
 
-	public String getItemCode() {
-		return itemCode;
+	public String getItemName() {
+		return itemName;
+	}
+
+
+	public float getPricePerItem() {
+		return pricePerItem;
+	}
+
+
+	public void setReceivedDate(Date receivedDate) {
+		this.receivedDate = receivedDate;
+	}
+
+
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
 
 
@@ -83,24 +92,14 @@ public class PWDocument implements Serializable {
 	}
 
 
-	public int getItemName() {
-		return itemName;
-	}
-
-
-	public void setItemName(int itemName) {
+	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
 
 
-	public String getPricePerItem() {
-		return pricePerItem;
-	}
-
-
-	public void setPricePerItem(String pricePerItem) {
+	public void setPricePerItem(float pricePerItem) {
 		this.pricePerItem = pricePerItem;
 	}
 
-
+   
 }

@@ -1,12 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
         
-	<!-- Zabezpieczenie flow przez Spring Security -->
-	<secured attributes="ROLE_SERVIS"/>
-
-	<view-state id="start" />
+    <!-- Zabezpieczenie flow przez Spring Security -->
+    <secured attributes="ROLE_SERVIS"/>
+        
+    <var name="collectCarForm" class="gospodarka.elektroniczna.documents.service.CollectCarForm" />
+    <var name="damagedCarForm" class="gospodarka.elektroniczna.documents.service.DamagedCarForm" />
+    <var name="repairCostEstimationForm" class="gospodarka.elektroniczna.documents.service.RepairCostEstimationForm" />
+    <var name="replacementPartOrderForm" class="gospodarka.elektroniczna.documents.service.ReplacementPartOrderForm" />
+    <var name="warrantyRepairForm" class="gospodarka.elektroniczna.documents.service.WarrantyRepairForm" />
+        
+    <view-state id="start">
+        <transition on="goReceiveDocuments" to="receiveDocuments"/>
+        <transition on="goDamagedCarForm" to="damagedCar"/>
+        <transition on="goWarrantyRepairForm" to="warrantyRepair"/>
+        <transition on="goReplacementPartOrderForm" to="replacementPartOrder"/>
+        <transition on="goRepairCostEstimationForm" to="repairCostEstimation"/>
+        <transition on="goCollectCarForm" to="collectCar"/>
+    </view-state>
+        
+    <view-state id="receiveDocuments">
+        <on-entry>
+            <evaluate expression="serviceFlow.getDocumentStubs()"
+                          result="flowScope.documentStubs">
+            </evaluate>         
+        </on-entry> 
+        <transition on="goReceiveDocuments" to="receiveDocuments"/>
+        <transition on="goLoadDamagedCarForm" to="loadDamagedCarForm"/>
+        <transition on="goLoadWarrantyRepairForm" to="loadWarrantyRepairForm"/>
+        <transition on="goLoadCollectCarForm" to="loadCollectCarForm"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <view-state id="loadCollectCarForm">
+        <transition on="cancel" to="receiveDocuments"/>
+    </view-state>
+    
+    <view-state id="loadDamagedCarForm">
+        <transition on="cancel" to="receiveDocuments"/>
+    </view-state>
+    
+    <view-state id="loadWarrantyRepairForm">
+        <transition on="cancel" to="receiveDocuments"/>
+    </view-state>
+    
+    <view-state id="damagedCar">
+        <transition on="saveDamagedCar" to="saveDamagedCarAction"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <action-state id="saveDamagedCarAction">
+        <evaluate expression="damagedCarFlow.sendDocument(damagedCarForm)"/>
+        <transition on="yes" to="start"/>
+    </action-state>
+    
+    <view-state id="warrantyRepair">
+        <transition on="saveWarrantyRepair" to="saveWarrantyRepairAction"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <action-state id="saveWarrantyRepairAction">
+        <evaluate expression="warrantyRepairFlow.sendDocument(warrantyRepairForm)"/>
+        <transition on="yes" to="start"/>
+    </action-state>
+    
+    <view-state id="replacementPartOrder">
+        <transition on="saveReplacementPartOrder" to="saveReplacementPartOrderAction"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <action-state id="saveReplacementPartOrderAction">
+        <evaluate expression="replacementPartOrderFlow.sendDocument(replacementPartOrderForm)"/>
+        <transition on="yes" to="start"/>
+    </action-state>
+    
+    <view-state id="repairCostEstimation">
+        <transition on="saveRepairCostEstimation" to="saveRepairCostEstimationAction"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <action-state id="saveRepairCostEstimationAction">
+        <evaluate expression="repairCostEstimationFlow.sendDocument(repairCostEstimationForm)"/>
+        <transition on="yes" to="start"/>
+    </action-state>
+    
+    <view-state id="collectCar">
+        <transition on="saveCollectCar" to="saveCollectCarAction"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <action-state id="saveCollectCarAction">
+        <evaluate expression="collectCarFlow.sendDocument(collectCarForm)"/>
+        <transition on="yes" to="start"/>
+    </action-state>
+    
+    
+    <bean-import resource="flow-beans.xml"/>
 
 </flow>

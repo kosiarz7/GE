@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+        <ui:param name="department" value="Serwis"/>
+        <ui:define name="pageContent">
+            <h3>Kosztorys naprawy pogwarancyjnej</h3>
+            <p:separator/>
+
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="calendar" value="Data:" />
+                    <p:calendar id="calendar" value="#{repairCostEstimationForm.date}"/>   
+
+                    <h:outputLabel for="brand" value="Marka:" />
+                    <p:inputText id="brand" value="#{repairCostEstimationForm.car.brand}"/>
+
+                    <h:outputLabel for="model" value="Model:" />
+                    <p:inputText id="model" value="#{repairCostEstimationForm.car.model}"/>
+
+                    <h:outputLabel for="plates" value="Numer rejestracyjny:" />
+                    <p:inputText id="plates" value="#{repairCostEstimationForm.car.registrationNumber}"/>
+                    
+                    <h:outputLabel for="vin" value="Numer VIN:" />
+                    <p:inputText id="vin" value="#{repairCostEstimationForm.car.VIN}"/>
+
+                    <h:outputLabel for="client" value="Nazwisko klienta:" />
+                    <p:inputText id="client"  value="#{repairCostEstimationForm.client.name}"/>
+
+                    <h:outputLabel for="worker" value="Nazwisko pracownika:" />
+                    <p:inputText id="worker" value="#{repairCostEstimationForm.worker.name}"/>
+                    
+                    <h:outputLabel for="price" value="Cena naprawy:" />
+                    <p:inputText id="price" value="#{repairCostEstimationForm.price}"/>
+                </h:panelGrid>
+                <p:commandButton id="save" action="saveRepairCostEstimation" value="Dodaj" update="@form" ajax="false" />
+                <p:commandButton id="cancel" action="cancel" value="Anuluj" ajax="false" immediate="true"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

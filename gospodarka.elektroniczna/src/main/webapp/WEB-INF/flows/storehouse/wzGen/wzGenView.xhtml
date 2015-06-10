@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Magazyn" />
+	<ui:define name="pageContent">
+		<h3>Wydanie zewnetrzne</h3>
+		<h:form>
+
+			<!--  <label>Do działu -> Obsługa klienta</label> -->
+
+			<div class="form-group">
+				<label>Data wydania towaru: </label>
+				<p:calendar id="releaseDate" value="#{wzVar.releaseDate}"
+					showOn="button" pattern="dd-MM-yyyy" label="'Data wydania'"
+					placeholder="dd-mm-yyyy" required="true" />
+				<p:message id="m1" for="releaseDate" style="color:red" />
+				<p></p>
+			</div>
+
+			<div class="form-group">
+				<label>Nazwa: </label>
+				<p:inputText id="itemName" class="form-control"
+					value="#{wzVar.itemName}" required="true" />
+				<p:message id="m2" for="itemName" style="color:red" />
+				<p></p>
+			</div>
+
+			<div class="form-group">
+				<label>Kod: </label>
+				<p:inputText id="itemCode" class="form-control"
+					value="#{wzVar.itemCode}" required="true" />
+				<p:message id="m3" for="itemCode" style="color:red" />
+				<p></p>
+			</div>
+
+			<div class="form-group">
+				<label>Cena: </label>
+				<p:inputText id="pricePerItem" class="form-control"
+					value="#{wzVar.pricePerItem}" required="true" />
+				<p:message id="m4" for="pricePerItem" style="color:red" />
+				<p></p>
+			</div>
+
+			<div class="form-group">
+				<label>Ilość: </label>
+				<p:inputText id="amount" class="form-control"
+					value="#{wzVar.amount}" required="true" />
+				<p:message id="m5" for="amount" style="color:red" />
+				<p></p>
+			</div>
+			<div class="form-group">
+				<label>Nazwisko klienta: </label>
+				<p:inputText id="customer" class="form-control"
+					value="#{wzVar.customer}" required="true" />
+				<p:message id="m6" for="customer" style="color:red" />
+				<p></p>
+			</div>
+
+			<p:commandButton id="save" action="wzGenA" value="Wyślij wniosek"
+				ajax="false" />
+			<p:button href="/app/storehouse" value="Powrót" />
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+
