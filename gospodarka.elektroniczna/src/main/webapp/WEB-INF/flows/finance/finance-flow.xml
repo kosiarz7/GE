@@ -7,6 +7,8 @@
 	<!-- Zabezpieczenie flow przez Spring Security -->
 	<secured attributes="ROLE_FINANCE"/>
 	
-	<view-state id="start" />
+	<view-state id="start">
+		<transition on="invoice" to="invoice" />
+	</view-state>
 
 </flow>
