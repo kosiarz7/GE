@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="timeSheetForm"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<!-- Zabezpieczenie flow przez Spring Security -->
+	<secured attributes="ROLE_MANUFACTURE"/>
+        <var name="timeSheet" class="gospodarka.elektroniczna.dto.manufacture.TimeSheetForm" />
+
+	<view-state id="timeSheetForm">
+		<transition on="saveTimeSheetForm" to="saveTimeSheetForm" />
+	</view-state>
+
+	<action-state id="saveTimeSheetForm">
+		<evaluate expression="controller.submitTimeSheetForm(springSecurityContextUtilBean.getUser(), timeSheet)"
+			result="flowScope.status" />
+		<transition to="timeSheetFormEnd" />
+	</action-state>
+        
+        <view-state id="timeSheetFormEnd">
+		<transition to="end" />
+	</view-state>
+        
+	<end-state  id="end"/>
+        
+        <bean-import resource="flow-beans.xml" />
+</flow>

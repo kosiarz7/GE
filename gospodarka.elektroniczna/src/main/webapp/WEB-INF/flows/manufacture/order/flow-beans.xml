@@ -7,6 +7,6 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	
-	<bean id="controllerVar" class="gospodarka.elektroniczna.controllers.hr.TrainingClearingFlow"
+	<bean id="controller" class="gospodarka.elektroniczna.controllers.manufacture.OrderFlow"
 		p:documentService-ref="documentService"/>
 </beans>

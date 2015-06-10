@@ -11,10 +11,10 @@ and open the template in the editor.
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://java.sun.com/jsp/jstl/core">
- <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+ <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
 	<ui:param name="department" value="Produkcja"/>
             <ui:define name="pageContent">
-
+<link rel='stylesheet' href='webjars/bootstrap/3.3.4/css/bootstrap.min.css'/>
                         <h3>Miesęczne podsumowanie linii produkcyjnej</h3>
  
                         <h:form id="monthlySummaryForm" >
@@ -49,12 +49,12 @@ and open the template in the editor.
 
                             <div class="form-group">
                                 <label for="reportedProblems">Zgłoszone nieprawidłowości</label>
-                                <h:inputText id="reportedProblems" class="form-control" value="#{monthlySummary.reportedProblems}"/>
+                                <h:inputText id="reportedProblems" class="form-control" value="#{monthlySummary.reportedProblems}"/><p></p>
                             </div>
 
                             <div class="form-group">
                                 <label for="numberOfDefectiveElements">Ilość wadliwych elementów</label>
-                                <h:inputText id="numberOfDefectiveElements" class="form-control" value="#{monthlySummary.numberOfDefectiveElements}"/>
+                                <h:inputText id="numberOfDefectiveElements" class="form-control" value="#{monthlySummary.numberOfDefectiveElements}"/><p></p>
                             </div>
 
                             <div class="form-group">

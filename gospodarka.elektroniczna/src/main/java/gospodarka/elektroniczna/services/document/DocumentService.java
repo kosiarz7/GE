@@ -17,6 +17,12 @@ import gospodarka.elektroniczna.documents.hr.ResignationEmployeeDocument;
 import gospodarka.elektroniczna.documents.hr.ResignationEmployerDocument;
 import gospodarka.elektroniczna.documents.hr.SickLeaveDocument;
 import gospodarka.elektroniczna.documents.hr.TrainingClearingDocument;
+import gospodarka.elektroniczna.documents.manufacture.DefectiveElementDocument;
+import gospodarka.elektroniczna.documents.manufacture.IndustrialAccidentDocument;
+import gospodarka.elektroniczna.documents.manufacture.MonthlySummaryOfProductionLineDocument;
+import gospodarka.elektroniczna.documents.manufacture.NewVehicleDocument;
+import gospodarka.elektroniczna.documents.manufacture.OrderDocument;
+import gospodarka.elektroniczna.documents.manufacture.TimeSheetDocument;
 import gospodarka.elektroniczna.dto.ArchivalDocumentDto;
 import gospodarka.elektroniczna.dto.CurrentDocumentDto;
 import gospodarka.elektroniczna.dto.DepartmentDto;
@@ -75,6 +81,12 @@ public class DocumentService implements IDocumentService, Serializable {
         map.put(DocumentTypes.RESIGNATION_EMPLOYER, ResignationEmployerDocument.class);
         map.put(DocumentTypes.SICK_LEAVE, SickLeaveDocument.class);
         map.put(DocumentTypes.TRAINING_CLEARING, TrainingClearingDocument.class);
+        map.put(DocumentTypes.DEFECTIVE_ELEMENT, DefectiveElementDocument.class);
+        map.put(DocumentTypes.INDUSTRIAL_ACCIDENT, IndustrialAccidentDocument.class);
+        map.put(DocumentTypes.MONTHLY_SUMMARY_OF_PRODUCTION_LINE, MonthlySummaryOfProductionLineDocument.class);
+        map.put(DocumentTypes.NEW_VEHICLE , NewVehicleDocument.class);
+        map.put(DocumentTypes.ORDER, OrderDocument.class);
+        map.put(DocumentTypes.TIME_SHEET, TimeSheetDocument.class);
         // TODO przy kolejnych dokumentach trzeba dołożyć.
     }
     

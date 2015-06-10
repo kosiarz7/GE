@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Dariusz
  */
-public class IndustrialAccidentForm implements Serializable{
+public class IndustrialAccidentForm extends AbstractManufactureUser implements Serializable{
     
     private static final long serialVersionUID = 1L;
     

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="monthlySummaryForm"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<!-- Zabezpieczenie flow przez Spring Security -->
+	<secured attributes="ROLE_MANUFACTURE"/>
+        <var name="monthlySummary" class="gospodarka.elektroniczna.dto.manufacture.MonthlySummaryOfProductionLine" />
+
+	<view-state id="monthlySummaryForm">
+		<transition on="saveMonthlySummary" to="saveMonthlySummaryForm" />
+	</view-state>
+
+	<action-state id="saveMonthlySummaryForm">
+		<evaluate expression="controller.submitMonthlySummaryForm(springSecurityContextUtilBean.getUser(), monthlySummary)"
+			result="flowScope.status" />
+		<transition to="monthlySummaryFormEnd" />
+	</action-state>
+        
+        <view-state id="monthlySummaryFormEnd">
+		<transition to="end" />
+	</view-state>
+        
+	<end-state  id="end"/>
+        
+        <bean-import resource="flow-beans.xml" />
+</flow>

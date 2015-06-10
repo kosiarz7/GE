@@ -6,5 +6,5 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="manufactureBean" class="gospodarka.elektroniczna.dao.flows.manufacture.ManufactureBean"/>
+	<bean id="manufactureBean" class="gospodarka.elektroniczna.flows.manufacture.ManufactureBean"/>
 </beans>

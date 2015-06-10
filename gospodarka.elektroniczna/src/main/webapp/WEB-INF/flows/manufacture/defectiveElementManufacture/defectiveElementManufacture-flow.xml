@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="trainingClearingHrView"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="defectiveElementManufactureView"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
-	<secured
-		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT"
-		match="any" />
+	<secured attributes="ROLE_MANUFACTURE"/>
 
 	<on-start>
-		<evaluate expression="controllerVar.getTrainingClearings()"
-			result="flowScope.trainingClearings" />
+		<evaluate expression="controller.getDefectiveElementForms()"
+			result="flowScope.defectiveElements" />
 	</on-start>
 
-	<view-state id="trainingClearingHrView">
-		<transition on="trainingClearingHr" to="trainingClearingHr" />
-	</view-state>
-
-	<bean-import resource="flow-beans.xml" />
+	<view-state id="defectiveElementManufactureView">
+            <transition on="defectiveElementManufacture" to="defectiveElementManufacture"/>
+        </view-state>
+        
+        <bean-import resource="flow-beans.xml" />
 </flow>

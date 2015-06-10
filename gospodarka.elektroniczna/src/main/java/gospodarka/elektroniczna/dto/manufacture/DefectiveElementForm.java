@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Dariusz
  */
-public class DefectiveElementForm implements Serializable{
+public class DefectiveElementForm extends AbstractManufactureUser implements Serializable{
     
     private static final long serialVersionUID = 1L;
     
@@ -22,10 +22,7 @@ public class DefectiveElementForm implements Serializable{
     private int workStationNumber;
     private int elementNumber;
     private String description;
-    
-    public DefectiveElementForm(){   
-    }
-
+   
     public Date getDate() {
         return date;
     }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gospodarka.elektroniczna.dao.flows.manufacture;
+package gospodarka.elektroniczna.flows.manufacture;
 
 /**
  *
@@ -36,6 +36,7 @@ public class ManufactureBean{
      
      public boolean saveMonthlySummary(MonthlySummaryOfProductionLine summary){
           System.out.println("Dodano formularz miesięcznego podsumowania");
+          
           return true;
      }
      

@@ -6,29 +6,34 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="Kadry/Finanse"/>
+  <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
+        <ui:param name="department" value="Produkcja"/>
 	<ui:define name="pageContent">
 		<h1>Rozliczenie szkolenia</h1>
 		<h:form>
 			<table border="1">
 				<tr>
-					<th width="100">Nazwa szkolenia</th>
-					<th width="200">Data początku</th>
-					<th width="200">Data końca</th>
-					<th>kwota</th>
+					<th width="100">Data </th>
+					<th width="200">Osoba zgłaszająca</th>
+					<th width="200">Numer lini produkcyjnej</th>
+					<th>Numer stanowiska</th>
+                                        <th>Numer elementu</th>
+                                        <th>Opis</th>
 				</tr>
-				<c:forEach items="${flowScope.trainingClearings}" var="instance">
+				<c:forEach items="${flowScope.defectiveElements}" var="instance">
 					<tr>
-						<td>${instance.getTrainingName()}</td>
-						<td>${instance.getStartDate()}</td>
-						<td>${instance.getEndDate()}</td>
-						<td>${instance.getAmount()}</td>
+						<td>${instance.getDate()}</td>
+						<td>${instance.getComplainant()}</td>
+						<td>${instance.getProductionLineNumber()}</td>
+						<td>${instance.getWorkStationNumber()}</td>
+                                                <td>${instance.getElementNumber()}</td>
+                                                <td>${instance.getDescription()}</td>
+                                                
 					</tr>
 				</c:forEach>
 			</table>
 			<br />
-			<p:button href="/app/hr" value="Powrót" />
+			<p:button href="/app/manufacture" value="Powrót" />
 		</h:form>
 
 

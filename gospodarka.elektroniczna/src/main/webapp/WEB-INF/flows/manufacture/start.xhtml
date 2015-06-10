@@ -9,14 +9,15 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+    <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
         <ui:param name="department" value="Produkcja"/>
         <ui:define name="pageContent">
 
             <h:head>
 
                 <title>Dział produkcji</title>
-                
+                <!-- Bootstrap -->
+
             </h:head>
             <body>
                 <div role="tabpanel">
@@ -29,32 +30,31 @@
                     <div id="tabContent" class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="documentAll">
                             <ui:include src="/WEB-INF/flows/manufacture/reviewDocuments.xhtml"/>
+                            <p:button href="/app/manufacture/defectiveElementManufacture" class="btn btn-primary" value="Zgłoszenia wadliwych elementów" />
                         </div>  
                         <div role="tabpanel" class="tab-pane" id="myDocument" >
                             <p>Drugi</p>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="addDocument">
                             <br></br>
-                            <h:form>
                                 <p>
-                                    <p:commandButton action="gotoMonthlySummary" class="btn btn-primary"  value="Miesięczne podsumowanie lini produkcyjnej" />
+                                    <p:button href="/app/manufacture/monthlySummary" class="btn btn-primary" value="Miesięczne podsumowanie lini produkcyjnej" />
                                 </p>
                                 <p>
-                                    <p:commandButton action="gotoAccidentForm" class="btn btn-primary"  value="Zgłoszenie wypadku przy pracy" />
+                                    <p:button href="/app/manufacture/defectiveElement" class="btn btn-primary" value="Zgłoszenie wadliwego elementu" />
                                 </p>
                                 <p>
-                                    <p:commandButton action="gotoDefectiveElementForm" class="btn btn-primary"  value="Zgłoszenie wadliwego elementu" />
+                                    <p:button href="/app/manufacture/industrialAccident" class="btn btn-primary" value="Zgłoszenie wypadku przy pracy" />
                                 </p>
                                 <p>
-                                    <p:commandButton action="gotoOrderForm" class="btn btn-primary"  value="Zamówienie części" />
+                                    <p:button href="/app/manufacture/order" class="btn btn-primary" value="Zamówienie części" />
                                 </p>
                                 <p>
-                                    <p:commandButton action="gotoTimeSheetForm" class="btn btn-primary"  value="Karta pracy pracownika" />
+                                    <p:button href="/app/manufacture/timeSheet" class="btn btn-primary" value="Karta pracy pracownika" />
                                 </p>
                                 <p>
-                                    <p:commandButton action="gotoVehicleForm" class="btn btn-primary"  value="Karta nowego pojazdu" />
+                                    <p:button href="/app/manufacture/newVehicle" class="btn btn-primary" value="Karta nowego pojazdu" />
                                 </p>
-                            </h:form>
 
 
                         </div>

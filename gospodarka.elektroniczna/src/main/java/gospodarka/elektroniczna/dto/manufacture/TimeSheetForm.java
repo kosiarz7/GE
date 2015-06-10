@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Dariusz
  */
-public class TimeSheetForm implements Serializable{
+public class TimeSheetForm extends AbstractManufactureUser implements Serializable{
     
     private static final long serialVersionUID = 1L;
     

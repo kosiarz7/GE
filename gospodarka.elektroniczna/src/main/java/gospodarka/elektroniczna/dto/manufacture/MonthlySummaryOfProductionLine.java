@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Dariusz
  */
-public class MonthlySummaryOfProductionLine implements Serializable{
+public class MonthlySummaryOfProductionLine extends AbstractManufactureUser implements Serializable{
     
     private static final long serialVersionUID = 1L;
     
