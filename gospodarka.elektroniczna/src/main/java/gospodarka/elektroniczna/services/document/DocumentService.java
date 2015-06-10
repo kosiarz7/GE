@@ -91,6 +91,11 @@ public class DocumentService implements IDocumentService, Serializable {
         map.put(DocumentTypes.NEW_VEHICLE , NewVehicleDocument.class);
         map.put(DocumentTypes.ORDER, OrderDocument.class);
         map.put(DocumentTypes.TIME_SHEET, TimeSheetDocument.class);
+        map.put(DocumentTypes.COLLECT_CAR, CollectCarForm.class);
+        map.put(DocumentTypes.DAMAGED_CAR, DamagedCarForm.class);
+        map.put(DocumentTypes.REPAIR_COST_ESTIMATION, RepairCostEstimationForm.class);
+        map.put(DocumentTypes.REPLACEMENT_PART_ORDER, ReplacementPartOrderForm.class);
+        map.put(DocumentTypes.WARRANTY_REPAIR, ReplacementPartOrderForm.class);
         // TODO przy kolejnych dokumentach trzeba dołożyć.
     }
     
