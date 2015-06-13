@@ -10,8 +10,16 @@
 
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
 	<ui:param name="department" value="Finanse i płace"/>
-    <ui:define name="pageContent">
-        Zawartość strony.
-    </ui:define>
+	<ui:define name="pageContent">
+		<h:form>
+			<p:button href="/app/finance/invoice" value="Wyślij fakturę" /> <br></br>
+			<p:button href="/app/hr/businessTravelClearing" value="Wyślij rozliczenie podróży służbowej" /> <br></br>
+			<p:button href="/app/hr/trainingClearing" value="Wyślij rozliczenie szkolenia" /> <br></br>
+			<p:button href="/app/hr/invoiceClearing" value="Wyślij rozliczenie faktury" /> <br></br>
+			<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
+				Rozliczenia finansowe i archiwizacja faktur
+			</c:if>
+		</h:form>
+	</ui:define>
 </ui:composition>
 </html>

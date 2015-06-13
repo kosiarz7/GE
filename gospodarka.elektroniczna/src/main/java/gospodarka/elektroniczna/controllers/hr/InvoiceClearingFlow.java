@@ -2,7 +2,10 @@ package gospodarka.elektroniczna.controllers.hr;
 
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
+import gospodarka.elektroniczna.documents.hr.InvoiceClearingDocument;
 import gospodarka.elektroniczna.dto.hr.InvoiceClearing;
+import gospodarka.elektroniczna.services.document.Document;
+import gospodarka.elektroniczna.services.document.DocumentService;
 import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.user.UserData;
 
