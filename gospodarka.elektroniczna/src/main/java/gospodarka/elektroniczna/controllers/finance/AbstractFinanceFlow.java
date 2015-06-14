@@ -1,12 +1,11 @@
-package gospodarka.elektroniczna.controllers.hr;
+package gospodarka.elektroniczna.controllers.finance;
 
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
-import gospodarka.elektroniczna.documents.hr.AbstractHrDocument;
-import gospodarka.elektroniczna.documents.hr.InvoiceClearingDocument;
-import gospodarka.elektroniczna.dto.hr.AbstractHrUser;
+import gospodarka.elektroniczna.documents.finance.AbstractFinanceDocument;
+import gospodarka.elektroniczna.documents.finance.InvoiceDocument;
+import gospodarka.elektroniczna.dto.finance.AbstractFinanceUser;
 import gospodarka.elektroniczna.services.document.Document;
-import gospodarka.elektroniczna.services.document.DocumentService;
 import gospodarka.elektroniczna.services.document.DocumentStub;
 import gospodarka.elektroniczna.services.document.IDocumentService;
 import gospodarka.elektroniczna.services.document.SearchCriteria;
@@ -20,14 +19,14 @@ import java.util.List;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 
-public abstract class AbstractHrFlow<T extends AbstractHrUser> {
+public abstract class AbstractFinanceFlow<T extends AbstractFinanceUser> {
 
     private IDocumentService documentService;
     private String documentTitle;
     private DocumentTypes documentType;
     private Departments targetDepartment;
 
-    public AbstractHrFlow(String documentTitle, DocumentTypes documentType, Departments targetDepartment) {
+    public AbstractFinanceFlow(String documentTitle, DocumentTypes documentType, Departments targetDepartment) {
         this.documentTitle = documentTitle;
         this.documentType = documentType;
         this.targetDepartment = targetDepartment;
@@ -48,7 +47,7 @@ public abstract class AbstractHrFlow<T extends AbstractHrUser> {
     protected boolean submit(UserData userData, Departments targetDepartment, T documentData) {
         try {
             Departments senderDepartment = convertRoleToDepartments(userData);
-            Document<AbstractHrDocument<T>> document = documentService.createDocument(documentType, documentTitle,
+            Document<AbstractFinanceDocument<T>> document = documentService.createDocument(documentType, documentTitle,
                     senderDepartment);
             document.getContent().setData(documentData);
             documentData.setUserName(userData.getName());
@@ -57,14 +56,14 @@ public abstract class AbstractHrFlow<T extends AbstractHrUser> {
             documentService.sendDocument(document, senderDepartment, targetDepartment);
             return true;
         } catch (WrongNumberOfLastSignatureException e) {
-            LoggerFactory.getLogger(BusinessTravelClearingFlow.class).error("błąd", e);
+            LoggerFactory.getLogger(InvoiceDocument.class).error("błąd", e);
             return false;
         }
     }
 
     protected boolean submit(UserData userData, Departments senderDepartment, Departments targetDepartment, T documentData) {
         try {
-            Document<AbstractHrDocument<T>> document = documentService.createDocument(documentType, documentTitle,
+            Document<AbstractFinanceDocument<T>> document = documentService.createDocument(documentType, documentTitle,
                     senderDepartment);
             document.getContent().setData(documentData);
             documentData.setUserName(userData.getName());
@@ -73,7 +72,7 @@ public abstract class AbstractHrFlow<T extends AbstractHrUser> {
             documentService.sendDocument(document, senderDepartment, targetDepartment);
             return true;
         } catch (WrongNumberOfLastSignatureException e) {
-            LoggerFactory.getLogger(BusinessTravelClearingFlow.class).error("błąd", e);
+            LoggerFactory.getLogger(InvoiceDocument.class).error("błąd", e);
             return false;
         }
     }
@@ -83,17 +82,13 @@ public abstract class AbstractHrFlow<T extends AbstractHrUser> {
 
         ArrayList<T> documents = new ArrayList<T>(documentStubs.size());
         for (DocumentStub documentStub : documentStubs) {
-            Document<AbstractHrDocument<T>> document = documentService.loadCurrentDocument(documentStub);
+            Document<AbstractFinanceDocument<T>> document = documentService.loadCurrentDocument(documentStub);
             T documentData = document.getContent().getData();
             documents.add(documentData);
         }
         return documents;
     }
-    
-    public void archiveDocument(final Document<T> document) {
-    	documentService.archiveDocument(document, targetDepartment);
-    }
-    
+
     protected Departments convertRoleToDepartments(UserData userData) {
         Collection<? extends GrantedAuthority> authorities = userData.getAuthorities();
         String roleName = authorities.iterator().next().getAuthority().toUpperCase();

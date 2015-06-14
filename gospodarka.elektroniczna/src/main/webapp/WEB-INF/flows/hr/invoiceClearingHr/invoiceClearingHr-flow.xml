@@ -14,7 +14,13 @@
 	<view-state id="invoiceClearingHrView">
 		<transition on="invoiceClearingHr" to="invoiceClearingHr" />
 	</view-state>
-
+	
+	<!--  
+	<action-state id="invoiceClearingArchive">
+		<evaluate expression="controllerVar.archiveInvoiceClearing(documentVar, Departments.HUMAN_RESOURCES)" />
+		<transition to="invoiceClearingHrView" />
+	</action-state>
+	-->
 	<bean-import resource="flow-beans.xml" />
 
 </flow>
