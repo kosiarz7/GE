@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
-	<secured attributes="ROLE_STOREHOUSE" />
+	<secured attributes="ROLE_MANUFACTURE"/>
 
 	<on-start>
 		<evaluate expression="controllerVar.getWWDocuments()" result="flowScope.wwdocuments" />

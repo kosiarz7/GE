@@ -13,21 +13,24 @@
 		<h:form>
 			<table border="1">
 				<tr>
-					<th width="100">Data </th>
-					<th width="200">Osoba zgłaszająca</th>
-					<th width="200">Numer lini produkcyjnej</th>
-					<th>Numer stanowiska</th>
-                                        <th>Numer elementu</th>
-                                        <th>Opis</th>
+					<th>Data </th>
+					<th>Numer linii produkcyjnej</th>
+					<th>Nazwa modelu</th>
+					<th>Liczba wyprodukowanych elementów</th>
+                                        <th>Zgłoszone problemy</th>
+                                        <th>Ilość uszkodzonych elemntów</th>
+                                        <th>Imię i nazwisko menegera</th>
 				</tr>
-				<c:forEach items="${flowScope.defectiveElements}" var="instance">
+				<c:forEach items="${flowScope.monthlySummaries}" var="instance">
 					<tr>
 						<td>${instance.getDate()}</td>
-						<td>${instance.getComplainant()}</td>
 						<td>${instance.getProductionLineNumber()}</td>
-						<td>${instance.getWorkStationNumber()}</td>
-                                                <td>${instance.getElementNumber()}</td>
-                                                <td>${instance.getDescription()}</td>
+						<td>${instance.getModelName()}</td>
+						<td>${instance.getAmountOfProductedElements()}</td>
+                                                <td>${instance.getReportedProblems()}</td>
+                                                <td>${instance.getNumberOfDefectiveElements()}</td>
+                                                <td>${instance.getProductionLineManager()}</td>
+                                                
                                                 
 					</tr>
 				</c:forEach>

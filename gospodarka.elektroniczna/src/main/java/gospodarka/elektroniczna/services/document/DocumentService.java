@@ -32,6 +32,7 @@ import gospodarka.elektroniczna.documents.service.CollectCarForm;
 import gospodarka.elektroniczna.documents.service.DamagedCarForm;
 import gospodarka.elektroniczna.documents.service.RepairCostEstimationForm;
 import gospodarka.elektroniczna.documents.service.ReplacementPartOrderForm;
+import gospodarka.elektroniczna.dto.manufacture.MonthlySummaryOfProductionLine;
 import gospodarka.elektroniczna.services.document.content.DocumentContentFactory;
 import gospodarka.elektroniczna.services.document.content.IDocumentContentSerialization;
 import gospodarka.elektroniczna.services.signature.WrongNumberOfLastSignatureException;
@@ -87,7 +88,7 @@ public class DocumentService implements IDocumentService, Serializable {
         map.put(DocumentTypes.TRAINING_CLEARING, TrainingClearingDocument.class);
         map.put(DocumentTypes.DEFECTIVE_ELEMENT, DefectiveElementDocument.class);
         map.put(DocumentTypes.INDUSTRIAL_ACCIDENT, IndustrialAccidentDocument.class);
-        map.put(DocumentTypes.MONTHLY_SUMMARY_OF_PRODUCTION_LINE, MonthlySummaryOfProductionLineDocument.class);
+        map.put(DocumentTypes.MONTHLY_SUMMARY_OF_PRODUCTION_LINE, MonthlySummaryOfProductionLine.class);
         map.put(DocumentTypes.NEW_VEHICLE , NewVehicleDocument.class);
         map.put(DocumentTypes.ORDER, OrderDocument.class);
         map.put(DocumentTypes.TIME_SHEET, TimeSheetDocument.class);

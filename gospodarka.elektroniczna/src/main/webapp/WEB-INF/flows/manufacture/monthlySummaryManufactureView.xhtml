@@ -6,38 +6,39 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-  <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
+    <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
         <ui:param name="department" value="Produkcja"/>
-	<ui:define name="pageContent">
-		<h1>Rozliczenie szkolenia</h1>
-		<h:form>
-			<table border="1">
-				<tr>
-					<th width="100">Data </th>
-					<th width="200">Osoba zgłaszająca</th>
-					<th width="200">Numer lini produkcyjnej</th>
-					<th>Numer stanowiska</th>
-                                        <th>Numer elementu</th>
-                                        <th>Opis</th>
-				</tr>
-				<c:forEach items="${flowScope.defectiveElements}" var="instance">
-					<tr>
-						<td>${instance.getDate()}</td>
-						<td>${instance.getComplainant()}</td>
-						<td>${instance.getProductionLineNumber()}</td>
-						<td>${instance.getWorkStationNumber()}</td>
-                                                <td>${instance.getElementNumber()}</td>
-                                                <td>${instance.getDescription()}</td>
-                                                
-					</tr>
-				</c:forEach>
-			</table>
-			<br />
-			<p:button href="/app/manufacture" value="Powrót" />
-		</h:form>
+        <ui:define name="pageContent">
+            <h1>Rozliczenie szkolenia</h1>
+            <h:form>
+                <table border="1">
+                    <tr>
+                        <th>Data </th>
+                        <th>Numer linii produkcyjnej</th>
+                        <th>Nazwa modelu</th>
+                        <th>Liczba wyprodukowanych elementów</th>
+                        <th>Zgłoszone problemy</th>
+                        <th>Ilość uszkodzonych elemntów</th>
+                        <th>Imię i nazwisko menegera</th>
+                    </tr>
+                    <tr>
+                        <td>${serviceFlow.monthlySummary.data.date}</td>
+                        <td>${serviceFlow.monthlySummary.data.productionLineNumber}</td>
+                        <td>${serviceFlow.monthlySummary.data.modelName}</td>
+                        <td>${serviceFlow.monthlySummary.data.amountOfProductedElements}</td>
+                        <td>${serviceFlow.monthlySummary.data.reportedProblems}</td>
+                        <td>${serviceFlow.monthlySummary.data.numberOfDefectiveElements}</td>
+                        <td>${serviceFlow.monthlySummary.data.productionLineManager}</td>
 
 
-	</ui:define>
-</ui:composition>
+                    </tr>
+                </table>
+                <br />
+                <p:button href="/app/manufacture" value="Powrót" />
+            </h:form>
+
+
+        </ui:define>
+    </ui:composition>
 </html>
 

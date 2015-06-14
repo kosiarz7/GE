@@ -14,6 +14,7 @@ and open the template in the editor.
     <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
         <ui:param name="department" value="Produkcja"/>
         <ui:define name="pageContent">
+            <link rel='stylesheet' href='../webjars/bootstrap/3.3.4/css/bootstrap.min.css'/>
             <h3>Zamówienie części</h3>
             <h:form id="orderForm" >
 
@@ -52,7 +53,7 @@ and open the template in the editor.
                 </div>
 
                 <p:commandButton  id="save" action="saveOrderForm"  class="btn btn-primary"  value="Dodaj" update="@form" />
-                <p:commandButton id="cancel" action="cancel" class="btn btn-primary"  value="Anuluj" ajax="false" immediate="true"/>
+                <p:button href="/app/manufacture" class="btn btn-primary" value="Anuluj" />
             </h:form>
         </ui:define>
     </ui:composition>
