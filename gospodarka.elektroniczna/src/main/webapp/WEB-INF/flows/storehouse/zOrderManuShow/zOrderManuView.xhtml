@@ -9,29 +9,26 @@
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
 	<ui:param name="department" value="Magazyn"/>
 	<ui:define name="pageContent">
-		<h1>Przyjęcia wewnętrzne</h1>
+		<h1>Produkcja - zamowienia</h1>
 		<h:form>
 			<table border="1">
-				<tr>
-					<th width="100">Imię i nazwisko</th>
-					<th width="50">Dział </th>
-					<th width="50">Data przyjecia</th>
-					<th width="50">Nazwa </th>
-					<th width="20">Sztuk</th>
-					<th width="100">Kod</th>
-					<th width="50">Cena/Szt.</th>
-				
+				<tr>     
+					<th width="100">data</th>
+					<th width="100">Data realizacji</th>
+					<th width="50">Osoba składająca zmówienie </th>
+					<th width="100">Nazwa elementu</th>
+					<th width="200">Sztuk:</th>
+
 				</tr>
-			  	<c:forEach items="${flowScope.pwdocuments}" var="instance">
+			  	<c:forEach items="${flowScope.manuDocuments}" var="instance">
 					<tr>
-						<td>${instance.getUserNameAndSurname()}</td>											
-						<td>${instance.getDepartment()}</td>
-						<td>${instance.getReceivedDate()}</td>
-						<td>${instance.getItemName()}</td>
+						<td>${instance.geDate()}</td>
+						<td>${instance.getDeliveryDate()}</td>
+						<td>${instance.getPersonPlacingAnOrder()}</td>
+						<td>${instance.getElementName()}</td>
 						<td>${instance.getAmount()}</td>
-						<td>${instance.getItemCode()}</td>
-						<td>${instance.getPricePerItem()}</td>
- 
+
+
 					</tr>
 				</c:forEach>
 			</table>

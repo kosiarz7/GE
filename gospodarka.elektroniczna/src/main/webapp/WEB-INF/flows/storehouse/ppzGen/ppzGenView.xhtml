@@ -13,18 +13,7 @@
 	<ui:define name="pageContent">
 		<h3>Potwierdzenie przyjecia zamówienia</h3>
 		<h:form>
-		
-			<div class="form-group">
-			
-				<p:outputLabel for="doDzialu" value="Do działu:" />
-				<p:selectOneListbox id="doDzialu">
-					<!--  value="#{ppzVar.dzialDocelowy}" -->
-					<f:selectItem itemLabel="Produkcja" itemValue="1" />
-					<f:selectItem itemLabel="Serwis" itemValue="2" />
-					<f:selectItem itemLabel="Obsługa klienta" itemValue="3" />
-				</p:selectOneListbox>
-				<p></p>
-			</div>
+
 			<div class="form-group">
 				<label>Numer zamówienia:	</label>
 				<p:inputText id="orderNumber"
@@ -54,10 +43,12 @@
 			</div>
 
 
-			<p:commandButton id="save" action="ppzGenA" value="Wyślij wniosek"
+				<p:commandButton id="saveService" action="ppzGenService" value="Wyślij wniosek do serwisu"
 				ajax="false" />
+				<p:commandButton id="saveManu" action="ppzGenManu" value="Wyślij wniosek do produkcji"
+				ajax="false" />
+				
 			<p:button href="/app/storehouse" value="Powrót" />
-
 
 		</h:form>
 	</ui:define>
