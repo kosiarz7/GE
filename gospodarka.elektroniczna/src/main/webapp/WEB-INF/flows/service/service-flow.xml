@@ -32,6 +32,8 @@
         <transition on="goLoadDamagedCarForm" to="loadDamagedCarForm"/>
         <transition on="goLoadWarrantyRepairForm" to="loadWarrantyRepairForm"/>
         <transition on="goLoadCollectCarForm" to="loadCollectCarForm"/>
+        <transition on="goLoadDefectiveElementForm" to="loadDefectiveElementForm"/>
+        <transition on="goLoadError" to="loadError"/>
         <transition on="cancel" to="start"/>
     </view-state>
     
@@ -44,6 +46,14 @@
     </view-state>
     
     <view-state id="loadWarrantyRepairForm">
+        <transition on="cancel" to="receiveDocuments"/>
+    </view-state>
+    
+    <view-state id="loadDefectiveElementForm">
+        <transition on="cancel" to="receiveDocuments"/>
+    </view-state>
+    
+    <view-state id="loadError">
         <transition on="cancel" to="receiveDocuments"/>
     </view-state>
     

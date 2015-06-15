@@ -6,8 +6,11 @@
 package gospodarka.elektroniczna.flows.service;
 
 import gospodarka.elektroniczna.dao.department.Departments;
+import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
+import gospodarka.elektroniczna.documents.manufacture.DefectiveElementDocument;
 import gospodarka.elektroniczna.documents.service.CollectCarForm;
 import gospodarka.elektroniczna.documents.service.DamagedCarForm;
+import gospodarka.elektroniczna.documents.service.ReplacementPartOrderForm;
 import gospodarka.elektroniczna.documents.service.WarrantyRepairForm;
 import gospodarka.elektroniczna.services.document.Document;
 import gospodarka.elektroniczna.services.document.DocumentStub;
@@ -28,6 +31,7 @@ public class ServiceFlow implements Serializable {
     private DamagedCarForm damagedCarForm;
     private WarrantyRepairForm warrantyRepairForm;
     private CollectCarForm collectCarForm;
+    private DefectiveElementDocument defectiveElementForm;
     
     public List<DocumentStub> getDocumentStubs()
     {
@@ -46,10 +50,10 @@ public class ServiceFlow implements Serializable {
     {
         switch(documentStub.getType())
         {
-            case DAMAGED_CAR:
-                Document<DamagedCarForm> damagedDocument = documentService.loadCurrentDocument(documentStub);
-                setDamagedCarForm(damagedDocument.getContent());
-                return "goLoadDamagedCarForm";
+//            case DAMAGED_CAR:
+//                Document<DamagedCarForm> damagedDocument = documentService.loadCurrentDocument(documentStub);
+//                setDamagedCarForm(damagedDocument.getContent());
+//                return "goLoadDamagedCarForm";
             case WARRANTY_REPAIR:
                 Document<WarrantyRepairForm> warrantyDocument = documentService.loadCurrentDocument(documentStub);
                 setWarrantyRepairForm(warrantyDocument.getContent());
@@ -58,9 +62,33 @@ public class ServiceFlow implements Serializable {
                 Document<CollectCarForm> collectCarDocument = documentService.loadCurrentDocument(documentStub);
                 setCollectCarForm(collectCarDocument.getContent());
                 return "goLoadCollectCarForm";
+            case DEFECTIVE_ELEMENT:
+                Document<DefectiveElementDocument> defectiveElementDocument = documentService.loadCurrentDocument(documentStub);
+                setDefectiveElementForm(defectiveElementDocument.getContent());
+                return "goLoadDefectiveElementForm";
             default:
-                return "cancel";
+                return "goLoadError";
         }
+    }
+    
+    public ReplacementPartOrderForm loadOrderForm()
+    {
+        SearchCriteria searchCriteria = new SearchCriteria();
+        searchCriteria.setDepartment(Departments.STOREHOUSE);
+        searchCriteria.setType(DocumentTypes.REPLACEMENT_PART_ORDER);
+        List<DocumentStub> documentStubs = documentService.loadCurrentDocuments(searchCriteria);
+        Document<ReplacementPartOrderForm> replacementPartOrderDocument;
+        if(documentStubs.size() >= 1)
+        {
+            replacementPartOrderDocument = documentService.loadCurrentDocument(documentStubs.get(0));
+            
+            return replacementPartOrderDocument.getContent();
+        }
+        else
+        {
+            return null;
+        }
+            
     }
     
     public void setDocumentService(final IDocumentService documentService) {
@@ -107,5 +135,19 @@ public class ServiceFlow implements Serializable {
      */
     public void setCollectCarForm(CollectCarForm collectCarForm) {
         this.collectCarForm = collectCarForm;
+    }
+
+    /**
+     * @return the defectiveElementDocument
+     */
+    public DefectiveElementDocument getDefectiveElementForm() {
+        return defectiveElementForm;
+    }
+
+    /**
+     * @param defectiveElementDocument the defectiveElementDocument to set
+     */
+    public void setDefectiveElementForm(DefectiveElementDocument defectiveElementForm) {
+        this.defectiveElementForm = defectiveElementForm;
     }
 }
