@@ -21,7 +21,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 public abstract class AbstractFinanceFlow<T extends AbstractFinanceUser> {
 
-    private IDocumentService documentService;
+    protected IDocumentService documentService;
     private String documentTitle;
     private DocumentTypes documentType;
     private Departments targetDepartment;

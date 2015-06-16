@@ -7,7 +7,6 @@ package gospodarka.elektroniczna.flows.service;
 
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
-import gospodarka.elektroniczna.documents.service.DamagedCarForm;
 import gospodarka.elektroniczna.documents.service.RepairCostEstimationForm;
 import gospodarka.elektroniczna.services.document.Document;
 import gospodarka.elektroniczna.services.document.IDocumentService;
@@ -28,7 +27,7 @@ public class RepairCostEstimationFlow implements Serializable {
         try {
             Document<RepairCostEstimationForm> document = documentService.createDocument(DocumentTypes.REPAIR_COST_ESTIMATION, "Kosztorys naprawy pogwarancyjnej", Departments.SERVIS);
             document.setContent(repairCostEstimationForm);
-            //documentService.sendDocument(document, Departments.SERVIS, Departments.SERVIS);
+            documentService.sendDocument(document, Departments.SERVIS, Departments.CUSTOMER_SERVICE);
             return true;
         } catch (WrongNumberOfLastSignatureException e) {
             LoggerFactory.getLogger(ServiceFlow.class).error("błąd", e);
