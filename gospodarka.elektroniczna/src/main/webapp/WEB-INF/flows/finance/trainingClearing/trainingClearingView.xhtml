@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Finanse i płace"/>
+	<ui:define name="pageContent">
+		<h1>Rozliczenie szkolenia</h1>
+		<h:form>
+			<p>
+				<p:message for="trainingName" />
+			</p>
+			<p>
+				<p:message for="startDate" />
+			</p>
+			<p>
+				<p:message for="endDate" />
+			</p>
+			<p>
+				<p:message for="amount" />
+			</p>
+			<p>
+				Nazwa szkolenia:
+				<p:inputText id="trainingName" value="#{trainingClearingVar.trainingName}"
+					label="'Nazwa szkolenia'"  required="true"/>
+			</p>
+			<p>
+				Data początku szkolenia
+				<p:calendar id="startDate"
+					value="#{trainingClearingVar.startDate}" showOn="button"
+					pattern="dd-MM-yyyy" label="'Data początku szkolenia'"
+					placeholder="dd-mm-yyyy"  required="true"/>
+			</p>
+			<p>
+				Data końca szkolenia:
+				<p:calendar id="endDate"
+					value="#{trainingClearingVar.endDate}" showOn="button"
+					pattern="dd-MM-yyyy" label="'Data końca szkolenia'"
+					placeholder="dd-mm-yyyy"  required="true"/>
+			</p>
+			<p>
+				Koszt szkolenia:
+				<p:inputText id="amount" value="#{trainingClearingVar.amount}"
+					label="'Koszsto szkoelnia'"  required="true"/>
+			</p>
+
+			<p:commandButton action="trainingClearing"
+				value="Wyślij rozliczenie" ajax="false" />
+			<p:button href="/app/finance" value="Powrót" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+

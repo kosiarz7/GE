@@ -1,6 +1,5 @@
-package gospodarka.elektroniczna.documents.hr;
+package gospodarka.elektroniczna.documents.finance;
 
-import gospodarka.elektroniczna.documents.finance.AbstractFinanceDocument;
 import gospodarka.elektroniczna.dto.finance.BusinessTravelClearing;
 
 public class BusinessTravelClearingDocument extends AbstractFinanceDocument<BusinessTravelClearing> {

@@ -3,10 +3,8 @@ package gospodarka.elektroniczna.controllers.hr;
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.documents.hr.AbstractHrDocument;
-import gospodarka.elektroniczna.documents.hr.InvoiceClearingDocument;
 import gospodarka.elektroniczna.dto.hr.AbstractHrUser;
 import gospodarka.elektroniczna.services.document.Document;
-import gospodarka.elektroniczna.services.document.DocumentService;
 import gospodarka.elektroniczna.services.document.DocumentStub;
 import gospodarka.elektroniczna.services.document.IDocumentService;
 import gospodarka.elektroniczna.services.document.SearchCriteria;
@@ -57,7 +55,7 @@ public abstract class AbstractHrFlow<T extends AbstractHrUser> {
             documentService.sendDocument(document, senderDepartment, targetDepartment);
             return true;
         } catch (WrongNumberOfLastSignatureException e) {
-            LoggerFactory.getLogger(BusinessTravelClearingFlow.class).error("błąd", e);
+            LoggerFactory.getLogger(AbstractHrFlow.class).error("błąd", e);
             return false;
         }
     }
@@ -73,7 +71,7 @@ public abstract class AbstractHrFlow<T extends AbstractHrUser> {
             documentService.sendDocument(document, senderDepartment, targetDepartment);
             return true;
         } catch (WrongNumberOfLastSignatureException e) {
-            LoggerFactory.getLogger(BusinessTravelClearingFlow.class).error("błąd", e);
+            LoggerFactory.getLogger(AbstractHrFlow.class).error("błąd", e);
             return false;
         }
     }

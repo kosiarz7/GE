@@ -39,7 +39,7 @@ public class SickLeaveFlow extends AbstractHrFlow<SickLeave>  implements Seriali
         criteria.setType(DocumentTypes.SICK_LEAVE);
 
         List<SickLeave> records = search(criteria);
-        LoggerFactory.getLogger(HolidaysRequestFlow.class).debug("getSickLeaves", records.size());
+        LoggerFactory.getLogger(SickLeaveFlow.class).debug("getSickLeaves", records.size());
 
         return records;
     }
