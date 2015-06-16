@@ -12,18 +12,6 @@
 	<ui:define name="pageContent">
 		<h3>Wydanie zewnetrzne</h3>
 		<h:form>
-
-			<!--  <label>Do działu -> Obsługa klienta</label> -->
-
-			<div class="form-group">
-				<label>Data wydania towaru: </label>
-				<p:calendar id="releaseDate" value="#{wzVar.releaseDate}"
-					showOn="button" pattern="dd-MM-yyyy" label="'Data wydania'"
-					placeholder="dd-mm-yyyy" required="true" />
-				<p:message id="m1" for="releaseDate" style="color:red" />
-				<p></p>
-			</div>
-
 			<div class="form-group">
 				<label>Nazwa: </label>
 				<p:inputText id="itemName" class="form-control"

@@ -3,6 +3,7 @@ package gospodarka.elektroniczna.controllers.finance;
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.dto.finance.Invoice;
+import gospodarka.elektroniczna.services.document.DocumentStub;
 import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.user.UserData;
 
@@ -38,5 +39,9 @@ public class InvoiceFlow extends AbstractFinanceFlow<Invoice> implements Seriali
         LoggerFactory.getLogger(InvoiceFlow.class).debug("getInvoice", records.size());
 
         return records;
+    }
+    
+    public void archiveInvoice(DocumentStub documentStub) {
+    	documentService.archiveDocument(documentService.loadCurrentDocument(documentStub), Departments.FINANCE);
     }
 }

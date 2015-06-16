@@ -4,11 +4,16 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
-	<secured attributes="ROLE_STOREHOUSE" />
+	<secured attributes="ROLE_STOREHOUSE, ROLE_MANUFACTURE, ROLE_SERVICE, ROLE_SERVIS, ROLE_ROOT" />
+
 
 	<on-start>
 		<evaluate expression="controllerVar.getPPZDocuments()"
 			result="flowScope.ppzdocuments" />
+		<evaluate expression="controllerVar.getPPZDocumentsServis()"
+			result="flowScope.ppzdocumentsService" />
+		<evaluate expression="controllerVar.getPPZDocumentsManu()"
+			result="flowScope.ppzdocumentsManu" />
 	</on-start>
 
 

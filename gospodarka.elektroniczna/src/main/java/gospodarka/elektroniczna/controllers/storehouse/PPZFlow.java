@@ -39,11 +39,55 @@ public class PPZFlow  extends AbstractStoreHouseFlow<PPZDocument> implements  Se
 		
 	    }
 	  
+	  public boolean submitPPZSerwis(UserData userData, PPZDocument ppz) {
+		    LoggerFactory.getLogger(PPZFlow.class).debug("submitPPZ", ppz);
+
+		    return submit(userData,Departments.SERVIS, ppz);
+			
+		    }
+	  
+	  public boolean submitPPZManu(UserData userData, PPZDocument ppz) {
+		    LoggerFactory.getLogger(PPZFlow.class).debug("submitPPZ", ppz);
+		    
+		    return submit(userData,Departments.MANUFACTURE, ppz);
+			
+		    }
+	  
 	  
 	    public List<PPZDocument> getPPZDocuments() {
 
 	        SearchCriteria criteria = new SearchCriteria();
 	        criteria.department(Departments.STOREHOUSE);
+	        criteria.setType(DocumentTypes.ORDER_CONFIRMATION);
+
+	        List<PPZDocument> records = search(criteria);
+	        LoggerFactory.getLogger(PZFlow.class).debug("getPPZDocuments", records.size());
+
+	        return records;
+	    }
+	    
+	    /*
+	     * Dla SERIWIS'U
+	     */
+	    public List<PPZDocument> getPPZDocumentsServis() {
+
+	        SearchCriteria criteria = new SearchCriteria();
+	        criteria.department(Departments.SERVIS);
+	        criteria.setType(DocumentTypes.ORDER_CONFIRMATION);
+
+	        List<PPZDocument> records = search(criteria);
+	        LoggerFactory.getLogger(PZFlow.class).debug("getPPZDocuments", records.size());
+
+	        return records;
+	    }
+	    
+	   /*
+	     * Dla PRODUKCJI
+	     */
+	    public List<PPZDocument> getPPZDocumentsManu() {
+
+	        SearchCriteria criteria = new SearchCriteria();
+	        criteria.department(Departments.MANUFACTURE);
 	        criteria.setType(DocumentTypes.ORDER_CONFIRMATION);
 
 	        List<PPZDocument> records = search(criteria);

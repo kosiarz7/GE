@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Finanse i płace"/>
+	<ui:define name="pageContent">
+		<p:dataTable id="dtInvoices" var="inv" value="#{flowScope.invoices}" scrollable="true" scrollWidth="80%" scrollHeight="50%">
+			<p:column headerText="Numer faktury" sortBy="#{inv.invoiceNumber}" width="200">
+	        	<h:outputText value="#{inv.invoiceNumber}" />
+		    </p:column>
+		    
+		    <p:column headerText="Data utworzenia" sortBy="#{inv.createDate}" width="200">
+	        	<h:outputText value="#{inv.createDate}" />
+		    </p:column>
+		    
+		    <p:column headerText="Data dostawy" sortBy="#{inv.supplyDate}" width="200">
+	        	<h:outputText value="#{inv.supplyDate}" />
+		    </p:column>
+		    
+		    <p:column headerText="Data zaksięgowania" sortBy="#{inv.archiveDate}" width="200">
+	        	<h:outputText value="#{inv.archiveDate}" />
+		    </p:column>
+		    
+		    <p:column headerText="Nazwa sprzedawcy" sortBy="#{inv.sellerName}" width="200">
+	        	<h:outputText value="#{inv.sellerName}" />
+		    </p:column>
+		    
+		    <p:column headerText="Adres sprzedawcy" sortBy="#{inv.sellerAddress}" width="200">
+	        	<h:outputText value="#{inv.sellerAddress}" />
+		    </p:column>
+		    
+		    <p:column headerText="NIP sprzedawcy" sortBy="#{inv.sellerVATIN}" width="200">
+	        	<h:outputText value="#{inv.sellerVATIN}" />
+		    </p:column>
+		    
+		    <p:column headerText="Nazwa nabywcy" sortBy="#{inv.buyerName}" width="200">
+	        	<h:outputText value="#{inv.buyerName}" />
+		    </p:column>
+		    
+		    <p:column headerText="Adres nabywcy" sortBy="#{inv.buyerAddress}" width="200">
+	        	<h:outputText value="#{inv.buyerAddress}" />
+		    </p:column>
+		    
+		    <p:column headerText="NIP nabywcy" sortBy="#{inv.buyerVATIN}" width="200">
+	        	<h:outputText value="#{inv.buyerVATIN}" />
+		    </p:column>
+		    
+		    <p:column headerText="Produkt" sortBy="#{inv.product}" width="200">
+	        	<h:outputText value="#{inv.product}" />
+		    </p:column>
+		    
+		    <p:column headerText="Ilość" sortBy="#{inv.amount}" width="200">
+	        	<h:outputText value="#{inv.amount}" />
+		    </p:column>
+		    
+		    <p:column headerText="VAT" sortBy="#{inv.vat}" width="200">
+	        	<h:outputText value="#{inv.vat}" />
+		    </p:column>
+		    
+		    <p:column headerText="Koszt netto" sortBy="#{inv.costNetto}" width="200">
+	        	<h:outputText value="#{inv.costNetto}" />
+		    </p:column>
+		    
+		    <p:column headerText="Koszt brutto" sortBy="#{inv.costBrutto}" width="200">
+	        	<h:outputText value="#{inv.costBrutto}" />
+		    </p:column>
+		    
+		    <p:column headerText="Akcja" width="150">
+            	<p:commandButton action="#{invoiceFlow.archiveDocument(inv)}" update="dtInvoices" value="Zaksięguj" />
+            </p:column>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>
+</html>
