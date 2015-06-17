@@ -45,7 +45,7 @@ public class NewCandidateFlow extends AbstractHrFlow<NewCandidate> implements Se
         return submit(userData, Departments.HUMAN_RESOURCES, newCandidate.getDepartment(), newCandidate);
     }
 
-    public void loadNewCandidates(Departments targetDepartment) {
+    public void loadNewCandidate(Departments targetDepartment) {
     	this.targetDepartment = targetDepartment;
         SearchCriteria criteria = new SearchCriteria();
         criteria.department(targetDepartment);

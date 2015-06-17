@@ -11,7 +11,8 @@
 
 	<view-state id="ppzGenView">		
 		<transition on="ppzGenService" to="ppzGenService" />		
-		<transition on="ppzGenManu" to="ppzGenManu" />
+		<transition on="ppzGenManu" to="ppzGenManu" />		
+		<transition on="ppzGenCustomer" to="ppzGenCustomer" />
 		
 	</view-state>
 
@@ -23,6 +24,11 @@
 	
 	<action-state id="ppzGenManu">
 		<evaluate expression="controllerVar.submitPPZManu(springSecurityContextUtilBean.getUser(), ppzVar)"
+			result="flowScope.status" />
+		<transition to="ppzGenEnd" />
+	</action-state>
+		<action-state id="ppzGenCustomer">
+		<evaluate expression="controllerVar.submitPPZCustomer(springSecurityContextUtilBean.getUser(), ppzVar)"
 			result="flowScope.status" />
 		<transition to="ppzGenEnd" />
 	</action-state>

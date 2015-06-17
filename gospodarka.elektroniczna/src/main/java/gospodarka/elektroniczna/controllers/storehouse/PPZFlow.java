@@ -52,7 +52,12 @@ public class PPZFlow  extends AbstractStoreHouseFlow<PPZDocument> implements  Se
 		    return submit(userData,Departments.MANUFACTURE, ppz);
 			
 		    }
-	  
+	  public boolean submitPPZCustomer(UserData userData, PPZDocument ppz) {
+		    LoggerFactory.getLogger(PPZFlow.class).debug("submitPPZ", ppz);
+		    
+		    return submit(userData,Departments.CUSTOMER_SERVICE, ppz);
+			
+		    }
 	  
 	    public List<PPZDocument> getPPZDocuments() {
 
@@ -95,4 +100,19 @@ public class PPZFlow  extends AbstractStoreHouseFlow<PPZDocument> implements  Se
 
 	        return records;
 	    }
+	    /*
+	     * Dla BOK
+	     */
+	    public List<PPZDocument> getPPZDocumentsCustomer() {
+
+	        SearchCriteria criteria = new SearchCriteria();
+	        criteria.department(Departments.CUSTOMER_SERVICE);
+	        criteria.setType(DocumentTypes.ORDER_CONFIRMATION);
+
+	        List<PPZDocument> records = search(criteria);
+	        LoggerFactory.getLogger(PZFlow.class).debug("getPPZDocuments", records.size());
+
+	        return records;
+	    }
+	    
 }
