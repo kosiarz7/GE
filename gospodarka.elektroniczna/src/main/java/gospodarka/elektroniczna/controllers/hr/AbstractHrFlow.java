@@ -11,8 +11,10 @@ import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.signature.WrongNumberOfLastSignatureException;
 import gospodarka.elektroniczna.services.user.UserData;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.LoggerFactory;
@@ -76,19 +78,18 @@ public abstract class AbstractHrFlow<T extends AbstractHrUser> {
         }
     }
     
-    protected List<T> search(SearchCriteria criteria) {
+    protected List<Document<AbstractHrDocument<T>>> search(SearchCriteria criteria) {
         List<DocumentStub> documentStubs = documentService.loadCurrentDocuments(criteria);
 
-        ArrayList<T> documents = new ArrayList<T>(documentStubs.size());
+        ArrayList<Document<AbstractHrDocument<T>>> documents = new ArrayList<Document<AbstractHrDocument<T>>>(documentStubs.size());
         for (DocumentStub documentStub : documentStubs) {
             Document<AbstractHrDocument<T>> document = documentService.loadCurrentDocument(documentStub);
-            T documentData = document.getContent().getData();
-            documents.add(documentData);
+            documents.add(document);
         }
         return documents;
     }
     
-    public void archiveDocument(final Document<T> document) {
+    public void archiveDocument(final Document<AbstractHrDocument<T>> document) {
     	documentService.archiveDocument(document, targetDepartment);
     }
     
@@ -114,5 +115,11 @@ public abstract class AbstractHrFlow<T extends AbstractHrUser> {
         default:
             return null;
         }
+    }
+    
+    public String convertDateToString(Date date)
+    {
+    	SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+    	return format.format(date);
     }
 }

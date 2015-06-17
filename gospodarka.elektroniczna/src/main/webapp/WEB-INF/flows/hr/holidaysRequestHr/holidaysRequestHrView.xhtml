@@ -7,28 +7,73 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="Kadry/Finanse"/>
+	<ui:param name="department" value="Kadry/Finanse" />
 	<ui:define name="pageContent">
 		<h1>Wnioski o urlop</h1>
-		<h:form>
-			<table border="1">
-				<tr>
-					<th width="100">Imię i nazwisko</th>
-					<th width="200">Data początku</th>
-					<th width="200">Data końca</th>
 
-				</tr>
-				<c:forEach items="${flowScope.holidaysRequests}" var="instance">
-					<tr>
-						<td>${instance.getUserNameAndSurname()}</td>
-						<td>${instance.getFromDate()}</td>
-						<td>${instance.getToDate()}</td>
 
-					</tr>
-				</c:forEach>
-			</table>
+
+		<h:form id="formId">
+			<p:dataTable var="instance" value="${controllerVar.getHolidaysRequests()}"
+				paginator="true" rows="10"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="5,10,15" selectionMode="single"
+				selection="#{controllerVar.selectedHolidaysRequest}" id="tableHolidaysRequests"
+				rowKey="#{instance}"
+				emptyMessage="Nie został zgłoszony żaden wniosek o urlop">
+
+				<p:ajax event="rowSelect" listener="#{controllerVar.onRowSelect}"
+					update=":formId:holidaysRequestDetails"
+					oncomplete="PF('holidaysRequestWidgetVar').show()" />
+				<p:column headerText="Pracownik" style="width:120px;">
+					${instance.getContent().getData().getUserNameAndSurname()}
+				</p:column>
+				<p:column headerText="Od kiedy" style="width:30px;">
+					${controllerVar.convertDateToString(instance.getContent().getData().getFromDate())}
+				</p:column>
+
+				<p:column headerText="Do kiedy" style="width:50px;">
+					${controllerVar.convertDateToString(instance.getContent().getData().getToDate())}
+				</p:column>
+
+			</p:dataTable>
+
 			<br />
 			<p:button href="/app/hr" value="Powrót" />
+
+
+			<p:dialog header="Wniosek o urlop"
+				widgetVar="holidaysRequestWidgetVar" modal="true" showEffect="fade"
+				hideEffect="fade" resizable="false">
+				<p:outputPanel id="holidaysRequestDetails" style="text-align:center;">
+					<p:panelGrid columns="1"
+						rendered="#{not empty controllerVar.selectedHolidaysRequest}"
+						columnClasses="label,value">
+						<p>
+							Pracownik:
+							<p:inputText id="employee"
+								value="#{controllerVar.selectedHolidaysRequest.getContent().getData().getUserNameAndSurname()}"
+								label="'Pracownik'" required="true" disabled="true" />
+						</p>
+						<p>
+							Od kiedy:
+							<p:inputText id="from"
+								value="#{controllerVar.convertDateToString(controllerVar.selectedHolidaysRequest.getContent().getData().getFromDate())}"
+								label="'Od kiedy'" required="true" disabled="true" />
+
+						</p>
+						<p>
+							Do kiedy:
+							<p:inputText id="to"
+								value="#{controllerVar.convertDateToString(controllerVar.selectedHolidaysRequest.getContent().getData().getToDate())}"
+								label="'Do kiedy'" required="true" disabled="true" />
+						</p>
+						<p:commandButton value="Zarchiwizuj"
+							actionListener="#{controllerVar.archiveHolidaysRequest}" update="@form"
+							onstart="showCurtain()" oncomplete="hideCurtain()" />
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

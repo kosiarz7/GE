@@ -2,13 +2,16 @@ package gospodarka.elektroniczna.controllers.hr;
 
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
+import gospodarka.elektroniczna.documents.hr.AbstractHrDocument;
 import gospodarka.elektroniczna.dto.hr.HolidaysRequest;
+import gospodarka.elektroniczna.services.document.Document;
 import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.user.UserData;
 
 import java.io.Serializable;
 import java.util.List;
 
+import org.primefaces.event.SelectEvent;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -20,7 +23,9 @@ import org.slf4j.LoggerFactory;
 public class HolidaysRequestFlow extends AbstractHrFlow<HolidaysRequest> implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+	private Document<AbstractHrDocument<HolidaysRequest>> selectedHolidaysRequest;
+	private List<Document<AbstractHrDocument<HolidaysRequest>>> holidaysRequests;
+	
     public HolidaysRequestFlow() {
         super("Wniose o urlop", DocumentTypes.HOLIDAYS_REQUEST, Departments.HUMAN_RESOURCES);
     }
@@ -31,15 +36,43 @@ public class HolidaysRequestFlow extends AbstractHrFlow<HolidaysRequest> impleme
         return submit(userData, holidayRequest);
     }
 
-    public List<HolidaysRequest> getHolidaysRequests() {
+    public void loadHolidaysRequests() {
 
         SearchCriteria criteria = new SearchCriteria();
         criteria.department(Departments.HUMAN_RESOURCES);
         criteria.setType(DocumentTypes.HOLIDAYS_REQUEST);
 
-        List<HolidaysRequest> records = search(criteria);
-        LoggerFactory.getLogger(HolidaysRequestFlow.class).debug("getHolidaysRequests", records.size());
+        holidaysRequests = search(criteria);
+        LoggerFactory.getLogger(HolidaysRequestFlow.class).debug("getHolidaysRequests", holidaysRequests.size());
 
-        return records;
     }
+    
+	@SuppressWarnings("unchecked")
+	public void onRowSelect(SelectEvent event) {
+		Object obj = event.getObject();
+		selectedHolidaysRequest = (Document<AbstractHrDocument<HolidaysRequest>>) obj;
+	}
+
+	public Document<AbstractHrDocument<HolidaysRequest>> getSelectedHolidaysRequest() {
+		return selectedHolidaysRequest;
+	}
+
+	public void setSelectedHolidaysRequest(
+			Document<AbstractHrDocument<HolidaysRequest>> selectedHolidaysRequest) {
+		this.selectedHolidaysRequest = selectedHolidaysRequest;
+	}
+
+	public void setHolidaysRequests(
+			List<Document<AbstractHrDocument<HolidaysRequest>>> holidaysRequests) {
+		this.holidaysRequests = holidaysRequests;
+	}
+	
+	public List<Document<AbstractHrDocument<HolidaysRequest>>> getHolidaysRequests() {
+		return holidaysRequests;
+	}
+
+	public void archiveHolidaysRequest() {
+		archiveDocument(selectedHolidaysRequest);
+		loadHolidaysRequests();
+	}
 }

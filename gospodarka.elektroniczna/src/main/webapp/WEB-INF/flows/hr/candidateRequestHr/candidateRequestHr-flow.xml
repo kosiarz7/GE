@@ -9,8 +9,7 @@
 	<var name="condidateRequestToDeleteVar" class="gospodarka.elektroniczna.dto.hr.CandidateRequest" />
 
 	<on-start>
-		<evaluate expression="controllerVar.getCandidateRequest()"
-			result="flowScope.candidates" />
+		<evaluate expression="controllerVar.loadCandidateRequest()"/>
 	</on-start>
 
 	<view-state id="candidateRequestHrView">
