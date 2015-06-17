@@ -44,13 +44,13 @@ public enum Departments {
      */
     END("Koniec");
 
-    String departmentStr;
+    private String departmentStr;
     private Departments(String departmentStr)
     {
     	this.departmentStr = departmentStr;
     }
     
-    public String toString()
+    public String getDepartmentString()
     {
     	return departmentStr;
     }
