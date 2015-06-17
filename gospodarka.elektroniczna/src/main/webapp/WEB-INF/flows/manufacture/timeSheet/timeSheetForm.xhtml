@@ -17,13 +17,16 @@ and open the template in the editor.
             <link rel='stylesheet' href='../webjars/bootstrap/3.3.4/css/bootstrap.min.css'/>
             <h3>Karta pracy pracownika</h3>
             <h:form id="orderForm" >
-
+                
                 <div class="form-group">
                     <label>Data</label>
-                    <h:inputText id="date" class="form-control" value="#{timeSheet.date}" required="true">
-                        <f:convertDateTime pattern="yyyy-MM-dd"/> 
-                    </h:inputText>
-                    <h:message id="m1" for="date" style="color:red"/> <p></p>
+                    <p>
+                        <p:calendar id="date"
+                                    value="#{timeSheet.date}" showOn="button"
+                                    pattern="MM/dd/yyyy" label="'Data'"
+                                    placeholder="MM/dd/yyyy"  required="true"/>
+                        <h:message id="m1" for="date" style="color:red"/>
+                    </p>
                 </div>
 
                 <div class="form-group">

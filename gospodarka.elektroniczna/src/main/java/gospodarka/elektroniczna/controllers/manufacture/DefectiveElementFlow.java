@@ -23,7 +23,7 @@ public class DefectiveElementFlow extends AbstractManufactureFlow<DefectiveEleme
     private static final long serialVersionUID = 1L;
 
     public DefectiveElementFlow() {
-        super("Wadliwy element", DocumentTypes.DEFECTIVE_ELEMENT, Departments.MANUFACTURE);
+        super("Wadliwy element", DocumentTypes.DEFECTIVE_ELEMENT, Departments.SERVIS);
     }
     
     public boolean submitDefectiveElementForm(UserData user, DefectiveElementForm defectiveElement) {

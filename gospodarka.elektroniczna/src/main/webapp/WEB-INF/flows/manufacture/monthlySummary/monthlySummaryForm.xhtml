@@ -18,17 +18,16 @@ and open the template in the editor.
                         <h3>Miesęczne podsumowanie linii produkcyjnej</h3>
  
                         <h:form id="monthlySummaryForm" >
-
+                     
                             <div class="form-group">
-                                <label for="date">Data</label>
-                                <!--<input type="date" class="form-control" path="date" placeholder="data"/>-->
-                                <div class="input-group input-append date" id="datePicker">           
-                                    <input type="text" class="form-control" name="date" />
-                                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>  
-                                </div>
-
-                                <h:message id="m1" for="date" style="color:red"/> <p></p>
-                                
+                                <label>Data</label>
+                                <p>
+                                    <p:calendar id="date"
+                                                value="#{monthlySummary.date}" showOn="button"
+                                                pattern="MM/dd/yyyy" label="'Data'"
+                                                placeholder="MM/dd/yyyy"  required="true"/>
+                                    <h:message id="m1" for="date" style="color:red"/> 
+                                </p>
                             </div>
                             
                             <div class="form-group">

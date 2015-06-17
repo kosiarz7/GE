@@ -20,18 +20,24 @@ and open the template in the editor.
 
                 <div class="form-group">
                     <label>Data</label>
-                    <h:inputText id="date" class="form-control" value="#{order.date}" required="true">
-                        <f:convertDateTime pattern="yyyy-MM-dd"/> 
-                    </h:inputText>
-                    <h:message id="m1" for="date" style="color:red"/> <p></p>
+                    <p>
+                        <p:calendar id="date"
+                                    value="#{order.date}" showOn="button"
+                                    pattern="MM/dd/yyyy" label="'Data'"
+                                    placeholder="MM/dd/yyyy"  required="true"/>
+                        <h:message id="m1" for="date" style="color:red"/>
+                    </p>
                 </div>
 
                 <div class="form-group">
                     <label>Data dostarczenia elementów</label>
-                    <h:inputText id="deliveryDate" class="form-control" value="#{order.deliveryDate}" required="true" >
-                        <f:convertDateTime pattern="yyyy-MM-dd"/> 
-                    </h:inputText>
-                    <h:message id="m2" for="deliveryDate" style="color:red"/> <p></p>
+                    <p>
+                        <p:calendar id="deliveryDate"
+                                    value="#{order.deliveryDate}" showOn="button"
+                                    pattern="MM/dd/yyyy" label="'Data'"
+                                    placeholder="MM/dd/yyyy"  required="true"/>
+                        <h:message id="m2" for="deliveryDate" style="color:red"/>
+                    </p>
                 </div>
 
                 <div class="form-group">
