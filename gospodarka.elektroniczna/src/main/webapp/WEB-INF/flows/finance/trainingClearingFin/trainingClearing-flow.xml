@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="trainingClearingView"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<!-- Zabezpieczenie flow przez Spring Security -->
+	<secured
+		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT"
+		match="any" />
+
+	<on-start>
+		<evaluate expression="controllerVar.getTrainingClearings()"
+			result="flowScope.trainingClearings" />
+	</on-start>
+
+	<view-state id="trainingClearingView">
+		<transition on="trainingClearing" to="trainingClearing" />
+	</view-state>
+
+	<bean-import resource="flow-beans.xml" />
+</flow>

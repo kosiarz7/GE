@@ -2,7 +2,9 @@ package gospodarka.elektroniczna.controllers.hr;
 
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
+import gospodarka.elektroniczna.documents.hr.AbstractHrDocument;
 import gospodarka.elektroniczna.dto.hr.NewCandidate;
+import gospodarka.elektroniczna.services.document.Document;
 import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.user.UserData;
 
@@ -10,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.primefaces.event.SelectEvent;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -21,9 +24,11 @@ import org.slf4j.LoggerFactory;
 public class NewCandidateFlow extends AbstractHrFlow<NewCandidate> implements Serializable {
 
     private static final long serialVersionUID = 1L;
+	private Document<AbstractHrDocument<NewCandidate>> selectedNewCandidate;
+	private List<Document<AbstractHrDocument<NewCandidate>>> newCandidates;
     
     private List<Departments> departments = new ArrayList<Departments>();
-    
+    private Departments targetDepartment;
     public NewCandidateFlow() {
         super("Nowy kandydat", DocumentTypes.NEW_CANDIDATE, Departments.HUMAN_RESOURCES);
         departments.add(Departments.CUSTOMER_SERVICE);
@@ -40,15 +45,15 @@ public class NewCandidateFlow extends AbstractHrFlow<NewCandidate> implements Se
         return submit(userData, Departments.HUMAN_RESOURCES, newCandidate.getDepartment(), newCandidate);
     }
 
-    public List<NewCandidate> getNewCandidate(Departments targetDepartment) {
+    public void loadNewCandidates(Departments targetDepartment) {
+    	this.targetDepartment = targetDepartment;
         SearchCriteria criteria = new SearchCriteria();
         criteria.department(targetDepartment);
         criteria.setType(DocumentTypes.NEW_CANDIDATE);
 
-        List<NewCandidate> records = search(criteria);
-        LoggerFactory.getLogger(NewCandidateFlow.class).debug("getNewCandidate", records.size());
+        newCandidates = search(criteria);
+        LoggerFactory.getLogger(NewCandidateFlow.class).debug("getNewCandidate", newCandidates.size());
 
-        return records;
     }
 
     public List<Departments> getDepartments() {
@@ -59,5 +64,31 @@ public class NewCandidateFlow extends AbstractHrFlow<NewCandidate> implements Se
         this.departments = departments;
     }
     
-    
+	@SuppressWarnings("unchecked")
+	public void onRowSelect(SelectEvent event) {
+		Object obj = event.getObject();
+		selectedNewCandidate = (Document<AbstractHrDocument<NewCandidate>>) obj;
+	}
+
+	public Document<AbstractHrDocument<NewCandidate>> getSelectedNewCandidate() {
+		return selectedNewCandidate;
+	}
+
+	public void setSelectedNewCandidate(
+			Document<AbstractHrDocument<NewCandidate>> selectedNewCandidate) {
+		this.selectedNewCandidate = selectedNewCandidate;
+	}
+
+	public List<Document<AbstractHrDocument<NewCandidate>>> getNewCandidates() {
+		return newCandidates;
+	}
+
+	public void setNewCandidates(
+			List<Document<AbstractHrDocument<NewCandidate>>> newCandidates) {
+		this.newCandidates = newCandidates;
+	}
+	public void archiveNewCandidate() {
+		archiveDocument(selectedNewCandidate);
+		loadNewCandidates(targetDepartment);
+	}
 }

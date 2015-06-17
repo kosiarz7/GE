@@ -7,30 +7,72 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="Kadry/Finanse"/>
+	<ui:param name="department" value="Kadry"/>
 	<ui:define name="pageContent">
 		<h1>Wakaty</h1>
-		<h:form>
-			<table border="1">
-				<tr>
-					<th width="100">Stanowisko</th>
-					<th width="200">Wymagane doświadczenie</th>
-					<th width="200">Opcjonalne doświadczenie</th>
-					<th>Opcje</th>
-				</tr>
-				<c:forEach items="${flowScope.candidates}" var="instance">
-					<tr>
-						<td>${instance.getJobName()}</td>
-						<td>${instance.getRequiredExperience()}</td>
-						<td>${instance.getGoodToKnownExperience()}</td>
-						<td><p:commandButton action="removedCandidateRequest"
-								value="Usun" ajax="false" /></td> <!-- TODO: jak wskazywac ktory byl klikniety -->
-					</tr>
-				</c:forEach>
-			</table>
-			<p:button href="/app/hr" value="Powrót" />
-		</h:form>
+		
+		<h:form id="formId">
+			<p:dataTable var="instance" value="${controllerVar.getCandidateRequests()}"
+				paginator="true" rows="10"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="5,10,15" selectionMode="single"
+				selection="#{controllerVar.selectedCandidateRequest}" id="tableCandidateRequest"
+				rowKey="#{instance}"
+				emptyMessage="Nie został zgłoszony żaden wakat">
 
+				<p:ajax event="rowSelect" listener="#{controllerVar.onRowSelect}"
+					update=":formId:candidateRequestDetails"
+					oncomplete="PF('candidateRequestWidgetVar').show()" />
+				<p:column headerText="Stanowisko" style="width:30px;">
+					${instance.getContent().getData().getJobName()}
+				</p:column>
+				<p:column headerText="Wymagane doświadczenie" style="width:120px;">
+					${instance.getContent().getData().getRequiredExperience()}
+				</p:column>
+
+				<p:column headerText="Opcjonalne doświadczenie" style="width:50px;">
+					${instance.getContent().getData().getGoodToKnownExperience()}
+				</p:column>
+
+			</p:dataTable>
+
+			<br />
+			<p:button href="/app/hr" value="Powrót" />
+
+
+			<p:dialog header="Wakaty"
+				widgetVar="candidateRequestWidgetVar" modal="true" showEffect="fade"
+				hideEffect="fade" resizable="false">
+				<p:outputPanel id="candidateRequestDetails" style="text-align:center;">
+					<p:panelGrid columns="1"
+						rendered="#{not empty controllerVar.selectedCandidateRequest}"
+						columnClasses="label,value">
+						<p>
+							Stanowisko:
+							<p:inputText id="jobName"
+								value="#{controllerVar.selectedCandidateRequest.getContent().getData().getJobName()}"
+								label="'Stanowisko'" required="true" disabled="true" />
+						</p>
+						<p>
+							Wymagane doświadczenie:
+							<p:inputText id="requiredExperience"
+								value="#{controllerVar.selectedCandidateRequest.getContent().getData().getRequiredExperience()}"
+								label="'Wymagane doświadczenie'" required="true" disabled="true" />
+
+						</p>
+						<p>
+							Opcjonalne doświadczenie:
+							<p:inputText id="goodToKnownExperience"
+								value="#{controllerVar.selectedCandidateRequest.getContent().getData().getGoodToKnownExperience()}"
+								label="'Opcjonalne doświadczenie'" required="true" disabled="true" />
+						</p>
+						<p:commandButton value="Zarchiwizuj"
+							actionListener="#{controllerVar.archiveCandidateRequest}" update="@form"
+							onstart="showCurtain()" oncomplete="hideCurtain()" />
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

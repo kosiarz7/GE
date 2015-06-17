@@ -1,8 +1,9 @@
 package gospodarka.elektroniczna.documents.hr;
 
-import gospodarka.elektroniczna.dto.hr.BusinessTravelClearing;
+import gospodarka.elektroniczna.documents.finance.AbstractFinanceDocument;
+import gospodarka.elektroniczna.dto.finance.BusinessTravelClearing;
 
-public class BusinessTravelClearingDocument extends AbstractHrDocument<BusinessTravelClearing> {
+public class BusinessTravelClearingDocument extends AbstractFinanceDocument<BusinessTravelClearing> {
 
     private static final long serialVersionUID = 1L;
 

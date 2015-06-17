@@ -3,18 +3,18 @@ package gospodarka.elektroniczna.controllers.hr;
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.documents.hr.AbstractHrDocument;
-import gospodarka.elektroniczna.documents.hr.InvoiceClearingDocument;
 import gospodarka.elektroniczna.dto.hr.AbstractHrUser;
 import gospodarka.elektroniczna.services.document.Document;
-import gospodarka.elektroniczna.services.document.DocumentService;
 import gospodarka.elektroniczna.services.document.DocumentStub;
 import gospodarka.elektroniczna.services.document.IDocumentService;
 import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.signature.WrongNumberOfLastSignatureException;
 import gospodarka.elektroniczna.services.user.UserData;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.LoggerFactory;
@@ -57,7 +57,7 @@ public abstract class AbstractHrFlow<T extends AbstractHrUser> {
             documentService.sendDocument(document, senderDepartment, targetDepartment);
             return true;
         } catch (WrongNumberOfLastSignatureException e) {
-            LoggerFactory.getLogger(BusinessTravelClearingFlow.class).error("błąd", e);
+            LoggerFactory.getLogger(AbstractHrFlow.class).error("błąd", e);
             return false;
         }
     }
@@ -73,24 +73,23 @@ public abstract class AbstractHrFlow<T extends AbstractHrUser> {
             documentService.sendDocument(document, senderDepartment, targetDepartment);
             return true;
         } catch (WrongNumberOfLastSignatureException e) {
-            LoggerFactory.getLogger(BusinessTravelClearingFlow.class).error("błąd", e);
+            LoggerFactory.getLogger(AbstractHrFlow.class).error("błąd", e);
             return false;
         }
     }
     
-    protected List<T> search(SearchCriteria criteria) {
+    protected List<Document<AbstractHrDocument<T>>> search(SearchCriteria criteria) {
         List<DocumentStub> documentStubs = documentService.loadCurrentDocuments(criteria);
 
-        ArrayList<T> documents = new ArrayList<T>(documentStubs.size());
+        ArrayList<Document<AbstractHrDocument<T>>> documents = new ArrayList<Document<AbstractHrDocument<T>>>(documentStubs.size());
         for (DocumentStub documentStub : documentStubs) {
             Document<AbstractHrDocument<T>> document = documentService.loadCurrentDocument(documentStub);
-            T documentData = document.getContent().getData();
-            documents.add(documentData);
+            documents.add(document);
         }
         return documents;
     }
     
-    public void archiveDocument(final Document<T> document) {
+    public void archiveDocument(final Document<AbstractHrDocument<T>> document) {
     	documentService.archiveDocument(document, targetDepartment);
     }
     
@@ -116,5 +115,11 @@ public abstract class AbstractHrFlow<T extends AbstractHrUser> {
         default:
             return null;
         }
+    }
+    
+    public String convertDateToString(Date date)
+    {
+    	SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+    	return format.format(date);
     }
 }
