@@ -19,7 +19,13 @@
 				<p:message id="m2" for="itemName" style="color:red" />
 				<p></p>
 			</div>
-
+			<div class="form-group">
+				<label>Data wydania: </label>
+				<p:calendar id="dateEnd" value="#{wzVar.releaseDate}" showOn="button"
+					pattern="dd-MM-yyyy" label="'Data wydania'"
+					placeholder="dd-mm-yyyy" required="true" />
+				<p:message id="m1" for="releaseDate" style="color:red" /><p></p>
+			</div>
 			<div class="form-group">
 				<label>Kod: </label>
 				<p:inputText id="itemCode" class="form-control"
