@@ -32,10 +32,10 @@ public class CandidateRequestFlow extends AbstractHrFlow<CandidateRequest>
 	}
 
 	public boolean submitCandidateRequest(UserData userData,
-			CandidateRequest candidateRequest) {
-		LoggerFactory.getLogger(CandidateRequestFlow.class).debug(
-				"submitCandidateRequest", candidateRequest);
+			CandidateRequest candidateRequest, Departments departments) {
 
+		candidateRequest.setDepartment(departments);
+		
 		return submit(userData, candidateRequest);
 	}
 

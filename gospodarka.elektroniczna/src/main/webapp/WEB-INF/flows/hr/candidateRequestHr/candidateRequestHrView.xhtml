@@ -23,6 +23,9 @@
 				<p:ajax event="rowSelect" listener="#{controllerVar.onRowSelect}"
 					update=":formId:candidateRequestDetails"
 					oncomplete="PF('candidateRequestWidgetVar').show()" />
+				<p:column headerText="Departament" style="width:30px;">
+					${instance.getContent().getData().getDepartment()}
+				</p:column>
 				<p:column headerText="Stanowisko" style="width:30px;">
 					${instance.getContent().getData().getJobName()}
 				</p:column>
@@ -47,6 +50,12 @@
 					<p:panelGrid columns="1"
 						rendered="#{not empty controllerVar.selectedCandidateRequest}"
 						columnClasses="label,value">
+						<p>
+							Departament:
+							<p:inputText id="department"
+								value="#{controllerVar.selectedCandidateRequest.getContent().getData().getDepartment()}"
+								label="'Departament'" required="true" disabled="true" />
+						</p>
 						<p>
 							Stanowisko:
 							<p:inputText id="jobName"

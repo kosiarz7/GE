@@ -16,7 +16,7 @@
 
 	<action-state id="candidateRequest">
 		<evaluate
-			expression="controllerVar.submitCandidateRequest(springSecurityContextUtilBean.getUser(), candidateRequestVar)"
+			expression="controllerVar.submitCandidateRequest(springSecurityContextUtilBean.getUser(), candidateRequestVar, springSecurityContextUtilBean.getUserDepartment())"
 			result="flowScope.status" />
 		<transition to="candidateRequestEnd" />
 	</action-state>

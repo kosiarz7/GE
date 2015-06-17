@@ -10,9 +10,9 @@ public abstract class AbstractHrUser implements Serializable{
      * 
      */
     private static final long serialVersionUID = 1L;
-    private String userName;
-    private String userSurname;
-    private Departments department;
+    protected String userName;
+    protected String userSurname;
+    protected Departments department;
 
     public String getUserName() {
         return userName;
