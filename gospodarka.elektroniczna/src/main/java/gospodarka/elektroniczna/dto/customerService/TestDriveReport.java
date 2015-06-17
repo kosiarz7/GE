@@ -3,7 +3,7 @@ package gospodarka.elektroniczna.dto.customerService;
 import gospodarka.elektroniczna.documents.service.Car;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 public class TestDriveReport extends AbstractCustomerServiceUser implements Serializable{
 
@@ -21,6 +21,7 @@ public class TestDriveReport extends AbstractCustomerServiceUser implements Seri
 	public TestDriveReport() {};
 	
 	public void init() {
+                dateTime = new Date();
 		employee = new Employee();
 		car = new Car();
 	}

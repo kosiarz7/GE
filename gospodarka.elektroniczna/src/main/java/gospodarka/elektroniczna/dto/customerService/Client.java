@@ -1,12 +1,19 @@
 package gospodarka.elektroniczna.dto.customerService;
 
-public class Client {
+import java.io.Serializable;
+
+public class Client implements Serializable {
+    
+     private static final long serialVersionUID = 1L;
+    
 	protected String name; //imie i nazwisko lub nazwa firmy
 	private String adress;
 	private String phone;
 	private String PIN; //pesel lub NIP
 
-	public Client()  {}
+	public Client()  {
+            PIN = "00000000000";
+        }
 
 	public String getName() {
 		return name;

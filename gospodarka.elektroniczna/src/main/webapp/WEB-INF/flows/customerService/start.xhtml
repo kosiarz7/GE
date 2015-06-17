@@ -2,16 +2,50 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="Obsługa klienta"/>
-    <ui:define name="pageContent">
-        Zawartość strony.
-    </ui:define>
-</ui:composition>
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+        <ui:param name="department" value="Obsluga klienta"/>
+        <ui:define name="pageContent">
+            <h:outputStylesheet library="css" name="service.css"  />
+            <h:form>
+                <div class="ui-grid ui-grid-responsive">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-6">
+
+                            <h2>Dokumenty do przeslania</h2>
+                            <h:panelGrid columns="1" style="margin: 0 auto;">    
+                                <p:button href="/app/customerService/orderCard" value="Wyslij karte konfiguracji zamowienia" styleClass="start-button"/>
+                                <p:button href="/app/customerService/orderInvoice" value="Wyslij rachunek do zamowienia" styleClass="start-button"/>
+                                <p:button href="/app/customerService/serviceOrderCard" value="Wyslij zlecenie uslug serwisowych" styleClass="start-button"/>
+                                <p:button href="/app/customerService/testDriveReport" value="Wyslij raport z jazdy probnej" styleClass="start-button"/>
+                                <p:button href="/app/customerService/dailyWorkReport" value="Wyslij dzienny raport pracy salonu" styleClass="start-button"/>
+                            </h:panelGrid>
+                        </div>
+
+                        <c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
+                            <div class="ui-grid-col-6">
+                                <h2>Podglad dokumentow wysylanych</h2>
+                                <h:panelGrid columns="1" style="margin: 0 auto;">
+                                    <p:button  href="/app/customerService/orderCardReceived" value="Pokaz przyjete zamowienia" styleClass="start-button" />				
+                                    <p:button  href="/app/customerService/orderInvoiceReceived" value="Pokaz rachunki zamowien" styleClass="start-button" />				
+                                    <p:button  href="/app/customerService/serviceOrderCardReceived" value="Pokaz przyjete zlecenia uslug" styleClass="start-button" />
+                                    <p:button  href="/app/customerService/testDriveReportReceived" value="Pokaz raporty jazd probnych" styleClass="start-button" />				
+                                    <p:button  href="/app/customerService/dailyWorkReportReceived" value="Pokaz raporty pracy salonu" styleClass="start-button" />			
+                                </h:panelGrid>
+                                <h2>Podglad dokumentow odbieranych</h2>
+                                <h:panelGrid columns="1" style="margin: 0 auto;">
+                                    <p:button  href="/app/storehouse/ppzShow" value="Pokaz magazynowy status zamowienia" styleClass="start-button" />				
+                                </h:panelGrid>
+                            </div>
+                        </c:if>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 </html>

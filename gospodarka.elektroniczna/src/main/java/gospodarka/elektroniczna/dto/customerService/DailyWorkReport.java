@@ -1,79 +1,73 @@
 package gospodarka.elektroniczna.dto.customerService;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 
-public class DailyWorkReport extends AbstractCustomerServiceUser implements Serializable{
+public class DailyWorkReport extends AbstractCustomerServiceUser implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2255396073131433657L;
-	
-	private Date date;
-	private ArrayList<Employee> employees;
-	private ArrayList<OrderCard> orders;
-	private ArrayList<TestDriveReport> testDrives;
-	private Double income;
-	
-	public DailyWorkReport() {}
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2255396073131433657L;
 
-	public void init() {
-		date = new Date();
-		employees = new ArrayList<Employee>();
-		orders = new ArrayList<OrderCard>();
-		testDrives = new ArrayList<TestDriveReport>();
-		
-		//pobrac dane
-	}
-	
-	public Date getDate() {
-		return date;
-	}
+    private Date date;
+    private Integer employeesAtShift;
+    private Integer ordersServed;
+    private Integer testDrivesPerformed;
+    private Double moneyStatus;
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public DailyWorkReport() {
+    }
 
-	public ArrayList<Employee> getEmployees() {
-		return employees;
-	}
+    public void init() {
+        date = new Date();
+    }
 
-	public void setEmployees(ArrayList<Employee> employees) {
-		this.employees = employees;
-	}
+    public Date getDate() {
+        return date;
+    }
 
-	public ArrayList<OrderCard> getOrders() {
-		return orders;
-	}
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-	public void setOrders(ArrayList<OrderCard> orders) {
-		this.orders = orders;
-	}
+    public Integer getEmployeesAtShift() {
+        return employeesAtShift;
+    }
 
-	public ArrayList<TestDriveReport> getTestDrives() {
-		return testDrives;
-	}
+    public void setEmployeesAtShift(Integer employeesAtShift) {
+        this.employeesAtShift = employeesAtShift;
+    }
 
-	public void setTestDrives(ArrayList<TestDriveReport> testDrives) {
-		this.testDrives = testDrives;
-	}
+    public Integer getOrdersServed() {
+        return ordersServed;
+    }
 
-	public Double getIncome() {
-		return income;
-	}
+    public void setOrdersServed(Integer ordersServed) {
+        this.ordersServed = ordersServed;
+    }
 
-	public void setIncome(Double income) {
-		this.income = income;
-	}
+    public Integer getTestDrivesPerformed() {
+        return testDrivesPerformed;
+    }
 
-	@Override
-	public String toString() {
-		return "DailyWorkReport [date=" + date + ", employees=" + employees
-				+ ", orders=" + orders + ", testDrives=" + testDrives
-				+ ", income=" + income + "]";
-	}
-	
-	
+    public void setTestDrivesPerformed(Integer testDrivesPerformed) {
+        this.testDrivesPerformed = testDrivesPerformed;
+    }
+
+    public Double getMoneyStatus() {
+        return moneyStatus;
+    }
+
+    public void setMoneyStatus(Double moneyStatus) {
+        this.moneyStatus = moneyStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "DailyWorkReport [date=" + date + ", employeesAtShift=" + employeesAtShift
+                + ", ordersServed=" + ordersServed + ", testDrivesPerformed=" + testDrivesPerformed
+                + ", moneyStatus=" + moneyStatus + "]";
+    }
+
 }

@@ -7,6 +7,8 @@
 	<!-- Zabezpieczenie flow przez Spring Security -->
 	<secured attributes="ROLE_CUSTOMER_SERVICE"/>
 	
-	<view-state id="start" />
-
+	<view-state id="start">
+            
+        </view-state>
+    
 </flow>

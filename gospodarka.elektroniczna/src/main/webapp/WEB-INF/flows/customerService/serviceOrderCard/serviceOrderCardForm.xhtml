@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
+        <ui:param name="department" value="Obsluga klienta"/>
+        <ui:define name="pageContent">
+            <h1>Zamowienie uslugi serwisowej</h1>
+            <h:form>
+                <div class="ui-grid ui-grid-responsive">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-6"/>
+                        <div class="ui-grid-col-6">
+                             <h:panelGrid columns="2" cellpadding="2">
+                                    <p:outputLabel for="orderDate" value="Data zamowienia: *" />
+                                    <p:calendar id="orderDate" value="#{data.serviceOrderDate}" pattern="dd-MM-yyyy" mask="true" />
+                             </h:panelGrid>                          
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-12">
+                            <br />
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-6">
+                            <p:panel id="clientData" header="Dane klienta" style="margin-bottom:20px">
+                                <h:panelGrid columns="2" cellpadding="2">
+                                    <p:outputLabel for="clientName" value="Imie i nazwisko:" />
+                                    <p:inputText id="clientName" value="#{data.client.name}" required="true" />
+
+
+                                    <p:outputLabel for="clientAdress" value="Adres:" />
+                                    <p:inputText id="clientAdress" value="#{data.client.adress}" required="true" />
+
+
+                                    <p:outputLabel for="clientPhone" value="Telefon:" />
+                                    <p:inputText id="clientPhone" value="#{data.client.phone}" required="true" />
+
+                                </h:panelGrid>
+                            </p:panel>
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <p:panel id="serviceData" header="Dane serwisu" style="margin-bottom:20px">
+                                <h:panelGrid columns="2" cellpadding="2">
+                                    <p:outputLabel for="clientName" value="Nazwa:" />
+                                    <p:inputText id="serviceName" value="#{data.service.name}" required="true" />
+
+
+                                    <p:outputLabel for="clientAdress" value="Adres:" />
+                                    <p:inputText id="serviceAdress" value="#{data.service.adress}" required="true" />
+
+
+                                    <p:outputLabel for="clientPhone" value="Telefon:" />
+                                    <p:inputText id="servicePhone" value="#{data.service.phone}" required="true" />
+
+                                </h:panelGrid>
+                            </p:panel>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                            <div class="ui-grid-col-6">
+                               <p:panel id="carData" header="Dane pojazdu" style="margin-bottom:20px">
+                                <h:panelGrid columns="2" cellpadding="2">
+                                    <p:outputLabel for="carBrand" value="Marka:" />
+                                    <p:inputText id="carBrand" value="#{data.car.brand}" required="true" />
+
+                                    <p:outputLabel for="carModel" value="Model:" />
+                                    <p:inputText id="carModel" value="#{data.car.model}" required="true" />
+
+                                    <p:outputLabel for="carRegistration" value="Numer rejestracyjny:" />
+                                    <p:inputText id="carRegistration" value="#{data.car.registrationNumber}" required="true" />
+ 
+                                    <p:outputLabel for="carVIN" value="VIN:" />
+                                    <p:inputText id="carVIN" value="#{data.car.VIN}" required="true" />
+                                </h:panelGrid>
+                            </p:panel>  
+                            </div>
+                            <div class="ui-grid-col-6">
+                                <p:panel id="todo" header="Zlecane uslugi" style="margin-bottom:20px">
+                                   <p:inputTextarea style="width: 98.5%;" value="#{data.todo}" rows="10" cols="50"
+								 counter="display" maxlength="255" counterTemplate="Pozostalo {0} znaków." />
+                                    <h:outputText id="display" /> 
+                                    
+                                </p:panel>
+                            </div>   
+                    </div>
+                    <div class="ui-grid-row">
+                                <p:commandButton action="saveServiceOrderCardForm" value="Wyslij zamowienie" ajax="false" />
+                                <p:button href="/app/customerService" value="Powrót" />
+                            </div>
+                    <div class="ui-grid-row">
+                        <p>
+                            <p:message for="clientName" />
+                        </p>
+                        <p>
+                            <p:message for="clientAdress" />
+                        </p>
+                        <p>
+                            <p:message for="clientPhone" />
+                        </p>
+                        <p>
+                            <p:message for="serviceName" />
+                        </p>
+                        <p>
+                            <p:message for="serviceAdress" />
+                        </p>
+                        <p>
+                            <p:message for="servicePhone" />
+                        </p>
+                        <p>
+                            <p:message for="carBrand" />
+                        </p>
+                        <p>
+                            <p:message for="carModel" />
+                        </p>
+                        <p>
+                            <p:message for="carRegistration" />
+                        </p>
+                        <p>
+                            <p:message for="carVIN" />
+                        </p>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

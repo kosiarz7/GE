@@ -1,7 +1,11 @@
 package gospodarka.elektroniczna.dto.customerService;
 
-public class Services {
+import java.io.Serializable;
+
+public class Services implements Serializable {
 	
+     private static final long serialVersionUID = 1L;
+    
 	private Integer id;
 	private String name;
 	private Double price;

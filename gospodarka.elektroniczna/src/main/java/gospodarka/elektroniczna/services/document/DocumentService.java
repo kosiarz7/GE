@@ -8,6 +8,11 @@ import gospodarka.elektroniczna.dao.department.IDepartmentDao;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.dao.documenttype.IDocumentHeaderDao;
 import gospodarka.elektroniczna.documents.TestDocument;
+import gospodarka.elektroniczna.documents.customerService.DailyWorkReportDocument;
+import gospodarka.elektroniczna.documents.customerService.OrderCardDocument;
+import gospodarka.elektroniczna.documents.customerService.OrderInvoiceDocument;
+import gospodarka.elektroniczna.documents.customerService.ServiceOrderCardDocument;
+import gospodarka.elektroniczna.documents.customerService.TestDriveReportDocument;
 import gospodarka.elektroniczna.documents.finance.InvoiceDocument;
 import gospodarka.elektroniczna.documents.hr.BusinessTravelClearingDocument;
 import gospodarka.elektroniczna.documents.hr.CandidateRequestDocument;
@@ -108,6 +113,11 @@ public class DocumentService implements IDocumentService, Serializable {
         map.put(DocumentTypes.REPAIR_COST_ESTIMATION, RepairCostEstimationForm.class);
         map.put(DocumentTypes.REPLACEMENT_PART_ORDER, ReplacementPartOrderForm.class);
         map.put(DocumentTypes.WARRANTY_REPAIR, ReplacementPartOrderForm.class);
+        map.put(DocumentTypes.ORDER_CARD, OrderCardDocument.class);
+        map.put(DocumentTypes.ORDER_INVOICE, OrderInvoiceDocument.class);
+        map.put(DocumentTypes.TEST_DRIVE_REPORT, TestDriveReportDocument.class);
+        map.put(DocumentTypes.SERVICE_ORDER_CARD, ServiceOrderCardDocument.class);
+        map.put(DocumentTypes.DAILY_WORK_REPORT, DailyWorkReportDocument.class);
         // TODO przy kolejnych dokumentach trzeba dołożyć.
     }
     

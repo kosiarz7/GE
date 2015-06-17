@@ -17,7 +17,32 @@ public class OrderInvoice extends AbstractCustomerServiceUser implements Seriali
 	
 	private Client client;
 	private Client seller;
+        private Item item;
 
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+    
+    public String addItem() {
+        Item nitem = new Item();
+        nitem.setId(this.item.getId());
+        nitem.setName(this.item.getName());
+        nitem.setAmount(this.item.getAmount());
+        nitem.setUnit(this.item.getUnit());
+        nitem.setValue(this.item.getValue());
+        items.add(nitem);
+        this.item.setId(this.item.getId()+1);
+        this.item.setName("");
+        this.item.setUnit("");
+        this.item.setAmount(0);
+        this.item.setValue(0.0);
+        return "addItem";
+    }
+    
 	private ArrayList<Item> items;
 	
 	private Double totalValue;
@@ -30,8 +55,9 @@ public class OrderInvoice extends AbstractCustomerServiceUser implements Seriali
 		documentDate = new Date();
 		client = new Client();
 		seller = new Client();
+                item = new Item();
 		//uzupelnic dane zakladu i daty
-		items = new ArrayList<Item>();
+		items = new ArrayList<>();
 	}
 
 	public Date getSellDate() {

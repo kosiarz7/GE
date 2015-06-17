@@ -1,8 +1,8 @@
 package gospodarka.elektroniczna.dto.customerService;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
+import javax.annotation.PostConstruct;
 
 public class OrderCard extends AbstractCustomerServiceUser implements Serializable {
 
@@ -10,7 +10,33 @@ public class OrderCard extends AbstractCustomerServiceUser implements Serializab
 	 * 
 	 */
 	private static final long serialVersionUID = -1216767815450969192L;
-
+        
+        public enum InteriorType {
+		Basic("Basic"),
+		Elegance("Elegance"),
+		Sporting("Sporting"),
+		SuperMegaHiperExtra("SuperMegaHiperExtra");
+		private String label;
+		InteriorType(String label) {
+			this.label = label;
+		}
+	    public String getLabel() {
+	    	return label;
+	    }
+	}
+        
+            public enum TransmissionType {
+		Manualna("Manualna 6 biegowa"),
+		Automatyczna("Automatyczna");
+		private String label;
+		TransmissionType(String label) {
+			this.label = label;
+		}
+	    public String getLabel() {
+	    	return label;
+	    }
+	}
+        
 	private Client client;
 	
 	private Date orderDate;
@@ -19,18 +45,17 @@ public class OrderCard extends AbstractCustomerServiceUser implements Serializab
 	private String color;
 	private String interior;
 	private String transmission;
-	private String equipmentVersion;
-	private ArrayList<String> accessories;
-
 	private Integer amount;
-	private Double price;
+
 	
 	public OrderCard() {
 	}
-
+        
+        @PostConstruct
 	public void init() {
 		orderDate = new Date();
 		client = new Client();
+                amount = 1;
 	}
 
 	public String getModel() {
@@ -73,26 +98,6 @@ public class OrderCard extends AbstractCustomerServiceUser implements Serializab
 		this.transmission = transmission;
 	}
 
-	public String getEquipmentVersion() {
-		return equipmentVersion;
-	}
-
-	public void setEquipmentVersion(String equipmentVersion) {
-		this.equipmentVersion = equipmentVersion;
-	}
-
-	public ArrayList<String> getAccessories() {
-		return accessories;
-	}
-
-	public void setAccessories(ArrayList<String> accessories) {
-		this.accessories = accessories;
-	}
-
-	public boolean addAccessories(String e) {
-		return accessories.add(e);
-	}
-
 	public Date getOrderDate() {
 		return orderDate;
 	}
@@ -117,22 +122,20 @@ public class OrderCard extends AbstractCustomerServiceUser implements Serializab
 		this.amount = amount;
 	}
 
-	public Double getPrice() {
-		return price;
+        public InteriorType[] getInteriorTypeList() {
+		return InteriorType.values();
 	}
-
-	public void setPrice(Double price) {
-		this.price = price;
+        
+        public TransmissionType[] getTransmissionTypeList() {
+		return TransmissionType.values();
 	}
-
+        
 	@Override
 	public String toString() {
 		return "OrderCard [client=" + client + ", orderDate=" + orderDate
 				+ ", model=" + model + ", engineSize=" + engineSize
 				+ ", color=" + color + ", interior=" + interior
-				+ ", transmission=" + transmission + ", equipmentVersion="
-				+ equipmentVersion + ", accessories=" + accessories
-				+ ", amount=" + amount + ", price=" + price + "]";
+				+ ", transmission=" + transmission + ", equipmentVersion=";
 	}
 
 }
