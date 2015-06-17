@@ -14,34 +14,44 @@ public enum Departments {
     /**
      * Fikcyjny dział służący do oznaczenia początku obiegu danego dokumentu.
      */
-    BEGIN,
+    BEGIN("Poczatek"), 
     /**
      * Kadry.
      */
-    HUMAN_RESOURCES,
+    HUMAN_RESOURCES("Kadry"),
     /**
      * Produkcja.
      */
-    MANUFACTURE,
+    MANUFACTURE("Produkcja"),
     /**
      * Finanse i płace.
      */
-    FINANCE,
+    FINANCE("Finanse"),
     /**
      * Serwis.
      */
-    SERVIS,
+    SERVIS("Service"),
     /**
      * Magazyn.
      */
-    STOREHOUSE,
+    STOREHOUSE("Magazyn"),
     /**
      * Obsługa klienta.
      */
-    CUSTOMER_SERVICE,
+    CUSTOMER_SERVICE("Obsługa klienta"),
     /**
      * Fikcyjny dział służacy do oznaczenia końca obiegu danego dokumentu.
      */
-    END;
+    END("Koniec");
 
+    String departmentStr;
+    private Departments(String departmentStr)
+    {
+    	this.departmentStr = departmentStr;
+    }
+    
+    public String toString()
+    {
+    	return departmentStr;
+    }
 }

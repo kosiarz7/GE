@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
+        <ui:param name="department" value="Obsluga klienta"/>
+        <ui:define name="pageContent">
+            <h1>Raport dziennej pracy salonu</h1>
+            <h:form>
+                <div class="ui-grid ui-grid-responsive">
+                    <div class="ui-grid-row">
+                        <p:panel id="clientData" header="Dane statystyczne" style="margin-bottom:20px">
+                                <h:panelGrid columns="2" cellpadding="2">
+                                       <p:outputLabel for="date" value="Data: *" />
+                                    <p:calendar id="date" value="#{data.date}" pattern="dd-MM-yyyy" mask="true" />
+
+                                    <p:outputLabel for="employeesAtShift" value="Ilosc pracownikow na zmianie:" />
+                                    <p:inputText id="employeesAtShift" value="#{data.employeesAtShift}" required="true" />
+
+                                    <p:outputLabel for="ordersServed" value="Ilosc zamowien:" />
+                                    <p:inputText id="ordersServed" value="#{data.ordersServed}" required="true" />
+                                    
+                                    <p:outputLabel for="testDrivesPerformed" value="Ilosc odbytych jazd probnych:" />
+                                    <p:inputText id="testDrivesPerformed" value="#{data.testDrivesPerformed}" required="true" />
+
+                                    <p:outputLabel for="moneyStatus" value="Suma pieniedzy w sejfie:" />
+                                    <p:inputText id="moneyStatus" value="#{data.moneyStatus}" required="true" />
+                                </h:panelGrid>
+                            </p:panel>
+                    </div>
+                     <div class="ui-grid-row">
+                                <p:commandButton action="saveDailyWorkReportForm" value="Wyslij zamowienie" ajax="false" />
+                                <p:button href="/app/customerService" value="Powrót" />
+                     </div>
+                    <div class="ui-grid-row">
+                        <p>
+                            <p:message for="date" />
+                        </p>
+                        <p>
+                            <p:message for="employeesAtShift" />
+                        </p>
+                        <p>
+                            <p:message for="ordersServed" />
+                        </p>
+                        <p>
+                            <p:message for="testDrivesPerformed" />
+                        </p>
+                        <p>
+                            <p:message for="moneyStatus" />
+                        </p>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
