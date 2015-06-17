@@ -5,13 +5,13 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
         
     <!-- Zabezpieczenie flow przez Spring Security -->
-    <secured attributes="ROLE_SERVIS, ROLE_STOREHOUSE" match="any"/>
+    <secured attributes="ROLE_SERVIS, ROLE_CUSTOMER_SERVICE" match="any"/>
         
     <var name="replacementPartOrderForm" class="gospodarka.elektroniczna.documents.service.ReplacementPartOrderForm" />
         
-    <view-state id="showOrderFormView">
+    <view-state id="showRepairCostEstimationForm">
         <on-entry>
-            <evaluate expression="serviceFlow.loadOrderForm()" result="flowScope.orderForms"/>
+            <evaluate expression="serviceFlow.loadRepairCostEstimationForm()" result="flowScope.repairCostEstimationForms"/>
         </on-entry>
     </view-state>
         

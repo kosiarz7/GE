@@ -12,30 +12,34 @@
         <ui:param name="department" value="Serwis"/>
         <ui:define name="pageContent">
             <h3>Zamówienie części zamiennych</h3>
-            <p:separator/>
+            
 
-            <h:form>
+            <c:forEach items="${flowScope.orderForms}" var="form">
+            <p:separator/>
+                <h:form>
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel value="Data:" />
-                    <h:outputLabel value="#{flowScope.orderForm.date}">
+                    <h:outputLabel value="#{form.date}">
                         <f:convertDateTime pattern="dd.MM.yyyy" />
                     </h:outputLabel>
                     
                     <h:outputLabel value="Data dostarczenia:" />
-                    <h:outputLabel value="#{flowScope.orderForm.deliveryDate}">
+                    <h:outputLabel value="#{form.deliveryDate}">
                         <f:convertDateTime pattern="dd.MM.yyyy" />
                     </h:outputLabel>
 
                     <h:outputLabel value="Nazwa części:" />
-                    <h:outputLabel value="#{flowScope.orderForm.elementName}"/>
+                    <h:outputLabel value="#{form.elementName}"/>
 
                     <h:outputLabel value="Ilość:" />
-                    <h:outputLabel value="#{flowScope.orderForm.amount}"/>
+                    <h:outputLabel value="#{form.amount}"/>
 
                     <h:outputLabel value="Nazwisko pracownika:" />
-                    <h:outputLabel value="#{flowScope.orderForm.worker.name}"/>
+                    <h:outputLabel value="#{form.worker.name}"/>
                 </h:panelGrid>
             </h:form>
+            </c:forEach>
+            
             <p:button href="/app/storehouse" value="Powrót" />
         </ui:define>
     </ui:composition>

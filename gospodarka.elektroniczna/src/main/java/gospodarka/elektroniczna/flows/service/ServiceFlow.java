@@ -12,6 +12,7 @@ import gospodarka.elektroniczna.documents.customerService.TestDriveReportDocumen
 import gospodarka.elektroniczna.documents.manufacture.DefectiveElementDocument;
 import gospodarka.elektroniczna.documents.service.CollectCarForm;
 import gospodarka.elektroniczna.documents.service.DamagedCarForm;
+import gospodarka.elektroniczna.documents.service.RepairCostEstimationForm;
 import gospodarka.elektroniczna.documents.service.ReplacementPartOrderForm;
 import gospodarka.elektroniczna.documents.service.WarrantyRepairForm;
 import gospodarka.elektroniczna.dto.customerService.ServiceOrderCard;
@@ -21,7 +22,9 @@ import gospodarka.elektroniczna.services.document.Document;
 import gospodarka.elektroniczna.services.document.DocumentStub;
 import gospodarka.elektroniczna.services.document.IDocumentService;
 import gospodarka.elektroniczna.services.document.SearchCriteria;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,7 +56,7 @@ public class ServiceFlow implements Serializable {
         return "goReceiveDocuments";
     }
     
-    public String loadDocument(DocumentStub documentStub)
+    public String loadDocument(DocumentStub documentStub) throws IOException
     {
         switch(documentStub.getType())
         {
@@ -81,29 +84,46 @@ public class ServiceFlow implements Serializable {
                 Document<TestDriveReportDocument> testDriveReportDocument = documentService.loadCurrentDocument(documentStub);
                 setTestDriveReportForm(testDriveReportDocument.getContent().getData());
                 return "goLoadTestDriveReportForm";
+            case ORDER_CONFIRMATION:
+                
             default:
                 return "goLoadError";
         }
     }
     
-    public ReplacementPartOrderForm loadOrderForm()
+    public List<ReplacementPartOrderForm> loadOrderForm()
     {
         SearchCriteria searchCriteria = new SearchCriteria();
         searchCriteria.setDepartment(Departments.STOREHOUSE);
         searchCriteria.setType(DocumentTypes.REPLACEMENT_PART_ORDER);
         List<DocumentStub> documentStubs = documentService.loadCurrentDocuments(searchCriteria);
         Document<ReplacementPartOrderForm> replacementPartOrderDocument;
-        if(documentStubs.size() >= 1)
+        List<ReplacementPartOrderForm> replacementPartOrderForms = new ArrayList<>();
+        
+        for(DocumentStub documentStub : documentStubs)
         {
-            replacementPartOrderDocument = documentService.loadCurrentDocument(documentStubs.get(0));
-            
-            return replacementPartOrderDocument.getContent();
+            replacementPartOrderDocument = documentService.loadCurrentDocument(documentStub);
+            replacementPartOrderForms.add(replacementPartOrderDocument.getContent());
         }
-        else
+        
+        return replacementPartOrderForms;
+    }
+    
+        public List<RepairCostEstimationForm> loadRepairCostEstimationForm()
+    {
+        SearchCriteria searchCriteria = new SearchCriteria();
+        searchCriteria.setDepartment(Departments.CUSTOMER_SERVICE);
+        searchCriteria.setType(DocumentTypes.REPAIR_COST_ESTIMATION);
+        List<DocumentStub> documentStubs = documentService.loadCurrentDocuments(searchCriteria);
+        Document<RepairCostEstimationForm> repairCostEstimationDocument;
+        List<RepairCostEstimationForm> repairCostEstimationForms = new ArrayList<>();
+        for(DocumentStub documentStub : documentStubs)
         {
-            return null;
+            repairCostEstimationDocument = documentService.loadCurrentDocument(documentStub);
+            repairCostEstimationForms.add(repairCostEstimationDocument.getContent());
         }
-            
+        
+        return repairCostEstimationForms;          
     }
     
     public void setDocumentService(final IDocumentService documentService) {

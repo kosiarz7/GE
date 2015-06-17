@@ -11,30 +11,27 @@
     <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
         <ui:param name="department" value="Serwis"/>
         <ui:define name="pageContent">
-            <h3>Zgłoszenie wadliwego elementu</h3>
+            <h3>Raport jazdy próbnej</h3>
             <p:separator/>
 
             <h:form>
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel value="Data:" />
-                    <h:outputLabel value="#{serviceFlow.defectiveElementForm.date}">
+                    <h:outputLabel value="#{serviceFlow.testDriveReportForm.dateTime}">
                         <f:convertDateTime pattern="dd.MM.yyyy" />
                     </h:outputLabel>
                     
-                    <h:outputLabel value="Osoba zgłaszająca:" />
-                    <h:outputLabel value="#{serviceFlow.defectiveElementForm.complaint}"/>
+                    <h:outputLabel value="Pracownik obsługujący:" />
+                    <h:outputLabel value="#{serviceFlow.testDriveReportForm.employee.name}"/>
 
-                    <h:outputLabel value="Numer linii montażowej:" />
-                    <h:outputLabel value="#{serviceFlow.defectiveElementForm.productionLineNumber}"/>
+                    <h:outputLabel value="Numer rejestracyjny:" />
+                    <h:outputLabel value="#{serviceFlow.testDriveReportForm.car.registrationNumber}"/>
 
-                    <h:outputLabel value="Numer stanowiska:" />
-                    <h:outputLabel value="#{serviceFlow.defectiveElementForm.workStationNumber}"/>
+                    <h:outputLabel value="Stan licznika przed:" />
+                    <h:outputLabel value="#{serviceFlow.testDriveReportForm.mileageBefore}"/>
                     
-                    <h:outputLabel value="Numer elementu:" />
-                    <h:outputLabel value="#{serviceFlow.defectiveElementForm.elementNumber}"/>
-                    
-                    <h:outputLabel value="Opis wady:"/>
-                    <h:outputLabel value="#{serviceFlow.defectiveElementForm.description}"/>
+                    <h:outputLabel value="Stan licznika po:" />
+                    <h:outputLabel value="#{serviceFlow.testDriveReportForm.mileageAfter}"/>
                     
                 </h:panelGrid>
                 <p:commandButton id="cancel" action="cancel" value="Anuluj" ajax="false" immediate="true"/>
