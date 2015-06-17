@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="Kadry"/>
+	<ui:param name="department" value="#{springSecurityContextUtilBean.getUserDepartment().toString()}"/>
 	<ui:define name="pageContent">
 		<h:form>
 		<h1>Wnioski</h1>
