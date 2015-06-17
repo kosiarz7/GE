@@ -6,7 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="#{springSecurityContextUtilBean.getUserDepartment().toString()}"/>
+	<ui:param name="department" value="#{springSecurityContextUtilBean.getUserDepartment().getDepartmentString()}"/>
 	<ui:define name="pageContent">
 		<h1>Zarejestruj nowego kandydata</h1>
 		<h:form>
