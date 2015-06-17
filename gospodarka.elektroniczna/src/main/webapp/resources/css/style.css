@@ -5,32 +5,72 @@ body {
 	padding: 0;
 	font-size: 16px;
 	font-family: Arial, sans-serif;
-	background-color: white;
+	background-color: black;
+	color: #FFFFFF;
 }
 
 #page {
-	padding-top: 30px;
-}
-
-#header, .bkgColor {
-	background-color: #527BEB;
+	display: table;
+	margin: 0 auto;
+	border: 2px solid white;
+	padding: 25px;
+	margin-top: 0px;
+	border-radius: 25px;
+	text-align: center;
+	background-color: black;
+	width: 1000px;
 }
 
 #header {
-	padding-top: 30px;
-	padding-bottom: 30px;
-	color: white;
+	display: table;
+	margin: 0 auto;
+	border: 2px solid white;
+	padding: 25px;
+	margin-top: 0px;
+	border-radius: 25px;
+	text-align: center;
+	background-color: black;
+	width: 1000px;
+}
+
+ .bkgColor {
+	background-image: url("../img/photo-car-production.jpg");
+    background-color: #000000;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+ }
+#login_field
+{
+	display: table; 
+	margin: 0 auto; 
+	border: 2px solid white; 
+	padding: 20px; 
+	margin-top: 100px; 
+	border-radius: 25px; 
+	text-align: center;
+	background-color: black;
 }
 
 #header-content {
 	position: relative;
-	height: 57px;
+	height: 65px;
 }
 
-#title {
-	position: absolute;
-	bottom: 0;
-	left: 0;
+#small_logo {
+  width: 65px;
+  height: 65px;
+  position: absolute;
+  left: 0px;
+}
+#factory_name {
+  position: absolute;
+  left: 70px;
+	color: #FFFFFF;
+}
+#department_name {
+	
+	color: #FFFFFF;
 }
 
 #userData {
@@ -43,12 +83,25 @@ body {
 	border: 0; 
 	vertical-align: middle;
 	padding-left: 15px;
+	color: #FFFFFF;
 }
 
-#pageSeparator {
-	height: 2px; 
-	width: 100%;
-	background-color: #F87171;
+#login_user
+{
+  margin-top: 5px;
+	color: #FFFFFF;
+}
+#menu_field
+{
+display: table;
+  margin: 0 auto;
+  border: 2px solid white;
+  padding-top: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 25px;
+  text-align: center;
+  background-color: black;
 }
 
 /* Kontener opakowujący jakąkolwiek zawartość na stronie. Wyznacza użytkowy obszar oraz wypośrodkowuje treść. */
@@ -111,96 +164,4 @@ div.content {
 
 .wideSpacing {
 	letter-spacing: 2px;
-}
-
-/* wygląd głównego elementu - ol */
-ol.mainMenu {
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-	background-color: #FFF;
-	font-size: 18px;
-	height: 2em;
-	line-height: 2em;
-	text-align: center;
-	z-index: 1;
-}
-
-/* wygląd wszystkich elementów - a - znajdujących się w elemencie - ol */
-ol.mainMenu a {
-	display: block;
-	text-decoration: none;
-	color: #000;
-	padding: 0 5px;
-	z-index: 1;
-}
-
-/* wygląd elementów - li - wszystkich dzieci elementu - ol */
-ol.mainMenu>li {
-	float: left;
-	width: 150px;
-	margin-left: 1px;
-	background-color: #FFFFFF;
-	height: 2em;
-	z-index: 1;
-}
-
-/* wygląd elementu - li - pierwszego dziecka elementu - ol */
-ol.mainMenu>li:first-child {
-	margin-left: 0;
-	z-index: 1;
-}
-
-/* wygląd elementów - li - wszystkich dzieci elementu - ol - po najechaniu kursorem myszki na element - li */
-ol.mainMenu>li:hover {
-	background-color: #EEE;
-	z-index: 1;
-}
-
-/* wygląd elementu - a - dziecka elementu - li - będącego dzieckiem elementu - ol - po najechaniu kursorem myszki na element - li */
-ol.mainMenu>li:hover>a {
-	color: #09C;
-	z-index: 1;
-}
-
-/* wygląd elementu - ul - dziecka elementu - li - będącego dzieckiem elementu - ol - po najechaniu kursorem myszki na element - li */
-ol.mainMenu>li:hover>ul {
-	display: block;
-	z-index: 1;
-}
-
-/* ------------------------CZĘŚĆ-ROZWIJANA-MENU------------------------ */
-
-/* wygląd głównych rozwijanych elementów - ul */
-ol.mainMenu>li>ul {
-	display: none;
-	list-style-type: none;
-	padding: 0;
-	margin: 0;
-	z-index: 1;
-}
-
-/* wygląd elementu - li - w części rozwijanej */
-ol.mainMenu>li>ul>li {
-	position: relative;
-	background-color: #EEE;
-	z-index: 1;
-}
-
-/* wygląd elementu - a - w części rozwijanej */
-ol.mainMenu>li>ul>li>a {
-	border-top: 1px solid #FFF;
-	z-index: 1;
-}
-
-/* wygląd elementu - li - w części rozwijanej, po najechaniu kursorem myszki na dany element - li */
-ol.mainMenu>li>ul>li:hover {
-	background-color: #DDD;
-	z-index: 1;
-}
-
-/* wygląd elementu - a - w części rozwijanej, po najechaniu kursorem myszki na element - li */
-ol.mainMenu>li>ul>li:hover>a {
-	color: #09C;
-	z-index: 1;
 }

@@ -6,7 +6,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="#{springSecurityContextUtilBean.getUserDepartment().getDepartmentString()}"/>
 	<ui:define name="pageContent">
 		<h1>Zarejestruj nowego kandydata</h1>
 		<h:form>
@@ -24,12 +23,12 @@
 			</p> -->
 			<p>
 				Imie:
-				<p:inputText id="name" value="#{newCandidateVar.userName}"
+				<p:inputText id="name" value="#{newCandidateVar.candidateName}"
 					label="'Imie'"  required="true"/>
 			</p>
 			<p>
 				Nazwisko:
-				<p:inputText id="surname" value="#{newCandidateVar.userSurname}"
+				<p:inputText id="surname" value="#{newCandidateVar.candidateSurname}"
 					label="'Nazwisko'"  required="true"/>
 			</p>
 			<p>
@@ -46,7 +45,7 @@
 			</p>
 
 			<p:commandButton action="newCandidateHr" value="Dodaj" ajax="false" />
-			<p:button href="/app/hr" value="Powrót" />
+
 		</h:form>
 	</ui:define>
 </ui:composition>

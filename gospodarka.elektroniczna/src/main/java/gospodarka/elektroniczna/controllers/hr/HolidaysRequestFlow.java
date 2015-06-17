@@ -9,6 +9,9 @@ import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.user.UserData;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.primefaces.event.SelectEvent;
@@ -43,8 +46,24 @@ public class HolidaysRequestFlow extends AbstractHrFlow<HolidaysRequest> impleme
         criteria.setType(DocumentTypes.HOLIDAYS_REQUEST);
 
         holidaysRequests = search(criteria);
+        sortHolidaysRequest();
         LoggerFactory.getLogger(HolidaysRequestFlow.class).debug("getHolidaysRequests", holidaysRequests.size());
 
+    }
+    
+    private void sortHolidaysRequest()
+    {
+    	Collections.sort(holidaysRequests, new Comparator<Document<AbstractHrDocument<HolidaysRequest>>>() {
+
+			@Override
+			public int compare(
+					Document<AbstractHrDocument<HolidaysRequest>> o1,
+					Document<AbstractHrDocument<HolidaysRequest>> o2) {
+				Date date1 = o1.getContent().getData().getFromDate();
+				Date date2 = o2.getContent().getData().getFromDate();
+				return -date1.compareTo(date2);
+			}
+		});
     }
     
 	@SuppressWarnings("unchecked")

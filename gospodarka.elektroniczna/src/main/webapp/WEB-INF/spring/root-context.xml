@@ -103,19 +103,19 @@
 	</bean>
 	
 	<bean id="usernameExtractor" class="gospodarka.elektroniczna.common.beans.UsernameExtractorBean" lazy-init="false"/>
-	
+	<!-- Nie chce mi sie zaglebiac jak to wywalic - zmienie na taki sam adres -->
 	<bean id="redirectBean" class="gospodarka.elektroniczna.common.beans.RedirectBean" 
 		p:springSecurityContextUtil-ref="springSecurityContextUtilBean"
 		p:prefix="redirect:/app/" p:rootRole="ROLE_ROOT">
 		<property name="redirects">
 			<map>
-				<entry key="ROLE_ROOT" value="root" />
-				<entry key="ROLE_HR" value="hr" />
-				<entry key="ROLE_MANUFACTURE" value="manufacture" />
-				<entry key="ROLE_FINANCE" value="finance" />
-				<entry key="ROLE_SERVIS" value="service" />
-				<entry key="ROLE_STOREHOUSE" value="storehouse" />
-				<entry key="ROLE_CUSTOMER_SERVICE" value="customerService" />
+				<entry key="ROLE_ROOT" value="mainWindow" />
+				<entry key="ROLE_HR" value="mainWindow" />
+				<entry key="ROLE_MANUFACTURE" value="mainWindow" />
+				<entry key="ROLE_FINANCE" value="mainWindow" />
+				<entry key="ROLE_SERVIS" value="mainWindow" />
+				<entry key="ROLE_STOREHOUSE" value="mainWindow" />
+				<entry key="ROLE_CUSTOMER_SERVICE" value="mainWindow" />
 			</map>
 		</property>
 	</bean>

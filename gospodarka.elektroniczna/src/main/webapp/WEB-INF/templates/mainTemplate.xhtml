@@ -5,41 +5,67 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<title>Produkcja samochodów</title>
+	<title>General Electrics - Produkcja samochodów</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="#{request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="#{request.contextPath}/resources/css/style.css"
+		rel="stylesheet" type="text/css" />
 </h:head>
-<h:body >
+<h:body styleClass="bkgColor">
 	<div id="header">
 		<div id="header-content" class="content">
-			<div id="title" class="font48p wideSpacing">#{department}</div>
+			<img src="#{request.contextPath}/resources/img/logo.png"
+				id="small_logo" />
+			<div id="factory_name" class="font36p wideSpacing">
+				General<br />Electrics
+			</div>
+			<div id="department_name" class="font48p wideSpacing">#{springSecurityContextUtilBean.getUserDepartment().getDepartmentString()}</div>
+
 			<div id="userData">
 				<form id="logoutForm" action="${request.contextPath}/app/logout"
 					method="post">
-					#{springSecurityContextUtilBean.getLoggedOnUserNameAndSurname()} <a
-						href="#" title="Wyloguj się"
+					<a href="#" title="Wyloguj się"
 						onclick="document.getElementById('logoutForm').submit();"> <img
 						id="logout-icon"
-						src="#{request.contextPath}/resources/img/exit.png" />
+						src="#{request.contextPath}/resources/img/exit2.png" />
 					</a> <input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
+					<div id="login_user">
+						#{springSecurityContextUtilBean.getLoggedOnUserNameAndSurname()}</div>
 				</form>
 			</div>
+
 		</div>
 	</div>
-	
-	<div id="pageSeparator" />
-	
-	<div id="menu" class="content">
-		<p:button href="/app/hr" value="KADRY" />
-		<p:button href="/app/manufacture" value="PRODUKCJA" />
-		<p:button href="/app/finance" value="FINANSE" />
-		<p:button href="/app/service" value="SERWIS" />
-		<p:button href="/app/storehouse" value="MAGAZYN" />
-		<p:button href="/app/customerService" value="OBSŁUGA" />
+
+	<div id="menu_field">
+		<div id="menu" class="content">
+			<h:form prependId="false">
+				<p:menubar id="menubar">
+					<p:menuitem value="Pulpit" url="/app/mainWindow" />
+					<p:submenu label="KADRY">
+						<p:menuitem value="Wyślij wniosek o urlop"
+							url="/app/hr/holidaysRequest" />
+						<p:menuitem value="Wyślij informacje o wakacie"
+							url="/app/hr/candidateRequest" />
+						<p:menuitem value="Wyślij zwolnienie lekarskie"
+							url="/app/hr/sickLeave" />
+						<p:menuitem value="Zobacz kandydatów" url="/app/hr/newCandidate" />
+						<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_HR')}">
+							<p:separator />
+							<p:menuitem value="Wnioski o urlop"
+								url="/app/hr/holidaysRequestHr" />
+							<p:menuitem value="Sprawdź wakaty"
+								url="/app/hr/candidateRequestHr" />
+							<p:menuitem value="Zwolnienia lekarskie"
+								url="/app/hr/sickLeaveHr" />
+							<p:menuitem value="Nowy kandydat" url="/app/hr/newCandidateHr" />
+						</c:if>
+					</p:submenu>
+
+				</p:menubar>
+			</h:form>
+		</div>
 	</div>
-	
-	<div id="pageSeparator" />
 
 	<div id="page">
 		<div class="content">
