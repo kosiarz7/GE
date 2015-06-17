@@ -5,7 +5,9 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd">
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
-	<secured attributes="ROLE_MANUFACTURE"/>
+	<secured
+		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT"
+		match="any" />
         
 	<var name="monthlySummary" class="gospodarka.elektroniczna.dto.manufacture.MonthlySummaryOfProductionLine" />
         <var name="accidentForm" class="gospodarka.elektroniczna.dto.manufacture.IndustrialAccidentForm" />

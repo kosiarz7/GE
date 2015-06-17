@@ -6,11 +6,11 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+  <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
         <ui:param name="department" value="Produkcja"/>
-        <ui:define name="pageContent">
-            <h1>Miesięczne podsumowanie linii produkcyjnej</h1>
-             <p:separator/>
+	<ui:define name="pageContent">
+		<h1>Zgłoszenie wypadku przy pracy</h1>
+		<p:separator/>
              <h:form>
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel value="Data:" />
@@ -39,7 +39,8 @@
                 </h:panelGrid>
                 <p:button href="/app/manufacture" value="Powrót" />
             </h:form>
-        </ui:define>
-    </ui:composition>
+
+	</ui:define>
+</ui:composition>
 </html>
 

@@ -49,14 +49,14 @@ public class ServiceFlow implements Serializable{
                 Document<MonthlySummaryOfProductionLineDocument> monthlySummaryDocument = documentService.loadCurrentDocument(documentStub);
                 setMonthlySummaryForm(monthlySummaryDocument.getContent());
                 return "goLoadMonthlySummaryForm";
-            /*case :
+            case INTERNAL_ADOPTION:
                 Document<PWDocument> pwDocument = documentService.loadCurrentDocument(documentStub);
                 setPWForm(pwDocument.getContent());
                 return "goLoadPWForm";
-            case :
+            case INTERNAL_ISSUE:
                 Document<WWDocument> wwDocument = documentService.loadCurrentDocument(documentStub);
                 setWWForm(wwDocument.getContent());
-                return "goLoadWWForm";*/
+                return "goLoadWWForm";
             default:
                 return "cancel";
         }

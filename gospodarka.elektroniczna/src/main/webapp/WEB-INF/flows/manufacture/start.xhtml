@@ -21,58 +21,16 @@
             </h:head>
             <body>
                 <div role="tabpanel">
-                    <ul id="tab" class="nav nav-pills nav-justified" role="tablist">
-                        <li role="presentation" class="active"><a href="#documentAll" aria-controls="documentAll" role="tab" data-toggle="tab">Dokumnety do zatwierdzenia</a></li>
-                        <li role="presentation"><a href="#addDocument" aria-controls="addDocument" role="tab" data-toggle="tab">Dodaj dokument</a></li>
+                    <ul id="tab" class="nav nav-pills nav-justified" role="tablist">                       
+                        <li role="presentation" class="active"><a href="#addDocument" aria-controls="addDocument" role="tab" data-toggle="tab">Dodaj dokument</a></li>
+                        <c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+                            <li role="presentation" ><a href="#documentAll" aria-controls="documentAll" role="tab" data-toggle="tab">Dokumnety do zatwierdzenia</a></li>
+                        </c:if>
                     </ul>
 
                     <div id="tabContent" class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="documentAll">
-                            <!-- <ui:include src="/WEB-INF/flows/manufacture/reviewDocuments.xhtml"/>-->
-                            <br/>
-                            <!-- <p>
-                                 <p:button href="/app/manufacture/monthlySummaryManufacture" class="btn btn-primary" value="Miesięczne podsumowania linii produkcyjnych" />
-                             </p>
-                             <p>
-                                 <p:button href="/app/manufacture/pwShow" class="btn btn-primary" value="Potwierdzenie odebrania produktu" />
-                             </p>
-                             <p>
-                                 <p:button href="/app/manufacture/wwShow" class="btn btn-primary" value="Potwierdzenie wydania elmentu" />
-                             </p> -->
-                        <h:form>
-                            <p:dataTable var="documentStub" value="#{flowScope.documentStubs}">
-                                <p:column headerText="Sygnatura">
-                                    <h:outputText value="#{documentStub.signature}" />
-                                </p:column>
 
-                                <p:column headerText="Tytuł">
-                                    <h:outputText value="#{documentStub.title}" />
-                                </p:column>
-
-                                <p:column headerText="Typ">
-                                    <h:outputText value="#{documentStub.type}" />
-                                </p:column>
-
-                                <p:column headerText="Z">
-                                    <h:outputText value="#{documentStub.from}" />
-                                </p:column>
-
-                                <p:column headerText="Do">
-                                    <h:outputText value="#{documentStub.to}" />
-                                </p:column>
-
-                                <p:column>
-                                    <p:commandButton action="#{serviceFlow.loadDocument(documentStub)}" value="Załaduj"/>
-                                </p:column>
-
-                                <p:column>
-                                    <p:commandButton action="#{serviceFlow.archivizeDocument(documentStub)}" value="Archiwizuj"/>
-                                </p:column>
-                            </p:dataTable>
-                        </h:form>
-                        </div>  
-
-                        <div role="tabpanel" class="tab-pane" id="addDocument">
+                        <div role="tabpanel" class="tab-pane active" id="addDocument">
                             <br></br>
                             <p>
                                 <p:button href="/app/manufacture/monthlySummary" class="btn btn-primary" value="Miesięczne podsumowanie lini produkcyjnej" />
@@ -92,16 +50,56 @@
                             <p>
                                 <p:button href="/app/manufacture/newVehicle" class="btn btn-primary" value="Karta nowego pojazdu" />
                             </p>
-                            
+
                             <p>
                                 <p:button class="btn btn-primary" href="/app/storehouse/wwGen" value="Wydanie wewnętrzne" />			
                             </p>
-                            
+
                             <p>
                                 <p:button class="btn btn-primary" href="/app/storehouse/pwGen" value="Przejęcie wewnętrzne" />
                             </p>
-                            
+
                         </div>
+
+                        <c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+                            <div role="tabpanel" class="tab-pane"  id="documentAll">
+                                <br/>
+
+                                <h:form>
+
+                                    <p:dataTable var="documentStub" value="#{flowScope.documentStubs}">
+                                        <p:column headerText="Sygnatura">
+                                            <h:outputText value="#{documentStub.signature}" />
+                                        </p:column>
+
+                                        <p:column headerText="Tytuł">
+                                            <h:outputText value="#{documentStub.title}" />
+                                        </p:column>
+
+                                        <p:column headerText="Typ">
+                                            <h:outputText value="#{documentStub.type}" />
+                                        </p:column>
+
+                                        <p:column headerText="Z">
+                                            <h:outputText value="#{documentStub.from}" />
+                                        </p:column>
+
+                                        <p:column headerText="Do">
+                                            <h:outputText value="#{documentStub.to}" />
+                                        </p:column>
+
+                                        <p:column>
+                                            <p:commandButton action="#{serviceFlow.loadDocument(documentStub)}" value="Załaduj"/>
+                                        </p:column>
+
+                                        <p:column>
+                                            <p:commandButton action="#{serviceFlow.archivizeDocument(documentStub)}" value="Archiwizuj"/>
+                                        </p:column>
+                                    </p:dataTable>
+
+                                </h:form>
+                            </div>  
+                        </c:if>
                     </div> 
                 </div>
 
@@ -115,5 +113,5 @@
             </body>
         </ui:define>
     </ui:composition>
-      
+
 </html>
