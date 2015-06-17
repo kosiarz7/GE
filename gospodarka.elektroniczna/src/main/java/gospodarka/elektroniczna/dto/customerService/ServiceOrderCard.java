@@ -17,7 +17,16 @@ public class ServiceOrderCard extends AbstractCustomerServiceUser implements Ser
 	private Client client;
 	private Client service;
 	private Car car;
-	private ArrayList <Services> orderedServices;
+	private String todo;
+
+    public String getTodo() {
+        return todo;
+    }
+
+    public void setTodo(String todo) {
+        this.todo = todo;
+    }
+
 	
 	public ServiceOrderCard() {};
 	
@@ -26,7 +35,6 @@ public class ServiceOrderCard extends AbstractCustomerServiceUser implements Ser
 		client = new Client();
 		service = new Client();
 		car = new Car();
-		orderedServices = new ArrayList<Services>();
 	}
 	
 	public Date getServiceOrderDate() {
@@ -53,17 +61,11 @@ public class ServiceOrderCard extends AbstractCustomerServiceUser implements Ser
 	public void setCar(Car car) {
 		this.car = car;
 	}
-	public ArrayList<Services> getOrderedServices() {
-		return orderedServices;
-	}
-	public void setOrderedServices(ArrayList<Services> orderedServices) {
-		this.orderedServices = orderedServices;
-	}
-
+        
 	@Override
 	public String toString() {
 		return "ServiceOrderCard [serviceOrderDate=" + serviceOrderDate
 				+ ", client=" + client + ", service=" + service + ", car="
-				+ car + ", orderedServices=" + orderedServices + "]";
+				+ car + ", todo=" + todo + "]";
 	}
 }

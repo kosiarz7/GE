@@ -19,13 +19,13 @@ public class OrderCardFlow extends AbstractCustomerServiceFlow<OrderCard> implem
 	private static final long serialVersionUID = 8321714249279199807L;
 
 	public OrderCardFlow() {
-		 super("Zamówienie pojazdu (konfigurator)", DocumentTypes.ORDER_CARD, Departments.MANUFACTURE);
+		 super("Zamowienie pojazdu (konfigurator)", DocumentTypes.ORDER_CARD, Departments.STOREHOUSE);
 	}
 	
 	public boolean submitOrderCard(UserData userData,
            OrderCard orderCard) {
 
-       LoggerFactory.getLogger(OrderCardFlow.class).debug("submitOrderCard",
+       LoggerFactory.getLogger(OrderCardFlow.class).info("submitOrderCard",
                orderCard);
 
        return submit(userData, orderCard);
@@ -34,7 +34,7 @@ public class OrderCardFlow extends AbstractCustomerServiceFlow<OrderCard> implem
    public List<OrderCard> getOrderCards() {
 
        SearchCriteria criteria = new SearchCriteria();
-       criteria.department(Departments.MANUFACTURE);
+       criteria.department(Departments.STOREHOUSE);
        criteria.setType(DocumentTypes.ORDER_CARD);
 
        List<OrderCard> orderCards = search(criteria);

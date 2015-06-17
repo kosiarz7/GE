@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="poGenView"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<!-- Zabezpieczenie flow przez Spring Security -->
+<secured
+		attributes="ROLE_STOREHOUSE, ROLE_ROOT"
+		match="any" />
+
+	<var name="poVar" class="gospodarka.elektroniczna.dto.storehouse.PODocument" />
+
+	<view-state id="poGenView">
+		<transition on="poGenA" to="poGen" />
+	</view-state>
+
+	<action-state id="poGen">
+		<evaluate expression="controllerVar.submitPO(springSecurityContextUtilBean.getUser(), poVar)"
+			result="flowScope.status" />
+		<transition to="poGenEnd" />
+	</action-state>
+
+	<end-state id="poGenEnd" view="poGenEnd.xhtml" />
+	<bean-import resource="flow-beans.xml" />
+</flow>

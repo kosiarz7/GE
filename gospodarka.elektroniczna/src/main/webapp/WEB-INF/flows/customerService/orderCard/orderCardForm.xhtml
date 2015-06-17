@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+        <ui:param name="department" value="Obsluga klienta"/>
+        <ui:define name="pageContent">
+            <h1>Karta konfiguracji zamawianego pojazdu</h1>
+            <h:form>
+                <div class="ui-grid ui-grid-responsive">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-6"/>
+                        <div class="ui-grid-col-6">
+                             <h:panelGrid columns="2" cellpadding="2">
+                                    <p:outputLabel for="orderDate" value="Data zamowienia: *" />
+                                    <p:calendar id="orderDate" value="#{data.orderDate}" pattern="dd-MM-yyyy" mask="true" />
+                             </h:panelGrid>                          
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <br />
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-5">
+                            <p:panel id="clientData" header="Dane klienta" style="margin-bottom:20px">
+                                <h:panelGrid columns="2" cellpadding="2">
+                                    <p:outputLabel for="clientName" value="Imie i nazwisko:" />
+                                    <p:inputText id="clientName" value="#{data.client.name}" required="true" />
+
+
+                                    <p:outputLabel for="clientAdress" value="Adres:" />
+                                    <p:inputText id="clientAdress" value="#{data.client.adress}" required="true" />
+
+
+                                    <p:outputLabel for="clientPhone" value="Telefon:" />
+                                    <p:inputText id="clientPhone" value="#{data.client.phone}" required="true" />
+
+                                </h:panelGrid>
+                            </p:panel>
+                            <div class="ui-grid-row">
+                                <p:commandButton action="saveOrderCardForm" value="Wyslij zamowienie" ajax="false" />
+                                <p:button href="/app/customerService" value="Powrót" />
+                            </div>
+                        </div>
+                        <div class="ui-grid-col-1" />
+                        <div class="ui-grid-col-6">
+                            <p:panel id="carData" header="Konfiguracja samochodu" style="margin-bottom:20px">
+                                <h:panelGrid columns="2" cellpadding="2">
+                                    <p:outputLabel for="model" value="Model:" />
+                                    <p:inputText id="model" value="#{data.model}" required="true" />
+
+
+                                    <p:outputLabel for="engineSize" value="Pojemnosc silnika (cm^3):" />
+                                    <p:inputText id="engineSize" value="#{data.engineSize}" required="true">
+                                        <f:validateDoubleRange minimum="1000" maximum="5000" />
+                                    </p:inputText>
+
+
+                                    <p:outputLabel for="color" value="Kolor:" />
+                                    <p:colorPicker id="color" value="#{data.color}" mode="inline" />
+
+
+                                    <h:outputLabel for="interior" value="Wersja wyposazenia: * " />
+                                    <p:selectOneMenu id="interior" value="#{data.interior}">
+                                        <f:selectItems value="#{data.interiorTypeList}" var="interiorType" itemValue="#{interiorType.label}"
+                                                       itemLabel="#{interiorType.label}" />
+                                    </p:selectOneMenu>
+
+
+                                    <h:outputLabel for="transmission" value="Skrzynia biegow: * " />
+                                    <p:selectOneMenu id="transmission" value="#{data.transmission}">
+                                        <f:selectItems value="#{data.transmissionTypeList}" var="transmissionType" itemValue="#{transmissionType.label}"
+                                                       itemLabel="#{transmissionType.label}" />
+                                    </p:selectOneMenu>
+
+                                </h:panelGrid>
+                            </p:panel>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <p>
+                            <p:message for="clientName" />
+                        </p>
+                        <p>
+                            <p:message for="clientAdress" />
+                        </p>
+                        <p>
+                            <p:message for="clientPhone" />
+                        </p>
+                        <p>
+                            <p:message for="model" />
+                        </p>
+                        <p>
+                            <p:message for="engineSize" />
+                        </p>
+                        <p>
+                            <p:message for="color" />
+                        </p>
+                        <p>
+                            <p:message for="interior" />
+                        </p>
+                        <p>
+                            <p:message for="transmission" />
+                        </p>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

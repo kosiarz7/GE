@@ -26,7 +26,8 @@
 			
 			<p:button class="btn btn-primary" href="/app/storehouse/ppzGen" value="POTWIERDZENIE PRZYJĘCIA ZAMÓWIENIA" />
 			<p:button class="btn btn-primary" href="/app/storehouse/pzGen" value="PRZYJECIE ZEWNĘTRZNE" />
-			<p:button class="btn btn-primary" href="/app/storehouse/wzGen" value="WYDANIE ZEWNĘTRZNE" />	
+			<p:button class="btn btn-primary" href="/app/storehouse/wzGen" value="WYDANIE ZEWNĘTRZNE" />			
+			<p:button class="btn btn-primary" href="/app/storehouse/poGen" value="ZLECENIE PRODUKCJI" />	
 				<hr/>
 			<h1 class="bg-success">Podgląd dokumentów </h1>
 
@@ -36,10 +37,11 @@
 				<p:button class="btn btn-success" href="/app/storehouse/wwShow" value="Pokaz WYDANIE WEWNĘTRZNE" />	
 				<p:button class="btn btn-success" href="/app/storehouse/zOrderManuShow" value="Pokaz ZAMÓWIENIA (produkcja)" />			
 				<p:button class="btn btn-success" href="/app/service/showOrderForm" value="Pokaz ZAMÓWIENIA (serwis)" />
-			
+				<p:button class="btn btn-success" href="/app/customerService/orderCardReceived" value="Pokaz ZAMÓWIENIA (BOK)" />
 		
 			<c:if test="springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')||
-			springSecurityContextUtilBean.hasRole('ROLE_SERVIS')}">
+			springSecurityContextUtilBean.hasRole('ROLE_SERVIS')||
+			springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
 			<h1 class="bg-success">Odebrane z magazynu </h1>
 				<p:button class="btn btn-success" href="/app/storehouse/ppzShow" value="Pokaz POTWIERDZENIE PRZYJĘCIA ZAMÓWIENIA" />	
 				
