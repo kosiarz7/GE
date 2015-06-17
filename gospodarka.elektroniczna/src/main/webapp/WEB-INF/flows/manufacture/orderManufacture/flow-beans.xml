@@ -7,6 +7,6 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	
-	<bean id="controller" class="gospodarka.elektroniczna.controllers.manufacture.MonthlySummaryOfProductionLineFlow"
+	<bean id="controller" class="gospodarka.elektroniczna.controllers.manufacture.OrderFlow"
 		p:documentService-ref="documentService"/>
 </beans>

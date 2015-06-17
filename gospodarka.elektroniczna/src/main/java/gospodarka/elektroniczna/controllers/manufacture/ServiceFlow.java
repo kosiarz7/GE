@@ -7,6 +7,7 @@ package gospodarka.elektroniczna.controllers.manufacture;
 
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.documents.manufacture.MonthlySummaryOfProductionLineDocument;
+import gospodarka.elektroniczna.documents.storehouse.PODocument_A;
 import gospodarka.elektroniczna.documents.storehouse.PPZDocument_A;
 import gospodarka.elektroniczna.dto.storehouse.PPZDocument;
 import gospodarka.elektroniczna.dto.storehouse.PWDocument;
@@ -28,8 +29,15 @@ public class ServiceFlow implements Serializable{
     private IDocumentService documentService;
     private MonthlySummaryOfProductionLineDocument monthlySummary;
     private PPZDocument_A ppzForm;
-    private PWDocument pwForm;
-    private WWDocument wwForm;
+    private PODocument_A poForm;
+
+    public PODocument_A getPoForm() {
+        return poForm;
+    }
+
+    public void setPoForm(final PODocument_A poForm) {
+        this.poForm = poForm;
+    }
     
     public List<DocumentStub> getDocumentStubs()
     {
@@ -52,14 +60,10 @@ public class ServiceFlow implements Serializable{
                 Document<MonthlySummaryOfProductionLineDocument> monthlySummaryDocument = documentService.loadCurrentDocument(documentStub);
                 setMonthlySummaryForm(monthlySummaryDocument.getContent());
                 return "goLoadMonthlySummaryForm";
-            case INTERNAL_ADOPTION:
-                Document<PWDocument> pwDocument = documentService.loadCurrentDocument(documentStub);
-                setPWForm(pwDocument.getContent());
-                return "goLoadPWForm";
-            case INTERNAL_ISSUE:
-                Document<WWDocument> wwDocument = documentService.loadCurrentDocument(documentStub);
-                setWWForm(wwDocument.getContent());
-                return "goLoadWWForm";
+            case PRODUCTION_ORDER:
+                Document<PODocument_A> poDocument = documentService.loadCurrentDocument(documentStub);
+                setPoForm(poDocument.getContent());
+                return "goLoadPOForm";
             case ORDER_CONFIRMATION:
                 Document<PPZDocument_A> ppzDocument = documentService.loadCurrentDocument(documentStub);
                 setPpzForm(ppzDocument.getContent());
@@ -85,23 +89,8 @@ public class ServiceFlow implements Serializable{
         this.monthlySummary = monthlySummary;
     }
     
-    public void setPWForm(final PWDocument pwForm) {
-        this.pwForm = pwForm;
-    }
-    
-     public void setWWForm(final WWDocument wwForm) {
-        this.wwForm = wwForm;
-    }
-     
     public MonthlySummaryOfProductionLineDocument getMonthlySummary() {
         return monthlySummary;
     }
 
-    public PWDocument getPwForm() {
-        return pwForm;
-    }
-
-    public WWDocument getWwForm() {
-        return wwForm;
-    }
 }

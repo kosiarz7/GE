@@ -9,25 +9,23 @@
   <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
         <ui:param name="department" value="Produkcja"/>
 	<ui:define name="pageContent">
-		<h1>Zgłoszone wadliwe elementy</h1>
+		<h1>Karty nowych pojazdów</h1>
 		<h:form>
 			<table border="1">
 				<tr>
 					<th width="100">Data </th>
-					<th width="200">Osoba zgłaszająca</th>
-					<th width="200">Numer lini produkcyjnej</th>
-					<th>Numer stanowiska</th>
-                                        <th>Numer elementu</th>
-                                        <th>Opis</th>
+					<th width="200">Model pojazdu</th>
+					<th width="200">Numer linii produkcyjnej</th>
+					<th>Imię i nazkiwsko inspektora</th>
+                                        <th>Notatki</th>
 				</tr>
-				<c:forEach items="${flowScope.defectiveElements}" var="instance">
+				<c:forEach items="${flowScope.newVehicles}" var="instance">
 					<tr>
 						<td>${instance.getDate()}</td>
-						<td>${instance.getComplainant()}</td>
+						<td>${instance.getVehicleModel()}</td>
 						<td>${instance.getProductionLineNumber()}</td>
-						<td>${instance.getWorkStationNumber()}</td>
-                                                <td>${instance.getElementNumber()}</td>
-                                                <td>${instance.getDescription()}</td>
+						<td>${instance.getInspectorName()}</td>
+                                                <td>${instance.getNotes()}</td>
                                                 
 					</tr>
 				</c:forEach>

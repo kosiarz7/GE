@@ -30,9 +30,8 @@
                 </evaluate>      
             </on-entry> 
             <transition on="goLoadMonthlySummaryForm" to="monthlySummaryManufactureView"/>
-            <transition on="goLoadPWForm" to="pwShow"/>
-            <transition on="goLoadWWForm" to="wwShow"/>
             <transition on="goLoadPPZForm" to="ppzView"/>
+            <transition on="goLoadPOForm" to="poView"/>
             <transition on="goReceiveDocuments" to="start"/>
             <transition on="gotoMonthlySummary" to="monthlySummaryForm"/>
             <transition on="gotoAccidentForm" to="industrialAccidentForm"/>
@@ -46,15 +45,11 @@
             <transition on="cancel" to="start"/>
         </view-state>
         
-        <view-state id="pwShowView">
-            <transition on="cancel" to="start"/>
-        </view-state>
-        
-        <view-state id="wwShowView">
-            <transition on="cancel" to="start"/>
-        </view-state>
-        
         <view-state id="ppzView">
+            <transition on="cancel" to="start"/>
+        </view-state>
+        
+        <view-state id="poView">
             <transition on="cancel" to="start"/>
         </view-state>
         

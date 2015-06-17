@@ -32,9 +32,28 @@
 
                         <div role="tabpanel" class="tab-pane active" id="addDocument">
                             <br></br>
+
                             <p>
-                                <p:button href="/app/manufacture/monthlySummary" class="btn btn-primary" value="Miesięczne podsumowanie lini produkcyjnej" />
+                                <p:button href="/app/manufacture/defectiveElementManufacture" class="btn btn-primary" value="Zgłoszenie wadliwego elementu" />
                             </p>
+                            <p>
+                                <p:button href="/app/manufacture/industrialAccidentManufacture" class="btn btn-primary" value="Zgłoszenie wypadku przy pracy" />
+                            </p>
+                            <p>
+                                <p:button href="/app/manufacture/orderManufacture" class="btn btn-primary" value="Zamówienie części" />
+                            </p>
+                            <p>
+                                <p:button href="/app/manufacture/timeSheetManufacture" class="btn btn-primary" value="Karta pracy pracownika" />
+                            </p>
+                            <p>
+                                <p:button href="/app/manufacture/newVehicleManufacture" class="btn btn-primary" value="Karta nowego pojazdu" />
+                            </p>
+                            
+                            <c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+                                <p>
+                                    <p:button href="/app/manufacture/monthlySummary" class="btn btn-primary" value="Miesięczne podsumowanie lini produkcyjnej" />
+                                </p>
+                            </c:if>
                             <p>
                                 <p:button href="/app/manufacture/defectiveElement" class="btn btn-primary" value="Zgłoszenie wadliwego elementu" />
                             </p>
@@ -63,9 +82,7 @@
 
                         <c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
                             <div role="tabpanel" class="tab-pane"  id="documentAll">
-                                <p>
-                                    <p:button class="btn btn-primary" href="/app/storehouse/poShow" value="Zamowienia produkcji" />
-                                </p>
+                                <br></br>
                                 <h:form>
 
                                     <p:dataTable var="documentStub" value="#{flowScope.documentStubs}">
@@ -77,16 +94,12 @@
                                             <h:outputText value="#{documentStub.title}" />
                                         </p:column>
 
-                                        <p:column headerText="Typ">
+                                        <p:column headerText="Typ" style="width:360px;">
                                             <h:outputText value="#{documentStub.type}" />
                                         </p:column>
 
                                         <p:column headerText="Z">
                                             <h:outputText value="#{documentStub.from}" />
-                                        </p:column>
-
-                                        <p:column headerText="Do">
-                                            <h:outputText value="#{documentStub.to}" />
                                         </p:column>
 
                                         <p:column>

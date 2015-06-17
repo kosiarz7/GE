@@ -9,25 +9,23 @@
   <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
         <ui:param name="department" value="Produkcja"/>
 	<ui:define name="pageContent">
-		<h1>Zgłoszone wadliwe elementy</h1>
+		<h1>Zgłoszone wypadki przy pracy</h1>
 		<h:form>
 			<table border="1">
 				<tr>
 					<th width="100">Data </th>
-					<th width="200">Osoba zgłaszająca</th>
-					<th width="200">Numer lini produkcyjnej</th>
-					<th>Numer stanowiska</th>
-                                        <th>Numer elementu</th>
-                                        <th>Opis</th>
+					<th width="200">Uczestniczy</th>
+					<th width="200">Osoby poszkodowane</th>
+					<th>Opis zdarzenia</th>
+                                        <th>Szkody</th>
 				</tr>
-				<c:forEach items="${flowScope.defectiveElements}" var="instance">
+				<c:forEach items="${flowScope.industrialAccidents}" var="instance">
 					<tr>
 						<td>${instance.getDate()}</td>
-						<td>${instance.getComplainant()}</td>
-						<td>${instance.getProductionLineNumber()}</td>
-						<td>${instance.getWorkStationNumber()}</td>
-                                                <td>${instance.getElementNumber()}</td>
-                                                <td>${instance.getDescription()}</td>
+						<td>${instance.getAttendees()}</td>
+						<td>${instance.getSufferers()}</td>
+						<td>${instance.getDescriptionOfOccurrence()}</td>
+                                                <td>${instance.getDamage()}</td>
                                                 
 					</tr>
 				</c:forEach>

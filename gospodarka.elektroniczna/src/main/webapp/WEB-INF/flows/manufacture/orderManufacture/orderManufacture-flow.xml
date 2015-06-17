@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="defectiveElementManufactureView"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" start-state="orderManufactureView"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
 	<secured attributes="ROLE_MANUFACTURE"/>
 
 	<on-start>
-		<evaluate expression="controller.getIndustrialAccidentForms()"
-			result="flowScope.indsutrialAccidents" />
+		<evaluate expression="controller.getOrderForms()"
+			result="flowScope.orders" />
 	</on-start>
 
-	<view-state id="indsutrialAccidentView">
-            <transition on="indsutrialAccidentManufacture" to="indsutrialAccidenttManufacture"/>
+	<view-state id="orderManufactureView">
+            <transition on="orderManufacture" to="orderManufacture"/>
         </view-state>
         
         <bean-import resource="flow-beans.xml" />

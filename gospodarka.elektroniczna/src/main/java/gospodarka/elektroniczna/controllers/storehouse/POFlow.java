@@ -27,7 +27,7 @@ public class POFlow  extends AbstractStoreHouseFlow<PODocument> implements  Seri
 	
 	
 	public POFlow() {
-		super("Potwierdzenie przyjêcia zamówienia",  DocumentTypes.PRODUCTION_ORDER, Departments.MANUFACTURE);
+		super("Zlecenie produkcji",  DocumentTypes.PRODUCTION_ORDER, Departments.MANUFACTURE);
 	}
 
 	private static final long serialVersionUID = 1L;
