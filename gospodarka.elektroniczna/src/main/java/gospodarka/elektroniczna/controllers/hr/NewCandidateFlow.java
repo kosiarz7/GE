@@ -45,7 +45,7 @@ public class NewCandidateFlow extends AbstractHrFlow<NewCandidate> implements Se
         return submit(userData, Departments.HUMAN_RESOURCES, newCandidate.getDepartment(), newCandidate);
     }
 
-    public void loadNewCandidate(Departments targetDepartment) {
+    public void loadNewCandidates(Departments targetDepartment) {
     	this.targetDepartment = targetDepartment;
         SearchCriteria criteria = new SearchCriteria();
         criteria.department(targetDepartment);
@@ -89,6 +89,6 @@ public class NewCandidateFlow extends AbstractHrFlow<NewCandidate> implements Se
 	}
 	public void archiveNewCandidate() {
 		archiveDocument(selectedNewCandidate);
-		loadNewCandidate(targetDepartment);
+		loadNewCandidates(targetDepartment);
 	}
 }
