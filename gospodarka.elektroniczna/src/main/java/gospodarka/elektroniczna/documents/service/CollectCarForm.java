@@ -41,6 +41,14 @@ public class CollectCarForm implements Serializable{
         client = form.client;
     }
     
+    public void clear()
+    {
+        this.date = null;
+        this.car = new Car();
+        this.carCondition = "";
+        this.worker = new Person();
+        this.client = new Person();
+    }
     /**
      * @return the date
      */

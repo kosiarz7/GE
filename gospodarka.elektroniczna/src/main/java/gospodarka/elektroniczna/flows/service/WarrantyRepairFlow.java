@@ -29,6 +29,7 @@ public class WarrantyRepairFlow implements Serializable {
             Document<WarrantyRepairForm> document = documentService.createDocument(DocumentTypes.WARRANTY_REPAIR, "Naprawa w ramach gwarancji", Departments.SERVIS);
             document.setContent(warrantyRepairForm);
             documentService.sendDocument(document, Departments.SERVIS, Departments.SERVIS);
+            warrantyRepairForm.clear();
             return true;
         } catch (WrongNumberOfLastSignatureException e) {
             LoggerFactory.getLogger(ServiceFlow.class).error("błąd", e);

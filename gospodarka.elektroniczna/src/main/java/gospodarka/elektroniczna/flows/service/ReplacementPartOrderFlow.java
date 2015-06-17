@@ -29,6 +29,7 @@ public class ReplacementPartOrderFlow implements Serializable {
             Document<ReplacementPartOrderForm> document = documentService.createDocument(DocumentTypes.REPLACEMENT_PART_ORDER, "Zamówienie części zamiennej", Departments.SERVIS);
             document.setContent(replacementPartOrderForm);
             documentService.sendDocument(document, Departments.SERVIS, Departments.STOREHOUSE);
+            replacementPartOrderForm.clear();
             return true;
         } catch (WrongNumberOfLastSignatureException e) {
             LoggerFactory.getLogger(ServiceFlow.class).error("błąd", e);

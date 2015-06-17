@@ -30,6 +30,14 @@ public class ReplacementPartOrderForm implements Serializable {
         this.worker = new Person();
     }
     
+    public void clear() {
+        date = null;
+        deliveryDate = null;
+        worker = new Person();
+        elementName = "";
+        amount = 0;
+    }
+    
     /**
      * @return the date
      */

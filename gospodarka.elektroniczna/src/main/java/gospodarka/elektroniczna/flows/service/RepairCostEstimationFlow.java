@@ -28,6 +28,7 @@ public class RepairCostEstimationFlow implements Serializable {
             Document<RepairCostEstimationForm> document = documentService.createDocument(DocumentTypes.REPAIR_COST_ESTIMATION, "Kosztorys naprawy pogwarancyjnej", Departments.SERVIS);
             document.setContent(repairCostEstimationForm);
             documentService.sendDocument(document, Departments.SERVIS, Departments.CUSTOMER_SERVICE);
+            repairCostEstimationForm.clear();
             return true;
         } catch (WrongNumberOfLastSignatureException e) {
             LoggerFactory.getLogger(ServiceFlow.class).error("błąd", e);

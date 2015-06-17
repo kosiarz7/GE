@@ -15,9 +15,11 @@ import gospodarka.elektroniczna.documents.service.DamagedCarForm;
 import gospodarka.elektroniczna.documents.service.RepairCostEstimationForm;
 import gospodarka.elektroniczna.documents.service.ReplacementPartOrderForm;
 import gospodarka.elektroniczna.documents.service.WarrantyRepairForm;
+import gospodarka.elektroniczna.documents.storehouse.PPZDocument_A;
 import gospodarka.elektroniczna.dto.customerService.ServiceOrderCard;
 import gospodarka.elektroniczna.dto.customerService.TestDriveReport;
 import gospodarka.elektroniczna.dto.manufacture.DefectiveElementForm;
+import gospodarka.elektroniczna.dto.storehouse.PPZDocument;
 import gospodarka.elektroniczna.services.document.Document;
 import gospodarka.elektroniczna.services.document.DocumentStub;
 import gospodarka.elektroniczna.services.document.IDocumentService;
@@ -42,6 +44,7 @@ public class ServiceFlow implements Serializable {
     private DefectiveElementForm defectiveElementForm;
     private ServiceOrderCard serviceOrderCardForm;
     private TestDriveReport testDriveReportForm;
+    private PPZDocument ppzForm;
     
     public List<DocumentStub> getDocumentStubs()
     {
@@ -85,7 +88,9 @@ public class ServiceFlow implements Serializable {
                 setTestDriveReportForm(testDriveReportDocument.getContent().getData());
                 return "goLoadTestDriveReportForm";
             case ORDER_CONFIRMATION:
-                
+                Document<PPZDocument> ppzDocument = documentService.loadCurrentDocument(documentStub);
+                setPpzForm(ppzDocument.getContent());
+                return "goLoadPPZForm";
             default:
                 return "goLoadError";
         }
@@ -212,5 +217,19 @@ public class ServiceFlow implements Serializable {
      */
     public void setTestDriveReportForm(TestDriveReport testDriveReportForm) {
         this.testDriveReportForm = testDriveReportForm;
+    }
+
+    /**
+     * @return the ppzForm
+     */
+    public PPZDocument getPpzForm() {
+        return ppzForm;
+    }
+
+    /**
+     * @param ppzForm the ppzForm to set
+     */
+    public void setPpzForm(PPZDocument ppzForm) {
+        this.ppzForm = ppzForm;
     }
 }

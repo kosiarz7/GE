@@ -35,6 +35,7 @@
         <transition on="goLoadDefectiveElementForm" to="loadDefectiveElementForm"/>
         <transition on="goLoadServiceOrderCardForm" to="loadServiceOrderCardForm"/>
         <transition on="goLoadTestDriveReportForm" to="loadTestDriveReportForm"/>
+        <transition on="goLoadPPZDocument" to="loadPPZForm"/>
         <transition on="goLoadError" to="loadError"/>
         <transition on="cancel" to="start"/>
     </view-state>
@@ -60,6 +61,10 @@
     </view-state>
     
     <view-state id="loadTestDriveReportForm">
+        <transition on="cancel" to="receiveDocuments"/>
+    </view-state>
+
+    <view-state id="loadPPZForm">
         <transition on="cancel" to="receiveDocuments"/>
     </view-state>
     

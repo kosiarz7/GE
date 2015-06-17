@@ -34,6 +34,14 @@ public class DamagedCarForm implements Serializable {
         
     }
     
+    public void clear() {
+        this.date = null;
+        this.car = new Car();
+        this.client = new Person();
+        this.worker = new Person();
+        this.testRide = false;
+    }
+    
     /**
      * @return the date
      */

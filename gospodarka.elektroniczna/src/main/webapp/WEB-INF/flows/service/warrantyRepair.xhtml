@@ -11,7 +11,7 @@
     <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
         <ui:param name="department" value="Serwis"/>
         <ui:define name="pageContent">
-            <h3>Zlecenie naprawy pogwarancyjnej</h3>
+            <h3>Zlecenie naprawy w ramach gwarancji</h3>
             <p:separator/>
 
             <h:form>
@@ -20,28 +20,28 @@
                     <p:calendar id="calendar" value="#{warrantyRepairForm.date}"/>   
 
                     <h:outputLabel for="brand" value="Marka:" />
-                    <p:inputText id="brand" value="#{warrantyRepairForm.car.brand}"/>
+                    <p:inputText id="brand" required="true" value="#{warrantyRepairForm.car.brand}"/>
 
                     <h:outputLabel for="model" value="Model:" />
-                    <p:inputText id="model" value="#{warrantyRepairForm.car.model}"/>
+                    <p:inputText id="model" required="true" value="#{warrantyRepairForm.car.model}"/>
 
                     <h:outputLabel for="plates" value="Numer rejestracyjny:" />
-                    <p:inputText id="plates" value="#{warrantyRepairForm.car.registrationNumber}"/>
+                    <p:inputText id="plates" required="true" value="#{warrantyRepairForm.car.registrationNumber}"/>
                     
                     <h:outputLabel for="vin" value="Numer VIN:" />
-                    <p:inputText id="vin" value="#{warrantyRepairForm.car.VIN}"/>
+                    <p:inputText id="vin" required="true" value="#{warrantyRepairForm.car.VIN}"/>
 
                     <h:outputLabel for="client" value="Nazwisko klienta:" />
-                    <p:inputText id="client"  value="#{warrantyRepairForm.client.name}"/>
+                    <p:inputText id="client" required="true" value="#{warrantyRepairForm.client.name}"/>
 
                     <h:outputLabel for="worker" value="Nazwisko pracownika:" />
-                    <p:inputText id="worker" value="#{warrantyRepairForm.worker.name}"/>
+                    <p:inputText id="worker" required="true" value="#{warrantyRepairForm.worker.name}"/>
                     
                     <h:outputLabel for="realisationDate" value="Przybliżony czas realizacji:" />
-                    <p:calendar id="realisationDate" value="#{warrantyRepairForm.realisationDate}"/>   
+                    <p:calendar id="realisationDate" required="true" value="#{warrantyRepairForm.realisationDate}"/>   
                     
                     <h:outputLabel for="damagedPart" value="Zepsute części:" />
-                    <p:inputText id="damagedPart" value="#{warrantyRepairForm.damagedPart}"/>
+                    <p:inputText id="damagedPart" required="true" value="#{warrantyRepairForm.damagedPart}"/>
                 </h:panelGrid>
                 <p:commandButton id="save" action="saveWarrantyRepair" value="Dodaj" update="@form" ajax="false" />
                 <p:commandButton id="cancel" action="cancel" value="Anuluj" ajax="false" immediate="true"/>

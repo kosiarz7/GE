@@ -33,6 +33,15 @@ public class RepairCostEstimationForm implements Serializable{
         this.worker = new Person();
     }
     
+    public void clear() { 
+        this.date = null;
+        this.car = new Car();
+        this.damageDescription = "";
+        this.price = new Integer(0);
+        this.client = new Person();
+        this.worker = new Person();
+    }
+    
     /**
      * @return the date
      */

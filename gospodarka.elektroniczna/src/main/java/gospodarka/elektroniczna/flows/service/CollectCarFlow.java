@@ -32,6 +32,7 @@ public class CollectCarFlow implements Serializable {
             Document<CollectCarForm> document = documentService.createDocument(DocumentTypes.COLLECT_CAR, "Odbiór samochodu", Departments.SERVIS);
             document.getContent().setData(collectCarForm);
             documentService.sendDocument(document, Departments.SERVIS, Departments.SERVIS);
+            collectCarForm.clear();
             return true;
         } catch (WrongNumberOfLastSignatureException e) {
             LoggerFactory.getLogger(ServiceFlow.class).error("błąd", e);

@@ -28,6 +28,7 @@ public class DamagedCarFlow implements Serializable {
             Document<DamagedCarForm> document = documentService.createDocument(DocumentTypes.DAMAGED_CAR, "Przyjęcie uszkodzonego samochodu", Departments.SERVIS);
             document.setContent(damagedCarForm);
             documentService.sendDocument(document, Departments.SERVIS, Departments.SERVIS);
+            damagedCarForm.clear();
             return true;
         } catch (WrongNumberOfLastSignatureException e) {
             LoggerFactory.getLogger(ServiceFlow.class).error("błąd", e);

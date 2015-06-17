@@ -34,6 +34,15 @@ public class WarrantyRepairForm implements Serializable {
         this.worker = new Person();
     }
     
+    public void clear() {
+        this.date = null;
+        this.damagedPart = "";
+        this.realisationDate = null;
+        this.client = new Person();
+        this.worker = new Person();
+        this.car = new Car();
+    }
+    
     /**
      * @return the date
      */
