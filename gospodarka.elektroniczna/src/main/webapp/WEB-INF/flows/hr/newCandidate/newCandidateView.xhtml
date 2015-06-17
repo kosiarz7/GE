@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Kadry" />
+	<ui:define name="pageContent">
+		<h1>Nowi kandydaci</h1>
+
+
+
+		<h:form id="formId">
+			<p:dataTable var="instance" value="${controllerVar.getNewCandidates()}"
+				paginator="true" rows="10"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="5,10,15" selectionMode="single"
+				selection="#{controllerVar.selectedNewCandidate}" id="tableHolidaysRequests"
+				rowKey="#{instance}"
+				emptyMessage="Nie został zgłoszony żaden kandydat">
+
+				<p:ajax event="rowSelect" listener="#{controllerVar.onRowSelect}"
+					update=":formId:newCandidateDetails"
+					oncomplete="PF('newCandidateWidgetVar').show()" />
+				<p:column headerText="Imię i nazwisko" style="width:120px;">
+					${instance.getContent().getData().getUserNameAndSurname()}
+				</p:column>
+				<p:column headerText="Doświadczenie" style="width:230px;">
+					${instance.getContent().getData().getExperience()}
+				</p:column>
+			</p:dataTable>
+
+			<br />
+			<p:button href="/app/hr" value="Powrót" />
+
+
+			<p:dialog header="Nowi kandydaci"
+				widgetVar="newCandidateWidgetVar" modal="true" showEffect="fade"
+				hideEffect="fade" resizable="false">
+				<p:outputPanel id="newCandidateDetails" style="text-align:center;">
+					<p:panelGrid columns="1"
+						rendered="#{not empty controllerVar.selectedNewCandidate}"
+						columnClasses="label,value">
+						<p>
+							Imię i nazwisko:
+							<p:inputText id="name"
+								value="#{controllerVar.selectedNewCandidate.getContent().getData().getUserNameAndSurname()}"
+								label="'Imię i nazwisko'" required="true" disabled="true" />
+						</p>
+						<p>
+							Doświadczenie:
+							<p:inputText id="exp"
+								value="#{controllerVar.selectedNewCandidate.getContent().getData().getExperience()}"
+								label="'Doświadczenie'" required="true" disabled="true" />
+
+						</p>
+						<p:commandButton value="Zarchiwizuj"
+							actionListener="#{controllerVar.archiveNewCandidate}" update="@form"
+							onstart="showCurtain()" oncomplete="hideCurtain()" />
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+

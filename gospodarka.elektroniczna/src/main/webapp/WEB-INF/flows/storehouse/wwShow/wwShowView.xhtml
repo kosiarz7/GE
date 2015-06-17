@@ -14,6 +14,7 @@
 			<table border="1">
 				<tr>
 					<th width="100">Imię i nazwisko</th>
+					<th width="50">Dział</th>
 					<th width="100">Nazwa</th>
 					<th width="20">Sztuk </th>
 					<th width="40">Kod </th>
@@ -23,7 +24,8 @@
 				</tr>
 			  	<c:forEach items="${flowScope.wwdocuments}" var="instance">
 					<tr>
-						<td>${instance.getUserNameAndSurname()}</td>
+						<td>${instance.getUserNameAndSurname()}</td>						
+						<td>${instance.getDepartment()}</td>
 						<td>${instance.getItemName()}</td>
 						<td>${instance.getAmount()}</td>
 						<td>${instance.getItemCode()}</td>						

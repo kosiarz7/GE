@@ -22,14 +22,33 @@
             <on-entry>
                 <evaluate expression="manufactureBean.getListOfMonthlySummary()"
                     result="flowScope.monthlySummaryList">
-                </evaluate>         
+                </evaluate>    
+                <evaluate expression="serviceFlow.getDocumentStubs()"
+                          result="flowScope.documentStubs">
+                </evaluate>      
             </on-entry> 
+            <transition on="goLoadMonthlySummaryForm" to="monthlySummaryManufactureView"/>
+            <transition on="goLoadPWForm" to="pwShow"/>
+            <transition on="goLoadWWForm" to="wwShow"/>
+            <transition on="goReceiveDocuments" to="start"/>
             <transition on="gotoMonthlySummary" to="monthlySummaryForm"/>
             <transition on="gotoAccidentForm" to="industrialAccidentForm"/>
             <transition on="gotoDefectiveElementForm" to="defectiveElementForm"/>
             <transition on="gotoOrderForm" to="orderForm"/>
             <transition on="gotoTimeSheetForm" to="timeSheetForm"/>
             <transition on="gotoVehicleForm" to="vehicleForm"/>
+        </view-state>
+        
+        <view-state id="monthlySummaryManufactureView">
+            <transition on="cancel" to="start"/>
+        </view-state>
+        
+        <view-state id="pwShowView">
+            <transition on="cancel" to="start"/>
+        </view-state>
+        
+        <view-state id="wwShowView">
+            <transition on="cancel" to="start"/>
         </view-state>
         
         <view-state id="monthlySummaryForm">

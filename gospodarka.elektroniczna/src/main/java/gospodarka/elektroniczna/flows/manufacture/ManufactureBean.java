@@ -10,12 +10,21 @@ package gospodarka.elektroniczna.flows.manufacture;
  * @author Dariusz
  */
 
+import gospodarka.elektroniczna.dao.department.Departments;
+import gospodarka.elektroniczna.documents.service.CollectCarForm;
+import gospodarka.elektroniczna.documents.service.DamagedCarForm;
+import gospodarka.elektroniczna.documents.service.WarrantyRepairForm;
 import gospodarka.elektroniczna.dto.manufacture.DefectiveElementForm;
 import gospodarka.elektroniczna.dto.manufacture.IndustrialAccidentForm;
 import gospodarka.elektroniczna.dto.manufacture.MonthlySummaryOfProductionLine;
 import gospodarka.elektroniczna.dto.manufacture.OrderForm;
 import gospodarka.elektroniczna.dto.manufacture.TimeSheetForm;
 import gospodarka.elektroniczna.dto.manufacture.VehicleForm;
+import gospodarka.elektroniczna.services.document.Document;
+import gospodarka.elektroniczna.services.document.DocumentStub;
+import gospodarka.elektroniczna.services.document.IDocumentService;
+import gospodarka.elektroniczna.services.document.SearchCriteria;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +33,8 @@ import java.util.List;
  *
  * @author Dariusz
  */
-public class ManufactureBean{
+public class ManufactureBean {
+    
      public String sendMassage(){
           System.out.println("widac");   
          return "witaj";

@@ -11,15 +11,20 @@
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
 	<ui:param name="department" value="Finanse i płace"/>
 	<ui:define name="pageContent">
-		<h:form>
+		<h:panelGrid columns="1" style="margin: 0 auto;">
 			<p:button href="/app/finance/invoice" value="Wyślij fakturę" /> <br></br>
-			<p:button href="/app/hr/businessTravelClearing" value="Wyślij rozliczenie podróży służbowej" /> <br></br>
-			<p:button href="/app/hr/trainingClearing" value="Wyślij rozliczenie szkolenia" /> <br></br>
-			<p:button href="/app/hr/invoiceClearing" value="Wyślij rozliczenie faktury" /> <br></br>
+			<p:button href="/app/finance/businessTravelClearing" value="Wyślij rozliczenie podróży służbowej" /> <br></br>
+			<p:button href="/app/finance/trainingClearing" value="Wyślij rozliczenie szkolenia" /> <br></br>
+			<!--<p:button href="/app/finance/invoiceClearing" value="Wyślij rozliczenie faktury" /> <br></br> -->
+			<br></br>
 			<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
-				Rozliczenia finansowe i archiwizacja faktur
+				Rozliczenia finansowe i archiwizacja faktur:
+				<p:button href="/app/finance/invoices" value="Przegląd faktur" />
+				<p:button href="/app/finance/businessTravelClearingFin" value="Rozlicz podróże służbowe" />
+				<p:button href="/app/finance/trainingClearingFin" value="Rozlicz szkolenia" />
+				<!--<p:button href="/app/finance/invoiceClearingFin" value="Rozlicz fakturę" />-->
 			</c:if>
-		</h:form>
+		</h:panelGrid>
 	</ui:define>
 </ui:composition>
 </html>

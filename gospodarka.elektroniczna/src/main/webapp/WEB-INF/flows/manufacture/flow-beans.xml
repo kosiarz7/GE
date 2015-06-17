@@ -7,4 +7,7 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="manufactureBean" class="gospodarka.elektroniczna.flows.manufacture.ManufactureBean"/>
+        
+        <bean id="serviceFlow" class="gospodarka.elektroniczna.controllers.manufacture.ServiceFlow"
+            p:documentService-ref="documentService"/>
 </beans>

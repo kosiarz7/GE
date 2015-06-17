@@ -14,15 +14,16 @@ and open the template in the editor.
     <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
         <ui:param name="department" value="Produkcja"/>
         <ui:define name="pageContent">
+            <link rel='stylesheet' href='../webjars/bootstrap/3.3.4/css/bootstrap.min.css'/>
             <h3>Zgłoszenie wypadku przy pracy</h3>
             <h:form id="defectiveElementForm" >
-
                 <div class="form-group">
-                    <label>Data</label>
-                    <h:inputText id="date" class="form-control" value="#{defectiveElement.date}" required="true">
-                        <f:convertDateTime pattern="yyyy-MM-dd"/> 
-                    </h:inputText>
-                    <h:message id="m1" for="date" style="color:red"/> <p></p>
+                    <label>Data</label><p>
+                        <p:calendar id="date"
+                                    value="#{defectiveElement.date}" showOn="button"
+                                    pattern="dd/MM/yyyy" label="'Data'"
+                                    placeholder="dd/mm/yyyy"  required="true"/>
+                        <h:message id="m1" for="date" style="color:red"/> </p>
                 </div>
 
                 <div class="form-group">
@@ -54,7 +55,7 @@ and open the template in the editor.
                     <h:inputText  class="form-control" value="#{defectiveElement.description}" />
                 </div>
                 <p:commandButton  id="save" action="saveDefectiveElementForm"  class="btn btn-primary"  value="Dodaj" update="@form" />
-                <p:button href="/app/manufacture" value="Powrót" />
+                <p:button href="/app/manufacture" class="btn btn-primary" value="Anuluj" />
             </h:form>
         </ui:define>
     </ui:composition>

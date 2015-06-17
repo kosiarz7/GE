@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Magazyn" />
+	<ui:define name="pageContent">
+		<h3>Zlecenie produkcji</h3>
+		<h:form>
+		<div class="form-group">
+				<div class="form-group">
+					<label>Numer zamówienia:</label>
+					<p:inputText id="orderNumber" class="form-control"
+						value="#{poVar.orderNumber}" required="true" />
+							<p:message id="m1" for="orderNumber" style="color:red" />
+					<p></p>
+				</div>
+				
+				<div class="form-group">
+					<label>Nazwa	</label>
+					<p:inputText id="nazwaProduktu" class="form-control"
+						value="#{poVar.nazwaProduktu}" required="true" />
+							<p:message id="m2" for="nazwaProduktu" style="color:red" />
+					<p></p>
+				</div>
+				<div class="form-group">
+					<label>Ilość</label>
+					<p:inputText id="sztuk" class="form-control"
+						value="#{poVar.sztuk}" required="true" />
+					<p:message id="m3" for="sztuk" style="color:red" />
+					<p></p>
+				</div>
+				<div class="form-group">
+					<label>Klient:	</label>
+					<p:inputText id="osobaSkladajacaZam" class="form-control"
+						value="#{poVar.osobaSkladajacaZam}" required="true" />
+							<p:message id="m4" for="osobaSkladajacaZam" style="color:red" />
+					<p></p>
+				</div>
+
+				<p:commandButton id="save" action="poGenA" value="Wyślij wniosek"
+					ajax="false" />
+				<p:button href="/app/storehouse" value="Powrót" />
+
+			</div>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+

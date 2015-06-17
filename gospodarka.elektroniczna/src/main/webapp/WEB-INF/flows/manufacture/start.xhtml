@@ -3,11 +3,11 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
     <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
         <ui:param name="department" value="Produkcja"/>
@@ -22,55 +22,98 @@
             <body>
                 <div role="tabpanel">
                     <ul id="tab" class="nav nav-pills nav-justified" role="tablist">
-                        <li role="presentation" class="active"><a href="#documentAll" aria-controls="documentAll" role="tab" data-toggle="tab">Przegląd dokumentów</a></li>
-                        <li role="presentation"><a href="#myDocument" aria-controls="myDocument" role="tab" data-toggle="tab">Moje dokumenty</a></li>
+                        <li role="presentation" class="active"><a href="#documentAll" aria-controls="documentAll" role="tab" data-toggle="tab">Dokumnety do zatwierdzenia</a></li>
                         <li role="presentation"><a href="#addDocument" aria-controls="addDocument" role="tab" data-toggle="tab">Dodaj dokument</a></li>
                     </ul>
 
                     <div id="tabContent" class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="documentAll">
-                            <ui:include src="/WEB-INF/flows/manufacture/reviewDocuments.xhtml"/>
-                            <p:button href="/app/manufacture/defectiveElementManufacture" class="btn btn-primary" value="Zgłoszenia wadliwych elementów" />
+                            <!-- <ui:include src="/WEB-INF/flows/manufacture/reviewDocuments.xhtml"/>-->
+                            <br/>
+                            <!-- <p>
+                                 <p:button href="/app/manufacture/monthlySummaryManufacture" class="btn btn-primary" value="Miesięczne podsumowania linii produkcyjnych" />
+                             </p>
+                             <p>
+                                 <p:button href="/app/manufacture/pwShow" class="btn btn-primary" value="Potwierdzenie odebrania produktu" />
+                             </p>
+                             <p>
+                                 <p:button href="/app/manufacture/wwShow" class="btn btn-primary" value="Potwierdzenie wydania elmentu" />
+                             </p> -->
+                        <h:form>
+                            <p:dataTable var="documentStub" value="#{flowScope.documentStubs}">
+                                <p:column headerText="Sygnatura">
+                                    <h:outputText value="#{documentStub.signature}" />
+                                </p:column>
+
+                                <p:column headerText="Tytuł">
+                                    <h:outputText value="#{documentStub.title}" />
+                                </p:column>
+
+                                <p:column headerText="Typ">
+                                    <h:outputText value="#{documentStub.type}" />
+                                </p:column>
+
+                                <p:column headerText="Z">
+                                    <h:outputText value="#{documentStub.from}" />
+                                </p:column>
+
+                                <p:column headerText="Do">
+                                    <h:outputText value="#{documentStub.to}" />
+                                </p:column>
+
+                                <p:column>
+                                    <p:commandButton action="#{serviceFlow.loadDocument(documentStub)}" value="Załaduj"/>
+                                </p:column>
+
+                                <p:column>
+                                    <p:commandButton action="#{serviceFlow.archivizeDocument(documentStub)}" value="Archiwizuj"/>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
                         </div>  
-                        <div role="tabpanel" class="tab-pane" id="myDocument" >
-                            <p>Drugi</p>
-                        </div>
+
                         <div role="tabpanel" class="tab-pane" id="addDocument">
                             <br></br>
-                                <p>
-                                    <p:button href="/app/manufacture/monthlySummary" class="btn btn-primary" value="Miesięczne podsumowanie lini produkcyjnej" />
-                                </p>
-                                <p>
-                                    <p:button href="/app/manufacture/defectiveElement" class="btn btn-primary" value="Zgłoszenie wadliwego elementu" />
-                                </p>
-                                <p>
-                                    <p:button href="/app/manufacture/industrialAccident" class="btn btn-primary" value="Zgłoszenie wypadku przy pracy" />
-                                </p>
-                                <p>
-                                    <p:button href="/app/manufacture/order" class="btn btn-primary" value="Zamówienie części" />
-                                </p>
-                                <p>
-                                    <p:button href="/app/manufacture/timeSheet" class="btn btn-primary" value="Karta pracy pracownika" />
-                                </p>
-                                <p>
-                                    <p:button href="/app/manufacture/newVehicle" class="btn btn-primary" value="Karta nowego pojazdu" />
-                                </p>
-
-
+                            <p>
+                                <p:button href="/app/manufacture/monthlySummary" class="btn btn-primary" value="Miesięczne podsumowanie lini produkcyjnej" />
+                            </p>
+                            <p>
+                                <p:button href="/app/manufacture/defectiveElement" class="btn btn-primary" value="Zgłoszenie wadliwego elementu" />
+                            </p>
+                            <p>
+                                <p:button href="/app/manufacture/industrialAccident" class="btn btn-primary" value="Zgłoszenie wypadku przy pracy" />
+                            </p>
+                            <p>
+                                <p:button href="/app/manufacture/order" class="btn btn-primary" value="Zamówienie części" />
+                            </p>
+                            <p>
+                                <p:button href="/app/manufacture/timeSheet" class="btn btn-primary" value="Karta pracy pracownika" />
+                            </p>
+                            <p>
+                                <p:button href="/app/manufacture/newVehicle" class="btn btn-primary" value="Karta nowego pojazdu" />
+                            </p>
+                            
+                            <p>
+                                <p:button class="btn btn-primary" href="/app/storehouse/wwGen" value="Wydanie wewnętrzne" />			
+                            </p>
+                            
+                            <p>
+                                <p:button class="btn btn-primary" href="/app/storehouse/pwGen" value="Przejęcie wewnętrzne" />
+                            </p>
+                            
                         </div>
                     </div> 
                 </div>
 
-      <script>
-       $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        e.target // newly activated tab
-        e.relatedTarget // previous active tab
-      })
-      </script>
+                <script>
+                    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                        e.target // newly activated tab
+                        e.relatedTarget // previous active tab
+                    })
+                </script>
 
-  </body>
-    </ui:define>
-</ui:composition>
-    
-    
+            </body>
+        </ui:define>
+    </ui:composition>
+      
 </html>

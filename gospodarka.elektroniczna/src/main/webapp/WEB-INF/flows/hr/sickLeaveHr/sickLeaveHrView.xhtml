@@ -8,27 +8,71 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="Kadry/Finanse"/>
+	<ui:param name="department" value="Kadry" />
 	<ui:define name="pageContent">
 		<h1>Zwolnienie lekarskie</h1>
-		<table border="1">
-			<tr>
-				<th width="100">Kto</th>
-				<th width="200">Od kiedy</th>
-				<th width="200">Do kiedy</th>
-			</tr>
-			<c:forEach items="${flowScope.sickLeaves}" var="instance">
-				<tr>
-					<td>${instance.getUserNameAndSurname()}</td>
-					<td>${instance.getFromDate()}</td>
-					<td>${instance.getToDate()}</td>
-					<!-- <td><p:commandButton action="controllerVar.sickLeaveArchive(${instance})" value="Archiwizuj" /></td> -->
-				</tr>
-			</c:forEach>
-		</table>
-		<br />
-		<p:button href="/app/hr" value="Powrót" />
+		<h:form id="formId">
+			<p:dataTable var="instance" value="${controllerVar.getSickLeaves()}"
+				paginator="true" rows="10"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="5,10,15" selectionMode="single"
+				selection="#{controllerVar.selectedSickLeave}"
+				id="tableSickLeaves" rowKey="#{instance}"
+				emptyMessage="Nie zostało zgłoszone żadne zwolnienie lekarskie">
+				
+				<p:ajax event="rowSelect" listener="#{controllerVar.onRowSelect}"
+					update=":formId:sickLeaveDetails"
+					oncomplete="PF('sickLeaveWidgetVar').show()" />
+				<p:column headerText="Pracownik" style="width:120px;">
+					${instance.getContent().getData().getUserNameAndSurname()}
+				</p:column>
+				<p:column headerText="Od kiedy" style="width:30px;">
+					${controllerVar.convertDateToString(instance.getContent().getData().getFromDate())}
+				</p:column>
+
+				<p:column headerText="Do kiedy" style="width:50px;">
+					${controllerVar.convertDateToString(instance.getContent().getData().getToDate())}
+				</p:column>
+
+			</p:dataTable>
+
+			<br />
+			<p:button href="/app/hr" value="Powrót" />
+
+
+			<p:dialog header="Zwolnienia lekarskie"
+				widgetVar="sickLeaveWidgetVar" modal="true" showEffect="fade"
+				hideEffect="fade" resizable="false">
+				<p:outputPanel id="sickLeaveDetails" style="text-align:center;">
+					<p:panelGrid columns="1"
+						rendered="#{not empty controllerVar.selectedSickLeave}"
+						columnClasses="label,value">
+						<p>
+							Pracownik:
+							<p:inputText id="employee"
+								value="#{controllerVar.selectedSickLeave.getContent().getData().getUserNameAndSurname()}"
+								label="'Pracownik'" required="true" disabled="true" />
+						</p>
+						<p>
+							Od kiedy:
+							<p:inputText id="from"
+								value="#{controllerVar.convertDateToString(controllerVar.selectedSickLeave.getContent().getData().getFromDate())}"
+								label="'Od kiedy'" required="true" disabled="true" />
+
+						</p>
+						<p>
+							Do kiedy:
+							<p:inputText id="to"
+								value="#{controllerVar.convertDateToString(controllerVar.selectedSickLeave.getContent().getData().getToDate())}"
+								label="'Do kiedy'" required="true" disabled="true" />
+						</p>
+						<p:commandButton value="Zarchiwizuj"
+							actionListener="#{controllerVar.archiveSickLeave}" update="@form"
+							onstart="showCurtain()" oncomplete="hideCurtain()" />
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>
-

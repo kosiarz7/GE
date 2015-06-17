@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
+        <ui:param name="department" value="Produkcja"/>
+        <ui:define name="pageContent">
+            <h1>Miesięczne podsumowanie linii produkcyjnej</h1>
+             <p:separator/>
+             <h:form>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel value="Data:" /><br />
+                    <h:outputLabel value="#{serviceFlow.monthlySummary.data.date}">
+                        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="GMT+3" />
+                    </h:outputLabel><br />
+                    
+                    <h:outputLabel value="Numer linii produkcyjnej:" /><br />
+                    <h:outputLabel value="#{serviceFlow.monthlySummary.data.productionLineNumber}"/><br />
+                    
+                    <h:outputLabel value="Nazwa modelu:" /><br />
+                    <h:outputLabel value="#{serviceFlow.monthlySummary.data.modelName}"/><br />
+
+                    <h:outputLabel value="Liczba wyprodukowanych elementów:" /><br />
+                    <h:outputLabel value="#{serviceFlow.monthlySummary.data.amountOfProductedElements}"/><br />
+                    
+                    <h:outputLabel value="Zgłoszone problemy:" /><br />
+                    <h:outputLabel value="#{serviceFlow.monthlySummary.data.reportedProblems}"/><br />
+                    
+                    <h:outputLabel value="Ilość uszkodzonych elemntów:"/><br />
+                    <h:outputLabel value="#{serviceFlow.monthlySummary.data.numberOfDefectiveElements}"/><br />
+
+                    <h:outputLabel value="Imię i nazwisko menegera:" /><br />
+                    <h:outputLabel value="#{serviceFlow.monthlySummary.data.productionLineManager}"/><br />
+                    
+                </h:panelGrid>
+                <p:button href="/app/manufacture" value="Powrót" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

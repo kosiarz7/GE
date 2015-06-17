@@ -9,7 +9,7 @@ public class CandidateRequest extends AbstractHrUser implements Serializable {
     private String jobName;
     private String requiredExperience;
     private String goodToKnownExperience;
-
+   
     public CandidateRequest() {
     }
 
@@ -44,12 +44,13 @@ public class CandidateRequest extends AbstractHrUser implements Serializable {
         this.goodToKnownExperience = goodToKnownExperience;
     }
 
-    @Override
-    public String toString() {
-        return "CandidateRequest [jobName=" + jobName + ", requiredExperience=" + requiredExperience
-                + ", goodToKnownExperience=" + goodToKnownExperience + ", getUserName()=" + getUserName()
-                + ", getUserSurname()=" + getUserSurname() + ", getDepartment()=" + getDepartment() + "]";
-    }
 
+	@Override
+	public String toString() {
+		return "CandidateRequest [jobName=" + jobName + ", requiredExperience="
+				+ requiredExperience + ", goodToKnownExperience="
+				+ goodToKnownExperience + ", department=" + department + "]";
+	}
 
+	
 }

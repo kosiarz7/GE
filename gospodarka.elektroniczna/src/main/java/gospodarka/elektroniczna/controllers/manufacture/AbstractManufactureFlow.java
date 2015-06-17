@@ -5,7 +5,7 @@
  */
 package gospodarka.elektroniczna.controllers.manufacture;
 
-import gospodarka.elektroniczna.controllers.hr.BusinessTravelClearingFlow;
+import gospodarka.elektroniczna.controllers.finance.BusinessTravelClearingFlow;
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.documents.manufacture.AbstractManufactureDocument;
@@ -16,9 +16,11 @@ import gospodarka.elektroniczna.services.document.IDocumentService;
 import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.signature.WrongNumberOfLastSignatureException;
 import gospodarka.elektroniczna.services.user.UserData;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 

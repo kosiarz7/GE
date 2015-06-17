@@ -5,21 +5,34 @@
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
 <secured
-		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT"
-		match="any" />
+		attributes="ROLE_STOREHOUSE, ROLE_ROOT" match="any" />
 
 	<var name="ppzVar" class="gospodarka.elektroniczna.dto.storehouse.PPZDocument" />
 
-	<view-state id="ppzGenView">
-		<transition on="ppzGenA" to="ppzGen" />
+	<view-state id="ppzGenView">		
+		<transition on="ppzGenService" to="ppzGenService" />		
+		<transition on="ppzGenManu" to="ppzGenManu" />		
+		<transition on="ppzGenCustomer" to="ppzGenCustomer" />
+		
 	</view-state>
 
-	<action-state id="ppzGen">
-		<evaluate expression="controllerVar.submitPPZ(springSecurityContextUtilBean.getUser(), ppzVar)"
+	<action-state id="ppzGenService">
+		<evaluate expression="controllerVar.submitPPZSerwis(springSecurityContextUtilBean.getUser(), ppzVar)"
 			result="flowScope.status" />
 		<transition to="ppzGenEnd" />
 	</action-state>
-
+	
+	<action-state id="ppzGenManu">
+		<evaluate expression="controllerVar.submitPPZManu(springSecurityContextUtilBean.getUser(), ppzVar)"
+			result="flowScope.status" />
+		<transition to="ppzGenEnd" />
+	</action-state>
+		<action-state id="ppzGenCustomer">
+		<evaluate expression="controllerVar.submitPPZCustomer(springSecurityContextUtilBean.getUser(), ppzVar)"
+			result="flowScope.status" />
+		<transition to="ppzGenEnd" />
+	</action-state>
+	
 	<end-state id="ppzGenEnd" view="ppzGenEnd.xhtml" />
 	<bean-import resource="flow-beans.xml" />
 </flow>
