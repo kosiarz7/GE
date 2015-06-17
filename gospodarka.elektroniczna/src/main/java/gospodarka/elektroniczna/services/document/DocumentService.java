@@ -28,6 +28,7 @@ import gospodarka.elektroniczna.documents.storehouse.PWDocument_A;
 import gospodarka.elektroniczna.documents.storehouse.PZDocument_A;
 import gospodarka.elektroniczna.documents.storehouse.WWDocument_A;
 import gospodarka.elektroniczna.documents.storehouse.WZDocument_A;
+import gospodarka.elektroniczna.documents.storehouse.PODocument_A;
 import gospodarka.elektroniczna.documents.manufacture.DefectiveElementDocument;
 import gospodarka.elektroniczna.documents.manufacture.IndustrialAccidentDocument;
 import gospodarka.elektroniczna.documents.manufacture.MonthlySummaryOfProductionLineDocument;
