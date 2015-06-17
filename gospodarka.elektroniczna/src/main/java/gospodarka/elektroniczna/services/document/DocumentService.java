@@ -100,7 +100,8 @@ public class DocumentService implements IDocumentService, Serializable {
         map.put(DocumentTypes.EXTERNAL_ISSUE, WZDocument_A.class);
         map.put(DocumentTypes.INTERNAL_ADOPTION, PWDocument_A.class);
         map.put(DocumentTypes.EXTERNAL_ADOPTION, PZDocument_A.class);
-        map.put(DocumentTypes.ORDER_CONFIRMATION, PPZDocument_A.class);
+        map.put(DocumentTypes.ORDER_CONFIRMATION, PPZDocument_A.class);		
+        map.put(DocumentTypes.PRODUCTION_ORDER, PODocument_A.class);
         map.put(DocumentTypes.INVOICE, InvoiceDocument.class);
         map.put(DocumentTypes.DEFECTIVE_ELEMENT, DefectiveElementDocument.class);
         map.put(DocumentTypes.INDUSTRIAL_ACCIDENT, IndustrialAccidentDocument.class);
