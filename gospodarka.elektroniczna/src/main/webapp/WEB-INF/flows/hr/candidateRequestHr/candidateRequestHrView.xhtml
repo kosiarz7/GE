@@ -24,7 +24,7 @@
 					update=":formId:candidateRequestDetails"
 					oncomplete="PF('candidateRequestWidgetVar').show()" />
 				<p:column headerText="Departament" style="width:30px;">
-					${instance.getContent().getData().getDepartment()}
+					${instance.getContent().getData().getDepartment().getDepartmentString()}
 				</p:column>
 				<p:column headerText="Stanowisko" style="width:30px;">
 					${instance.getContent().getData().getJobName()}
@@ -53,7 +53,7 @@
 						<p>
 							Departament:
 							<p:inputText id="department"
-								value="#{controllerVar.selectedCandidateRequest.getContent().getData().getDepartment()}"
+								value="#{controllerVar.selectedCandidateRequest.getContent().getData().getDepartment().getDepartmentString()}"
 								label="'Departament'" required="true" disabled="true" />
 						</p>
 						<p>
