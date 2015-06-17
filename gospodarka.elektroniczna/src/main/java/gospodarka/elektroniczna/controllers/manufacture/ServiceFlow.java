@@ -7,6 +7,8 @@ package gospodarka.elektroniczna.controllers.manufacture;
 
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.documents.manufacture.MonthlySummaryOfProductionLineDocument;
+import gospodarka.elektroniczna.documents.storehouse.PPZDocument_A;
+import gospodarka.elektroniczna.dto.storehouse.PPZDocument;
 import gospodarka.elektroniczna.dto.storehouse.PWDocument;
 import gospodarka.elektroniczna.dto.storehouse.WWDocument;
 import gospodarka.elektroniczna.services.document.Document;
@@ -25,6 +27,7 @@ public class ServiceFlow implements Serializable{
     private static final long serialVersionUID = 1L;
     private IDocumentService documentService;
     private MonthlySummaryOfProductionLineDocument monthlySummary;
+    private PPZDocument_A ppzForm;
     private PWDocument pwForm;
     private WWDocument wwForm;
     
@@ -57,9 +60,21 @@ public class ServiceFlow implements Serializable{
                 Document<WWDocument> wwDocument = documentService.loadCurrentDocument(documentStub);
                 setWWForm(wwDocument.getContent());
                 return "goLoadWWForm";
+            case ORDER_CONFIRMATION:
+                Document<PPZDocument_A> ppzDocument = documentService.loadCurrentDocument(documentStub);
+                setPpzForm(ppzDocument.getContent());
+                return "goLoadPPZForm";
             default:
                 return "cancel";
         }
+    }
+
+    public PPZDocument_A getPpzForm() {
+        return ppzForm;
+    }
+
+    public void setPpzForm(final PPZDocument_A ppzForm) {
+        this.ppzForm = ppzForm;
     }
     
     public void setDocumentService(final IDocumentService documentService) {

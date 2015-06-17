@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+        <ui:param name="department" value="Produkcja"/>
+        <ui:define name="pageContent">
+            <h1>Potwierdzenia przyjęcia zamówienia</h1>
+             <p:separator/>
+             <h:form>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel value="Data realizacji:" />
+                    <h:outputLabel value="#{serviceFlow.ppzForm.data.dateEnd}">
+                        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="GMT+3" />
+                    </h:outputLabel>
+                    
+                    <h:outputLabel value="Imię i nazwisko:" />
+                    <h:outputLabel value="#{serviceFlow.ppzForm.data.userName} #{serviceFlow.ppzForm.data.userSurname}"/>
+                    
+                    <h:outputLabel value="Numer zamówienia:" />
+                    <h:outputLabel value="#{serviceFlow.ppzForm.data.orderNumber}"/>
+
+                    <h:outputLabel value="Status:" />
+                    <h:outputLabel value="#{serviceFlow.ppzForm.data.state}"/>
+                    
+                    <h:outputLabel value="Dod. info:" />
+                    <h:outputLabel value="#{serviceFlow.ppzForm.data.reason}"/>
+                                      
+                </h:panelGrid>
+                <p:button href="/app/manufacture" value="Powrót" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

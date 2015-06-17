@@ -63,8 +63,9 @@
 
                         <c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
                             <div role="tabpanel" class="tab-pane"  id="documentAll">
-                                <br/>
-
+                                <p>
+                                    <p:button class="btn btn-primary" href="/app/storehouse/poShow" value="Zamowienia produkcji" />
+                                </p>
                                 <h:form>
 
                                     <p:dataTable var="documentStub" value="#{flowScope.documentStubs}">
