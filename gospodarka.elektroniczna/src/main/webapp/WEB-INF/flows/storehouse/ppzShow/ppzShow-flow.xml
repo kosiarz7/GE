@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
-	<secured attributes="ROLE_STOREHOUSE, ROLE_MANUFACTURE, ROLE_SERVICE, ROLE_SERVIS, ROLE_ROOT" />
+	<secured attributes="ROLE_STOREHOUSE, ROLE_MANUFACTURE, ROLE_CUSTOMER_SERVICE, ROLE_SERVIS, ROLE_ROOT" />
 
 
 	<on-start>
