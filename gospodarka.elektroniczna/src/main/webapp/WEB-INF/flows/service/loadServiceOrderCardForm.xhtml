@@ -11,30 +11,48 @@
     <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
         <ui:param name="department" value="Serwis"/>
         <ui:define name="pageContent">
-            <h3>Zgłoszenie wadliwego elementu</h3>
+            <h3>Zgłoszenie naprawy serwisowej</h3>
             <p:separator/>
 
             <h:form>
                 <h:panelGrid columns="2" cellpadding="5">
-                    <h:outputLabel value="Data zamówienia:" />
+                    <h:outputLabel value="Data zgłoszenia" />
                     <h:outputLabel value="#{serviceFlow.serviceOrderCardForm.serviceOrderDate}">
                         <f:convertDateTime pattern="dd.MM.yyyy" />
                     </h:outputLabel>
                     
-                    <h:outputLabel value="Osoba zgłaszająca:" />
-                    <h:outputLabel value="#{serviceFlow.defectiveElementForm.complaint}"/>
+                    <h:outputLabel value="Imię klienta:" />
+                    <h:outputLabel value="#{serviceFlow.serviceOrderCardForm.client.name}"/>
 
-                    <h:outputLabel value="Numer linii montażowej:" />
-                    <h:outputLabel value="#{serviceFlow.defectiveElementForm.productionLineNumber}"/>
+                    <h:outputLabel value="Nr telefonu klienta:" />
+                    <h:outputLabel value="#{serviceFlow.serviceOrderCardForm.client.phone}"/>
 
-                    <h:outputLabel value="Numer stanowiska:" />
-                    <h:outputLabel value="#{serviceFlow.defectiveElementForm.workStationNumber}"/>
+                    <h:outputLabel value="Adres klienta:" />
+                    <h:outputLabel value="#{serviceFlow.serviceOrderCardForm.client.adress}"/>
                     
-                    <h:outputLabel value="Numer elementu:" />
-                    <h:outputLabel value="#{serviceFlow.defectiveElementForm.elementNumber}"/>
+                    <h:outputLabel value="Nazwa serwisu:" />
+                    <h:outputLabel value="#{serviceFlow.serviceOrderCardForm.service.name}"/>
+
+                    <h:outputLabel value="Nr telefonu serwisu:" />
+                    <h:outputLabel value="#{serviceFlow.serviceOrderCardForm.service.phone}"/>
+
+                    <h:outputLabel value="Adres serwisu:" />
+                    <h:outputLabel value="#{serviceFlow.serviceOrderCardForm.service.adress}"/>
                     
-                    <h:outputLabel value="Opis wady:"/>
-                    <h:outputLabel value="#{serviceFlow.defectiveElementForm.description}"/>
+                    <h:outputLabel value="Marka:" />
+                    <h:outputLabel value="#{serviceFlow.serviceOrderCardForm.car.brand}"/>
+
+                    <h:outputLabel value="Model:" />
+                    <h:outputLabel value="#{serviceFlow.serviceOrderCardForm.car.model}"/>
+
+                    <h:outputLabel value="Numer rejestracyjny:" />
+                    <h:outputLabel value="#{serviceFlow.serviceOrderCardForm.car.registrationNumber}"/>
+                    
+                    <h:outputLabel value="Numer nadwozia:" />
+                    <h:outputLabel value="#{serviceFlow.serviceOrderCardForm.car.VIN}"/>
+                    
+                    <h:outputLabel value="Opis:" />
+                    <h:outputLabel value="#{serviceFlow.serviceOrderCardForm.todo}"/>
                     
                 </h:panelGrid>
                 <p:commandButton id="cancel" action="cancel" value="Anuluj" ajax="false" immediate="true"/>
