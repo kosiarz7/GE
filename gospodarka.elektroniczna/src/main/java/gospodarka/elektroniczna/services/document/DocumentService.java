@@ -28,6 +28,7 @@ import gospodarka.elektroniczna.documents.storehouse.PWDocument_A;
 import gospodarka.elektroniczna.documents.storehouse.PZDocument_A;
 import gospodarka.elektroniczna.documents.storehouse.WWDocument_A;
 import gospodarka.elektroniczna.documents.storehouse.WZDocument_A;
+import gospodarka.elektroniczna.documents.storehouse.PODocument_A;
 import gospodarka.elektroniczna.documents.manufacture.DefectiveElementDocument;
 import gospodarka.elektroniczna.documents.manufacture.IndustrialAccidentDocument;
 import gospodarka.elektroniczna.documents.manufacture.MonthlySummaryOfProductionLineDocument;
@@ -100,7 +101,8 @@ public class DocumentService implements IDocumentService, Serializable {
         map.put(DocumentTypes.EXTERNAL_ISSUE, WZDocument_A.class);
         map.put(DocumentTypes.INTERNAL_ADOPTION, PWDocument_A.class);
         map.put(DocumentTypes.EXTERNAL_ADOPTION, PZDocument_A.class);
-        map.put(DocumentTypes.ORDER_CONFIRMATION, PPZDocument_A.class);
+        map.put(DocumentTypes.ORDER_CONFIRMATION, PPZDocument_A.class);		
+        map.put(DocumentTypes.PRODUCTION_ORDER, PODocument_A.class);
         map.put(DocumentTypes.INVOICE, InvoiceDocument.class);
         map.put(DocumentTypes.DEFECTIVE_ELEMENT, DefectiveElementDocument.class);
         map.put(DocumentTypes.INDUSTRIAL_ACCIDENT, IndustrialAccidentDocument.class);
