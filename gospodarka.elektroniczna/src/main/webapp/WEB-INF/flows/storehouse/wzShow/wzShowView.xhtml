@@ -7,31 +7,31 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="Magazyn"/>
+	<ui:param name="department" value="Magazyn" />
 	<ui:define name="pageContent">
 		<h1>Wydania zewnętrzne</h1>
-		<h:form >
-			<table border="1" >
+		<h:form>
+			<table border="1">
 				<tr>
 					<th width="100">Imię i nazwisko</th>
 					<th width="100">Nazwa</th>
-					<th width="20">Sztuk </th>
-					<th width="40">Kod </th>
-					<th width="20">Cena/Szt </th>
-					<th width="100">Klient </th>
+					<th width="20">Sztuk</th>
+					<th width="40">Kod</th>
+					<th width="20">Cena/Szt</th>
+					<th width="100">Klient</th>
 					<th width="100">Data przyjecia</th>
 
 				</tr>
-			  	<c:forEach items="${flowScope.wzdocuments}" var="instance">
+				<c:forEach items="${flowScope.wzdocuments}" var="instance">
 					<tr>
 						<td>${instance.getUserNameAndSurname()}</td>
 						<td>${instance.getItemName()}</td>
 						<td>${instance.getAmount()}</td>
-						<td>${instance.getItemCode()}</td>						
+						<td>${instance.getItemCode()}</td>
 						<td>${instance.getPricePerItem()}</td>
 						<td>${instance.getCustomer()}</td>
 						<td>${instance.getReleaseDate()}</td>
-      
+
 					</tr>
 				</c:forEach>
 			</table>

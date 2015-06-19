@@ -12,16 +12,16 @@
 	<ui:define name="pageContent">
 		<h3>Wydanie zewnetrzne</h3>
 		<h:form>
-		
-				<p:message id="m1" for="releaseDate" style="color:red" />				
-				<p:message id="m2" for="itemName" style="color:red" />
-				<p:message id="m3" for="itemCode" style="color:red" />
-				<p:message id="m4" for="pricePerItem" style="color:red" />
-				<p:message id="m6" for="customer" style="color:red" />
-				
-		<h:panelGrid columns="2" cellpadding="5">			
-			
-			<h:outputLabel for="releaseDate" value="Data wydania:" />
+
+			<p:message id="m1" for="releaseDate" style="color:red" />
+			<p:message id="m2" for="itemName" style="color:red" />
+			<p:message id="m3" for="itemCode" style="color:red" />
+			<p:message id="m4" for="pricePerItem" style="color:red" />
+			<p:message id="m6" for="customer" style="color:red" />
+
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<h:outputLabel for="releaseDate" value="Data wydania:" />
 				<p:calendar id="releaseDate" value="#{wzVar.releaseDate}"
 					showOn="button" pattern="dd-MM-yyyy" label="'Data realizacji'"
 					placeholder="dd-mm-yyyy" required="true" />
@@ -31,20 +31,20 @@
 
 				<h:outputLabel for="itemCode" value="Kod:" />
 				<p:inputText id="itemCode" value="#{wzVar.itemCode}" required="true" />
-				
+
 				<h:outputLabel for="pricePerItem" value="Cena:" />
-				<p:inputText id="pricePerItem" value="#{wzVar.pricePerItem}" required="true" />
-				
+				<p:inputText id="pricePerItem" value="#{wzVar.pricePerItem}"
+					required="true" />
+
 				<h:outputLabel for="amount" value="Sztuk:" />
-				<p:inputText id="amount" value="#{wzVar.amount}"  required="true"/>
-				
+				<p:inputText id="amount" value="#{wzVar.amount}" required="true" />
+
 				<h:outputLabel for="customer" value="Klient:" />
-				<p:inputText id="customer" value="#{wzVar.customer}"  required="true"/>
-				
+				<p:inputText id="customer" value="#{wzVar.customer}" required="true" />
+
 			</h:panelGrid>
 			<p:commandButton id="save" action="wzGenA" value="Wyślij wniosek"
 				ajax="false" />
-			<p:button href="/app/storehouse" value="Powrót" />
 
 
 		</h:form>

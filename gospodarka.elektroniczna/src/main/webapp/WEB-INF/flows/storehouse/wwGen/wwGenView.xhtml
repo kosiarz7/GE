@@ -11,14 +11,14 @@
 	<ui:param name="department" value="Magazyn" />
 	<ui:define name="pageContent">
 		<h3>Wydanie wewnetrzne</h3>
-		<h:form>		
-				<p:message id="m1" for="releaseDate" style="color:red" />				
-				<p:message id="m2" for="itemName" style="color:red" />
-				<p:message id="m3" for="itemCode" style="color:red" />
-				<p:message id="m4" for="pricePerItem" style="color:red" />
-				
-		<h:panelGrid columns="2" cellpadding="5">				
-			<h:outputLabel for="releaseDate" value="Data wydania:" />
+		<h:form>
+			<p:message id="m1" for="releaseDate" style="color:red" />
+			<p:message id="m2" for="itemName" style="color:red" />
+			<p:message id="m3" for="itemCode" style="color:red" />
+			<p:message id="m4" for="pricePerItem" style="color:red" />
+
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel for="releaseDate" value="Data wydania:" />
 				<p:calendar id="releaseDate" value="#{wwVar.releaseDate}"
 					showOn="button" pattern="dd-MM-yyyy" label="'Data realizacji'"
 					placeholder="dd-mm-yyyy" required="true" />
@@ -28,18 +28,18 @@
 
 				<h:outputLabel for="itemCode" value="Kod:" />
 				<p:inputText id="itemCode" value="#{wwVar.itemCode}" required="true" />
-				
+
 				<h:outputLabel for="pricePerItem" value="Cena:" />
-				<p:inputText id="pricePerItem" value="#{wwVar.pricePerItem}" required="true" />
-				
+				<p:inputText id="pricePerItem" value="#{wwVar.pricePerItem}"
+					required="true" />
+
 				<h:outputLabel for="amount" value="Sztuk:" />
-				<p:inputText id="amount" value="#{wwVar.amount}"  required="true"/>
-				
+				<p:inputText id="amount" value="#{wwVar.amount}" required="true" />
+
 			</h:panelGrid>
-	
+
 			<p:commandButton id="save" action="wwGenA" value="Wyślij wniosek"
 				ajax="false" />
-			<p:button href="/app/storehouse" value="Powrót" />
 
 
 		</h:form>
