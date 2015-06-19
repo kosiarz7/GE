@@ -11,15 +11,12 @@
 	<var name="poVar" class="gospodarka.elektroniczna.dto.storehouse.PODocument" />
 
 	<view-state id="poGenView">
-		<transition on="poGenA" to="poGen" />
-	</view-state>
-
-	<action-state id="poGen">
+		<transition on="poGenA" to="poGenEnd"  >
 		<evaluate expression="controllerVar.submitPO(springSecurityContextUtilBean.getUser(), poVar)"
 			result="flowScope.status" />
-		<transition to="poGenEnd" />
-	</action-state>
+		</transition>
+	</view-state>
 
-	<end-state id="poGenEnd" view="poGenEnd.xhtml" />
+	<view-state id="poGenEnd" view="poGenEnd.xhtml" />
 	<bean-import resource="flow-beans.xml" />
 </flow>

@@ -11,15 +11,12 @@
 	<var name="pzVar" class="gospodarka.elektroniczna.dto.storehouse.PZDocument" />
 
 	<view-state id="pzGenView">
-		<transition on="pzGenA" to="pzGen" />
-	</view-state>
-
-	<action-state id="pzGen">
+		<transition on="pzGenA" to="pzGenEnd" >
 		<evaluate expression="controllerVar.submitPZ(springSecurityContextUtilBean.getUser(), pzVar)"
 			result="flowScope.status" />
-		<transition to="pzGenEnd" />
-	</action-state>
+		</transition>
+	</view-state>
 
-	<end-state id="pzGenEnd" view="pzGenEnd.xhtml" />
+	<view-state id="pzGenEnd" view="pzGenEnd.xhtml" />
 	<bean-import resource="flow-beans.xml" />
 </flow>

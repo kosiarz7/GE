@@ -7,19 +7,17 @@
 	<secured
 		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT, ROLE_CUSTOMER_SERVICE"
 		match="any" />
-		
-	<var name="businessTravelClearingVar" class="gospodarka.elektroniczna.dto.finance.BusinessTravelClearing" />
-					
+
+	<var name="businessTravelClearingVar"
+		class="gospodarka.elektroniczna.dto.finance.BusinessTravelClearing" />
+
 	<view-state id="businessTravelClearingView">
-		<transition on="businessTravelClearing" to="businessTravelClearing" />
+		<transition on="businessTravelClearing" to="businessTravelClearingEnd">
+			<evaluate
+				expression="controllerVar.submitBusinessTravelClearing(springSecurityContextUtilBean.getUser(), businessTravelClearingVar)"
+				result="flowScope.status" />
+		</transition>
 	</view-state>
-
-	<action-state id="businessTravelClearing">
-		<evaluate expression="controllerVar.submitBusinessTravelClearing(springSecurityContextUtilBean.getUser(), businessTravelClearingVar)"
-			result="flowScope.status" />
-		<transition to="businessTravelClearingEnd" />
-	</action-state>
-
-	<end-state id="businessTravelClearingEnd" view="businessTravelClearingEnd.xhtml" />
-	<bean-import resource="flow-beans.xml"/>
+	<view-state id="businessTravelClearingEnd" view="businessTravelClearingEnd.xhtml" />
+	<bean-import resource="flow-beans.xml" />
 </flow>
