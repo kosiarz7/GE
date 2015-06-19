@@ -9,7 +9,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-    <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
         <ui:param name="department" value="Produkcja"/>
         <ui:define name="pageContent">
 
@@ -34,48 +34,48 @@
                             <br></br>
 
                             <p>
-                                <p:button href="/app/manufacture/defectiveElementManufacture" class="btn btn-primary" value="Zgłoszenie wadliwego elementu" />
+                                <p:button href="/app/manufacture/defectiveElementManufacture"value="Zgłoszenie wadliwego elementu" />
                             </p>
                             <p>
-                                <p:button href="/app/manufacture/industrialAccidentManufacture" class="btn btn-primary" value="Zgłoszenie wypadku przy pracy" />
+                                <p:button href="/app/manufacture/industrialAccidentManufacture"value="Zgłoszenie wypadku przy pracy" />
                             </p>
                             <p>
-                                <p:button href="/app/manufacture/orderManufacture" class="btn btn-primary" value="Zamówienie części" />
+                                <p:button href="/app/manufacture/orderManufacture"value="Zamówienie części" />
                             </p>
                             <p>
-                                <p:button href="/app/manufacture/timeSheetManufacture" class="btn btn-primary" value="Karta pracy pracownika" />
+                                <p:button href="/app/manufacture/timeSheetManufacture"value="Karta pracy pracownika" />
                             </p>
                             <p>
-                                <p:button href="/app/manufacture/newVehicleManufacture" class="btn btn-primary" value="Karta nowego pojazdu" />
+                                <p:button href="/app/manufacture/newVehicleManufacture"value="Karta nowego pojazdu" />
                             </p>
                             
                             <c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
                                 <p>
-                                    <p:button href="/app/manufacture/monthlySummary" class="btn btn-primary" value="Miesięczne podsumowanie lini produkcyjnej" />
+                                    <p:button href="/app/manufacture/monthlySummary"value="Miesięczne podsumowanie lini produkcyjnej" />
                                 </p>
                             </c:if>
                             <p>
-                                <p:button href="/app/manufacture/defectiveElement" class="btn btn-primary" value="Zgłoszenie wadliwego elementu" />
+                                <p:button href="/app/manufacture/defectiveElement"value="Zgłoszenie wadliwego elementu" />
                             </p>
                             <p>
-                                <p:button href="/app/manufacture/industrialAccident" class="btn btn-primary" value="Zgłoszenie wypadku przy pracy" />
+                                <p:button href="/app/manufacture/industrialAccident"value="Zgłoszenie wypadku przy pracy" />
                             </p>
                             <p>
-                                <p:button href="/app/manufacture/order" class="btn btn-primary" value="Zamówienie części" />
+                                <p:button href="/app/manufacture/order"value="Zamówienie części" />
                             </p>
                             <p>
-                                <p:button href="/app/manufacture/timeSheet" class="btn btn-primary" value="Karta pracy pracownika" />
+                                <p:button href="/app/manufacture/timeSheet"value="Karta pracy pracownika" />
                             </p>
                             <p>
-                                <p:button href="/app/manufacture/newVehicle" class="btn btn-primary" value="Karta nowego pojazdu" />
-                            </p>
-
-                            <p>
-                                <p:button class="btn btn-primary" href="/app/storehouse/wwGen" value="Wydanie wewnętrzne" />			
+                                <p:button href="/app/manufacture/newVehicle"value="Karta nowego pojazdu" />
                             </p>
 
                             <p>
-                                <p:button class="btn btn-primary" href="/app/storehouse/pwGen" value="Przejęcie wewnętrzne" />
+                                <p:buttonhref="/app/storehouse/wwGen" value="Wydanie wewnętrzne" />			
+                            </p>
+
+                            <p>
+                                <p:buttonhref="/app/storehouse/pwGen" value="Przejęcie wewnętrzne" />
                             </p>
 
                         </div>

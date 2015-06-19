@@ -5,7 +5,7 @@
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
 <secured
-		attributes=" ROLE_MANUFACTURE,  ROLE_STOREHOUSE, ROLE_ROOT , ROLE_SERVIS"
+		attributes="ROLE_MANUFACTURE,  ROLE_STOREHOUSE, ROLE_ROOT , ROLE_SERVIS"
 		match="any" />
 
 	<var name="wwVar" class="gospodarka.elektroniczna.dto.storehouse.WWDocument" />

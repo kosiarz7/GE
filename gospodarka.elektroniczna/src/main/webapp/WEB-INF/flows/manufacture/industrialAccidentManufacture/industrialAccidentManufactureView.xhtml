@@ -6,10 +6,10 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-  <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
+  <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
         <ui:param name="department" value="Produkcja"/>
 	<ui:define name="pageContent">
-		<h1>Zgłoszone wypadki przy pracy</h1>
+		<h1 style="color: #FFFFFF">Zgłoszone wypadki przy pracy</h1>
 		<h:form>
 			<table border="1">
 				<tr>
@@ -30,8 +30,6 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<br />
-			<p:button href="/app/manufacture" class="btn btn-primary" value="Powrót" />
 		</h:form>
 
 
