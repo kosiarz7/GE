@@ -9,6 +9,9 @@ import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.user.UserData;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.primefaces.event.SelectEvent;
@@ -46,11 +49,27 @@ public class SickLeaveFlow extends AbstractHrFlow<SickLeave> implements
 		criteria.setType(DocumentTypes.SICK_LEAVE);
 
 		sickLeaves = search(criteria);
+		sortHolidaysRequest();
 		LoggerFactory.getLogger(HolidaysRequestFlow.class).debug(
 				"getSickLeaves", sickLeaves.size());
 
 	}
+    
+    private void sortHolidaysRequest()
+    {
+    	Collections.sort(sickLeaves, new Comparator<Document<AbstractHrDocument<SickLeave>>>() {
 
+			@Override
+			public int compare(
+					Document<AbstractHrDocument<SickLeave>> o1,
+					Document<AbstractHrDocument<SickLeave>> o2) {
+				Date date1 = o1.getContent().getData().getFromDate();
+				Date date2 = o2.getContent().getData().getFromDate();
+				return -date1.compareTo(date2);
+			}
+		});
+    }
+    
 	public List<Document<AbstractHrDocument<SickLeave>>> getSickLeaves() {
 		return sickLeaves;
 	}

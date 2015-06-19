@@ -11,15 +11,12 @@
 	<var name="sickLeaveVar" class="gospodarka.elektroniczna.dto.hr.SickLeave" />
 
 	<view-state id="sickLeaveView">
-		<transition on="sickLeave" to="sickLeave" />
+		<transition on="sickLeave" to="sickLeaveEnd" >
+				<evaluate expression="controllerVar.submitSickLeave(springSecurityContextUtilBean.getUser(), sickLeaveVar)"
+			result="flowScope.status" />
+		</transition>
 	</view-state>
 
-	<action-state id="sickLeave">
-		<evaluate expression="controllerVar.submitSickLeave(springSecurityContextUtilBean.getUser(), sickLeaveVar)"
-			result="flowScope.status" />
-		<transition to="sickLeaveEnd" />
-	</action-state>
-
-	<end-state id="sickLeaveEnd" view="sickLeaveEnd.xhtml" />
+	<view-state id="sickLeaveEnd" view="sickLeaveEnd.xhtml" />
 	<bean-import resource="flow-beans.xml" />
 </flow>

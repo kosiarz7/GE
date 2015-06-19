@@ -13,7 +13,9 @@ public class NewCandidate extends AbstractHrUser implements Serializable {
 
     private String experience;
     private Departments department;
-
+    private String candidateName;
+    private String candidateSurname;
+    
     public NewCandidate() {
 
     }
@@ -34,11 +36,26 @@ public class NewCandidate extends AbstractHrUser implements Serializable {
         this.department = department;
     }
 
-    @Override
-    public String toString() {
-        return "NewCandidate [experience=" + experience + ", department=" + department + ", getUserName()="
-                + getUserName() + ", getUserSurname()=" + getUserSurname() + "]";
-    }
+	public String getCandidateName() {
+		return candidateName;
+	}
+
+	public void setCandidateName(String candidateName) {
+		this.candidateName = candidateName;
+	}
+
+	public String getCandidateSurname() {
+		return candidateSurname;
+	}
+
+	public void setCandidateSurname(String candidateSurname) {
+		this.candidateSurname = candidateSurname;
+	}
+
+   public String getCandidateNameAndSurname()
+   {
+	   return candidateName + " " + candidateSurname;
+   }
 
     
 }

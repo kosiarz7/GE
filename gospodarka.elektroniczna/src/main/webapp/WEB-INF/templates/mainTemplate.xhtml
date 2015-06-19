@@ -5,41 +5,318 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<title>Produkcja samochodów</title>
+	<title>General Electrics - Produkcja samochodów</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="#{request.contextPath}/resources/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="#{request.contextPath}/resources/css/style.css"
+		rel="stylesheet" type="text/css" />
 </h:head>
-<h:body >
+<h:body styleClass="bkgColor">
 	<div id="header">
 		<div id="header-content" class="content">
-			<div id="title" class="font48p wideSpacing">#{department}</div>
+			<a href="/GE/app/mainWindow"> <img
+				src="#{request.contextPath}/resources/img/logo.png" id="small_logo" />
+			</a>
+			<div id="factory_name" class="font28p wideSpacing">
+				<a href="/GE/app/mainWindow"
+					style="color: #FFFFFF; text-decoration: none;"> General<br />Electrics
+				</a>
+			</div>
+
+			<div id="department_name" class="font48p wideSpacing">#{springSecurityContextUtilBean.getUserDepartment().getDepartmentString()}</div>
+
 			<div id="userData">
 				<form id="logoutForm" action="${request.contextPath}/app/logout"
 					method="post">
-					#{springSecurityContextUtilBean.getLoggedOnUserNameAndSurname()} <a
-						href="#" title="Wyloguj się"
+					<a href="#" title="Wyloguj się"
 						onclick="document.getElementById('logoutForm').submit();"> <img
 						id="logout-icon"
-						src="#{request.contextPath}/resources/img/exit.png" />
+						src="#{request.contextPath}/resources/img/exit2.png" />
 					</a> <input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
+					<div id="login_user">
+						#{springSecurityContextUtilBean.getLoggedOnUserNameAndSurname()}</div>
 				</form>
 			</div>
+
 		</div>
 	</div>
-	
-	<div id="pageSeparator" />
-	
-	<div id="menu" class="content">
-		<p:button href="/app/hr" value="KADRY" />
-		<p:button href="/app/manufacture" value="PRODUKCJA" />
-		<p:button href="/app/finance" value="FINANSE" />
-		<p:button href="/app/service" value="SERWIS" />
-		<p:button href="/app/storehouse" value="MAGAZYN" />
-		<p:button href="/app/customerService" value="OBSŁUGA" />
+
+	<div id="menu_field">
+		<div id="menu" class="content">
+			<h:form prependId="false">
+				<p:menubar id="menubar">
+					<p:menuitem value="Pulpit" url="/app/mainWindow" />
+
+
+					<p:submenu label="KADRY">
+						<p:menuitem value="Wyślij wniosek o urlop"
+							url="/app/hr/holidaysRequest" />
+						<p:menuitem value="Wyślij informacje o wakacie"
+							url="/app/hr/candidateRequest" />
+						<p:menuitem value="Wyślij zwolnienie lekarskie"
+							url="/app/hr/sickLeave" />
+						<p:menuitem value="Zobacz kandydatów" url="/app/hr/newCandidate" />
+
+						<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_HR')}">
+
+							<p:menuitem value="Wnioski o urlop"
+								url="/app/hr/holidaysRequestHr" />
+							<p:menuitem value="Sprawdź wakaty"
+								url="/app/hr/candidateRequestHr" />
+							<p:menuitem value="Zwolnienia lekarskie"
+								url="/app/hr/sickLeaveHr" />
+							<p:menuitem value="Nowy kandydat" url="/app/hr/newCandidateHr" />
+						</c:if>
+					</p:submenu>
+
+					<p:submenu label="FINANSE">
+						<p:menuitem value="Rozliczenie podróży służbowej"
+							url="/app/finance/businessTravelClearing" />
+						<c:if
+							test="#{springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
+							<p:menuitem value="Rozliczenia podróży służbowych"
+								url="/app/finance/businessTravelClearingFin" />
+						</c:if>
+						<p:menuitem value="Faktura do rozliczenia"
+							url="/app/finance/invoice" />
+						<c:if
+							test="#{springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
+							<p:menuitem value="Rozliczenia faktur"
+								url="/app/finance/invoiceClearingFin" />
+						</c:if>
+						<p:menuitem value="Faktura do rozliczenia"
+							url="/app/finance/invoices" />
+						<p:menuitem value="Rozliczenie szkolenia"
+							url="/app/finance/trainingClearing" />
+						<c:if
+							test="#{springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
+							<p:menuitem value="Rozliczenie szkolenia"
+								url="/app/finance/trainingClearingFin" />
+						</c:if>
+					</p:submenu>
+					<c:if
+						test="#{not springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
+						<p:submenu label="PRODUKCJA">
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+								<p:menuitem value="Zgłoszenie usterki"
+									url="/app/manufacture/defectiveElement" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_SERVIS')}">
+								<p:menuitem value="Zgłoszone wadliwe elementy"
+									url="/app/manufacture/defectiveElementManufacture" />
+							</c:if>
+
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+								<p:menuitem value="Zgłoszenie wypadku przy pracy"
+									url="/app/manufacture/industrialAccident" />
+							</c:if>
+							<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_HR')}">
+								<p:menuitem value="Zgłoszone wypadki przy pracy"
+									url="/app/manufacture/industrialAccidentManufacture" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+								<p:menuitem value="Miesęczne podsumowanie linii produkcyjnej"
+									url="/app/manufacture/monthlySummary" />
+								<p:menuitem value="Karta nowego pojazdu"
+									url="/app/manufacture/newVehicle" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
+								<p:menuitem value="Karty nowych pojazdów"
+									url="/app/manufacture/newVehicleManufacture" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+								<p:menuitem value="Zamówienie części"
+									url="/app/manufacture/order" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
+								<p:menuitem value="Zamówienia"
+									url="/app/manufacture/orderManufacture" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+								<p:menuitem value="Przyjęcia wewnętrzne"
+									url="/app/manufacture/pwShow" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+								<p:menuitem value="Karta pracy pracownika"
+									url="/app/manufacture/timeSheet" />
+							</c:if>
+							<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_HR')}">
+								<p:menuitem value="Karty pracy pracowników"
+									url="/app/manufacture/timeSheetManufacture" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+								<p:menuitem value="Podsumowanie linii produkcyjnej"
+									url="/app/manufacture/wwShow" />
+							</c:if>
+						</p:submenu>
+					</c:if>
+
+					<c:if
+						test="#{(not springSecurityContextUtilBean.hasRole('ROLE_HR')) and (not springSecurityContextUtilBean.hasRole('ROLE_FINANCE')) and (not springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE'))}">
+						<p:submenu label="SERWIS">
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_SERVIS') or springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
+								<p:menuitem value="Zamówienie części zamiennych"
+									url="/app/service/showOrderForm" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_SERVIS') or springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
+								<p:menuitem value="Koszotrys naprawy pogwarancyjnej"
+									url="/app/service/showRepairCostEstimationForm" />
+							</c:if>
+
+						</p:submenu>
+					</c:if>
+					<c:if
+						test="#{(not springSecurityContextUtilBean.hasRole('ROLE_HR')) and (not springSecurityContextUtilBean.hasRole('ROLE_FINANCE'))}">
+						<p:submenu label="MAGAZYN">
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_ROOT')}">
+								<p:menuitem value="Zlecenie produkcji"
+									url="/app/storehouse/poGen" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+								<p:menuitem value="Zlecenia produkcji"
+									url="/app/storehouse/poShow" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_ROOT')}">
+								<p:menuitem value="Przyjecie zamówienia"
+									url="/app/storehouse/ppzGen" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE') or springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_SERVIS')}">
+								<p:menuitem value="Potwierdzenie przyjecia zamówienia"
+									url="/app/storehouse/ppzShow" />
+							</c:if>
+
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE') or springSecurityContextUtilBean.hasRole('ROLE_SERVIS') or springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_ROOT')}">
+								<p:menuitem value="Przyjęcie wewnętrzne"
+									url="/app/storehouse/pwGen" />
+							</c:if>
+
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
+								<p:menuitem value="Przyjęcia wewnętrzne - lista"
+									url="/app/storehouse/pwShow" />
+							</c:if>
+
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
+								<p:menuitem value="Przyjęcie zewnetrzne"
+									url="/app/storehouse/pzGen" />
+							</c:if>
+
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
+								<p:menuitem value="Przyjęcie zewnetrzne"
+									url="/app/storehouse/pzShow" />
+							</c:if>
+
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE') or springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_ROOT') or springSecurityContextUtilBean.hasRole('ROLE_SERVIS')}">
+								<p:menuitem value="Wydanie wewnetrzne"
+									url="/app/storehouse/wwGen" />
+							</c:if>
+
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
+								<p:menuitem value="Wydania wewnętrzne"
+									url="/app/storehouse/wwShow" />
+							</c:if>
+
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
+								<p:menuitem value="Wydanie zewnetrzne"
+									url="/app/storehouse/wzGen" />
+							</c:if>
+
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
+								<p:menuitem value="Wydania zewnętrzne"
+									url="/app/storehouse/wzShow" />
+							</c:if>
+
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
+								<p:menuitem value="Produkcja - zamowienia"
+									url="/app/storehouse/zOrderManuShow" />
+							</c:if>
+
+						</p:submenu>
+					</c:if>
+
+					<c:if
+						test="#{(not springSecurityContextUtilBean.hasRole('ROLE_HR')) and (not springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE'))and (not springSecurityContextUtilBean.hasRole('ROLE_SERVIS')) }">
+						<p:submenu label="OBSŁUGA">
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
+								<p:menuitem value="Raport pracy salonu"
+									url="/app/customerService/dailyWorkReport" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
+								<p:menuitem value="Raport pracy salonu"
+									url="/app/customerService/dailyWorkReportReceived" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
+								<p:menuitem value="Karta konfiguracji pojazdu"
+									url="/app/customerService/orderCard" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
+								<p:menuitem value="Karta zamowienia z konfiguratora"
+									url="/app/customerService/orderCardReceived" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
+								<p:menuitem value="Rachunek zamowienia"
+									url="/app/customerService/orderInvoice" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
+								<p:menuitem value="Rachunki"
+									url="/app/customerService/orderInvoiceReceived" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
+								<p:menuitem value="Zamowienie uslugi serwisowej"
+									url="/app/customerService/serviceOrderCard" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_SERVICE')}">
+								<p:menuitem value="Raporty pracy salonu"
+									url="/app/customerService/serviceOrderCardReceived" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
+								<p:menuitem value="Raport jazdy probnej"
+									url="/app/customerService/testDriveReport" />
+							</c:if>
+							<c:if
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_SERVICE')}">
+								<p:menuitem value="Raporty jazd testowych"
+									url="/app/customerService/testDriveReportReceived" />
+							</c:if>
+						</p:submenu>
+					</c:if>
+				</p:menubar>
+			</h:form>
+		</div>
 	</div>
-	
-	<div id="pageSeparator" />
 
 	<div id="page">
 		<div class="content">
@@ -48,5 +325,13 @@
 			</div>
 		</div>
 	</div>
+	<script src="webjars/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#datePicker').datepicker({
+				format : 'mm/dd/yyyy'
+			});
+		});
+	</script>
 </h:body>
 </html>

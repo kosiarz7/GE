@@ -30,7 +30,7 @@ public enum Departments {
     /**
      * Serwis.
      */
-    SERVIS("Service"),
+    SERVIS("Serwis"),
     /**
      * Magazyn.
      */

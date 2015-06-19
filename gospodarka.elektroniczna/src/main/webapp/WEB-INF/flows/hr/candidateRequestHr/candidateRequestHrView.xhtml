@@ -7,7 +7,6 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="#{springSecurityContextUtilBean.getUserDepartment().getDepartmentString()}"/>
 	<ui:define name="pageContent">
 		<h1>Wakaty</h1>
 		
@@ -24,7 +23,7 @@
 					update=":formId:candidateRequestDetails"
 					oncomplete="PF('candidateRequestWidgetVar').show()" />
 				<p:column headerText="Departament" style="width:30px;">
-					${instance.getContent().getData().getDepartment()}
+					${instance.getContent().getData().getDepartment().getDepartmentString()}
 				</p:column>
 				<p:column headerText="Stanowisko" style="width:30px;">
 					${instance.getContent().getData().getJobName()}
@@ -39,9 +38,6 @@
 
 			</p:dataTable>
 
-			<br />
-			<p:button href="/app/hr" value="Powrót" />
-
 
 			<p:dialog header="Wakaty"
 				widgetVar="candidateRequestWidgetVar" modal="true" showEffect="fade"
@@ -53,7 +49,7 @@
 						<p>
 							Departament:
 							<p:inputText id="department"
-								value="#{controllerVar.selectedCandidateRequest.getContent().getData().getDepartment()}"
+								value="#{controllerVar.selectedCandidateRequest.getContent().getData().getDepartment().getDepartmentString()}"
 								label="'Departament'" required="true" disabled="true" />
 						</p>
 						<p>

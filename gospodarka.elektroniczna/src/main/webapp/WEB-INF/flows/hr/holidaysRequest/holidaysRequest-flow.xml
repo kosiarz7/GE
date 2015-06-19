@@ -11,15 +11,12 @@
 	<var name="holidaysRequestVar" class="gospodarka.elektroniczna.dto.hr.HolidaysRequest" />
 
 	<view-state id="holidaysRequestView">
-		<transition on="holidaysRequest" to="holidaysRequest" />
-	</view-state>
-
-	<action-state id="holidaysRequest">
-		<evaluate expression="controllerVar.submitHolidaysRequest(springSecurityContextUtilBean.getUser(), holidaysRequestVar)"
+		<transition on="holidaysRequest" to="AholidaysRequestEnd" >
+				<evaluate expression="controllerVar.submitHolidaysRequest(springSecurityContextUtilBean.getUser(), holidaysRequestVar)"
 			result="flowScope.status" />
-		<transition to="holidaysRequestEnd" />
-	</action-state>
-
-	<end-state id="holidaysRequestEnd" view="holidaysRequestEnd.xhtml" />
+		</transition>
+	</view-state>
+	
+	<view-state id="AholidaysRequestEnd" view="holidaysRequestEnd.xhtml" />
 	<bean-import resource="flow-beans.xml" />
 </flow>

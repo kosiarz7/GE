@@ -12,42 +12,31 @@
 	<ui:define name="pageContent">
 		<h3>Zlecenie produkcji</h3>
 		<h:form>
-		<div class="form-group">
-				<div class="form-group">
-					<label>Numer zamówienia:</label>
-					<p:inputText id="orderNumber" class="form-control"
-						value="#{poVar.orderNumber}" required="true" />
-							<p:message id="m1" for="orderNumber" style="color:red" />
-					<p></p>
-				</div>
-				
-				<div class="form-group">
-					<label>Nazwa	</label>
-					<p:inputText id="nazwaProduktu" class="form-control"
-						value="#{poVar.nazwaProduktu}" required="true" />
-							<p:message id="m2" for="nazwaProduktu" style="color:red" />
-					<p></p>
-				</div>
-				<div class="form-group">
-					<label>Ilość</label>
-					<p:inputText id="sztuk" class="form-control"
-						value="#{poVar.sztuk}" required="true" />
-					<p:message id="m3" for="sztuk" style="color:red" />
-					<p></p>
-				</div>
-				<div class="form-group">
-					<label>Klient:	</label>
-					<p:inputText id="osobaSkladajacaZam" class="form-control"
-						value="#{poVar.osobaSkladajacaZam}" required="true" />
-							<p:message id="m4" for="osobaSkladajacaZam" style="color:red" />
-					<p></p>
-				</div>
+			<p:message id="m1" for="orderNumber" style="color:red" />
+			<p:message id="m2" for="nazwaProduktu" style="color:red" />
+			<p:message id="m3" for="sztuk" style="color:red" />
+			<p:message id="m4" for="osobaSkladajacaZam" style="color:red" />
+			<h:panelGrid columns="2" cellpadding="5">
 
-				<p:commandButton id="save" action="poGenA" value="Wyślij wniosek"
-					ajax="false" />
-				<p:button href="/app/storehouse" value="Powrót" />
+				<h:outputLabel for="orderNumber" value="Numer zamówienia:" />
+				<p:inputText id="orderNumber" value="#{poVar.orderNumber}"
+					required="true" />
 
-			</div>
+				<h:outputLabel for="nazwaProduktu" value="Nazwa/Kod:" />
+				<p:inputText id="nazwaProduktu" value="#{poVar.nazwaProduktu}"
+					required="true" />
+
+				<h:outputLabel for="sztuk" value="Ilość:" />
+				<p:inputText id="sztuk" value="#{poVar.sztuk}" required="true" />
+
+				<h:outputLabel for="osobaSkladajacaZam" value="Klient:" />
+				<p:inputText id="osobaSkladajacaZam"
+					value="#{poVar.osobaSkladajacaZam}" required="true" />
+
+			</h:panelGrid>
+
+			<p:commandButton id="save" action="poGenA" value="Wyślij wniosek"
+				ajax="false" />
 
 		</h:form>
 	</ui:define>

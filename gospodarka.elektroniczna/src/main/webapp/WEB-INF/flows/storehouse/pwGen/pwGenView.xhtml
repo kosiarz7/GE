@@ -12,54 +12,40 @@
 	<ui:define name="pageContent">
 		<h3>Przyjęcie wewnętrzne</h3>
 		<h:form>
-			<div class="form-group">
-				<div class="form-group">
-					<label>Data przyjecia towaru</label>
-					<p:calendar id="receivedDate" value="#{pwVar.receivedDate}"
-						showOn="button" pattern="dd-MM-yyyy" label="'Data wydania'"
-						placeholder="dd-mm-yyyy" required="true" />
-					<p:message id="m1" for="receivedDate" style="color:red" />
-					<p></p>
-				</div>
 
-				<div class="form-group">
-					<label>Nazwa	</label>
-					<p:inputText id="itemName" class="form-control"
-						value="#{pwVar.itemName}" required="true" />
-							<p:message id="m2" for="itemName" style="color:red" />
-					<p></p>
-				</div>
+			<p:message id="m1" for="receivedDate" style="color:red" />
+			<p:message id="m2" for="itemName" style="color:red" />
+			<p:message id="m3" for="itemCode" style="color:red" />
+			<p:message id="m4" for="pricePerItem" style="color:red" />
+			<p:message id="m5" for="amount" style="color:red" />
 
-				<div class="form-group">
-					<label>Kod	</label>
-					<p:inputText id="itemCode" class="form-control"
-						value="#{pwVar.itemCode}" required="true"  />
-							<p:message id="m3" for="itemCode" style="color:red" />
-					<p></p>
-				</div>
+			<h:panelGrid columns="2" cellpadding="5">
 
-				<div class="form-group">
-					<label>Cena	</label>
-					<p:inputText id="pricePerItem" class="form-control"
-						value="#{pwVar.pricePerItem}" required="true" />
-					<p:message id="m4" for="pricePerItem" style="color:red" />
-					<p></p>
-				</div>
+				<h:outputLabel for="receivedDate" value="Data przyjecia:" />
+				<p:calendar id="receivedDate" value="#{pwVar.receivedDate}"
+					showOn="button" pattern="dd-MM-yyyy" label="'Data realizacji'"
+					placeholder="dd-mm-yyyy" required="true" />
 
-				<div class="form-group">
-					<label>Ilość</label>
-					<p:inputText id="amount" class="form-control"
-						value="#{pwVar.amount}" required="true" />
-					<p:message id="m5" for="amount" style="color:red" />
-					<p></p>
-				</div>
+				<h:outputLabel for="itemName" value="Nazwa:" />
+				<p:inputText id="itemName" value="#{pwVar.itemName}" required="true" />
+
+				<h:outputLabel for="itemCode" value="Kod:" />
+				<p:inputText id="itemCode" value="#{pwVar.itemCode}" required="true" />
 
 
-				<p:commandButton id="save" action="pwGenA" value="Wyślij wniosek"
-					ajax="false" />
-				<p:button href="/app/storehouse" value="Powrót" />
+				<h:outputLabel for="pricePerItem" value="Cena:" />
+				<p:inputText id="pricePerItem" value="#{pwVar.pricePerItem}"
+					required="true" />
 
-			</div>
+
+				<h:outputLabel for="amount" value="Sztuk:" />
+				<p:inputText id="amount" value="#{pwVar.amount}" required="true" />
+
+			</h:panelGrid>
+
+			<p:commandButton id="save" action="pwGenA" value="Wyślij wniosek"
+				ajax="false" />
+
 
 		</h:form>
 	</ui:define>

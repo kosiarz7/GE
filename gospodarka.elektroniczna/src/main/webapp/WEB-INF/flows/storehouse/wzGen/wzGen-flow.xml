@@ -11,15 +11,12 @@
 	<var name="wzVar" class="gospodarka.elektroniczna.dto.storehouse.WZDocument" />
 
 	<view-state id="wzGenView">
-		<transition on="wzGenA" to="wzGen" />
-	</view-state>
-
-	<action-state id="wzGen">
+		<transition on="wzGenA" to="wzGenEnd"  >
 		<evaluate expression="controllerVar.submitWZ(springSecurityContextUtilBean.getUser(), wzVar)"
 			result="flowScope.status" />
-		<transition to="wzGenEnd" />
-	</action-state>
+		</transition>
+	</view-state>
 
-	<end-state id="wzGenEnd" view="wzGenEnd.xhtml" />
+	<view-state id="wzGenEnd" view="wzGenEnd.xhtml" />
 	<bean-import resource="flow-beans.xml" />
 </flow>

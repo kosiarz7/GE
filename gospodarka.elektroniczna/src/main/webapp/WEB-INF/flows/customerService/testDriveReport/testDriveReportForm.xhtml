@@ -6,60 +6,67 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
-        <ui:param name="department" value="Obsluga klienta"/>
-        <ui:define name="pageContent">
-            <h1>Raport jazdy probnej</h1>
-            <h:form>
-                <div class="ui-grid ui-grid-responsive">
-                    <div class="ui-grid-row">
-                        <p:panel id="testDriveData" header="Dane statystyczne" style="margin-bottom:20px">
-                                <h:panelGrid columns="2" cellpadding="2">
-                                       <p:outputLabel for="date" value="Data: *" />
-                                    <p:calendar id="date" value="#{data.dateTime}" pattern="dd-MM-yyyy" mask="true" />
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Obsluga klienta" />
+	<ui:define name="pageContent">
+		<h1>Raport jazdy probnej</h1>
+		<h:form>
+			<div class="ui-grid ui-grid-responsive">
+				<div class="ui-grid-row">
+					<p:panel id="testDriveData" header="Dane statystyczne"
+						style="margin-bottom:20px">
+						<h:panelGrid columns="2" cellpadding="2">
+							<p:outputLabel for="date" value="Data: *" />
+							<p:calendar id="date" value="#{data.dateTime}"
+								pattern="dd-MM-yyyy" mask="true" />
 
-                                    <p:outputLabel for="employee" value="Pracownik obslugujacy:" />
-                                    <p:inputText id="employee" value="#{data.employee.name}" required="true" />
+							<p:outputLabel for="employee" value="Pracownik obslugujacy:" />
+							<p:inputText id="employee" value="#{data.employee.name}"
+								required="true" />
 
-                                    <p:outputLabel for="carNumber" value="Nr rejestracyjny auta testowego:" />
-                                    <p:inputText id="carNumber" value="#{data.car.registrationNumber}" required="true" />
-                                    
-                                    <p:outputLabel for="mileageBefore" value="Stan licznika przed" />
-                                    <p:inputText id="mileageBefore" value="#{data.mileageBefore}" required="true" />
+							<p:outputLabel for="carNumber"
+								value="Nr rejestracyjny auta testowego:" />
+							<p:inputText id="carNumber"
+								value="#{data.car.registrationNumber}" required="true" />
 
-                                    <p:outputLabel for="mileageAfter" value="Stan licznika po:" />
-                                    <p:inputText id="mileageAfter" value="#{data.mileageAfter}" required="true" />
-                                </h:panelGrid>
-                            </p:panel>
-                    </div>
-                     <div class="ui-grid-row">
-                                <p:commandButton action="saveTestDriveReportForm" value="Wyslij raport" ajax="false" />
-                                <p:button href="/app/customerService" value="Powrót" />
-                     </div>
-                    <div class="ui-grid-row">
-                        <p>
-                            <p:message for="date" />
-                        </p>
-                        <p>
-                            <p:message for="employee" />
-                        </p>
-                        <p>
-                            <p:message for="carNumber" />
-                        </p>
-                        <p>
-                            <p:message for="mileageBefore" />
-                        </p>
-                        <p>
-                            <p:message for="mileageAfter" />
-                        </p>
-                    </div>
-                </div>
-            </h:form>
-        </ui:define>
-    </ui:composition>
+							<p:outputLabel for="mileageBefore" value="Stan licznika przed" />
+							<p:inputText id="mileageBefore" value="#{data.mileageBefore}"
+								required="true" />
+
+							<p:outputLabel for="mileageAfter" value="Stan licznika po:" />
+							<p:inputText id="mileageAfter" value="#{data.mileageAfter}"
+								required="true" />
+						</h:panelGrid>
+					</p:panel>
+				</div>
+				<div class="ui-grid-row">
+					<p:commandButton action="saveTestDriveReportForm"
+						value="Wyslij raport" ajax="false" />
+				</div>
+				<div class="ui-grid-row">
+					<p>
+						<p:message for="date" />
+					</p>
+					<p>
+						<p:message for="employee" />
+					</p>
+					<p>
+						<p:message for="carNumber" />
+					</p>
+					<p>
+						<p:message for="mileageBefore" />
+					</p>
+					<p>
+						<p:message for="mileageAfter" />
+					</p>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>

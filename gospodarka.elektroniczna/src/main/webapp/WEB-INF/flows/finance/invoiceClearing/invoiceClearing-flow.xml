@@ -5,21 +5,18 @@
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
 	<secured
-		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT"
+		attributes="ROLE_HR, ROLE_MANUFACTURE, ROLE_FINANCE, ROLE_SERVIS, ROLE_STOREHOUSE, ROLE_ROOT, ROLE_CUSTOMER_SERVICE"
 		match="any" />
 
 	<var name="invoiceClearingVar" class="gospodarka.elektroniczna.dto.finance.InvoiceClearing" />
 
 	<view-state id="invoiceClearingView">
-		<transition on="invoiceClearing" to="invoiceClearing" />
-	</view-state>
-
-	<action-state id="invoiceClearing">
+		<transition on="invoiceClearing" to="invoiceClearingEnd" >
 		<evaluate expression="controllerVar.submitInvoiceClearing(springSecurityContextUtilBean.getUser(), invoiceClearingVar)"
 			result="flowScope.status" />
-		<transition to="invoiceClearingEnd" />
-	</action-state>
+		</transition>
+	</view-state>
 
-	<end-state id="invoiceClearingEnd" view="invoiceClearingEnd.xhtml" />
+	<view-state id="invoiceClearingEnd" view="invoiceClearingEnd.xhtml" />
 	<bean-import resource="flow-beans.xml" />
 </flow>

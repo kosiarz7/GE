@@ -13,44 +13,31 @@
 	<ui:define name="pageContent">
 		<h3>Potwierdzenie przyjecia zamówienia</h3>
 		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
 
-			<div class="form-group">
-				<label>Numer zamówienia:	</label>
-				<p:inputText id="orderNumber"
-					value="#{ppzVar.orderNumber}" required="true"  />
-				<h:message id="m1" for="orderNumber" style="color:red" /><p></p>
-			</div>
-			<div class="form-group">
-				<label>Przewidujemy datę realizacji na: </label>
+				<h:outputLabel for="dateEnd" value="Data realizacji:" />
 				<p:calendar id="dateEnd" value="#{ppzVar.dateEnd}" showOn="button"
 					pattern="dd-MM-yyyy" label="'Data realizacji'"
 					placeholder="dd-mm-yyyy" required="true" />
-				<h:message id="m2" for="dateEnd" style="color:red" /><p></p>
-			</div>
 
-			<div class="form-group">
-				<label>Status zamówienia: </label>
-				<p:inputText id="state" class="form-control" value="#{ppzVar.state}"
-					required="true" />
-				<h:message id="m3" for="state" style="color:red" /><p></p>
-			</div>
+				<h:outputLabel for="orderNumber" value="Numer zamówienia:" />
+				<p:inputText id="orderNumber" value="#{ppzVar.orderNumber}" />
 
-			<div class="form-group">
-				<label>Uzasadnienie: 	</label>
-				<p:inputText id="reason" class="form-control"
-					value="#{ppzVar.reason}" />
-				<p></p>
-			</div>
+				<h:outputLabel for="state" value="Status zamówienia:" />
+				<p:inputText id="state" value="#{ppzVar.state}" />
 
+				<h:outputLabel for="reason" value="Uzasadnienie:" />
+				<p:inputText id="reason" value="#{ppzVar.reason}" />
 
-				<p:commandButton id="saveService" action="ppzGenService" value="Wyślij wniosek do serwisu"
-				ajax="false" />
-				<p:commandButton id="saveManu" action="ppzGenManu" value="Wyślij wniosek do produkcji"
-				ajax="false" />
-				<p:commandButton id="saveCustomer" action="ppzGenCustomer" value="Wyślij wniosek do BOK"
-				ajax="false" />
-				
-			<p:button href="/app/storehouse" value="Powrót" />
+			</h:panelGrid>
+
+			<p:commandButton id="saveService" action="ppzGenService"
+				value="Wyślij wniosek do serwisu" ajax="false" />
+			<p:commandButton id="saveManu" action="ppzGenManu"
+				value="Wyślij wniosek do produkcji" ajax="false" />
+			<p:commandButton id="saveCustomer" action="ppzGenCustomer"
+				value="Wyślij wniosek do BOK" ajax="false" />
+
 
 		</h:form>
 	</ui:define>

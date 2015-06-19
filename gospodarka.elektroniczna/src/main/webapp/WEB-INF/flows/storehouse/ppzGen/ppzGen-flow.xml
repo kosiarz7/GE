@@ -4,35 +4,30 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
-<secured
-		attributes="ROLE_STOREHOUSE, ROLE_ROOT" match="any" />
+	<secured attributes="ROLE_STOREHOUSE, ROLE_ROOT" match="any" />
 
 	<var name="ppzVar" class="gospodarka.elektroniczna.dto.storehouse.PPZDocument" />
 
-	<view-state id="ppzGenView">		
-		<transition on="ppzGenService" to="ppzGenService" />		
-		<transition on="ppzGenManu" to="ppzGenManu" />		
-		<transition on="ppzGenCustomer" to="ppzGenCustomer" />
-		
+	<view-state id="ppzGenView">
+		<transition on="ppzGenService" to="ppzGenEnd">
+			<evaluate
+				expression="controllerVar.submitPPZSerwis(springSecurityContextUtilBean.getUser(), ppzVar)"
+				result="flowScope.status" />
+		</transition>
+		<transition on="ppzGenManu" to="ppzGenEnd">
+			<evaluate
+				expression="controllerVar.submitPPZManu(springSecurityContextUtilBean.getUser(), ppzVar)"
+				result="flowScope.status" />
+		</transition>
+		<transition on="ppzGenCustomer" to="ppzGenEnd">
+			<evaluate
+				expression="controllerVar.submitPPZCustomer(springSecurityContextUtilBean.getUser(), ppzVar)"
+				result="flowScope.status" />
+		</transition>
+
 	</view-state>
 
-	<action-state id="ppzGenService">
-		<evaluate expression="controllerVar.submitPPZSerwis(springSecurityContextUtilBean.getUser(), ppzVar)"
-			result="flowScope.status" />
-		<transition to="ppzGenEnd" />
-	</action-state>
-	
-	<action-state id="ppzGenManu">
-		<evaluate expression="controllerVar.submitPPZManu(springSecurityContextUtilBean.getUser(), ppzVar)"
-			result="flowScope.status" />
-		<transition to="ppzGenEnd" />
-	</action-state>
-		<action-state id="ppzGenCustomer">
-		<evaluate expression="controllerVar.submitPPZCustomer(springSecurityContextUtilBean.getUser(), ppzVar)"
-			result="flowScope.status" />
-		<transition to="ppzGenEnd" />
-	</action-state>
-	
-	<end-state id="ppzGenEnd" view="ppzGenEnd.xhtml" />
+
+	<view-state id="ppzGenEnd" view="ppzGenEnd.xhtml" />
 	<bean-import resource="flow-beans.xml" />
 </flow>

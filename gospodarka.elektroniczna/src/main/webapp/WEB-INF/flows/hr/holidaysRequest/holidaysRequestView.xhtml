@@ -6,7 +6,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="#{springSecurityContextUtilBean.getUserDepartment().getDepartmentString()}"/>
 	<ui:define name="pageContent">
 		<h:form>
 			<p>
@@ -29,7 +28,6 @@
 			</p>
 			<p:commandButton action="holidaysRequest" value="Wyślij wniosek"
 				ajax="false" />
-			<p:button href="/app/hr" value="Powrót" />
 		</h:form>
 	</ui:define>
 </ui:composition>

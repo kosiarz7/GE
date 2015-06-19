@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
-	<ui:param name="department" value="Magazyn"/>
+	<ui:param name="department" value="Magazyn" />
 	<ui:define name="pageContent">
 		<h1>Potwierdzenia przyjęcia zamówienia</h1>
 		<h:form>
@@ -15,64 +15,65 @@
 				<tr>
 					<th width="100">Imię i nazwisko</th>
 					<th width="100">Data realizacji</th>
-					<th width="50">Numer zamówienia </th>
+					<th width="50">Numer zamówienia</th>
 					<th width="100">Status</th>
 					<th width="200">Dod. info</th>
 
 				</tr>
-					
-			<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
-			
-			  	<c:forEach items="${flowScope.ppzdocuments}" var="instance">
-					<tr>
-						<td>${instance.getUserNameAndSurname()}</td>
-						<td>${instance.getDateEnd()}</td>
-						<td>${instance.getOrderNumber()}</td>
-						<td>${instance.getState()}</td>
-						<td>${instance.getReason()}</td>
-					</tr>
-				</c:forEach>
+
+				<c:if
+					test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
+
+					<c:forEach items="${flowScope.ppzdocuments}" var="instance">
+						<tr>
+							<td>${instance.getUserNameAndSurname()}</td>
+							<td>${instance.getDateEnd()}</td>
+							<td>${instance.getOrderNumber()}</td>
+							<td>${instance.getState()}</td>
+							<td>${instance.getReason()}</td>
+						</tr>
+					</c:forEach>
 				</c:if>
-				<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">			
-			  	<c:forEach items="${flowScope.ppzdocumentsManu}" var="instance">
-					<tr>
-						<td>${instance.getUserNameAndSurname()}</td>
-						<td>${instance.getDateEnd()}</td>
-						<td>${instance.getOrderNumber()}</td>
-						<td>${instance.getState()}</td>
-						<td>${instance.getReason()}</td>
-					</tr>
-				</c:forEach>
+				<c:if
+					test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+					<c:forEach items="${flowScope.ppzdocumentsManu}" var="instance">
+						<tr>
+							<td>${instance.getUserNameAndSurname()}</td>
+							<td>${instance.getDateEnd()}</td>
+							<td>${instance.getOrderNumber()}</td>
+							<td>${instance.getState()}</td>
+							<td>${instance.getReason()}</td>
+						</tr>
+					</c:forEach>
 				</c:if>
-			<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_SERVIS')}">			
-			  	<c:forEach items="${flowScope.ppzdocumentsService}" var="instance">
-					<tr>
-						<td>${instance.getUserNameAndSurname()}</td>
-						<td>${instance.getDateEnd()}</td>
-						<td>${instance.getOrderNumber()}</td>
-						<td>${instance.getState()}</td>
-						<td>${instance.getReason()}</td>
-					</tr>
-				</c:forEach>
+				<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_SERVIS')}">
+					<c:forEach items="${flowScope.ppzdocumentsService}" var="instance">
+						<tr>
+							<td>${instance.getUserNameAndSurname()}</td>
+							<td>${instance.getDateEnd()}</td>
+							<td>${instance.getOrderNumber()}</td>
+							<td>${instance.getState()}</td>
+							<td>${instance.getReason()}</td>
+						</tr>
+					</c:forEach>
 				</c:if>
-				
-				
-			<c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
-			  	<c:forEach items="${flowScope.ppzdocumentsCustomer}" var="instance">
-					<tr>
-						<td>${instance.getUserNameAndSurname()}</td>
-						<td>${instance.getDateEnd()}</td>
-						<td>${instance.getOrderNumber()}</td>
-						<td>${instance.getState()}</td>
-						<td>${instance.getReason()}</td>
-					</tr>
-				</c:forEach>
+
+
+				<c:if
+					test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
+					<c:forEach items="${flowScope.ppzdocumentsCustomer}" var="instance">
+						<tr>
+							<td>${instance.getUserNameAndSurname()}</td>
+							<td>${instance.getDateEnd()}</td>
+							<td>${instance.getOrderNumber()}</td>
+							<td>${instance.getState()}</td>
+							<td>${instance.getReason()}</td>
+						</tr>
+					</c:forEach>
 				</c:if>
-				
-				
+
+
 			</table>
-			<br />
-			<p:button href="/app/storehouse" value="Powrót" />
 		</h:form>
 	</ui:define>
 </ui:composition>

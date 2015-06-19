@@ -41,7 +41,6 @@ public class NewCandidateFlow extends AbstractHrFlow<NewCandidate> implements Se
 
     public boolean submitNewCandidate(UserData userData, NewCandidate newCandidate) {
         LoggerFactory.getLogger(NewCandidateFlow.class).debug("submitNewCandidate", newCandidate);
-
         return submit(userData, Departments.HUMAN_RESOURCES, newCandidate.getDepartment(), newCandidate);
     }
 

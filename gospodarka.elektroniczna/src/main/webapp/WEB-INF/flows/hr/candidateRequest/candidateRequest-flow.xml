@@ -11,16 +11,12 @@
 	<var name="candidateRequestVar" class="gospodarka.elektroniczna.dto.hr.CandidateRequest" />
 
 	<view-state id="candidateRequestView">
-		<transition on="candidateRequest" to="candidateRequest" />
-	</view-state>
-
-	<action-state id="candidateRequest">
-		<evaluate
+		<transition on="candidateRequest" to="candidateRequestEnd" >
+				<evaluate
 			expression="controllerVar.submitCandidateRequest(springSecurityContextUtilBean.getUser(), candidateRequestVar, springSecurityContextUtilBean.getUserDepartment())"
 			result="flowScope.status" />
-		<transition to="candidateRequestEnd" />
-	</action-state>
-
-	<end-state id="candidateRequestEnd" view="candidateRequestEnd.xhtml" />
+		</transition>
+	</view-state>
+	<view-state id="candidateRequestEnd" view="candidateRequestEnd.xhtml" />
 	<bean-import resource="flow-beans.xml" />
 </flow>

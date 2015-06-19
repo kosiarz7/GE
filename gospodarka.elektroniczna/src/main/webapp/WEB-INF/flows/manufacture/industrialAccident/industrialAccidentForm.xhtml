@@ -11,11 +11,11 @@ and open the template in the editor.
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:p="http://primefaces.org/ui"
     xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
         <ui:param name="department" value="Produkcja"/>
         <ui:define name="pageContent">
             <link rel='stylesheet' href='../webjars/bootstrap/3.3.4/css/bootstrap.min.css'/>
-            <h3>Zgłoszenie wypadku przy pracy</h3>
+            <h3 style="color: #FFFFFF">Zgłoszenie wypadku przy pracy</h3>
             <h:form id="industrialAccidentForm" >
                 
                 <div class="form-group">
@@ -51,8 +51,7 @@ and open the template in the editor.
                     <h:message id="m5" for="damage" style="color:red"/> <p></p>
                 </div>
 
-                <p:commandButton  id="save" action="saveAccidentForm"  class="btn btn-primary"  value="Dodaj" update="@form" />
-                <p:button href="/app/manufacture" class="btn btn-primary" value="Anuluj" />            
+                <p:commandButton  id="save" action="saveAccidentForm"  value="Dodaj" update="@form" />
             </h:form>
         </ui:define>
     </ui:composition>

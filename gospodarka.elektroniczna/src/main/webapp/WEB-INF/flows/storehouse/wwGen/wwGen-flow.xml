@@ -5,21 +5,18 @@
 
 	<!-- Zabezpieczenie flow przez Spring Security -->
 <secured
-		attributes=" ROLE_MANUFACTURE,  ROLE_STOREHOUSE, ROLE_ROOT , ROLE_SERVIS"
+		attributes="ROLE_MANUFACTURE,  ROLE_STOREHOUSE, ROLE_ROOT , ROLE_SERVIS"
 		match="any" />
 
 	<var name="wwVar" class="gospodarka.elektroniczna.dto.storehouse.WWDocument" />
 
 	<view-state id="wwGenView">
-		<transition on="wwGenA" to="wwGen" />
-	</view-state>
-
-	<action-state id="wwGen">
+		<transition on="wwGenA" to="wwGenEnd" >
 		<evaluate expression="controllerVar.submitWW(springSecurityContextUtilBean.getUser(), wwVar)"
 			result="flowScope.status" />
-		<transition to="wwGenEnd" />
-	</action-state>
+		</transition>
+	</view-state>
 
-	<end-state id="wwGenEnd" view="wwGenEnd.xhtml" />
+	<view-state id="wwGenEnd" view="wwGenEnd.xhtml" />
 	<bean-import resource="flow-beans.xml" />
 </flow>

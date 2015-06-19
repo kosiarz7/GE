@@ -6,131 +6,147 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <ui:composition template="/WEB-INF/templates/manufactureTemplate.xhtml">
-        <ui:param name="department" value="Obsluga klienta"/>
-        <ui:define name="pageContent">
-            <h3>Rachunek zamowienia</h3>
-            <h:form>
-                <div class="ui-grid ui-grid-responsive">
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-12">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:param name="department" value="Obsluga klienta" />
+	<ui:define name="pageContent">
+		<h3>Rachunek zamowienia</h3>
+		<h:form>
+			<div class="ui-grid ui-grid-responsive">
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-12"></div>
+				</div>
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-6">
+						<p:panel id="client" header="Dane klienta"
+							style="margin-bottom:20px">
+							<h:panelGrid columns="2" cellpadding="2">
+								<p:outputLabel for="clientName" value="Nazwa:" />
+								<p:inputText id="clientName" value="#{data.client.name}"
+									required="true" />
+								<p:outputLabel for="clientAdress" value="Adres:" />
+								<p:inputText id="clientAdress" value="#{data.client.adress}"
+									required="true" />
+								<p:outputLabel for="clientPIN" value="Pesel:" />
+								<p:inputText id="clientPIN" value="#{data.client.PIN}"
+									required="true" />
+								<p:outputLabel for="clientPhone" value="Telefon:" />
+								<p:inputText id="clientPhone" value="#{data.client.phone}"
+									required="true" />
+							</h:panelGrid>
+						</p:panel>
+					</div>
+					<div class="ui-grid-col-6">
+						<p:panel id="seller" header="Dane sprzedajacego"
+							style="margin-bottom:20px">
+							<h:panelGrid columns="2" cellpadding="2">
+								<p:outputLabel for="sellerName" value="Nazwa:" />
+								<p:inputText id="sellerName" value="#{data.seller.name}"
+									required="true" />
+								<p:outputLabel for="sellerAdress" value="Adres:" />
+								<p:inputText id="sellerAdress" value="#{data.seller.adress}"
+									required="true" />
+								<p:outputLabel for="sellerPIN" value="NIP:" />
+								<p:inputText id="sellerPIN" value="#{data.seller.PIN}"
+									required="true" />
+								<p:outputLabel for="sellerPhone" value="Telefon:" />
+								<p:inputText id="sellerPhone" value="#{data.seller.phone}"
+									required="true" />
+							</h:panelGrid>
+						</p:panel>
+					</div>
+				</div>
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-12">
+						<div class="ui-grid-row">
+							<p:dataTable var="item" value="#{data.items}">
+								<p:column headerText="Id">
+									<h:outputText value="#{item.id}" />
+								</p:column>
 
-                        </div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-6">
-                            <p:panel id="client" header="Dane klienta" style="margin-bottom:20px">
-                                <h:panelGrid columns="2" cellpadding="2">
-                                    <p:outputLabel for="clientName" value="Nazwa:" />
-                                    <p:inputText id="clientName" value="#{data.client.name}" required="true" />
-                                    <p:outputLabel for="clientAdress" value="Adres:" />
-                                    <p:inputText id="clientAdress" value="#{data.client.adress}" required="true" />
-                                    <p:outputLabel for="clientPIN" value="Pesel:" />
-                                    <p:inputText id="clientPIN" value="#{data.client.PIN}" required="true" />
-                                    <p:outputLabel for="clientPhone" value="Telefon:" />
-                                    <p:inputText id="clientPhone" value="#{data.client.phone}" required="true" />
-                                </h:panelGrid>
-                            </p:panel>
-                        </div>
-                        <div class="ui-grid-col-6">
-                            <p:panel id="seller" header="Dane sprzedajacego" style="margin-bottom:20px">
-                                <h:panelGrid columns="2" cellpadding="2">
-                                    <p:outputLabel for="sellerName" value="Nazwa:" />
-                                    <p:inputText id="sellerName" value="#{data.seller.name}" required="true" />
-                                    <p:outputLabel for="sellerAdress" value="Adres:" />
-                                    <p:inputText id="sellerAdress" value="#{data.seller.adress}" required="true" />
-                                    <p:outputLabel for="sellerPIN" value="NIP:" />
-                                    <p:inputText id="sellerPIN" value="#{data.seller.PIN}" required="true" />
-                                    <p:outputLabel for="sellerPhone" value="Telefon:" />
-                                    <p:inputText id="sellerPhone" value="#{data.seller.phone}" required="true" />
-                                </h:panelGrid>
-                            </p:panel>
-                        </div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class="ui-grid-col-12">
-                            <div class="ui-grid-row">
-                            <p:dataTable var="item" value="#{data.items}">
-                                <p:column headerText="Id">
-                                    <h:outputText value="#{item.id}" />
-                                </p:column>
+								<p:column headerText="Nazwa">
+									<h:outputText value="#{item.name}" />
+								</p:column>
 
-                                <p:column headerText="Nazwa">
-                                    <h:outputText value="#{item.name}" />
-                                </p:column>
+								<p:column headerText="Jednostka">
+									<h:outputText value="#{item.unit}" />
+								</p:column>
 
-                                <p:column headerText="Jednostka">
-                                    <h:outputText value="#{item.unit}" />
-                                </p:column>
+								<p:column headerText="Ilosc">
+									<h:outputText value="#{item.amount}" />
+								</p:column>
 
-                                <p:column headerText="Ilosc">
-                                    <h:outputText value="#{item.amount}" />
-                                </p:column>
-                                
-                                 <p:column headerText="Cena">
-                                    <h:outputText value="#{item.value}" />
-                                </p:column>
-                            </p:dataTable>
-                            </div>
-                            <div class="ui-grid-row">
-                                  <p:panel header="Dodaj pozycje"> 
-                                      <h:panelGrid columns="5" cellpadding="1">
-                    <h:outputLabel value="Id: " />
-                    <h:outputLabel value="Nazwa: " />
-                     <h:outputLabel value="Jednostka: " />
-                      <h:outputLabel value="Ilosc: " />
-                    <h:outputLabel value="Cena: " />
-                      <p:inputText size="10" value="#{data.item.id}"/>
-                    
-                    <p:inputText size="10" value="#{data.item.name}"/>
-                   
-                    <p:inputText size="10"  value="#{data.item.unit}"/>
-                   
-                    <p:inputText size="10" value="#{data.item.amount}"/>
-                    
-                    <p:inputText size="10" value="#{data.item.value}"/>
-                                      </h:panelGrid>
-                    <f:facet name="footer">
-                        <h:commandButton value="Dodaj" action="addItem"/>
-                    </f:facet>
-                </p:panel>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ui-grid-row">
-                        <div class='ui-grid-col-6'> 
-                            <h:panelGrid columns="2" cellpadding="5">
-                                <p:outputLabel for="sellDate" value="Data sprzedazy: *" />
-                                <p:calendar id="sellDate" value="#{data.sellDate}" pattern="dd-MM-yyyy" mask="true" />
-                                <p:outputLabel for="documentDate" value="Data wystawienia rachunku: *" />
-                                <p:calendar id="documentDate" value="#{data.documentDate}" pattern="dd-MM-yyyy" mask="true" />
-                                <p:outputLabel for="paymentDate" value="Data platnosci: *" />
-                                <p:calendar id="paymentDate" value="#{data.paymentDate}" pattern="dd-MM-yyyy" mask="true" />
-                                <p:commandButton action="saveOrderInvoiceForm" value="Zapisz rachunek" ajax="false" />
-                                <p:button href="/app/customerService" value="Powrót" />
-                            </h:panelGrid>
-                        </div>
-                        <div class="ui-grid-col-6">
-                            <p:panel id="podsumowanie" header="Podsumowanie" style="margin-bottom:20px">
-                                <h:panelGrid columns="2" cellpadding="2">
-                                    <p:outputLabel for="totalValue" value="W sumie:" />
-                                    <p:inputText id="totalValue" value="#{data.totalValue}" required="true" />
-                                    <p:outputLabel for="paidValue" value="Zaplacono:" />
-                                    <p:inputText id="paidValue" value="#{data.paidValue}" required="true" />
-                                    <p:outputLabel for="notPaidValue" value="Do zaplaty:" />
-                                    <p:inputText id="notPaidValue" value="#{data.notPaidValue}" required="true" />
-                                </h:panelGrid>
-                            </p:panel>
-                        </div>
-                    </div>
-                </div>
+								<p:column headerText="Cena">
+									<h:outputText value="#{item.value}" />
+								</p:column>
+							</p:dataTable>
+						</div>
+						<div class="ui-grid-row">
+							<p:panel header="Dodaj pozycje">
+								<h:panelGrid columns="5" cellpadding="1">
+									<h:outputLabel value="Id: " />
+									<h:outputLabel value="Nazwa: " />
+									<h:outputLabel value="Jednostka: " />
+									<h:outputLabel value="Ilosc: " />
+									<h:outputLabel value="Cena: " />
+									<p:inputText size="10" value="#{data.item.id}" />
 
-            </h:form>
-        </ui:define>
-    </ui:composition>
+									<p:inputText size="10" value="#{data.item.name}" />
+
+									<p:inputText size="10" value="#{data.item.unit}" />
+
+									<p:inputText size="10" value="#{data.item.amount}" />
+
+									<p:inputText size="10" value="#{data.item.value}" />
+								</h:panelGrid>
+								<f:facet name="footer">
+									<h:commandButton value="Dodaj" action="addItem" />
+								</f:facet>
+							</p:panel>
+						</div>
+					</div>
+				</div>
+				<div class="ui-grid-row">
+					<div class='ui-grid-col-6'>
+						<h:panelGrid columns="2" cellpadding="5">
+							<p:outputLabel for="sellDate" value="Data sprzedazy: *" />
+							<p:calendar id="sellDate" value="#{data.sellDate}"
+								pattern="dd-MM-yyyy" mask="true" />
+							<p:outputLabel for="documentDate"
+								value="Data wystawienia rachunku: *" />
+							<p:calendar id="documentDate" value="#{data.documentDate}"
+								pattern="dd-MM-yyyy" mask="true" />
+							<p:outputLabel for="paymentDate" value="Data platnosci: *" />
+							<p:calendar id="paymentDate" value="#{data.paymentDate}"
+								pattern="dd-MM-yyyy" mask="true" />
+							<p:commandButton action="saveOrderInvoiceForm"
+								value="Zapisz rachunek" ajax="false" />
+						</h:panelGrid>
+					</div>
+					<div class="ui-grid-col-6">
+						<p:panel id="podsumowanie" header="Podsumowanie"
+							style="margin-bottom:20px">
+							<h:panelGrid columns="2" cellpadding="2">
+								<p:outputLabel for="totalValue" value="W sumie:" />
+								<p:inputText id="totalValue" value="#{data.totalValue}"
+									required="true" />
+								<p:outputLabel for="paidValue" value="Zaplacono:" />
+								<p:inputText id="paidValue" value="#{data.paidValue}"
+									required="true" />
+								<p:outputLabel for="notPaidValue" value="Do zaplaty:" />
+								<p:inputText id="notPaidValue" value="#{data.notPaidValue}"
+									required="true" />
+							</h:panelGrid>
+						</p:panel>
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>
