@@ -259,56 +259,56 @@
 					</c:if>
 
 					<c:if
-						test="#{(not springSecurityContextUtilBean.hasRole('ROLE_HR')) and (not springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE'))and (not springSecurityContextUtilBean.hasRole('ROLE_SERVIS')) }">
+						test="#{(not springSecurityContextUtilBean.hasRole('ROLE_HR')) and (not springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')) }">
 						<p:submenu label="OBSŁUGA">
 							<c:if
 								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
-								<p:menuitem value="Raport pracy salonu"
+								<p:menuitem value="Zdaj raport z dziennej pracy salonu"
 									url="/app/customerService/dailyWorkReport" />
 							</c:if>
 							<c:if
-								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
 								<p:menuitem value="Raport pracy salonu"
 									url="/app/customerService/dailyWorkReportReceived" />
 							</c:if>
 							<c:if
 								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
-								<p:menuitem value="Karta konfiguracji pojazdu"
+								<p:menuitem value="Zloz zamowienie na pojazd"
 									url="/app/customerService/orderCard" />
 							</c:if>
 							<c:if
-								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
-								<p:menuitem value="Karta zamowienia z konfiguratora"
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
+								<p:menuitem value="Karty zamowien"
 									url="/app/customerService/orderCardReceived" />
 							</c:if>
 							<c:if
 								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
-								<p:menuitem value="Rachunek zamowienia"
+								<p:menuitem value="Wystaw rachunek do zamowienia"
 									url="/app/customerService/orderInvoice" />
 							</c:if>
 							<c:if
-								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
-								<p:menuitem value="Rachunki"
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
+								<p:menuitem value="Rachunki do zamowien"
 									url="/app/customerService/orderInvoiceReceived" />
 							</c:if>
 							<c:if
 								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
-								<p:menuitem value="Zamowienie uslugi serwisowej"
+								<p:menuitem value="Zamow uslugi serwisowe"
 									url="/app/customerService/serviceOrderCard" />
 							</c:if>
 							<c:if
-								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_SERVICE')}">
-								<p:menuitem value="Raporty pracy salonu"
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_SERVIS')}">
+								<p:menuitem value="Dzienne podsumowania pracy salonu"
 									url="/app/customerService/serviceOrderCardReceived" />
 							</c:if>
 							<c:if
 								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
-								<p:menuitem value="Raport jazdy probnej"
+								<p:menuitem value="Zdaj raport z jazdy testowej"
 									url="/app/customerService/testDriveReport" />
 							</c:if>
 							<c:if
-								test="#{springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_SERVICE')}">
-								<p:menuitem value="Raporty jazd testowych"
+								test="#{springSecurityContextUtilBean.hasRole('ROLE_SERVIS')}">
+								<p:menuitem value="Raporty z jazd testowych"
 									url="/app/customerService/testDriveReportReceived" />
 							</c:if>
 						</p:submenu>
