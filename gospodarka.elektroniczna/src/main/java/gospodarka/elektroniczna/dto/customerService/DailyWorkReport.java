@@ -21,6 +21,10 @@ public class DailyWorkReport extends AbstractCustomerServiceUser implements Seri
 
     public void init() {
         date = new Date();
+        employeesAtShift = 0;
+        ordersServed = 0;
+        testDrivesPerformed = 0;
+        moneyStatus = 0.0;
     }
 
     public Date getDate() {
