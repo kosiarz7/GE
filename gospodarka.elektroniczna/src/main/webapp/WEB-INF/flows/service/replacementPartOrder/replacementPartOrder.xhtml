@@ -11,28 +11,25 @@
     <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
         <ui:param name="department" value="Serwis"/>
         <ui:define name="pageContent">
-            <h:outputStylesheet library="css" name="service.css"  />
-
-            <c:forEach items="${flowScope.orderForms}" var="form">
+            <h3>Zamówienie części zamiennych</h3>
             <p:separator/>
+
+            <h:outputStylesheet library="css" name="service.css"  />
+            
             <div class="ui-grid ui-grid-responsive">
                 <h:form>
-                    <p:panel id="mainPanel" header="Zamówienie części zamiennych" toggleable="true" collapsed="true">
+                    <p:panel id="mainPanel" toggleable="true">
                         <div class="ui-grid-row">
                             <div class="ui-grid-col-6">
                                 <h:panelGrid columns="2" cellpadding="5" styleClass="panelGridCenter">
-                                    <h:outputLabel value="Data:" />
-                                    <h:outputLabel value="#{form.date}">
-                                        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="CET"/>
-                                    </h:outputLabel>    
+                                    <h:outputLabel for="calendar" value="Data zamówienia:" />
+                                    <p:calendar id="calendar" value="#{replacementPartOrderForm.date}" mindate="flow.date" maxdate="flow.date" readonly="true"/>      
                                 </h:panelGrid>
                             </div>
                             <div class="ui-grid-col-6">
                                 <h:panelGrid columns="2" cellpadding="5" styleClass="panelGridCenter">
-                                    <h:outputLabel value="Data dostarczenia:" />
-                                    <h:outputLabel value="#{form.deliveryDate}">
-                                        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="CET"/>
-                                    </h:outputLabel>   
+                                    <h:outputLabel for="deliveryDate" value="Data zapotrzebowania:" />
+                                    <p:calendar widgetVar="deliveryDate" label="deliveryDate" value="#{replacementPartOrderForm.deliveryDate}" mindate="flow.deliveryDate" readonly="true"/>   
                                 </h:panelGrid>
                             </div>
                         </div>
@@ -40,23 +37,22 @@
                             <div class="ui-grid-col-12">
                                 <p:panel id="carData" header="Dane zamówienia">
                                     <h:panelGrid columns="2" cellpadding="5" styleClass="panelGridCenter">
-                                        <h:outputLabel value="Nazwa części:" />
-                                        <h:outputLabel value="#{form.elementName}"/>
+                                        <h:outputLabel for="element" value="Nazwa części:" />
+                                        <p:inputText id="element" value="#{replacementPartOrderForm.elementName}"/>
 
-                                        <h:outputLabel value="Ilość:" />
-                                        <h:outputLabel value="#{form.amount}"/>
+                                        <h:outputLabel for="amount" value="Ilość:" />
+                                        <p:inputText id="amount" value="#{replacementPartOrderForm.amount}"/>
 
-                                        <h:outputLabel value="Nazwisko pracownika:" />
-                                        <h:outputLabel value="#{form.worker.name}"/>
+                                        <h:outputLabel for="worker" value="Nazwisko pracownika:" />
+                                        <p:inputText id="worker" value="#{replacementPartOrderForm.worker.name}"/>
                                     </h:panelGrid>
                                 </p:panel>                               
                             </div>
                         </div>
-                        <p:button  href="/app/storehouse/ppzGen" value="Wyślij potwierdzenie" style="margin-top: 10px"/>
                     </p:panel>
+                    <p:commandButton id="save" action="saveReplacementPartOrder" value="Dodaj" update="@form" ajax="false" />
                 </h:form>
             </div>
-            </c:forEach>
         </ui:define>
     </ui:composition>
 </html>

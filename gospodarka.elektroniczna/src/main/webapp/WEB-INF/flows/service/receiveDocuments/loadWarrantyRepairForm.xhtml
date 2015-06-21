@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+        <ui:param name="department" value="Serwis"/>
+        <ui:define name="pageContent">
+            <h3>Protokół przyjęcia uszkodzonego samochodu</h3>
+            <p:separator/>
+
+            <h:outputStylesheet library="css" name="service.css"  />
+
+            <div class="ui-grid ui-grid-responsive">
+                <h:form>
+                    <p:panel id="mainPanel" toggleable="true">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-6">
+                                <h:panelGrid columns="2" cellpadding="5" styleClass="panelGridCenter">
+                                    <h:outputLabel value="Data utworzenia:" />
+                                    <h:outputLabel value="#{serviceFlow.warrantyRepairForm.date}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="CET"/>
+                                    </h:outputLabel>
+                                </h:panelGrid>
+                            </div>
+                            <div class="ui-grid-col-6">
+                                <h:panelGrid columns="2" cellpadding="5" styleClass="panelGridCenter">
+                                    <h:outputLabel value="Data realizacji:" />
+                                    <h:outputLabel value="#{serviceFlow.warrantyRepairForm.realisationDate}">
+                                        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="CET"/>
+                                    </h:outputLabel>
+                                </h:panelGrid>
+                            </div>
+                        </div>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-6">
+                                <p:panel id="carData" header="Dane samochodu">
+                                    <h:panelGrid columns="2" cellpadding="5" styleClass="panelGridCenter">
+                                        <h:outputLabel value="Marka:" />
+                                        <h:outputLabel value="#{serviceFlow.warrantyRepairForm.car.brand}"/>
+
+                                        <h:outputLabel value="Model:" />
+                                        <h:outputLabel value="#{serviceFlow.warrantyRepairForm.car.model}"/>
+
+                                        <h:outputLabel value="Numer rejestracyjny:" />
+                                        <h:outputLabel value="#{serviceFlow.warrantyRepairForm.car.registrationNumber}"/>
+
+                                        <h:outputLabel value="Numer VIN:" />
+                                        <h:outputLabel value="#{serviceFlow.warrantyRepairForm.car.VIN}"/>
+
+                                        <h:outputLabel value="Uszkodzona część:"/>
+                                        <h:outputLabel value="#{serviceFlow.warrantyRepairForm.damagedPart}"/>
+                                    </h:panelGrid>
+                                </p:panel>
+                            </div>
+                            <div class="ui-grid-col-6">
+                                <p:panel id="peopleData" header="Dane osobowe" style="margin-left: 10px; height: 222px">
+                                    <h:panelGrid columns="2" cellpadding="5" styleClass="panelGridCenter">
+                                        <h:outputLabel value="Nazwisko klienta:" />
+                                        <h:outputLabel value="#{serviceFlow.warrantyRepairForm.client.name}"/>
+
+                                        <h:outputLabel value="Nazwisko pracownika:" />
+                                        <h:outputLabel value="#{serviceFlow.warrantyRepairForm.worker.name}"/>
+                                    </h:panelGrid>
+                                </p:panel>
+                            </div>
+
+                        </div>
+                    </p:panel>
+                    <p:commandButton id="save" action="cancel" value="Powrót" update="@form" ajax="false" style="margin-top: 10px"/>
+                </h:form>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+</html>

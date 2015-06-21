@@ -48,9 +48,17 @@ public class ServiceFlow implements Serializable {
     
     public List<DocumentStub> getDocumentStubs()
     {
-        List<DocumentStub> documentStubs = documentService.loadCurrentDocuments(new SearchCriteria().department(Departments.SERVIS));
 
-        return documentStubs;
+        List<DocumentStub> documentStubs = documentService.loadCurrentDocuments(new SearchCriteria().department(Departments.SERVIS));
+        List<DocumentStub> filteredStubs = new ArrayList<>();
+        for(DocumentStub stub : documentStubs)
+        {
+            if(stub.getFrom().getDepartmentString().equals("Serwis"))
+            {
+                filteredStubs.add(stub);
+            }
+        }
+        return filteredStubs;
     }
     
     public String archivizeDocument(DocumentStub documentStub)

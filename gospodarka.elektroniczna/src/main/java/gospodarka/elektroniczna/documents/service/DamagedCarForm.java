@@ -8,6 +8,7 @@ package gospodarka.elektroniczna.documents.service;
 import java.io.Serializable;
 import java.util.Date;
 import javax.annotation.PostConstruct;
+import javax.validation.constraints.Future;
 
 /**
  *
@@ -28,6 +29,7 @@ public class DamagedCarForm implements Serializable {
     
     @PostConstruct
     public void init() {
+        this.date = new Date();
         this.client = new Person();
         this.worker = new Person();
         this.car = new Car();

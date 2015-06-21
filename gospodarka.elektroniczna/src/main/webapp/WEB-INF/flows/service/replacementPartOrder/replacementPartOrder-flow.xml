@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+        
+    <!-- Zabezpieczenie flow przez Spring Security -->
+    <secured attributes="ROLE_SERVIS" match="any"/>
+        
+    <var name="replacementPartOrderForm" class="gospodarka.elektroniczna.documents.service.ReplacementPartOrderForm" />
+        
+    <view-state id="replacementPartOrder">
+        <transition on="saveReplacementPartOrder" to="saveReplacementPartOrderAction"/>
+    </view-state>
+    
+    <action-state id="saveReplacementPartOrderAction">
+        <evaluate expression="flow.sendDocument(replacementPartOrderForm)"
+            result="flowScope.status" />
+        <transition to="replacementPartOrderEnd"/>
+    </action-state>
+    
+    <view-state id="replacementPartOrderEnd">
+        <transition to="end" />
+    </view-state>
+        
+    <end-state  id="end"/>
+        
+    <bean-import resource="flow-beans.xml"/>
+
+</flow>

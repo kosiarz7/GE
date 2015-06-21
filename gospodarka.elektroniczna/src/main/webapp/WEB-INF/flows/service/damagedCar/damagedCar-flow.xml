@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+        
+    <!-- Zabezpieczenie flow przez Spring Security -->
+    <secured attributes="ROLE_SERVIS" match="any"/>
+        
+    <var name="damagedCarForm" class="gospodarka.elektroniczna.documents.service.DamagedCarForm" />
+        
+    <view-state id="damagedCar">
+        <transition on="saveDamagedCar" to="saveDamagedCarAction"/>
+    </view-state>
+    
+    <action-state id="saveDamagedCarAction">
+        <evaluate expression="flow.sendDocument(damagedCarForm)"
+            result="flowScope.status" />
+        <transition to="damagedCarEnd"/>
+    </action-state>
+    
+    <view-state id="damagedCarEnd">
+        <transition to="end" />
+    </view-state>
+        
+    <end-state  id="end"/>
+        
+    <bean-import resource="flow-beans.xml"/>
+
+</flow>
