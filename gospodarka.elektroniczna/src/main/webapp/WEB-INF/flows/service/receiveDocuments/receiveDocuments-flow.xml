@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+        
+    <!-- Zabezpieczenie flow przez Spring Security -->
+    <secured attributes="ROLE_SERVIS" match="any"/>
+        
+    <view-state id="receiveDocuments">
+        <on-entry>
+            <evaluate expression="serviceFlow.getDocumentStubs()"
+                          result="flowScope.documentStubs">
+            </evaluate>         
+        </on-entry> 
+        <transition on="goReceiveDocuments" to="receiveDocuments"/>
+        <transition on="goLoadDamagedCarForm" to="loadDamagedCarForm"/>
+        <transition on="goLoadWarrantyRepairForm" to="loadWarrantyRepairForm"/>
+        <transition on="goLoadCollectCarForm" to="loadCollectCarForm"/>
+        <transition on="goLoadDefectiveElementForm" to="loadDefectiveElementForm"/>
+        <transition on="goLoadServiceOrderCardForm" to="loadServiceOrderCardForm"/>
+        <transition on="goLoadTestDriveReportForm" to="loadTestDriveReportForm"/>
+        <transition on="goLoadPPZDocument" to="loadPPZForm"/>
+        <transition on="goLoadError" to="loadError"/>
+        <transition on="cancel" to="start"/>
+    </view-state>
+    
+    <view-state id="loadCollectCarForm">
+        <transition on="cancel" to="receiveDocuments"/>
+    </view-state>
+    
+    <view-state id="loadWarrantyRepairForm">
+        <transition on="cancel" to="receiveDocuments"/>
+    </view-state>
+    
+    <view-state id="loadDamagedCarForm">
+        <transition on="cancel" to="receiveDocuments"/>
+    </view-state>
+        
+    <bean-import resource="flow-beans.xml"/>
+
+</flow>

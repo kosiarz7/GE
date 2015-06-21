@@ -27,6 +27,8 @@ public class ReplacementPartOrderForm implements Serializable {
 
     @PostConstruct
     public void init() {
+        this.date = new Date();
+        this.deliveryDate = new Date(); 
         this.worker = new Person();
     }
     

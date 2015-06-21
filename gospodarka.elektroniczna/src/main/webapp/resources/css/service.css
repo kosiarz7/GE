@@ -3,3 +3,11 @@
     width: 300px;
     height: 60px;
 }
+
+.panelGridCenter {
+    margin: 0 auto;
+}
+
+.rowHeight{
+    display: table;
+}
