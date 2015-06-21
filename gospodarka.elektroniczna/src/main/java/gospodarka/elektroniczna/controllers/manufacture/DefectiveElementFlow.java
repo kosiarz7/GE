@@ -34,7 +34,7 @@ public class DefectiveElementFlow extends AbstractManufactureFlow<DefectiveEleme
 
     public List<DefectiveElementForm> getDefectiveElementForms() {
         SearchCriteria criteria = new SearchCriteria();
-        criteria.department(Departments.MANUFACTURE);
+        criteria.department(Departments.SERVIS);
         criteria.setType(DocumentTypes.DEFECTIVE_ELEMENT);
 
         List<DefectiveElementForm> records = search(criteria);

@@ -20,7 +20,7 @@
                                         <th>Numer linii produkcyjnej</th>
                                         <th>Numer stanowiska</th>
 				</tr>
-				<c:forEach items="${flowScope.newVehicles}" var="instance">
+				<c:forEach items="${flowScope.timeSheets}" var="instance">
 					<tr>
 						<td>${instance.getDate()}</td>
 						<td>${instance.getShift()}</td>

@@ -13,13 +13,13 @@
 		<h:form>
 			<table border="1">
 				<tr>
-					<th width="100">Data </th>
+					<th width="100">Data złożenia zamówienia</th>
 					<th width="200">Data dostarczenia</th>
 					<th width="200">Osoba składająca zamówienie</th>
 					<th>Nazwa elementu</th>
                                         <th>Ilość</th>
 				</tr>
-				<c:forEach items="${flowScope.newVehicles}" var="instance">
+				<c:forEach items="${flowScope.orders}" var="instance">
 					<tr>
 						<td>${instance.getDate()}</td>
 						<td>${instance.getDeliveryDate()}</td>

@@ -8,7 +8,6 @@ package gospodarka.elektroniczna.controllers.manufacture;
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
 import gospodarka.elektroniczna.dto.manufacture.OrderForm;
-import gospodarka.elektroniczna.dto.manufacture.VehicleForm;
 import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.user.UserData;
 import java.io.Serializable;

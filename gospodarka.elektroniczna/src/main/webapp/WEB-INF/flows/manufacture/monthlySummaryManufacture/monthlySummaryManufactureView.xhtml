@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+        <ui:param name="department" value="Produkcja"/>
+        <ui:define name="pageContent">
+            <h1 style="color: #FFFFFF">Miesięczne podsumowanie linii produkcyjnej</h1>
+             <p:separator/>
+             <h:form>
+			<table border="1">
+				<tr>
+					<th>Data </th>
+					<th>Numer linii produkcyjnej</th>
+					<th>Nazwa modelu</th>
+					<th>Liczba wyprodukowanych elementów</th>
+                                        <th>Zgłoszone problemy</th>
+                                        <th>Ilość uszkodzonych elemntów</th>
+                                        <th>Imię i nazwisko menegera</th>
+				</tr>
+				<c:forEach items="${flowScope.monthlySummaries}" var="instance">
+					<tr>
+						<td>${instance.getDate()}</td>
+						<td>${instance.getProductionLineNumber()}</td>
+						<td>${instance.getModelName()}</td>
+						<td>${instance.getAmountOfProductedElements()}</td>
+                                                <td>${instance.getReportedProblems()}</td>
+                                                <td>${instance.getNumberOfDefectiveElements()}</td>
+                                                <td>${instance.getProductionLineManager()}</td>
+                                                
+					</tr>
+				</c:forEach>
+			</table>
+		</h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

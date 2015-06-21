@@ -7,7 +7,6 @@ package gospodarka.elektroniczna.controllers.manufacture;
 
 import gospodarka.elektroniczna.dao.department.Departments;
 import gospodarka.elektroniczna.dao.documenttype.DocumentTypes;
-import gospodarka.elektroniczna.dto.manufacture.OrderForm;
 import gospodarka.elektroniczna.dto.manufacture.TimeSheetForm;
 import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.user.UserData;
@@ -31,8 +30,8 @@ public class TimeSheetFlow extends AbstractManufactureFlow<TimeSheetForm> implem
 
     public List<TimeSheetForm> getTimeSheetForms() {
         SearchCriteria criteria = new SearchCriteria();
-        criteria.department(Departments.STOREHOUSE);
-        criteria.setType(DocumentTypes.ORDER);
+        criteria.department(Departments.HUMAN_RESOURCES);
+        criteria.setType(DocumentTypes.TIME_SHEET);
 
         List<TimeSheetForm> records = search(criteria);
         return records;

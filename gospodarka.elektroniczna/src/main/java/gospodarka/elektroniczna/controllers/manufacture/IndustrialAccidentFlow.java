@@ -12,7 +12,6 @@ import gospodarka.elektroniczna.services.document.SearchCriteria;
 import gospodarka.elektroniczna.services.user.UserData;
 import java.io.Serializable;
 import java.util.List;
-import org.slf4j.LoggerFactory;
 
 /**
  *
