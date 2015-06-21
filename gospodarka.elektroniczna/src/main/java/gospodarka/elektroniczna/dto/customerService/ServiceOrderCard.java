@@ -34,6 +34,10 @@ public class ServiceOrderCard extends AbstractCustomerServiceUser implements Ser
 		serviceOrderDate = new Date();
 		client = new Client();
 		service = new Client();
+                service.setName("GE - services");
+                service.setPIN("1721685020");
+                service.setPhone("778596859");
+                service.setAdress("Serwisowa 16 92-235 Lodz");
 		car = new Car();
 	}
 	

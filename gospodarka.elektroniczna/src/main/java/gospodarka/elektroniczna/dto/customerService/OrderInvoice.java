@@ -37,9 +37,10 @@ public class OrderInvoice extends AbstractCustomerServiceUser implements Seriali
         items.add(nitem);
         this.item.setId(this.item.getId()+1);
         this.item.setName("");
-        this.item.setUnit("");
-        this.item.setAmount(0);
+        this.item.setUnit("szt");
+        this.item.setAmount(1);
         this.item.setValue(0.0);
+        totalValue+= nitem.getValue()*nitem.getAmount();
         return "addItem";
     }
     
@@ -53,9 +54,25 @@ public class OrderInvoice extends AbstractCustomerServiceUser implements Seriali
 	
 	public void init() {
 		documentDate = new Date();
+                sellDate = new Date();
+                paymentDate = new Date();
 		client = new Client();
 		seller = new Client();
                 item = new Item();
+                item.setAmount(1);
+                item.setId(1);
+                item.setUnit("szt");
+                client.setAdress("");
+                client.setName("");
+                client.setPhone("");
+                
+                totalValue = 0.0;
+                paidValue = 0.0;
+                notPaidValue = 0.0;
+                seller.setName("General Electronics");
+                seller.setAdress("Samochodowa 19 92-235 Lodz");
+                seller.setPIN("1721685020");
+                seller.setPhone("668998876");
 		//uzupelnic dane zakladu i daty
 		items = new ArrayList<>();
 	}
