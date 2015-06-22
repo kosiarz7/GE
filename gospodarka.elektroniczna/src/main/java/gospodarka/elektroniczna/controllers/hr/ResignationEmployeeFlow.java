@@ -33,7 +33,7 @@ public class ResignationEmployeeFlow extends AbstractHrFlow<ResignationEmployee>
 
     public boolean submitResignationEmployee(UserData userData, ResignationEmployee resignationEmployee) {
         LoggerFactory.getLogger(ResignationEmployeeFlow.class).debug("submitResignationEmployee", resignationEmployee);
-
+        System.err.println(resignationEmployee.toString());
         return submit(userData, resignationEmployee);
     }
 
@@ -45,6 +45,10 @@ public class ResignationEmployeeFlow extends AbstractHrFlow<ResignationEmployee>
 
         resignationEmployees = search(criteria);
         LoggerFactory.getLogger(ResignationEmployeeFlow.class).debug("getResignationEmployees", resignationEmployees.size());
+        for (Document<AbstractHrDocument<ResignationEmployee>> buf : resignationEmployees)
+        {
+        	System.err.println(buf.getContent().getData());
+        }
 
     }
     
@@ -63,6 +67,7 @@ public class ResignationEmployeeFlow extends AbstractHrFlow<ResignationEmployee>
 	public void setSelectedResignationEmployee(
 			Document<AbstractHrDocument<ResignationEmployee>> selectedResignationEmployee) {
 		this.selectedResignationEmployee = selectedResignationEmployee;
+		System.err.println("SET SELECTED: "+selectedResignationEmployee);
 	}
 
 

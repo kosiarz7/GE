@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
+	<ui:define name="pageContent">
+		<h:form>
+			<p>
+				<p:message for="resignationDate" />
+			</p>
+			<p>
+				<p:message for="comment" />
+			</p>
+			<h1>Wypowiedzenie</h1>
+			<p>
+				Z dniem
+				<p:calendar id="resignationDate"
+					value="#{resignationEmployeeVar.resignationDate}" showOn="button"
+					pattern="dd-MM-yyyy" label="'Data rezygnacji'"
+					placeholder="dd-mm-yyyy" required="true" />
+				składam wypowiedzenie umowy o pracę. <br /> <br /> Komentarz
+				<p:inputText id="comment" value="#{resignationEmployeeVar.comment}"
+					label="'Komentarz:'" required="true" size="50" />
+				</br> Podpisany:
+				#{springSecurityContextUtilBean.getUser().getNameAndSurname()} <br />
+			</p>
+			<p:commandButton action="resignationEmployee"
+				value="Wyślij wypowiedzenie" ajax="false" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+

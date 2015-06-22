@@ -56,6 +56,7 @@
                             <p:menuitem value="Wyślij zwolnienie lekarskie"
                                         url="/app/hr/sickLeave" />
                             <p:menuitem value="Zobacz kandydatów" url="/app/hr/newCandidate" />
+							<p:menuitem value="Wyślij wypowiedzenie" url="/app/hr/resignationEmployee" />
 
                             <c:if test="#{springSecurityContextUtilBean.hasRole('ROLE_HR')}">
 
@@ -66,6 +67,8 @@
                                 <p:menuitem value="Zwolnienia lekarskie"
                                             url="/app/hr/sickLeaveHr" />
                                 <p:menuitem value="Nowy kandydat" url="/app/hr/newCandidateHr" />
+                                <p:menuitem value="Zobacz wypowiedzenia" url="/app/hr/resignationEmployeeHr" />
+                                
                             </c:if>
                         </p:submenu>
 

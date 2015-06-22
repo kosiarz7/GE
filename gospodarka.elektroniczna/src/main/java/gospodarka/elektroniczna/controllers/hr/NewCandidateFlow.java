@@ -29,6 +29,7 @@ public class NewCandidateFlow extends AbstractHrFlow<NewCandidate> implements Se
     
     private List<Departments> departments = new ArrayList<Departments>();
     private Departments targetDepartment;
+    
     public NewCandidateFlow() {
         super("Nowy kandydat", DocumentTypes.NEW_CANDIDATE, Departments.HUMAN_RESOURCES);
         departments.add(Departments.CUSTOMER_SERVICE);
