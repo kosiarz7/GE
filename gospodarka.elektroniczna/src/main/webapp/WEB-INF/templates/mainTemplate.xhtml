@@ -158,7 +158,7 @@
                                     <p:menuitem value="Podsumowanie linii produkcyjnej"
                                                 url="/app/manufacture/monthlySummaryManufacture" />
                                 </c:if>
-                            </p:submenu>
+                          </p:submenu>
                         </c:if>
 
                         <c:if
@@ -196,76 +196,76 @@
                             <p:submenu label="MAGAZYN">
                                 <c:if
                                     test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_ROOT')}">
-                                    <p:menuitem value="Zlecenie produkcji"
+                                    <p:menuitem value="Wyślij zlecenie produkcji"
                                                 url="/app/storehouse/poGen" />
                                 </c:if>
                                 <c:if
-                                    test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
-                                    <p:menuitem value="Zlecenia produkcji"
+                                    test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE')}">
+                                    <p:menuitem value="Zobacz zlecenia produkcji"
                                                 url="/app/storehouse/poShow" />
                                 </c:if>
                                 <c:if
                                     test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_ROOT')}">
-                                    <p:menuitem value="Przyjecie zamówienia"
+                                    <p:menuitem value="Potwierdź zamówienie"
                                                 url="/app/storehouse/ppzGen" />
                                 </c:if>
                                 <c:if
-                                    test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE') or springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_SERVIS')}">
-                                    <p:menuitem value="Potwierdzenie przyjecia zamówienia"
+                                    test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE') or springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE') or springSecurityContextUtilBean.hasRole('ROLE_SERVIS')}">
+                                    <p:menuitem value="Zobacz potwierdzenia zam."
                                                 url="/app/storehouse/ppzShow" />
                                 </c:if>
 
                                 <c:if
-                                    test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE') or springSecurityContextUtilBean.hasRole('ROLE_SERVIS') or springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_ROOT')}">
-                                    <p:menuitem value="Przyjęcie wewnętrzne"
+                                    test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE') or springSecurityContextUtilBean.hasRole('ROLE_SERVIS') or springSecurityContextUtilBean.hasRole('ROLE_ROOT')}">
+                                    <p:menuitem value="Wyślij przyjęcie wew."
                                                 url="/app/storehouse/pwGen" />
                                 </c:if>
 
                                 <c:if
                                     test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
-                                    <p:menuitem value="Przyjęcia wewnętrzne - lista"
+                                    <p:menuitem value="Zobacz przyjęcie wew."
                                                 url="/app/storehouse/pwShow" />
                                 </c:if>
 
                                 <c:if
                                     test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
-                                    <p:menuitem value="Przyjęcie zewnetrzne"
+                                    <p:menuitem value="Wyślij przyjęcie zew."
                                                 url="/app/storehouse/pzGen" />
                                 </c:if>
 
                                 <c:if
                                     test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
-                                    <p:menuitem value="Przyjęcie zewnetrzne"
+                                    <p:menuitem value="Zobacz przyjęcie zew."
                                                 url="/app/storehouse/pzShow" />
                                 </c:if>
 
                                 <c:if
-                                    test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE') or springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_ROOT') or springSecurityContextUtilBean.hasRole('ROLE_SERVIS')}">
-                                    <p:menuitem value="Wydanie wewnetrzne"
+                                    test="#{springSecurityContextUtilBean.hasRole('ROLE_MANUFACTURE') or springSecurityContextUtilBean.hasRole('ROLE_ROOT') or springSecurityContextUtilBean.hasRole('ROLE_SERVIS')}">
+                                    <p:menuitem value="Wyślij wydanie wew."
                                                 url="/app/storehouse/wwGen" />
                                 </c:if>
 
                                 <c:if
                                     test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
-                                    <p:menuitem value="Wydania wewnętrzne"
+                                    <p:menuitem value="Zobacz wydanie wew."
                                                 url="/app/storehouse/wwShow" />
                                 </c:if>
 
                                 <c:if
                                     test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
-                                    <p:menuitem value="Wydanie zewnetrzne"
+                                    <p:menuitem value="Wyślij wydanie zew."
                                                 url="/app/storehouse/wzGen" />
                                 </c:if>
 
                                 <c:if
                                     test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE') or springSecurityContextUtilBean.hasRole('ROLE_CUSTOMER_SERVICE')}">
-                                    <p:menuitem value="Wydania zewnętrzne"
+                                    <p:menuitem value="Zobacz wydanie zew."
                                                 url="/app/storehouse/wzShow" />
                                 </c:if>
 
                                 <c:if
                                     test="#{springSecurityContextUtilBean.hasRole('ROLE_STOREHOUSE')}">
-                                    <p:menuitem value="Produkcja - zamowienia"
+                                    <p:menuitem value="Produkcja(zamowienia)"
                                                 url="/app/storehouse/zOrderManuShow" />
                                 </c:if>
 
