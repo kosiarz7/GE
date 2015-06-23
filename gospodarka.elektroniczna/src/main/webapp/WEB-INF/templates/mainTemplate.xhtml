@@ -73,27 +73,27 @@
                         </p:submenu>
 
                         <p:submenu label="FINANSE">
-                            <p:menuitem value="Rozliczenie podróży służbowej"
+                            <p:menuitem value="Rozlicz podróż służbową"
                                         url="/app/finance/businessTravelClearing" />
                             <c:if
                                 test="#{springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
                                 <p:menuitem value="Rozliczenia podróży służbowych"
                                             url="/app/finance/businessTravelClearingFin" />
+                                <p:separator />
                             </c:if>
-                            <p:menuitem value="Faktura do rozliczenia"
+                            <p:menuitem value="Rozlicz fakturę"
                                         url="/app/finance/invoice" />
                             <c:if
                                 test="#{springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
-                                <p:menuitem value="Rozliczenia faktur"
-                                            url="/app/finance/invoiceClearingFin" />
+	                            <p:menuitem value="Rozliczenia faktur"
+	                                        url="/app/finance/invoices" />
+	                            <p:separator />
                             </c:if>
-                            <p:menuitem value="Faktura do rozliczenia"
-                                        url="/app/finance/invoices" />
-                            <p:menuitem value="Rozliczenie szkolenia"
+                            <p:menuitem value="Rozlicz szkolenie"
                                         url="/app/finance/trainingClearing" />
                             <c:if
                                 test="#{springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
-                                <p:menuitem value="Rozliczenie szkolenia"
+                                <p:menuitem value="Rozliczenia szkoleń"
                                             url="/app/finance/trainingClearingFin" />
                             </c:if>
                         </p:submenu>
