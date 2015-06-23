@@ -95,6 +95,8 @@
                                 test="#{springSecurityContextUtilBean.hasRole('ROLE_FINANCE')}">
                                 <p:menuitem value="Rozliczenia szkoleń"
                                             url="/app/finance/trainingClearingFin" />
+                                <p:separator />
+                                <p:menuitem value="Pokaż faktury zamówień BOK" url="/app/customerService/orderInvoiceReceived" />
                             </c:if>
                         </p:submenu>
                         <c:if

@@ -9,27 +9,27 @@
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
 	<ui:param name="department" value="Finanse i płace"/>
 	<ui:define name="pageContent">
-		<h1>Rozliczenie szkolenia</h1>
-		<h:form>
-			<table border="1">
-				<tr>
-					<th width="100">Nazwa szkolenia</th>
-					<th width="200">Data początku</th>
-					<th width="200">Data końca</th>
-					<th>kwota</th>
-				</tr>
-				<c:forEach items="${flowScope.trainingClearings}" var="instance">
-					<tr>
-						<td>${instance.getTrainingName()}</td>
-						<td>${instance.getStartDate()}</td>
-						<td>${instance.getEndDate()}</td>
-						<td>${instance.getAmount()}</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</h:form>
-
-
+		<p:dataTable id="dtTrainingClearingFin" var="train" value="${flowScope.trainingClearings}" scrollable="true" >
+			<f:facet name="header">
+		        Szkolenia:
+		    </f:facet>
+		    
+			<p:column headerText="Nazwa szkolenia" footerText="Nazwa szkolenia" width="200" >
+				<h:outputText value="#{train.trainingName}" />
+			</p:column>
+			
+			<p:column headerText="Data rozpoczęcia" footerText="Data rozpoczęcia" width="200" >
+				<h:outputText value="#{train.startDate}" />
+			</p:column>
+			
+			<p:column headerText="Data zakończenia" footerText="Data zakończenia" width="200" >
+				<h:outputText value="#{train.endDate}" />
+			</p:column>
+			
+			<p:column headerText="Koszt" footerText="Koszt" width="200" >
+				<h:outputText value="#{train.amount}" />
+			</p:column>
+		</p:dataTable>
 	</ui:define>
 </ui:composition>
 </html>
