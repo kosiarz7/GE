@@ -9,30 +9,35 @@
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
 	<ui:param name="department" value="Finanse i płace"/>
 	<ui:define name="pageContent">
-		<h1>Rozliczenie podróży służbowej</h1>
-		<h:form>
-			<table border="1">
-				<tr>
-					<th width="100">Nazwa</th>
-					<th width="200">Data wyjazdu</th>
-					<th width="200">Data powrotu</th>
-					<th>Kraj</th>
-					<th>Miasto</th>
-					<th>Koszt wyjazdu</th>
-				</tr>
-				<c:forEach items="${flowScope.candidates}" var="instance">
-					<tr>
-						<td>${instance.getName()}</td>
-						<td>${instance.getStartDate()}</td>
-						<td>${instance.getEndDate()}</td>
-						<td>${instance.getCountry()}</td>
-						<td>${instance.getCity()}</td>
-						<td>${instance.getAmount()}</td>
-					</tr>
-				</c:forEach>
-			</table>
-		</h:form>
-
+		<p:dataTable id="dtBusinessTravelClearingFin" var="trav" value="${flowScope.candidates}" scrollable="true" >
+			<f:facet name="header">
+		        Podróże służbowe:
+		    </f:facet>
+		    
+			<p:column headerText="Nazwa" footerText="Nazwa" width="200" >
+				<h:outputText value="#{trav.name}" />
+			</p:column>
+			
+			<p:column headerText="Data wyjazdu" footerText="Data wyjazdu" width="200" >
+				<h:outputText value="#{trav.startDate}" />
+			</p:column>
+			
+			<p:column headerText="Data powrotu" footerText="Data powrotu" width="200" >
+				<h:outputText value="#{trav.endDate}" />
+			</p:column>
+			
+			<p:column headerText="Kraj" footerText="Kraj" width="200" >
+				<h:outputText value="#{trav.country}" />
+			</p:column>
+			
+			<p:column headerText="Miasto" footerText="Miasto" width="200" >
+				<h:outputText value="#{trav.city}" />
+			</p:column>
+			
+			<p:column headerText="Koszt wyjazdu" footerText="Koszt wyjazdu" width="200" >
+				<h:outputText value="#{trav.amount}" />
+			</p:column>
+		</p:dataTable>
 	</ui:define>
 </ui:composition>
 </html>

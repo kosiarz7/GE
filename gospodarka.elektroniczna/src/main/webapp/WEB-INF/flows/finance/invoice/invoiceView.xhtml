@@ -8,108 +8,74 @@
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
 	<ui:param name="department" value="Finanse i płace"/>
 	<ui:define name="pageContent">
-		<h1>Faktura do rozliczenia</h1>
 		<h:form>
-			<p>
-				<p:message for="createDate" />
-			</p>
-			<p>
-				<p:message for="sellerName" />
-			</p>
-			<p>
-				<p:message for="sellerAddress" />
-			</p>
-			<p>
-				<p:message for="sellerVATIN" />
-			</p>
-			<p>
-				<p:message for="buyerName" />
-			</p>
-			<p>
-				<p:message for="buyerAddress" />
-			</p>
-			<p>
-				<p:message for="buyerVATIN" />
-			</p>			
-			<p>
-				<p:message for="product" />
-			</p>
-			<p>
-				<p:message for="amount" />
-			</p>
-			<p>
-				<p:message for="vat" />
-			</p>
-			<p>
-				<p:message for="costNetto" />
-			</p>
-			<p>
-				<p:message for="costBrutto" />
-			</p>
-			
-			<p>
-				Data wystawienia:
+			<p:panel id="panelInvoice" header="Faktura do rozliczenia">
+			<h:panelGrid columns="3" cellpadding="5" style="margin: 0 auto">
+				<p:outputLabel for="createDate" value="Data wystawienia:" />
 				<p:calendar id="createDate" value="#{invoiceVar.createDate}" showOn="button"
 					pattern="dd-MM-yyyy" label="'Data wystawienia'"
-					placeholder="dd-mm-yyyy" required="true" />		
-			</p>
-			<p>
-				Sprzedawca:
-				<p:inputText id="sellerName" value="#{invoiceVar.sellerName}"
-					label="'Sprzedawca'"  required="true"/>		
-			</p>
-			<p>
-				Adres sprzedawcy:
-				<p:inputText id="sellerAddress" value="#{invoiceVar.sellerAddress}"
-					label="'Adres sprzedawcy'"  required="true"/>		
-			</p>
-			<p>
-				NIP sprzedawcy:
-				<p:inputText id="sellerVATIN" value="#{invoiceVar.sellerVATIN}"
-					label="'NIP sprzedawcy'"  required="true"/>		
-			</p>
-			<p>
-				Nabywca:
-				<p:inputText id="buyerName" value="#{invoiceVar.buyerName}"
-					label="'Nabywca'"  required="true"/>		
-			</p>
-			<p>
-				Adres nabywcy:
-				<p:inputText id="buyerAddress" value="#{invoiceVar.buyerAddress}"
-					label="'Adres nabywcy'"  required="true"/>		
-			</p>
-			<p>
-				NIP nabywcy:
-				<p:inputText id="buyerVATIN" value="#{invoiceVar.buyerVATIN}"
-					label="'NIP nabywcy'"  required="true"/>		
-			</p>			
-			<p>
-				Produkt:
-				<p:inputText id="product" value="#{invoiceVar.product}"
-					label="'Produkt'"  required="true"/>
-			</p>
-			<p>
-				Ilość:
-				<p:inputText id="amount" value="#{invoiceVar.amount}"
-					label="'Ilość'"  required="true"/>		
-			</p>
-			<p>
-				Vat:
-				<p:inputText id="vat" value="#{invoiceVar.vat}"
-					label="'Vat'"  required="true"/>		
-			</p>
-			<p>
-				Koszt netto:
-				<p:inputText id="costNetto" value="#{invoiceVar.costNetto}"
-					label="'Koszt netto'"  required="true"/>		
-			</p>
-			<p>
-				Koszt brutto:
-				<p:inputText id="costBrutto" value="#{invoiceVar.costBrutto}"
-					label="'Koszt brutto'"  required="true"/>		
-			</p>
+					placeholder="dd-mm-yyyy" required="true" />
+				<p:message for="createDate" />
 
-			<p:commandButton action="invoice" value="Dodaj" ajax="false" />
+				<p:outputLabel for="sellerName" value="Sprzedawca:" />
+				<p:inputText id="sellerName" value="#{invoiceVar.sellerName}"
+					label="'Sprzedawca'"  required="true" />
+				<p:message for="sellerName" />
+
+				<p:outputLabel for="sellerAddress" value="Adres sprzedawcy:" />
+				<p:inputText id="sellerAddress" value="#{invoiceVar.sellerAddress}"
+					label="'Adres sprzedawcy'"  required="true" />
+				<p:message for="sellerAddress" />
+
+				<p:outputLabel for="sellerVATIN" value="NIP sprzedawcy:" />
+				<p:inputText id="sellerVATIN" value="#{invoiceVar.sellerVATIN}"
+					label="'NIP sprzedawcy'"  required="true" />
+				<p:message for="sellerVATIN" />
+
+				<p:outputLabel for="buyerName" value="Nabywca:" />
+				<p:inputText id="buyerName" value="#{invoiceVar.buyerName}"
+					label="'Nabywca'"  required="true" />
+				<p:message for="buyerName" />
+
+				<p:outputLabel for="buyerAddress" value="Adres nabywcy:" />
+				<p:inputText id="buyerAddress" value="#{invoiceVar.buyerAddress}"
+					label="'Adres nabywcy'"  required="true" />
+				<p:message for="buyerAddress" />
+
+				<p:outputLabel for="buyerVATIN" value="NIP nabywcy:" />
+				<p:inputText id="buyerVATIN" value="#{invoiceVar.buyerVATIN}"
+					label="'NIP nabywcy'"  required="true" />
+				<p:message for="buyerVATIN" />
+
+				<p:outputLabel for="product" value="Produkt:" />
+				<p:inputText id="product" value="#{invoiceVar.product}"
+					label="'Produkt'"  required="true" />
+				<p:message for="product" />
+
+				<p:outputLabel for="amount" value="Ilość:" />
+				<p:inputText id="amount" value="#{invoiceVar.amount}"
+					label="'Ilość'"  required="true" />
+				<p:message for="amount" />
+
+				<p:outputLabel for="vat" value="Vat:" />
+				<p:inputText id="vat" value="#{invoiceVar.vat}"
+					label="'Vat'"  required="true" />
+				<p:message for="vat" />
+
+				<p:outputLabel for="costNetto" value="Koszt netto:" />
+				<p:inputText id="costNetto" value="#{invoiceVar.costNetto}"
+					label="'Koszt netto'"  required="true" />
+				<p:message for="costNetto" />
+				
+				<p:outputLabel for="costBrutto" value="Koszt brutto:" />
+				<p:inputText id="costBrutto" value="#{invoiceVar.costBrutto}"
+					label="'Koszt brutto'"  required="true" />
+				<p:message for="costBrutto" />
+
+				<p />
+				<p:commandButton action="invoice" value="Wyślij fakturę" ajax="false" />	
+			</h:panelGrid>
+			</p:panel>
 		</h:form>
 	</ui:define>
 </ui:composition>

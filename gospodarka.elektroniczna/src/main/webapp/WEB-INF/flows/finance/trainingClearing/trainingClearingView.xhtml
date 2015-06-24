@@ -8,48 +8,40 @@
 <ui:composition template="/WEB-INF/templates/mainTemplate.xhtml">
 	<ui:param name="department" value="Finanse i płace"/>
 	<ui:define name="pageContent">
-		<h1>Rozliczenie szkolenia</h1>
 		<h:form>
-			<p>
-				<p:message for="trainingName" />
-			</p>
-			<p>
-				<p:message for="startDate" />
-			</p>
-			<p>
-				<p:message for="endDate" />
-			</p>
-			<p>
-				<p:message for="amount" />
-			</p>
-			<p>
-				Nazwa szkolenia:
+			<p:panel id="panelTrainingClearing" header="Rozliczenie szkolenia">
+			<h:panelGrid columns="3" cellpadding="5" style="margin: 0 auto">
+				<p:outputLabel for="trainingName" value="Nazwa szkolenia:" />
 				<p:inputText id="trainingName" value="#{trainingClearingVar.trainingName}"
 					label="'Nazwa szkolenia'"  required="true"/>
-			</p>
-			<p>
-				Data początku szkolenia
+			    <p:message for="trainingName" />
+
+				<p:outputLabel for="startDate" value="Data początku szkolenia:" />
 				<p:calendar id="startDate"
 					value="#{trainingClearingVar.startDate}" showOn="button"
 					pattern="dd-MM-yyyy" label="'Data początku szkolenia'"
 					placeholder="dd-mm-yyyy"  required="true"/>
-			</p>
-			<p>
-				Data końca szkolenia:
+			    <p:message for="startDate" />
+
+				<p:outputLabel for="endDate" value="Data końca szkolenia:" />
 				<p:calendar id="endDate"
 					value="#{trainingClearingVar.endDate}" showOn="button"
 					pattern="dd-MM-yyyy" label="'Data końca szkolenia'"
 					placeholder="dd-mm-yyyy"  required="true"/>
-			</p>
-			<p>
-				Koszt szkolenia:
+				<p:message for="endDate" />
+
+				<p:outputLabel for="amount" value="Koszt szkolenia:" />
 				<p:inputText id="amount" value="#{trainingClearingVar.amount}"
 					label="'Koszsto szkoelnia'"  required="true"/>
-			</p>
+				<p:message for="amount" />
 
-			<p:commandButton action="trainingClearing"
-				value="Wyślij rozliczenie" ajax="false" />
+				<p />
+				<p:commandButton action="trainingClearing"
+					value="Wyślij rozliczenie" ajax="false" />
+			</h:panelGrid>
+			</p:panel>
 		</h:form>
+		
 	</ui:define>
 </ui:composition>
 </html>
